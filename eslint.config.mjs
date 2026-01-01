@@ -37,11 +37,13 @@ export default defineConfig(
                 'error',
                 {
                     enforceBuildableLibDependency: true,
+                    allowCircularSelfDependency: true,
                     allow: ['^.*/eslint\\.config\\.mjs$'],
                     depConstraints: [
                         {
-                            sourceTag: '*',
-                            onlyDependOnLibsWithTags: ['*'],
+                            sourceTag: 'platform:angular',
+                            onlyDependOnLibsWithTags: [],
+                            allowedExternalImports: ['@angular/*', '@analogjs/*', 'rxjs'],
                         },
                     ],
                 },

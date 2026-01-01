@@ -4,7 +4,7 @@
     "projectType": "application",
     "prefix": "dma",
     "sourceRoot": "apps/dnd-mapp/src",
-    "tags": [],
+    "tags": ["platform:angular"],
     "targets": {
         "build": {
             "executor": "@angular/build:application",
