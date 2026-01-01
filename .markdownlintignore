@@ -1,0 +1,11 @@
+node_modules/
+
+.angular/
+dist/
+reports/
+
+.nx/
+tmp/
+
+.idea/
+.vscode/
