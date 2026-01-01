@@ -1,20 +1,43 @@
+import eslint from '@eslint/js';
 import nx from '@nx/eslint-plugin';
+import eslintConfigPrettier from 'eslint-config-prettier/flat';
+import { defineConfig } from 'eslint/config';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
-export default [
+export default defineConfig(
     ...nx.configs['flat/base'],
-    ...nx.configs['flat/typescript'],
-    ...nx.configs['flat/javascript'],
     {
         ignores: ['**/dist', '**/out-tsc', '**/vitest.config.*.timestamp*'],
     },
     {
-        files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
+        files: ['**/*.js', '**/*.mjs', '**/*.cjs', '**/*.ts', '**/*.cts', '**/*.mts'],
+        extends: [eslint.configs.recommended, ...tseslint.configs.recommended],
+    },
+    {
+        plugins: {
+            '@typescript-eslint': tseslint.plugin,
+        },
+        languageOptions: {
+            ecmaVersion: 2024,
+            sourceType: 'module',
+            globals: {
+                ...globals.browser,
+                ...globals.node,
+            },
+            parserOptions: {
+                tsconfigRootDir: import.meta.dirname,
+            },
+        },
+    },
+    {
+        files: ['**/*.ts', '**/*.js'],
         rules: {
             '@nx/enforce-module-boundaries': [
                 'error',
                 {
                     enforceBuildableLibDependency: true,
-                    allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?[jt]s$'],
+                    allow: ['^.*/eslint\\.config\\.mjs$'],
                     depConstraints: [
                         {
                             sourceTag: '*',
@@ -26,8 +49,16 @@ export default [
         },
     },
     {
-        files: ['**/*.ts', '**/*.tsx', '**/*.cts', '**/*.mts', '**/*.js', '**/*.jsx', '**/*.cjs', '**/*.mjs'],
-        // Override or add rules here
+        files: ['**/*.js', '**/*.cjs', '**/*.mjs'],
         rules: {},
     },
-];
+    {
+        files: ['**/*.ts', '**/*.cts', '**/*.mts'],
+        rules: {},
+    },
+    {
+        files: ['**/*.ts', '**/*.cts', '**/*.mts', '**/*.js', '**/*.cjs', '**/*.mjs'],
+        rules: {},
+    },
+    eslintConfigPrettier,
+);
