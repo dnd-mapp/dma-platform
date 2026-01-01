@@ -24,7 +24,7 @@ export default defineConfig(
                 'error',
                 {
                     type: 'attribute',
-                    prefix: 'app',
+                    prefix: 'dma',
                     style: 'camelCase',
                 },
             ],
@@ -32,7 +32,7 @@ export default defineConfig(
                 'error',
                 {
                     type: 'element',
-                    prefix: 'app',
+                    prefix: 'dma',
                     style: 'kebab-case',
                 },
             ],

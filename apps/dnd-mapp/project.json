@@ -1,8 +1,8 @@
 {
-    "name": "dnd-mapp",
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "name": "dnd-mapp",
     "projectType": "application",
-    "prefix": "app",
+    "prefix": "dma",
     "sourceRoot": "apps/dnd-mapp/src",
     "tags": [],
     "targets": {
