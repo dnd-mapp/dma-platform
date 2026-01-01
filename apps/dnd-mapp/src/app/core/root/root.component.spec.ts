@@ -13,6 +13,7 @@ describe('RootComponent', () => {
         const fixture = TestBed.createComponent(RootComponent);
         await fixture.whenStable();
         const compiled = fixture.nativeElement as HTMLElement;
-        expect(compiled.querySelector('h1')?.textContent).toContain('Welcome dnd-mapp');
+
+        expect(compiled.querySelector('h1').textContent).toContain('D&D Mapp Application works!');
     });
 });
