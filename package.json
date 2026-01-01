@@ -5,6 +5,10 @@
   "private": true,
   "scripts": {},
   "packageManager": "pnpm@10.27.0",
+  "workspaces": [
+    "apps/*",
+    "libs/*"
+  ],
   "dependencies": {
     "@angular/common": "~21.0.0",
     "@angular/compiler": "~21.0.0",
