@@ -9,18 +9,23 @@
         "build": {
             "executor": "@angular/build:application",
             "outputs": ["{options.outputPath}"],
+            "cache": true,
             "options": {
-                "outputPath": "dist/apps/dnd-mapp",
-                "browser": "apps/dnd-mapp/src/main.ts",
-                "tsConfig": "apps/dnd-mapp/tsconfig.app.json",
                 "assets": [
                     {
                         "glob": "**/*",
                         "input": "apps/dnd-mapp/public"
                     }
                 ],
-                "styles": ["apps/dnd-mapp/src/styles.css"]
+                "browser": "apps/dnd-mapp/src/main.ts",
+                "outputPath": "dist/apps/dnd-mapp",
+                "security": {
+                    "autoCsp": true
+                },
+                "styles": ["apps/dnd-mapp/src/styles.css"],
+                "tsConfig": "apps/dnd-mapp/tsconfig.app.json"
             },
+            "defaultConfiguration": "production",
             "configurations": {
                 "production": {
                     "budgets": [
@@ -35,15 +40,16 @@
                             "maximumError": "8kb"
                         }
                     ],
-                    "outputHashing": "all"
+                    "subresourceIntegrity": true
                 },
                 "development": {
+                    "namedChunks": true,
                     "optimization": false,
                     "extractLicenses": false,
-                    "sourceMap": true
+                    "sourceMap": true,
+                    "watch": true
                 }
-            },
-            "defaultConfiguration": "production"
+            }
         },
         "serve": {
             "executor": "@angular/build:dev-server",
