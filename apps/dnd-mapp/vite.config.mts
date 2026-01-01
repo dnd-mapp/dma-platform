@@ -33,6 +33,6 @@ export default defineConfig(() => ({
         outputFile: `${reportsDirectory}/index.html`,
         reporters: ['dot', 'html', ...(isCI ? ['github-actions'] : [])],
         root: __dirname,
-        setupFiles: ['src/test-setup.ts'],
+        setupFiles: ['test/test-setup.ts'],
     },
 }));

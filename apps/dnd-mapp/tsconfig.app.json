@@ -1,7 +1,7 @@
 {
     "extends": "./tsconfig.json",
     "include": ["src/**/*.ts"],
-    "exclude": ["src/**/*.spec.ts", "vite.config.mts", "src/test-setup.ts"],
+    "exclude": ["src/**/*.spec.ts", "vite.config.mts", "test/test-setup.ts"],
     "compilerOptions": {
         "outDir": "../../dist/out-tsc",
         "types": []
