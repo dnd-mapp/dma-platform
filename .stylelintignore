@@ -1,0 +1,7 @@
+.angular/
+dist/
+reports/
+
+.nx/
+
+node_modules/
