@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "license": "UNLICENSED",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "gen:ssl-certificate": "mkcert -cert-file cert.pem -key-file cert-key.pem localhost.www.dndmapp.dev localhost 127.0.0.1"
+  },
   "packageManager": "pnpm@10.27.0",
   "workspaces": [
     "apps/*",
