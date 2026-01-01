@@ -58,15 +58,25 @@
             },
             "defaultConfiguration": "development"
         },
+        "test": {
+            "executor": "nx:run-commands",
+            "outputs": ["{options.reportsDirectory}"],
+            "cache": true,
+            "options": {
+                "cwd": "{projectRoot}"
+            },
+            "defaultConfiguration": "ci",
+            "configurations": {
+                "ci": {
+                    "command": "vitest run"
+                },
+                "development": {
+                    "command": "vitest --ui"
+                }
+            }
+        },
         "lint": {
             "executor": "@nx/eslint:lint"
-        },
-        "test": {
-            "executor": "@nx/vitest:test",
-            "outputs": ["{options.reportsDirectory}"],
-            "options": {
-                "reportsDirectory": "../../coverage/apps/dnd-mapp"
-            }
         },
         "serve-static": {
             "continuous": true,

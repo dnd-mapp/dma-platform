@@ -1,28 +1,38 @@
-/// <reference types='vitest' />
+/// <reference types='vitest/config' />
 import angular from '@analogjs/vite-plugin-angular';
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import { playwright } from '@vitest/browser-playwright';
 import { defineConfig } from 'vite';
 
+const reportsDirectory = '../../reports/apps/dnd-mapp';
+const isCI = Boolean(process.env['CI']);
+
 export default defineConfig(() => ({
-    root: __dirname,
     cacheDir: '../../node_modules/.vite/apps/dnd-mapp',
     plugins: [angular(), nxViteTsPaths(), nxCopyAssetsPlugin(['*.md'])],
-    // Uncomment this if you are using workers.
-    // worker: {
-    //   plugins: () => [ nxViteTsPaths() ],
-    // },
     test: {
-        name: 'dnd-mapp',
-        watch: false,
-        globals: true,
-        environment: 'jsdom',
-        include: ['{src,tests}/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-        setupFiles: ['src/test-setup.ts'],
-        reporters: ['default'],
-        coverage: {
-            reportsDirectory: '../../coverage/apps/dnd-mapp',
-            provider: 'v8' as const,
+        browser: {
+            enabled: true,
+            headless: true,
+            instances: [{ browser: 'chromium' as const }],
+            provider: playwright(),
         },
+        coverage: {
+            enabled: true,
+            exclude: ['**/index.ts'],
+            include: ['src/app/**/*.ts'],
+            provider: 'v8' as const,
+            reportsDirectory: `${reportsDirectory}/coverage`,
+            reporter: ['text-summary', 'html'],
+        },
+        globals: true,
+        include: ['src/**/*.spec.ts'],
+        name: 'dnd-mapp',
+        open: false,
+        outputFile: `${reportsDirectory}/index.html`,
+        reporters: ['dot', 'html', ...(isCI ? ['github-actions'] : [])],
+        root: __dirname,
+        setupFiles: ['src/test-setup.ts'],
     },
 }));
