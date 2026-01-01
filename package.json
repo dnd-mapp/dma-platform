@@ -1,8 +1,8 @@
 {
   "name": "@dma-platform/source",
   "version": "0.0.0",
-  "license": "MIT",
   "scripts": {},
+  "license": "UNLICENSED",
   "private": true,
   "dependencies": {
     "@angular/common": "~21.0.0",
