@@ -46,17 +46,22 @@
             "defaultConfiguration": "production"
         },
         "serve": {
-            "continuous": true,
             "executor": "@angular/build:dev-server",
-            "configurations": {
-                "production": {
-                    "buildTarget": "dnd-mapp:build:production"
-                },
-                "development": {
-                    "buildTarget": "dnd-mapp:build:development"
-                }
+            "continuous": true,
+            "options": {
+                "buildTarget": "dnd-mapp:build:development",
+                "port": 4200
             },
-            "defaultConfiguration": "development"
+            "defaultConfiguration": "https",
+            "configurations": {
+                "https": {
+                    "host": "localhost.www.dndmapp.dev",
+                    "ssl": true,
+                    "sslCert": "cert.pem",
+                    "sslKey": "cert-key.pem"
+                },
+                "http": {}
+            }
         },
         "test": {
             "executor": "nx:run-commands",
