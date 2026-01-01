@@ -1,6 +1,5 @@
 /// <reference types='vitest/config' />
 import angular from '@analogjs/vite-plugin-angular';
-import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import { playwright } from '@vitest/browser-playwright';
 import { defineConfig } from 'vite';
@@ -10,7 +9,7 @@ const isCI = Boolean(process.env['CI']);
 
 export default defineConfig(() => ({
     cacheDir: '../../node_modules/.vite/apps/dnd-mapp',
-    plugins: [angular(), nxViteTsPaths(), nxCopyAssetsPlugin(['*.md'])],
+    plugins: [angular(), nxViteTsPaths()],
     test: {
         browser: {
             enabled: true,
