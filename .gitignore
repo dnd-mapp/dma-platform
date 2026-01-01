@@ -27,3 +27,6 @@ Thumbs.db
 .nx/workspace-data
 
 .angular/
+
+**/.env
+cert*.pem
