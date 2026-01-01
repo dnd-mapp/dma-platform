@@ -1,8 +1,8 @@
 {
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
-    "name": "e2e-dnd-mapp",
+    "name": "dnd-mapp-e2e",
     "projectType": "application",
-    "sourceRoot": "apps/dnd-mapp-e2e/src",
+    "sourceRoot": "e2e/dnd-mapp/src",
     "implicitDependencies": ["dnd-mapp"],
     "targets": {}
 }
