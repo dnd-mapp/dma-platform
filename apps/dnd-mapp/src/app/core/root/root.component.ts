@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NxWelcome } from './nx-welcome';
+import { NxWelcome } from '../../nx-welcome';
 
 @Component({
     imports: [NxWelcome, RouterModule],
     selector: 'app-root',
-    templateUrl: './app.html',
-    styleUrl: './app.css',
+    templateUrl: './root.component.html',
+    styleUrl: './root.component.css',
 })
-export class App {
+export class RootComponent {
     protected title = 'dnd-mapp';
 }
