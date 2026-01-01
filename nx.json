@@ -1,15 +1,27 @@
 {
     "$schema": "./node_modules/nx/schemas/nx-schema.json",
+    "defaultProject": "dnd-mapp",
+    "defaultBase": "main",
+    "neverConnectToCloud": true,
+    "cli": {
+        "packageManager": "pnpm"
+    },
+    "workspaceLayout": {
+        "appsDir": "apps",
+        "libsDir": "libs"
+    },
+    "affected": {
+        "defaultBase": "main"
+    },
     "namedInputs": {
+        "sharedGlobals": [],
         "default": ["{projectRoot}/**/*", "sharedGlobals"],
         "production": [
             "default",
-            "!{projectRoot}/.eslintrc.json",
             "!{projectRoot}/eslint.config.mjs",
-            "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+            "!{projectRoot}/**/?(*.)spec.ts?(.snap)",
             "!{projectRoot}/tsconfig.spec.json"
-        ],
-        "sharedGlobals": []
+        ]
     },
     "targetDefaults": {
         "@angular/build:application": {
@@ -19,12 +31,7 @@
         },
         "@nx/eslint:lint": {
             "cache": true,
-            "inputs": [
-                "default",
-                "{workspaceRoot}/.eslintrc.json",
-                "{workspaceRoot}/.eslintignore",
-                "{workspaceRoot}/eslint.config.mjs"
-            ]
+            "inputs": ["default", "{workspaceRoot}/eslint.config.mjs"]
         },
         "@nx/vitest:test": {
             "cache": true,
