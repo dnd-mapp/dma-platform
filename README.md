@@ -1,4 +1,4 @@
-# DmaPlatform
+# D&D Mapp platform
 
 ✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
 
