@@ -1,4 +1,4 @@
 autoInstallPeers: true
 packages:
-  - 'apps/*'
-  - 'libs/*'
+    - 'apps/*'
+    - 'libs/*'
