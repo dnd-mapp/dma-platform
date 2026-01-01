@@ -1,19 +1,30 @@
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { NxWelcome } from '../../nx-welcome';
+import { RootHarness } from '@dnd-mapp/dnd-mapp/test';
 import { RootComponent } from './root.component';
 
 describe('RootComponent', () => {
-    beforeEach(async () => {
-        await TestBed.configureTestingModule({
-            imports: [RootComponent, NxWelcome],
-        }).compileComponents();
-    });
+    @Component({
+        template: `<dma-root />`,
+        imports: [RootComponent],
+    })
+    class TestComponent {}
 
-    it('should render title', async () => {
-        const fixture = TestBed.createComponent(RootComponent);
-        await fixture.whenStable();
-        const compiled = fixture.nativeElement as HTMLElement;
+    async function setupTest() {
+        TestBed.configureTestingModule({
+            imports: [TestComponent],
+        });
 
-        expect(compiled.querySelector('h1').textContent).toContain('D&D Mapp Application works!');
+        const harnessLoader = TestbedHarnessEnvironment.loader(TestBed.createComponent(TestComponent));
+
+        return {
+            harness: await harnessLoader.getHarness(RootHarness),
+        };
+    }
+
+    it('should create', async () => {
+        const { harness } = await setupTest();
+        expect(harness).toBeDefined();
     });
 });
