@@ -1,6 +1,33 @@
 # Add files here to ignore them from prettier formatting
-/dist
-/coverage
-/.nx/cache
-/.nx/workspace-data
-.angular
+*
+
+!*/
+
+!*.json
+!*.yaml
+!*.html
+!*.scss
+!*.ts
+!*.tsx
+!*.[cm]ts
+!*.js
+!*.jsx
+!*.[cm]js
+
+# Specific Files
+
+!.prettierrc
+
+pnpm-lock.yaml
+
+.nx/cache/
+.nx/workspace-data/
+
+# Specific Folders
+
+node_modules/
+
+.angular/
+dist/
+reports/
+
