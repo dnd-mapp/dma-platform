@@ -52,7 +52,9 @@ export default defineConfig(
     },
     {
         files: ['**/*.js', '**/*.cjs', '**/*.mjs'],
-        rules: {},
+        rules: {
+            '@typescript-eslint/no-require-imports': 'off',
+        },
     },
     {
         files: ['**/*.ts', '**/*.cts', '**/*.mts'],
