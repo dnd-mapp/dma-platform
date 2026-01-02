@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "nx": "pnpm dlx nx",
-    "gen:ssl-certificate": "mkcert -cert-file cert.pem -key-file cert-key.pem localhost.www.dndmapp.dev localhost 127.0.0.1"
+    "gen:ssl-certificate": "mkcert -cert-file cert.pem -key-file cert-key.pem localhost.www.dndmapp.dev localhost.auth.dndmapp.dev localhost.api.dndmapp.dev localhost.admin.dndmapp.dev localhost.resources.dndmapp.dev localhost.players.dndmapp.dev localhost 127.0.0.1"
   },
   "packageManager": "pnpm@10.27.0",
   "workspaces": [
