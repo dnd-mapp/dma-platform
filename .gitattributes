@@ -1,0 +1,79 @@
+# ------------------------------------------------------------------------------
+# .gitattributes for an Angular + pnpm repository
+# ------------------------------------------------------------------------------
+
+# Default: normalize text files and keep LF in the repo
+*                   text=auto eol=lf
+
+# Source files
+*.ts                text eol=lf diff=ts
+*.js                text eol=lf
+*.mjs               text eol=lf
+*.cjs               text eol=lf
+
+*.html              text eol=lf diff=html
+*.css               text eol=lf
+*.scss              text eol=lf
+
+# Data / docs
+*.json              text eol=lf
+*.yaml              text eol=lf
+*.md                text eol=lf
+*.txt               text eol=lf
+
+# Common configs
+*.editorconfig      text eol=lf
+*.gitignore         text eol=lf
+*.gitattributes     text eol=lf
+*.npmrc             text eol=lf
+*.nvmrc             text eol=lf
+*.tool-versions     text eol=lf
+*.browserslistrc    text eol=lf
+*.eslintrc*         text eol=lf
+*.eslintignore      text eol=lf
+*.prettierrc*       text eol=lf
+*.prettierignore    text eol=lf
+*.stylelintrc*      text eol=lf
+
+# pnpm lockfile
+pnpm-lock.yaml      text eol=lf
+
+# Shell scripts
+*.sh                text eol=lf
+
+# Windows scripts: keep CRLF endings
+*.bat               text eol=crlf
+*.cmd               text eol=crlf
+*.ps1               text eol=crlf
+
+# SVG is text (diffable)
+*.svg               text eol=lf
+
+# ------------------------------------------------------------------------------
+# Binary files: do not normalize and do not diff as text
+# ------------------------------------------------------------------------------
+*.png               binary
+*.jpg               binary
+*.jpeg              binary
+*.gif               binary
+*.webp              binary
+*.ico               binary
+
+*.woff              binary
+*.woff2             binary
+*.ttf               binary
+*.otf               binary
+*.eot               binary
+
+*.pdf               binary
+*.zip               binary
+*.gz                binary
+*.7z                binary
+*.tar               binary
+*.rar               binary
+
+*.mp3               binary
+*.wav               binary
+*.mp4               binary
+*.mov               binary
+*.webm              binary
