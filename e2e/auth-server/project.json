@@ -1,0 +1,14 @@
+{
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "name": "auth-server-e2e",
+    "projectType": "application",
+    "implicitDependencies": ["auth-server"],
+    "targets": {
+        "e2e": {
+            "executor": "@nx/jest:jest",
+            "options": {
+                "jestConfig": "e2e/auth-server/jest.config.cts"
+            }
+        }
+    }
+}

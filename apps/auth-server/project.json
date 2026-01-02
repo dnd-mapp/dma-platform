@@ -1,0 +1,44 @@
+{
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "name": "auth-server",
+    "projectType": "application",
+    "sourceRoot": "apps/auth-server/src",
+    "tags": ["platform:nestjs"],
+    "targets": {
+        "build": {
+            "executor": "nx:run-commands",
+            "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+            "cache": true,
+            "options": {
+                "command": "webpack-cli build",
+                "cwd": "apps/auth-server"
+            },
+            "defaultConfiguration": "production",
+            "configurations": {
+                "production": {
+                    "args": ["--node-env production"]
+                },
+                "development": {
+                    "args": ["--node-env development"]
+                }
+            }
+        },
+        "serve": {
+            "executor": "@nx/js:node",
+            "continuous": true,
+            "options": {
+                "buildTarget": "auth-server:build:development",
+                "inspect": false,
+                "runBuildTargetDependencies": false
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/reports/{projectRoot}"],
+            "cache": true,
+            "options": {
+                "jestConfig": "apps/auth-server/jest.config.cts"
+            }
+        }
+    }
+}
