@@ -1,100 +1,87 @@
-# D&D Mapp platform
+# D&D Mapp
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+A distributed Dungeons & Dragons fifth Edition ecosystem for character management, campaign organization, and virtual tabletop play.
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## 🏗 System Architecture
 
-## Run tasks
+This project is a **Nx Workspace** containing multiple specialized applications and services, designed to be deployed via Docker/Kubernetes.
 
-To run the dev server for your app, use:
+### Frontend Applications (Angular & AnalogJS)
 
-```sh
-npx nx serve dnd-mapp
+- **`dnd-mapp`**: The primary web UI for players and DMs (VTT, Character Sheets, Notes).
+- **`auth-client`**: Dedicated identity portal for registration, login, and profile management.
+- **`admin-client`**: Internal dashboard for system administration, log inspection, and data management.
+
+### Backend Services (NestJS)
+
+- **`api-gateway`**: Centralized entry point for all client traffic.
+- **`auth-server`**: Identity provider and credential management.
+- **`resources-server`**: Authoritative source for game data (SRD, Spells, Monsters).
+- **`player-server`**: Persistent storage for characters, user notes, and campaign states.
+
+## 🚀 Tech Stack
+
+- **Frontend:** Angular, AnalogJS (Meta-framework, used for testing only), Tailwind CSS.
+- **Backend:** NestJS, Node.js.
+- **Workspace:** Nx (Monorepo), Vitest/Jest (Unit/In-browser testing), Playwright/Jest (E2E).
+- **Quality:** ESLint, Stylelint, Markdownlint, Prettier.
+- **Deployment:** Docker, Kubernetes.
+
+## 🛠 Development Workflow
+
+### Installation
+
+```bash
+pnpm install
 ```
 
-To create a production bundle:
+### Running Applications
 
-```sh
-npx nx build dnd-mapp
+You can serve any application or service using the Nx CLI:
+
+```bash
+# Frontend
+pnpm exec nx serve dnd-mapp
+pnpm exec nx serve auth-client
+
+# Backend
+pnpm exec nx serve auth-server
+pnpm exec nx serve api-gateway
 ```
 
-To see all available targets to run for a project, run:
+### Workspace-wide Operations
 
-```sh
-npx nx show project dnd-mapp
+```bash
+# Run tests for all affected projects
+pnpm exec nx affected:test
+
+# Check linting for the entire workspace
+pnpm exec nx affected:lint
+
+# Format all files
+pnpm exec nx format:write
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+## 📦 Project Structure
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Add new projects
-
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
-
-```sh
-npx nx g @nx/angular:app demo
+```text
+dnd-mapp/dma-platform
+├── apps
+│   ├── admin-client        # Angular
+│   ├── auth-client         # Angular
+│   ├── dnd-mapp            # Angular
+│   ├── api-gateway         # NestJS
+│   ├── auth-server         # NestJS
+│   ├── player-server       # NestJS
+│   └── resources-server    # NestJS
+├── libs                    # Shared logic, DTOs, and UI components
+└── ... workspace config
 ```
 
-To generate a new library, use:
+## 🐳 Deployment
 
-```sh
-npx nx g @nx/angular:lib mylib
-```
+Each application in the `apps/` directory is designed to be containerized. The system is architected for self-hosting in a Kubernetes environment, allowing for independent scaling of the resource and player servers.
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+## 📜 License
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Set up CI
-
-### Step 1
-
-To connect to Nx Cloud, run the following command:
-
-```sh
-npx nx connect
-```
-
-Connecting to Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
-
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-### Step 2
-
-Use the following command to configure a CI workflow for your workspace:
-
-```sh
-npx nx g ci-workflow
-```
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+This project is **UNLICENSED**. All rights reserved. Proprietary software.
