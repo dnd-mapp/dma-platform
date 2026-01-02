@@ -20,7 +20,9 @@
             "default",
             "!{projectRoot}/eslint.config.mjs",
             "!{projectRoot}/**/?(*.)spec.ts?(.snap)",
-            "!{projectRoot}/tsconfig.spec.json"
+            "!{projectRoot}/tsconfig.spec.json",
+            "!{projectRoot}/jest.config.cts",
+            "!{projectRoot}/test/test-setup.ts"
         ]
     },
     "targetDefaults": {
@@ -50,6 +52,24 @@
             "options": {
                 "targetName": "lint"
             }
+        },
+        {
+            "plugin": "@nx/webpack/plugin",
+            "options": {
+                "buildTargetName": "build",
+                "serveTargetName": "serve",
+                "previewTargetName": "preview",
+                "buildDepsTargetName": "build-deps",
+                "watchDepsTargetName": "watch-deps",
+                "serveStaticTargetName": "serve-static"
+            }
+        },
+        {
+            "plugin": "@nx/jest/plugin",
+            "options": {
+                "targetName": "test"
+            },
+            "exclude": ["e2e/auth-server/**/*"]
         }
     ],
     "generators": {
