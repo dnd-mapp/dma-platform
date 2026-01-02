@@ -58,6 +58,10 @@
             "linter": "eslint",
             "style": "css",
             "unitTestRunner": "vitest-analog"
+        },
+        "@nx/nest:application": {
+            "linter": "eslint",
+            "unitTestRunner": "jest"
         }
     }
 }
