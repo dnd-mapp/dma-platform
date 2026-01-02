@@ -20,7 +20,8 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "paths": {
-            "@dnd-mapp/dnd-mapp/test": ["apps/dnd-mapp/test"]
+            "@dnd-mapp/dnd-mapp/test": ["apps/dnd-mapp/test"],
+            "@dnd-mapp/domain/auth": ["libs/auth/domain/src"]
         },
         "rootDir": ".",
         "skipDefaultLibCheck": true,

@@ -48,6 +48,10 @@ export default defineConfig(
                             sourceTag: 'platform:nestjs',
                             allowedExternalImports: ['@nestjs/*', 'rxjs'],
                         },
+                        {
+                            sourceTag: 'scope:auth',
+                            onlyDependOnLibsWithTags: ['scope:auth'],
+                        },
                     ],
                 },
             ],
