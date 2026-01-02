@@ -79,6 +79,11 @@
             "style": "css",
             "unitTestRunner": "vitest-analog"
         },
+        "@nx/js:library": {
+            "bundler": "none",
+            "linter": "eslint",
+            "unitTestRunner": "none"
+        },
         "@nx/nest:application": {
             "linter": "eslint",
             "unitTestRunner": "jest"
