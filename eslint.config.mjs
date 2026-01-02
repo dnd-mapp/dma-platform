@@ -42,8 +42,11 @@ export default defineConfig(
                     depConstraints: [
                         {
                             sourceTag: 'platform:angular',
-                            onlyDependOnLibsWithTags: [],
                             allowedExternalImports: ['@angular/*', '@analogjs/*', 'rxjs'],
+                        },
+                        {
+                            sourceTag: 'platform:nestjs',
+                            allowedExternalImports: ['@nestjs/*', 'rxjs'],
                         },
                     ],
                 },
