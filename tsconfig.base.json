@@ -22,7 +22,8 @@
         "paths": {
             "@dnd-mapp/dnd-mapp/test": ["apps/dnd-mapp/test"],
             "@dnd-mapp/domain/auth": ["libs/auth/domain/src"],
-            "@dnd-mapp/shared/utils": ["libs/shared/utils/src"]
+            "@dnd-mapp/shared/utils": ["libs/shared/utils/src"],
+            "@dnd-mapp/backend/core": ["libs/backend/core/src"]
         },
         "rootDir": ".",
         "skipDefaultLibCheck": true,
