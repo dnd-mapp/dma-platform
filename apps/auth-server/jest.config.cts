@@ -1,9 +1,8 @@
 import type { Config } from 'jest';
 
 const config: Config = {
-    collectCoverageFrom: ['<rootDir>/src/app/**/*.ts'],
+    collectCoverageFrom: ['<rootDir>/src/app/**/*.ts', '!<rootDir>/**/index.ts'],
     coverageDirectory: '../../reports/apps/auth-server',
-    coveragePathIgnorePatterns: ['<rootDir>/src/**/index.ts'],
     displayName: 'auth-server',
     moduleNameMapper: {},
     moduleFileExtensions: ['ts', 'js', 'html'],
