@@ -49,6 +49,10 @@ export default defineConfig(
                             allowedExternalImports: ['@nestjs/*', 'class-validator', 'rxjs'],
                         },
                         {
+                            sourceTag: 'scope:backend-auth-app',
+                            onlyDependOnLibsWithTags: ['scope:backend', 'scope:shared', 'scope:auth'],
+                        },
+                        {
                             sourceTag: 'scope:backend',
                             onlyDependOnLibsWithTags: ['scope:backend', 'scope:shared'],
                         },

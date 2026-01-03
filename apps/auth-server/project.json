@@ -3,7 +3,7 @@
     "name": "auth-server",
     "projectType": "application",
     "sourceRoot": "apps/auth-server/src",
-    "tags": ["platform:nestjs", "scope:auth", "scope:backend"],
+    "tags": ["platform:nestjs", "scope:backend-auth-app"],
     "targets": {
         "build": {
             "executor": "nx:run-commands",
