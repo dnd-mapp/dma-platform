@@ -27,6 +27,7 @@ Thumbs.db
 .nx/workspace-data
 
 .angular/
+**/src/prisma/
 
 **/.env
 cert*.pem
