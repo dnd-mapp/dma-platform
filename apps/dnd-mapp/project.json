@@ -79,10 +79,10 @@
             "defaultConfiguration": "ci",
             "configurations": {
                 "ci": {
-                    "command": "vitest run"
+                    "command": "vitest run -c apps/dnd-mapp/vite.config.mts"
                 },
                 "development": {
-                    "command": "vitest --ui"
+                    "command": "vitest -c apps/dnd-mapp/vite.config.mts --ui"
                 }
             }
         },
