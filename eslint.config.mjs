@@ -46,7 +46,15 @@ export default defineConfig(
                         },
                         {
                             sourceTag: 'platform:nestjs',
-                            allowedExternalImports: ['@nestjs/*', 'class-validator', 'class-transformer', 'rxjs'],
+                            allowedExternalImports: [
+                                '@dotenvx/*',
+                                '@nestjs/*',
+                                '@prisma/*',
+                                'class-validator',
+                                'class-transformer',
+                                'prisma/*',
+                                'rxjs',
+                            ],
                         },
                         {
                             sourceTag: 'scope:backend-auth-app',
