@@ -1,0 +1,12 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+    engineType   = "client"
+    moduleFormat = "cjs"
+    output       = "../src/prisma"
+    provider     = "prisma-client"
+}
+
+datasource db {
+    provider = "mysql"
+}

@@ -5,13 +5,23 @@
     "sourceRoot": "apps/auth-server/src",
     "tags": ["platform:nestjs", "scope:backend-auth-app"],
     "targets": {
+        "prisma-generate": {
+            "executor": "nx:run-commands",
+            "inputs": ["{projectRoot}/prisma/schema.prisma", "{projectRoot}/prisma.config.ts"],
+            "outputs": ["{projectRoot}/src/prisma"],
+            "cache": true,
+            "options": {
+                "command": "prisma generate",
+                "cwd": "{projectRoot}"
+            }
+        },
         "build": {
             "executor": "nx:run-commands",
             "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
             "cache": true,
             "options": {
                 "command": "webpack-cli build",
-                "cwd": "apps/auth-server"
+                "cwd": "{projectRoot}"
             },
             "defaultConfiguration": "production",
             "configurations": {
