@@ -38,6 +38,13 @@
             "cache": true,
             "options": {
                 "jestConfig": "apps/auth-server/jest.config.cts"
+            },
+            "defaultConfiguration": "ci",
+            "configurations": {
+                "ci": {},
+                "development": {
+                    "watch": true
+                }
             }
         }
     }
