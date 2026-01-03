@@ -10,3 +10,14 @@ generator client {
 datasource db {
     provider = "mysql"
 }
+
+model User {
+    id        String   @id @default(nanoid())
+    username  String   @unique(map: "uq_user_username")
+    password  String
+    email     String
+    createdAt DateTime @default(now()) @map(name: "created_at")
+    updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+    @@map(name: "users")
+}
