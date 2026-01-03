@@ -1,15 +1,18 @@
 import { Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { FastifyAdapter } from '@nestjs/platform-fastify';
-import { AppModule } from './app';
+import { AppModule, SERVER_CONFIGURATION_NAMESPACE, ServerConfiguration } from './app';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule, new FastifyAdapter());
-    const port = process.env['PORT'] || 4350;
+    const configService = app.get(ConfigService);
 
-    await app.listen(port);
+    const { host, port } = configService.get<ServerConfiguration>(SERVER_CONFIGURATION_NAMESPACE);
 
-    Logger.log(`🚀 Application is running on: http://localhost:${port}}`);
+    await app.listen(port, host);
+
+    Logger.log(`🚀 Application is running on: http://${host}:${port}}`);
 }
 
 bootstrap().catch((error) => console.error(error));
