@@ -21,7 +21,8 @@
         "noUnusedParameters": true,
         "paths": {
             "@dnd-mapp/dnd-mapp/test": ["apps/dnd-mapp/test"],
-            "@dnd-mapp/domain/auth": ["libs/auth/domain/src"]
+            "@dnd-mapp/domain/auth": ["libs/auth/domain/src"],
+            "@dnd-mapp/shared/utils": ["libs/shared/utils/src"]
         },
         "rootDir": ".",
         "skipDefaultLibCheck": true,

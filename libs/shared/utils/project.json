@@ -1,0 +1,23 @@
+{
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "name": "shared-utils",
+    "projectType": "library",
+    "sourceRoot": "libs/shared/utils/src",
+    "tags": ["scope:shared"],
+    "targets": {
+        "test": {
+            "executor": "nx:run-commands",
+            "outputs": ["{workspaceRoot}/reports/{projectRoot}"],
+            "cache": true,
+            "defaultConfiguration": "ci",
+            "configurations": {
+                "ci": {
+                    "command": "vitest run -c libs/shared/utils/vite.config.mts"
+                },
+                "development": {
+                    "command": "vitest -c libs/shared/utils/vite.config.mts --ui"
+                }
+            }
+        }
+    }
+}
