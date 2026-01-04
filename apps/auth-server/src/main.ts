@@ -1,4 +1,5 @@
-import { Logger } from '@nestjs/common';
+import { validationPipeOptions } from '@dnd-mapp/backend/core';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
@@ -11,6 +12,8 @@ async function bootstrap() {
     const { host, port } = configService.get<ServerConfiguration>(SERVER_CONFIGURATION_NAMESPACE);
 
     await app.listen(port, host);
+
+    app.useGlobalPipes(new ValidationPipe(validationPipeOptions));
 
     Logger.log(`🚀 Application is running on: http://${host}:${port}}`);
 }
