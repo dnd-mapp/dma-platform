@@ -4,6 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaClient, User as PrismaUser } from '../../prisma/client';
 
 function transformRecordToDto(record: PrismaUser) {
+    if (record === null) return null;
     return new UserBuilder()
         .withId(record.id)
         .withUsername(record.username)
