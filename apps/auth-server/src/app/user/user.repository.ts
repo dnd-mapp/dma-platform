@@ -32,6 +32,11 @@ export class UserRepository {
         return transformAllRecordsToDto(results);
     }
 
+    public async findById(userId: string) {
+        const result = await this.databaseService.prisma.user.findUnique({ where: { id: userId } });
+        return transformRecordToDto(result);
+    }
+
     public async findByUsername(username: string) {
         const result = await this.databaseService.prisma.user.findUnique({ where: { username: username } });
         return transformRecordToDto(result);

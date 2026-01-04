@@ -1,9 +1,9 @@
 import { CreateUserDto } from '@dnd-mapp/domain/auth';
-import { Body, Controller, Get, HttpStatus, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, NotFoundException, Param, Post, Res } from '@nestjs/common';
 import { FastifyReply } from 'fastify';
 import { UserService } from './user.service';
 
-@Controller('user')
+@Controller('/user')
 export class UserController {
     private readonly userService: UserService;
 
@@ -26,5 +26,15 @@ export class UserController {
         });
 
         return created;
+    }
+
+    @Get(`/:userId`)
+    public async getById(@Param('userId') userId: string) {
+        const byId = await this.userService.getById(userId);
+
+        if (!byId) {
+            throw new NotFoundException(`User with ID "${userId}" was not found`);
+        }
+        return byId;
     }
 }

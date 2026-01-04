@@ -17,6 +17,10 @@ export class UserService {
         return await this.userRepository.findAll();
     }
 
+    public async getById(userId: string) {
+        return await this.userRepository.findById(userId);
+    }
+
     public async create(data: CreateUserDto) {
         const { username, password } = data;
 
