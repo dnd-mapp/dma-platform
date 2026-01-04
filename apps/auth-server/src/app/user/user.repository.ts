@@ -1,5 +1,5 @@
 import { DatabaseService } from '@dnd-mapp/backend/core';
-import { UserBuilder } from '@dnd-mapp/domain/auth';
+import { CreateUserDto, UserBuilder } from '@dnd-mapp/domain/auth';
 import { Injectable } from '@nestjs/common';
 import { PrismaClient, User as PrismaUser } from '../../prisma/client';
 
@@ -29,5 +29,23 @@ export class UserRepository {
     public async findAll() {
         const results = await this.databaseService.prisma.user.findMany();
         return transformAllRecordsToDto(results);
+    }
+
+    public async findByUsername(username: string) {
+        const result = await this.databaseService.prisma.user.findUnique({ where: { username: username } });
+        return transformRecordToDto(result);
+    }
+
+    public async create(data: CreateUserDto) {
+        const { username, password, email } = data;
+
+        const created = await this.databaseService.prisma.user.create({
+            data: {
+                username: username,
+                password: password,
+                email: email,
+            },
+        });
+        return transformRecordToDto(created);
     }
 }
