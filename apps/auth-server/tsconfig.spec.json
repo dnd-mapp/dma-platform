@@ -1,6 +1,6 @@
 {
     "extends": "./tsconfig.json",
-    "include": ["jest.config.cts", "src/**/*.spec.ts", "src/**/*.d.ts"],
+    "include": ["jest.config.cts", "src/**/*.spec.ts", "src/**/*.d.ts", "test/**/*.ts"],
     "compilerOptions": {
         "module": "CommonJS",
         "moduleResolution": "node10",

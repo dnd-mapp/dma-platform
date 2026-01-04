@@ -6,6 +6,7 @@ const config: Config = {
     displayName: 'auth-server',
     moduleNameMapper: {},
     moduleFileExtensions: ['ts', 'js', 'html'],
+    setupFilesAfterEnv: ['<rootDir>/test/test-setup.ts'],
     preset: '../../jest.preset.js',
     rootDir: __dirname,
     transform: {
