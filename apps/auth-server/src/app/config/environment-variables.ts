@@ -1,10 +1,11 @@
 import { transform, validatorOptions } from '@dnd-mapp/backend/core';
 import { tryCatch } from '@dnd-mapp/shared/utils';
-import { IsNotEmpty, IsNumber, IsString, Max, Min, validate } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, Max, Min, MinLength, validate } from 'class-validator';
 
 export const EnvironmentVariables = {
     SERVER_HOST: 'AUTH_SERVER_HOST',
     SERVER_PORT: 'AUTH_SERVER_PORT',
+    SERVER_PASSWORD_PEPPER: 'AUTH_SERVER_PEPPER',
 
     DB_HOST: 'AUTH_DB_HOST',
     DB_PORT: 'AUTH_DB_PORT',
@@ -29,6 +30,8 @@ const MIN_PORT_RANGE = 1024 as const;
 
 const MAX_PORT_RANGE = 65535 as const;
 
+const MIN_PASSWORD_PEPPER_LENGTH = 24 as const;
+
 class Environment {
     @IsNotEmpty()
     @IsString()
@@ -38,6 +41,11 @@ class Environment {
     @Min(MIN_PORT_RANGE)
     @IsNumber({ allowNaN: false, allowInfinity: false, maxDecimalPlaces: 0 })
     [EnvironmentVariables.SERVER_PORT]: number = DEFAULT_SERVER_PORT;
+
+    @MinLength(MIN_PASSWORD_PEPPER_LENGTH)
+    @IsNotEmpty()
+    @IsString()
+    [EnvironmentVariables.SERVER_PASSWORD_PEPPER]: string;
 
     @IsNotEmpty()
     @IsString()
