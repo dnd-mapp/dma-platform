@@ -57,7 +57,7 @@ export default defineConfig(
                             ],
                         },
                         {
-                            sourceTag: 'scope:backend-auth-app',
+                            sourceTag: 'scope:auth-backend',
                             onlyDependOnLibsWithTags: ['scope:backend', 'scope:shared', 'scope:auth'],
                         },
                         {

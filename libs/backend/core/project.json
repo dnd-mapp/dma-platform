@@ -3,6 +3,6 @@
     "name": "backend-core",
     "projectType": "library",
     "sourceRoot": "libs/backend/core/src",
-    "tags": ["scope:backend"],
+    "tags": ["scope:auth-backend"],
     "targets": {}
 }

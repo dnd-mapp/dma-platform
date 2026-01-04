@@ -3,7 +3,7 @@
     "name": "auth-server",
     "projectType": "application",
     "sourceRoot": "apps/auth-server/src",
-    "tags": ["platform:nestjs", "scope:backend-auth-app"],
+    "tags": ["platform:nestjs", "scope:auth-backend"],
     "targets": {
         "prisma-generate": {
             "executor": "nx:run-commands",
