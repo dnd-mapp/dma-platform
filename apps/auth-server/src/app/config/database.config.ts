@@ -26,6 +26,6 @@ export default registerAs(
             port: parseInt(process.env[EnvironmentVariables.DB_PORT], DEFAULT_DB_PORT),
             schema: process.env[EnvironmentVariables.DB_SCHEMA] || DEFAULT_DB_SCHEMA,
             user: process.env[EnvironmentVariables.DB_USER] || DEFAULT_DB_USER,
-            password: process.env[EnvironmentVariables.DB_PASSWORD],
+            password: process.env[EnvironmentVariables.DB_PASSWORD]!,
         }) satisfies DatabaseConfiguration,
 );

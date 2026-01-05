@@ -9,7 +9,7 @@ async function bootstrap() {
     const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
     const configService = app.get(ConfigService);
 
-    const { host, port } = configService.get<ServerConfiguration>(SERVER_CONFIGURATION_NAMESPACE);
+    const { host, port } = configService.get<ServerConfiguration>(SERVER_CONFIGURATION_NAMESPACE)!;
 
     await app.listen(port, host);
 

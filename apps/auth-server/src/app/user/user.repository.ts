@@ -3,7 +3,7 @@ import { CreateUserDto, UserBuilder } from '@dnd-mapp/domain/auth';
 import { Injectable } from '@nestjs/common';
 import { PrismaClient, User as PrismaUser } from '../../prisma/client';
 
-function transformRecordToDto(record: PrismaUser) {
+function transformRecordToDto(record: PrismaUser | null) {
     if (record === null) return null;
     return new UserBuilder()
         .withId(record.id)

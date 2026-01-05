@@ -75,6 +75,6 @@ export async function validateEnvironmentVariables(environment: Record<string, u
     const { data: validationErrors, error } = await tryCatch(validate(parsedEnvironment, validatorOptions));
 
     if (error) throw error;
-    if (validationErrors.length > 0) throw new Error(Object.values(validationErrors[0].constraints)[0]);
+    if (validationErrors.length > 0) throw new Error(validationErrors[0]!.toString(true));
     return parsedEnvironment;
 }

@@ -16,6 +16,6 @@ export default registerAs(
         ({
             host: process.env[EnvironmentVariables.SERVER_HOST] || DEFAULT_SERVER_HOST,
             port: parseInt(process.env[EnvironmentVariables.SERVER_PORT], DEFAULT_SERVER_PORT),
-            pepper: process.env[EnvironmentVariables.SERVER_PASSWORD_PEPPER],
+            pepper: process.env[EnvironmentVariables.SERVER_PASSWORD_PEPPER]!,
         }) satisfies ServerConfiguration,
 );

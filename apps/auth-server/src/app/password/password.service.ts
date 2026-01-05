@@ -16,7 +16,7 @@ export class PasswordService implements OnModuleInit {
     public async onModuleInit() {
         await ConfigModule.envVariablesLoaded;
 
-        const { pepper } = this.configService.get<ServerConfiguration>(SERVER_CONFIGURATION_NAMESPACE);
+        const { pepper } = this.configService.get<ServerConfiguration>(SERVER_CONFIGURATION_NAMESPACE)!;
         this.pepper = pepper;
     }
 
