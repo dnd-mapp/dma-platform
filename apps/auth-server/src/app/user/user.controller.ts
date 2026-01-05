@@ -3,7 +3,7 @@ import { Body, Controller, Get, HttpStatus, NotFoundException, Param, Post, Res 
 import { FastifyReply } from 'fastify';
 import { UserService } from './user.service';
 
-@Controller('/user')
+@Controller('/users')
 export class UserController {
     private readonly userService: UserService;
 
