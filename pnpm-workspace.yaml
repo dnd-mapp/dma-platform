@@ -3,3 +3,6 @@ packages:
     - libs/*
 
 autoInstallPeers: true
+
+# Released packages must be three days old before we can use them
+minimumReleaseAge: 4320
