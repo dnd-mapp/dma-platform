@@ -36,4 +36,9 @@ export class UserBuilder {
         this.user.updatedAt = timestamp;
         return this;
     }
+
+    public deletedAt(timestamp: Date | null) {
+        this.user.deletedAt = timestamp;
+        return this;
+    }
 }

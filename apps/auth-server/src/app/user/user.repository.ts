@@ -12,6 +12,7 @@ function transformRecordToDto(record: PrismaUser | null) {
         .withEmail(record.email)
         .createdAt(record.createdAt)
         .lastUpdatedAt(record.updatedAt)
+        .deletedAt(record.deletedAt)
         .build();
 }
 

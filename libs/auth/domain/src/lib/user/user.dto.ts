@@ -26,4 +26,7 @@ export class UserDto {
 
     @IsDate()
     public updatedAt: Date;
+
+    @IsDate()
+    public deletedAt: Date | null;
 }
