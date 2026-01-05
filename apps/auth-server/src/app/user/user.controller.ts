@@ -18,14 +18,15 @@ export class UserController {
 
     @Post()
     public async create(@Body() data: CreateUserDto, @Res({ passthrough: true }) response: FastifyReply) {
-        const created = await this.userService.create(data);
+        const user = await this.userService.create(data);
         const url = response.request.url;
 
-        response.status(HttpStatus.CREATED).headers({
-            Location: `${url}/${created.id}`,
-        });
-
-        return created;
+        if (!user.deletedAt) {
+            response.status(HttpStatus.CREATED).headers({
+                Location: `${url}/${user.id}`,
+            });
+        }
+        return user;
     }
 
     @Get(`/:userId`)

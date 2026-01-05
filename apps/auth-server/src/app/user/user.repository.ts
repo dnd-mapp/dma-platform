@@ -2,7 +2,7 @@ import { DatabaseService } from '@dnd-mapp/backend/core';
 import { CreateUserDto, UserBuilder } from '@dnd-mapp/domain/auth';
 import { Injectable } from '@nestjs/common';
 import { PrismaClient, User as PrismaUser } from '../../prisma/client';
-import { FindOneParams } from './models';
+import { FindAllParams, FindOneParams } from './models';
 
 function transformRecordToDto(record: PrismaUser | null) {
     if (record === null) return null;
@@ -29,8 +29,10 @@ export class UserRepository {
         this.databaseService = databaseService;
     }
 
-    public async findAll() {
-        const results = await this.databaseService.prisma.user.findMany();
+    public async findAll(params: FindAllParams = { includeDeleted: false }) {
+        const results = await this.databaseService.prisma.user.findMany(
+            params.includeDeleted ? undefined : { where: { deletedAt: null } },
+        );
         return transformAllRecordsToDto(results);
     }
 

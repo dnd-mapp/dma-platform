@@ -23,18 +23,26 @@ export class UserService {
     }
 
     public async create(data: CreateUserDto) {
-        const { username, password } = data;
+        const { username, email, password } = data;
 
-        if (await this.isUsernameTaken(username)) {
+        const byUsername = await this.getByUsername(username);
+
+        if (byUsername) {
+            if (byUsername.deletedAt !== null && byUsername.email === email) {
+                // TODO - Send account reactivation email
+                return byUsername;
+            }
             throw new ConflictException(`Could not create User. - Reason: Username "${username}" is already in use`);
         }
         data.password = await this.passwordService.hashPassword(password);
 
-        return await this.userRepository.create(data);
+        const created = await this.userRepository.create(data);
+
+        // TODO - Send account activation email
+
+        return created;
     }
 
-    private async getByUsername(username: string) {
-        return await this.userRepository.findByUsername(username);
     public async removeById(userId: string) {
         const byId = await this.getById(userId, { includeDeleted: true });
 
@@ -45,8 +53,7 @@ export class UserService {
         await this.userRepository.removeById(userId);
     }
 
-    private async isUsernameTaken(username: string) {
-        const byUsername = await this.getByUsername(username);
-        return byUsername !== null;
+    private async getByUsername(username: string) {
+        return await this.userRepository.findByUsername(username);
     }
 }
