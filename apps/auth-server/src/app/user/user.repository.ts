@@ -1,5 +1,5 @@
 import { DatabaseService } from '@dnd-mapp/backend/core';
-import { CreateUserDto, UserBuilder } from '@dnd-mapp/domain/auth';
+import { CreateUserDto, UpdateUserDto, UserBuilder } from '@dnd-mapp/domain/auth';
 import { Injectable } from '@nestjs/common';
 import { PrismaClient, User as PrismaUser } from '../../prisma/client';
 import { FindAllParams, FindOneParams } from './models';
@@ -61,6 +61,19 @@ export class UserRepository {
             },
         });
         return transformRecordToDto(created)!;
+    }
+
+    public async update(userId: string, user: UpdateUserDto) {
+        const { username } = user;
+
+        const updated = await this.databaseService.prisma.user.update({
+            where: { id: userId },
+            data: {
+                username: username,
+                updatedAt: new Date(),
+            },
+        });
+        return transformRecordToDto(updated);
     }
 
     public async removeById(userId: string, soft = true) {

@@ -1,4 +1,4 @@
-import { CreateUserDto } from '@dnd-mapp/domain/auth';
+import { CreateUserDto, UpdateUserDto } from '@dnd-mapp/domain/auth';
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { PasswordService } from '../password';
 import { FindOneParams } from './models';
@@ -41,6 +41,22 @@ export class UserService {
         // TODO - Send account activation email
 
         return created;
+    }
+
+    public async update(userId: string, data: UpdateUserDto) {
+        const { username } = data;
+        const byId = await this.getById(userId);
+        const byUsername = await this.getByUsername(username);
+
+        if (byId === null || (byUsername && byUsername.id === userId && byUsername.deletedAt !== null)) {
+            throw new NotFoundException(`Could not update User with ID "${userId}". - Reason: User was not found`);
+        }
+        if (byUsername && byUsername.id !== userId) {
+            throw new ConflictException(
+                `Could not update User with ID "${userId}". - Reason: Username "${username}" us already in use`,
+            );
+        }
+        return await this.userRepository.update(userId, data);
     }
 
     public async removeById(userId: string) {

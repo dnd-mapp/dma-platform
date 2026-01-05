@@ -20,14 +20,13 @@
 
 ### Updating
 
-- [ ] When updating a User account where the `deletedAt` column is set to a timestamp, the system should return a 404 Not Found error response.
-- [ ] When updating a User account which doesn't exist, the system should return a 404 Not Found error response.
-- [ ] When updating a User account to have a username that belongs to another User, the system should return a 409 Conflict error response.
+- [x] When updating a User account where the `deletedAt` column is set to a timestamp, the system should return a 404 Not Found error response.
+- [x] When updating a User account which doesn't exist, the system should return a 404 Not Found error response.
+- [x] When updating a User account to have a username that belongs to another User, the system should return a 409 Conflict error response.
 - [ ] When updating a User account, the request should have a `If-Match` header containing the `version` of the User.
 - [ ] When updating a User account and the `version` of the User account in the `If-Match` doesn't match the `version` of the user account stored in the database the system should return a 412 Precondition Failed error reponse.
 - [ ] When updating a User account the `version` column should increase by one.
-- [ ] When updating a new user account, the username must be at least three characters long.
-- [ ] When updating a new user account, the email must be a valid email address.
+- [x] When updating a User account, the username must be at least three characters long.
 
 ### Deleting
 
@@ -36,3 +35,12 @@
 - [ ] Users may only remove their own account.
 - [ ] Users with the `Admin` role mark any account as removed.
 - [ ] When a user account has had a value set for the `deletedAt` column for longer than 30 days, the account will be removed permanetely. Any link to the user account will be set to `NULL`.
+
+## Auth
+
+### Change email
+
+- [ ] When updating a user account, the email must be a valid email address.
+
+### Change password
+
