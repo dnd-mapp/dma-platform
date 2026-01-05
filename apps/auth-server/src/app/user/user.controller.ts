@@ -30,12 +30,14 @@ export class UserController {
     }
 
     @Get(`/:userId`)
-    public async getById(@Param('userId') userId: string) {
+    public async getById(@Param('userId') userId: string, @Res({ passthrough: true }) response: FastifyReply) {
         const byId = await this.userService.getById(userId);
 
         if (!byId) {
             throw new NotFoundException(`User with ID "${userId}" was not found`);
         }
+        response.headers({ ETag: `${byId.version}` });
+
         return byId;
     }
 

@@ -16,7 +16,7 @@
 
 - [x] When retrieving all Users (`GET /users`), accounts where the `deletedAt` column is set should be excluded from the result set.
 - [x] When retrieving a single User (`GET /users/:userId`), accounts where the `deletedAt` column is set should return a 404 Not Found error response.
-- [ ] When retrieving a single User, the system should return a `ETag` response header containing the `version` column value.
+- [x] When retrieving a single User, the system should return a `ETag` response header containing the `version` column value.
 
 ### Updating
 
