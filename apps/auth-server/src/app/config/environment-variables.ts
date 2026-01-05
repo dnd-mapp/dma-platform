@@ -72,7 +72,9 @@ class Environment {
 export async function validateEnvironmentVariables(environment: Record<string, unknown>) {
     const parsedEnvironment = transform(Environment, environment);
 
-    const { data: validationErrors, error } = await tryCatch(validate(parsedEnvironment, validatorOptions));
+    const { data: validationErrors, error } = await tryCatch(
+        validate(parsedEnvironment, { ...validatorOptions, forbidNonWhitelisted: false }),
+    );
 
     if (error) throw error;
     if (validationErrors.length > 0) throw new Error(validationErrors[0]!.toString(true));
