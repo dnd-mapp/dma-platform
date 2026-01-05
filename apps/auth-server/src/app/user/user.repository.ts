@@ -2,6 +2,7 @@ import { DatabaseService } from '@dnd-mapp/backend/core';
 import { CreateUserDto, UserBuilder } from '@dnd-mapp/domain/auth';
 import { Injectable } from '@nestjs/common';
 import { PrismaClient, User as PrismaUser } from '../../prisma/client';
+import { FindOneParams } from './models';
 
 function transformRecordToDto(record: PrismaUser | null) {
     if (record === null) return null;
@@ -33,13 +34,17 @@ export class UserRepository {
         return transformAllRecordsToDto(results);
     }
 
-    public async findById(userId: string) {
-        const result = await this.databaseService.prisma.user.findUnique({ where: { id: userId } });
+    public async findById(userId: string, params: FindOneParams = { includeDeleted: false }) {
+        const result = await this.databaseService.prisma.user.findUnique({
+            where: { id: userId, ...(params.includeDeleted ? {} : { deletedAt: null }) },
+        });
         return transformRecordToDto(result);
     }
 
     public async findByUsername(username: string) {
-        const result = await this.databaseService.prisma.user.findUnique({ where: { username: username } });
+        const result = await this.databaseService.prisma.user.findUnique({
+            where: { username: username },
+        });
         return transformRecordToDto(result);
     }
 
@@ -53,6 +58,22 @@ export class UserRepository {
                 email: email,
             },
         });
-        return transformRecordToDto(created);
+        return transformRecordToDto(created)!;
+    }
+
+    public async removeById(userId: string, soft = true) {
+        if (soft) {
+            const timestamp = new Date();
+
+            await this.databaseService.prisma.user.update({
+                where: { id: userId },
+                data: {
+                    updatedAt: timestamp,
+                    deletedAt: timestamp,
+                },
+            });
+        } else {
+            await this.databaseService.prisma.user.delete({ where: { id: userId } });
+        }
     }
 }

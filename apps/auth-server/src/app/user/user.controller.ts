@@ -1,5 +1,5 @@
 import { CreateUserDto } from '@dnd-mapp/domain/auth';
-import { Body, Controller, Get, HttpStatus, NotFoundException, Param, Post, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, NotFoundException, Param, Post, Res } from '@nestjs/common';
 import { FastifyReply } from 'fastify';
 import { UserService } from './user.service';
 
@@ -36,5 +36,13 @@ export class UserController {
             throw new NotFoundException(`User with ID "${userId}" was not found`);
         }
         return byId;
+    }
+
+    // TODO - Only allow Users with `Admin` role or Users to delete their own account.
+    @Delete('/:userId')
+    public async removeById(@Param('userId') userId: string, @Res({ passthrough: true }) response: FastifyReply) {
+        await this.userService.removeById(userId);
+
+        response.status(HttpStatus.NO_CONTENT);
     }
 }
