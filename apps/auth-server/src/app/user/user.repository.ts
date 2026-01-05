@@ -11,6 +11,7 @@ function transformRecordToDto(record: PrismaUser | null) {
         .withUsername(record.username)
         .withPassword(record.password)
         .withEmail(record.email)
+        .withVersion(record.version)
         .createdAt(record.createdAt)
         .lastUpdatedAt(record.updatedAt)
         .deletedAt(record.deletedAt)

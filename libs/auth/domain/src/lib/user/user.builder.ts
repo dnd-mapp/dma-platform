@@ -27,6 +27,11 @@ export class UserBuilder {
         return this;
     }
 
+    public withVersion(version: number) {
+        this.user.version = version;
+        return this;
+    }
+
     public createdAt(timestamp: Date) {
         this.user.createdAt = timestamp;
         return this;

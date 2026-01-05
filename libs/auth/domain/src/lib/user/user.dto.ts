@@ -1,5 +1,5 @@
 import { Exclude } from 'class-transformer';
-import { IsDate, IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { IsDate, IsEmail, IsNotEmpty, IsNumber, IsString, Min, MinLength } from 'class-validator';
 
 export class UserDto {
     @IsNotEmpty()
@@ -20,6 +20,10 @@ export class UserDto {
     @IsEmail()
     @IsString()
     public email: string;
+
+    @Min(1)
+    @IsNumber({ maxDecimalPlaces: 0, allowInfinity: false, allowNaN: false })
+    public version: number;
 
     @IsDate()
     public createdAt: Date;
