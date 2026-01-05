@@ -72,6 +72,7 @@ export class UserRepository {
             data: {
                 username: username,
                 updatedAt: new Date(),
+                version: { increment: 1 },
             },
         });
         return transformRecordToDto(updated);
@@ -86,6 +87,7 @@ export class UserRepository {
                 data: {
                     updatedAt: timestamp,
                     deletedAt: timestamp,
+                    version: { increment: 1 },
                 },
             });
         } else {

@@ -25,7 +25,7 @@
 - [x] When updating a User account to have a username that belongs to another User, the system should return a 409 Conflict error response.
 - [ ] When updating a User account, the request should have a `If-Match` header containing the `version` of the User.
 - [ ] When updating a User account and the `version` of the User account in the `If-Match` doesn't match the `version` of the user account stored in the database the system should return a 412 Precondition Failed error reponse.
-- [ ] When updating a User account the `version` column should increase by one.
+- [x] When updating a User account the `version` column should increase by one.
 - [x] When updating a User account, the username must be at least three characters long.
 
 ### Deleting
