@@ -3,5 +3,5 @@ export interface FindAllParams {
 }
 
 export interface FindOneParams {
-    includeDeleted: boolean;
+    includeDeleted?: boolean;
 }
