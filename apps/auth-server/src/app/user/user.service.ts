@@ -1,5 +1,5 @@
 import { CreateUserDto, UpdateUserDto } from '@dnd-mapp/domain/auth';
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException, PreconditionFailedException } from '@nestjs/common';
 import { PasswordService } from '../password';
 import { FindOneParams } from './models';
 import { UserRepository } from './user.repository';
@@ -43,11 +43,14 @@ export class UserService {
         return created;
     }
 
-    public async update(userId: string, data: UpdateUserDto) {
+    public async update(userId: string, data: UpdateUserDto, ifMatch?: string) {
         const { username } = data;
         const byId = await this.getById(userId);
         const byUsername = await this.getByUsername(username);
 
+        if (byId && `${byId.version}` !== ifMatch) {
+            throw new PreconditionFailedException();
+        }
         if (byId === null || (byUsername && byUsername.id === userId && byUsername.deletedAt !== null)) {
             throw new NotFoundException(`Could not update User with ID "${userId}". - Reason: User was not found`);
         }

@@ -1,5 +1,18 @@
 import { CreateUserDto, UpdateUserDto } from '@dnd-mapp/domain/auth';
-import { Body, Controller, Delete, Get, HttpStatus, NotFoundException, Param, Post, Put, Res } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Headers,
+    HttpStatus,
+    NotFoundException,
+    Param,
+    Post,
+    PreconditionFailedException,
+    Put,
+    Res,
+} from '@nestjs/common';
 import { FastifyReply } from 'fastify';
 import { UserService } from './user.service';
 
@@ -30,7 +43,11 @@ export class UserController {
     }
 
     @Get(`/:userId`)
-    public async getById(@Param('userId') userId: string, @Res({ passthrough: true }) response: FastifyReply) {
+    public async getById(
+        @Param('userId') userId: string,
+        @Res({ passthrough: true }) response: FastifyReply,
+        @Headers('If-None-Match') ifNoneMatch?: string,
+    ) {
         const byId = await this.userService.getById(userId);
 
         if (!byId) {
@@ -38,12 +55,21 @@ export class UserController {
         }
         response.headers({ ETag: `${byId.version}` });
 
+        if (ifNoneMatch && `${byId.version}` === ifNoneMatch) {
+            response.status(HttpStatus.NOT_MODIFIED);
+            return;
+        }
         return byId;
     }
 
     @Put('/:userId')
-    public async update(@Param('userId') userId: string, @Body() data: UpdateUserDto) {
-        return await this.userService.update(userId, data);
+    public async update(
+        @Param('userId') userId: string,
+        @Body() data: UpdateUserDto,
+        @Headers('If-Match') ifMatch?: string,
+    ) {
+        if (!ifMatch) throw new PreconditionFailedException();
+        return await this.userService.update(userId, data, ifMatch);
     }
 
     // TODO - Only allow Users with `Admin` role or Users to delete their own account.
