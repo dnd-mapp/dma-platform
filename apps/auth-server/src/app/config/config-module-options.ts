@@ -7,7 +7,6 @@ export const configModuleOptions: ConfigModuleOptions = {
     cache: true,
     envFilePath: ['.env'],
     expandVariables: true,
-    isGlobal: true,
     load: [serverConfig, databaseConfig],
     validate: validateEnvironmentVariables,
 };
