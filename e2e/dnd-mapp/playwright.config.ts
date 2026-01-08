@@ -11,7 +11,7 @@ export default defineConfig({
         trace: 'on-first-retry',
     },
     webServer: {
-        command: 'pnpm dlx nx serve dnd-mapp -c http',
+        command: 'pnpm exec nx serve dnd-mapp -c http',
         url: baseURL,
         reuseExistingServer: true,
         cwd: workspaceRoot,
