@@ -42,7 +42,7 @@ export default defineConfig(
                     depConstraints: [
                         {
                             sourceTag: 'platform:angular',
-                            allowedExternalImports: ['@angular/*', '@analogjs/*', 'rxjs'],
+                            allowedExternalImports: ['@angular/*', '@analogjs/*', 'nanoid', 'rxjs'],
                         },
                         {
                             sourceTag: 'platform:nestjs',
