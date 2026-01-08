@@ -15,6 +15,10 @@
                     {
                         "input": "{projectRoot}/public",
                         "glob": "**/*"
+                    },
+                    {
+                        "input": "libs/shared/ui/public",
+                        "glob": "**/*"
                     }
                 ],
                 "browser": "{projectRoot}/src/main.ts",
