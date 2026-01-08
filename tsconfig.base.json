@@ -21,12 +21,14 @@
         "noUnusedParameters": true,
         "paths": {
             "@dnd-mapp/admin-client/test": ["apps/admin-client/test/index.ts"],
+            "@dnd-mapp/backend/core": ["libs/backend/core/src/index.ts"],
+            "@dnd-mapp/backend/core/test": ["libs/backend/core/test/index.ts"],
             "@dnd-mapp/dnd-mapp/test": ["apps/dnd-mapp/test/index.ts"],
             "@dnd-mapp/domain/auth": ["libs/auth/domain/src/index.ts"],
             "@dnd-mapp/domain/auth/test": ["libs/auth/domain/test/index.ts"],
-            "@dnd-mapp/shared/utils": ["libs/shared/utils/src/index.ts"],
-            "@dnd-mapp/backend/core": ["libs/backend/core/src/index.ts"],
-            "@dnd-mapp/backend/core/test": ["libs/backend/core/test/index.ts"]
+            "@dnd-mapp/shared/ui": ["libs/shared/ui/src/index.ts"],
+            "@dnd-mapp/shared/ui/test": ["libs/shared/ui/test/index.ts"],
+            "@dnd-mapp/shared/utils": ["libs/shared/utils/src/index.ts"]
         },
         "rootDir": ".",
         "skipDefaultLibCheck": true,

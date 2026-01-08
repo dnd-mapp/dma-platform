@@ -31,6 +31,11 @@
             "dependsOn": ["^build"],
             "inputs": ["production", "^production"]
         },
+        "@nx/angular:ng-packagr-lite": {
+            "cache": true,
+            "dependsOn": ["^build"],
+            "inputs": ["production", "^production"]
+        },
         "@nx/eslint:lint": {
             "cache": true,
             "inputs": ["default", "{workspaceRoot}/eslint.config.mjs"]
@@ -86,6 +91,17 @@
             "linter": "eslint",
             "style": "css",
             "unitTestRunner": "vitest-analog"
+        },
+        "@nx/angular:component": {
+            "style": "css",
+            "changeDetection": "OnPush",
+            "type": "component"
+        },
+        "@nx/angular:library": {
+            "addTailwind": true,
+            "linter": "eslint",
+            "unitTestRunner": "none",
+            "changeDetection": "OnPush"
         },
         "@nx/js:library": {
             "bundler": "none",

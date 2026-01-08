@@ -1,0 +1,9 @@
+{
+  "name": "@dnd-mapp/shared-ui",
+  "version": "0.0.1",
+  "sideEffects": false,
+  "peerDependencies": {
+    "@angular/common": "~21.0.0",
+    "@angular/core": "~21.0.0"
+  }
+}
