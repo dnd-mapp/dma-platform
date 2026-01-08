@@ -15,6 +15,8 @@ async function bootstrap() {
 
     app.useGlobalPipes(new ValidationPipe(validationPipeOptions));
 
+    app.enableShutdownHooks();
+
     Logger.log(`🚀 Application is running on: http://${host}:${port}}`);
 }
 
