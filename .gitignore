@@ -18,6 +18,7 @@ node_modules/
 
 # misc
 reports/
+**/__screenshots__
 
 # System Files
 .DS_Store
