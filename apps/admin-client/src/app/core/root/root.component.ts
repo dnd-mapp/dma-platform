@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { NavBrandComponent, TopAppBarComponent } from '@dnd-mapp/shared/ui';
 
 @Component({
     selector: 'dma-root',
@@ -8,6 +9,6 @@ import { RouterOutlet } from '@angular/router';
     host: {
         '[class]': `'h-dvh flex flex-col bg-neutral-50'`,
     },
-    imports: [RouterOutlet],
+    imports: [RouterOutlet, TopAppBarComponent, NavBrandComponent],
 })
 export class RootComponent {}
