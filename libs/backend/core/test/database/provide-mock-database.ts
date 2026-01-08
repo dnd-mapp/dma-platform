@@ -1,4 +1,4 @@
-import { mockUserDB } from '@dnd-mapp/domain/auth/test';
+import { mockUserDB } from '@dnd-mapp/auth/domain/test';
 import { Provider } from '@nestjs/common';
 import { DatabaseService } from '../../src';
 

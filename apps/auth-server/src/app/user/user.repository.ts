@@ -1,5 +1,5 @@
+import { CreateUserDto, UpdateUserDto, UserBuilder } from '@dnd-mapp/auth/domain';
 import { DatabaseService } from '@dnd-mapp/backend/core';
-import { CreateUserDto, UpdateUserDto, UserBuilder } from '@dnd-mapp/domain/auth';
 import { Injectable } from '@nestjs/common';
 import { PrismaClient, User as PrismaUser } from '../../prisma/client';
 import { FindAllParams, FindOneParams } from './models';

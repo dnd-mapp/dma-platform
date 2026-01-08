@@ -1,4 +1,4 @@
-import { resetMockDatabases } from '@dnd-mapp/domain/auth/test';
+import { resetMockDatabases } from '@dnd-mapp/auth/domain/test';
 
 beforeEach(() => {
     resetMockDatabases();

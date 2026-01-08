@@ -1,4 +1,4 @@
-import { CreateUserDto, UpdateUserDto } from '@dnd-mapp/domain/auth';
+import { CreateUserDto, UpdateUserDto } from '@dnd-mapp/auth/domain';
 import {
     Body,
     Controller,

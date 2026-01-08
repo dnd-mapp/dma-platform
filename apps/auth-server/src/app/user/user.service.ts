@@ -1,4 +1,4 @@
-import { CreateUserDto, UpdateUserDto } from '@dnd-mapp/domain/auth';
+import { CreateUserDto, UpdateUserDto } from '@dnd-mapp/auth/domain';
 import { ConflictException, Injectable, NotFoundException, PreconditionFailedException } from '@nestjs/common';
 import { PasswordService } from '../password';
 import { FindOneParams } from './models';
