@@ -13,17 +13,17 @@
             "options": {
                 "assets": [
                     {
-                        "glob": "**/*",
-                        "input": "apps/dnd-mapp/public"
+                        "input": "{projectRoot}/public",
+                        "glob": "**/*"
                     }
                 ],
-                "browser": "apps/dnd-mapp/src/main.ts",
-                "outputPath": "dist/apps/dnd-mapp",
+                "browser": "{projectRoot}/src/main.ts",
+                "outputPath": "dist/{projectRoot}",
                 "security": {
                     "autoCsp": true
                 },
-                "styles": ["apps/dnd-mapp/src/styles.css"],
-                "tsConfig": "apps/dnd-mapp/tsconfig.app.json"
+                "styles": ["{projectRoot}/src/styles.css"],
+                "tsConfig": "{projectRoot}/tsconfig.app.json"
             },
             "defaultConfiguration": "production",
             "configurations": {

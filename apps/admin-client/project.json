@@ -13,17 +13,17 @@
             "options": {
                 "assets": [
                     {
-                        "glob": "**/*",
-                        "input": "apps/admin-client/public"
+                        "input": "{projectRoot}/public",
+                        "glob": "**/*"
                     }
                 ],
-                "browser": "apps/admin-client/src/main.ts",
-                "outputPath": "dist/apps/admin-client",
+                "browser": "{projectRoot}/src/main.ts",
+                "outputPath": "{workspaceRoot}/dist/{projectRoot}",
                 "security": {
                     "autoCsp": true
                 },
-                "styles": ["apps/admin-client/src/styles.css"],
-                "tsConfig": "apps/admin-client/tsconfig.app.json"
+                "styles": ["{projectRoot}/src/styles.css"],
+                "tsConfig": "{projectRoot}/tsconfig.app.json"
             },
             "defaultConfiguration": "production",
             "configurations": {
