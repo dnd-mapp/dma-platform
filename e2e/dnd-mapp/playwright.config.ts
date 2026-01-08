@@ -12,7 +12,7 @@ export default defineConfig({
     },
     webServer: {
         command: 'pnpm dlx nx serve dnd-mapp -c http',
-        url: 'http://localhost:4200',
+        url: baseURL,
         reuseExistingServer: true,
         cwd: workspaceRoot,
     },
