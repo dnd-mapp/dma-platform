@@ -11,22 +11,22 @@ interface SetupTestEnvironmentParams<H extends ComponentHarness, C = unknown> {
 }
 
 export async function setupTestEnvironment<H extends ComponentHarness, C = unknown>(
-    params: SetupTestEnvironmentParams<H, C> = { imports: [], providers: [] },
+    params?: SetupTestEnvironmentParams<H, C>,
 ) {
     TestBed.configureTestingModule({
-        imports: [...params.imports!, ...(params.testComponent ? [params.testComponent] : [])],
-        providers: [...params.providers!],
+        imports: [...(params?.imports ?? []), ...(params?.testComponent ? [params.testComponent] : [])],
+        providers: [...(params?.providers ?? [])],
     });
 
     let fixture: ComponentFixture<C> | null = null;
     let harnessLoader: HarnessLoader | null = null;
     let harness: H | null = null;
 
-    if (params.testComponent) {
+    if (params?.testComponent) {
         fixture = TestBed.createComponent(params.testComponent);
         harnessLoader = TestbedHarnessEnvironment.loader(fixture);
     }
-    if (params.harness && harnessLoader) {
+    if (params?.harness && harnessLoader) {
         harness = await harnessLoader.getHarness(params.harness);
     }
     return {
