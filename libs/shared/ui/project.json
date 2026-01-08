@@ -16,7 +16,7 @@
             "defaultConfiguration": "production",
             "configurations": {
                 "production": {
-                    "tsConfig": "libs/shared/ui/tsconfig.lib.prod.json"
+                    "tsConfig": "{projectRoot}/tsconfig.lib.prod.json"
                 },
                 "development": {
                     "tsConfig": "{projectRoot}/tsconfig.lib.json"
