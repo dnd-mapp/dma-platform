@@ -1,7 +1,6 @@
-import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { Component } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import { RootHarness } from '@dnd-mapp/admin-client/test';
+import { setupTestEnvironment } from '@dnd-mapp/shared/ui/test';
 import { RootComponent } from './root.component';
 
 describe('RootComponent', () => {
@@ -12,14 +11,13 @@ describe('RootComponent', () => {
     class TestComponent {}
 
     async function setupTest() {
-        TestBed.configureTestingModule({
-            imports: [TestComponent],
+        const { harness } = await setupTestEnvironment({
+            testComponent: TestComponent,
+            harness: RootHarness,
         });
 
-        const harnessLoader = TestbedHarnessEnvironment.loader(TestBed.createComponent(TestComponent));
-
         return {
-            harness: await harnessLoader.getHarness(RootHarness),
+            harness: harness!,
         };
     }
 
