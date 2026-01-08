@@ -57,7 +57,7 @@
         },
         "serve": {
             "executor": "@angular/build:dev-server",
-            "dependsOn": ["build"],
+            "dependsOn": ["build", "auth-server:serve"],
             "continuous": true,
             "options": {
                 "buildTarget": "admin-client:build:development",

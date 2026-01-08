@@ -35,6 +35,7 @@
         },
         "serve": {
             "executor": "@nx/js:node",
+            "dependsOn": ["auth-client:serve"],
             "continuous": true,
             "options": {
                 "buildTarget": "auth-server:build:development",
