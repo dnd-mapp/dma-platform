@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { RootHarness } from '@dnd-mapp/admin-client/test';
-import { setupTestEnvironment } from '@dnd-mapp/shared/ui/test';
+import { setupTestEnvironment } from '../../../../../../libs/shared/ui/test/src/public_api';
 import { appRoutes } from '../config';
 import { RootComponent } from './root.component';
 
