@@ -1,6 +1,6 @@
 {
-    "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "name": "auth-server-e2e",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "projectType": "application",
     "implicitDependencies": ["auth-server"],
     "targets": {

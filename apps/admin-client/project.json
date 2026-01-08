@@ -5,11 +5,9 @@
     "prefix": "dma",
     "sourceRoot": "apps/admin-client/src",
     "tags": ["platform:angular", "scope:admin-client"],
-    "implicitDependencies": ["shared-ui", "auth-ui"],
     "targets": {
         "build": {
             "executor": "@angular/build:application",
-            "dependsOn": ["^build"],
             "outputs": ["{options.outputPath}"],
             "cache": true,
             "options": {

@@ -1,32 +1,13 @@
 {
-    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
     "name": "auth-ui",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "sourceRoot": "libs/auth/ui/src",
     "prefix": "dma",
     "tags": ["scope:shared", "scope:auth", "platform:angular"],
     "targets": {
-        "build": {
-            "executor": "@nx/angular:ng-packagr-lite",
-            "dependsOn": ["^build"],
-            "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
-            "cache": true,
-            "options": {
-                "project": "{projectRoot}/ng-package.json"
-            },
-            "defaultConfiguration": "production",
-            "configurations": {
-                "production": {
-                    "tsConfig": "{projectRoot}/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "{projectRoot}/tsconfig.lib.json"
-                }
-            }
-        },
         "test": {
             "executor": "nx:run-commands",
-            "dependsOn": ["build"],
             "outputs": ["{workspaceRoot}/reports/{projectRoot}"],
             "cache": true,
             "options": {

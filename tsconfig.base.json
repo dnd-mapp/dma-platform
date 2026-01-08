@@ -26,9 +26,9 @@
             "@dnd-mapp/dnd-mapp/test": ["apps/dnd-mapp/test/index.ts"],
             "@dnd-mapp/auth/domain": ["libs/auth/domain/src/index.ts"],
             "@dnd-mapp/auth/domain/test": ["libs/auth/domain/test/index.ts"],
-            "@dnd-mapp/auth/ui": ["dist/libs/auth/ui"],
+            "@dnd-mapp/auth/ui": ["libs/auth/ui/src/index.ts"],
             "@dnd-mapp/auth/ui/test": ["libs/auth/ui/test/index.ts"],
-            "@dnd-mapp/shared/ui": ["dist/libs/shared/ui"],
+            "@dnd-mapp/shared/ui": ["libs/shared/ui/src/index.ts"],
             "@dnd-mapp/shared/ui/test": ["libs/shared/ui/test/index.ts"],
             "@dnd-mapp/shared/utils": ["libs/shared/utils/src/index.ts"]
         },
