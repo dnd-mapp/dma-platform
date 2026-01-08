@@ -43,6 +43,9 @@ async function bootstrap() {
 
     app.useGlobalPipes(new ValidationPipe(validationPipeOptions));
 
+    // TODO - Configure properly with help from a configuration file and environment variables.
+    app.enableCors();
+
     app.enableShutdownHooks();
 
     await app.listen(port, host);
