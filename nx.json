@@ -10,9 +10,6 @@
         "appsDir": "apps",
         "libsDir": "libs"
     },
-    "affected": {
-        "defaultBase": "main"
-    },
     "namedInputs": {
         "sharedGlobals": [],
         "default": ["{projectRoot}/**/*", "sharedGlobals"],
