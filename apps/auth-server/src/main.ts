@@ -41,13 +41,13 @@ async function bootstrap() {
 
     const { host, port } = configService.get<ServerConfiguration>(SERVER_CONFIGURATION_NAMESPACE)!;
 
-    await app.listen(port, host);
-
     app.useGlobalPipes(new ValidationPipe(validationPipeOptions));
 
     app.enableShutdownHooks();
 
-    Logger.log(`🚀 Application is running on: http://${host}:${port}}`);
+    await app.listen(port, host);
+
+    Logger.log(`🚀 Application is running on: ${sslEnabled ? 'https' : 'http'}://${host}:${port}}`);
 }
 
 bootstrap().catch((error) => console.error(error));
