@@ -72,6 +72,10 @@ export default defineConfig(
                             onlyDependOnLibsWithTags: ['scope:backend', 'scope:shared'],
                         },
                         {
+                            sourceTag: 'scope:admin',
+                            onlyDependOnLibsWithTags: ['scope:admin', 'scope:shared'],
+                        },
+                        {
                             sourceTag: 'scope:auth',
                             onlyDependOnLibsWithTags: ['scope:auth', 'scope:shared'],
                         },

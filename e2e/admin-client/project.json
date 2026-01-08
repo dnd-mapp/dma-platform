@@ -1,0 +1,8 @@
+{
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "name": "admin-client-e2e",
+    "projectType": "application",
+    "sourceRoot": "e2e/admin-client/src",
+    "implicitDependencies": ["admin-client"],
+    "targets": {}
+}
