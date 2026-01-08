@@ -4,7 +4,7 @@
     "projectType": "library",
     "sourceRoot": "libs/shared/ui/src",
     "prefix": "dma",
-    "tags": ["scope:shared", "scope:ui"],
+    "tags": ["scope:shared", "scope:ui", "platform:angular"],
     "targets": {
         "build": {
             "executor": "@nx/angular:ng-packagr-lite",
