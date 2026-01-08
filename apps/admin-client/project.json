@@ -71,7 +71,7 @@
         },
         "test": {
             "executor": "nx:run-commands",
-            "outputs": ["{options.reportsDirectory}"],
+            "outputs": ["{workspaceRoot}/reports/{projectRoot}"],
             "cache": true,
             "options": {
                 "cwd": "{projectRoot}"
