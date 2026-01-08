@@ -1,1 +1,1 @@
-export * from './top-app-bar.harness';
+export * from './nav';
