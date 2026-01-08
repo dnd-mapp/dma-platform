@@ -6,8 +6,9 @@
     "targets": {
         "e2e": {
             "executor": "@nx/jest:jest",
+            "dependsOn": ["^serve"],
             "options": {
-                "jestConfig": "e2e/auth-server/jest.config.cts"
+                "jestConfig": "{projectRoot}/jest.config.cts"
             }
         }
     }
