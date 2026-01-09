@@ -11,6 +11,10 @@ import { buttonTypeAttribute, ButtonTypes, DEFAULT_BUTTON_TYPE } from './button-
         '[class.bg-neutral-100]': 'isBase()',
         '[class.hover:bg-neutral-200]': 'isBase()',
         '[class.active:bg-neutral-300]': 'isBase()',
+        '[class.text-neutral-100]': 'isPrimary()',
+        '[class.bg-blue-400]': 'isPrimary()',
+        '[class.hover:bg-blue-500]': 'isPrimary()',
+        '[class.active:bg-blue-600]': 'isPrimary()',
     },
     imports: [],
 })
@@ -18,4 +22,6 @@ export class ButtonComponent {
     public readonly buttonType = input(DEFAULT_BUTTON_TYPE, { alias: 'dma-button', transform: buttonTypeAttribute });
 
     protected readonly isBase = computed(() => this.buttonType() === ButtonTypes.BASE);
+
+    protected readonly isPrimary = computed(() => this.buttonType() === ButtonTypes.PRIMARY);
 }
