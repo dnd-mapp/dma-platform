@@ -3,6 +3,6 @@
     "$schema": "../../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "sourceRoot": "libs/auth/domain/src",
-    "tags": ["scope:auth"],
+    "tags": ["scope:auth", "scope:shared"],
     "targets": {}
 }
