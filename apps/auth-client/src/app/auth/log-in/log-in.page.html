@@ -1,0 +1,27 @@
+<article class="flex h-full items-center justify-center bg-blue-200">
+    <form
+        class="w-xs rounded-md border border-neutral-400 bg-neutral-50 p-4 py-8 shadow-md"
+        [formGroup]="loginForm"
+        (ngSubmit)="onLogIn()"
+    >
+        <h1 class="text-xl font-medium">Login</h1>
+        <div class="mt-3 mb-4">
+            <dma-input
+                inputType="text"
+                inputId="username-input"
+                label="Username"
+                placeholder="TheLegend27"
+                formControlName="username"
+            ></dma-input>
+        </div>
+        <div class="mb-4">
+            <dma-input inputType="password" inputId="password-input" label="Password" formControlName="password" />
+        </div>
+        <div class="flex justify-end">
+            <button class="w-full" type="submit" dma-button="primary" [disabled]="loginForm.invalid">Log in</button>
+        </div>
+        <hr class="my-4 border-neutral-500" />
+        <p class="text-sm">Don't have an account? <dma-anchor route="/sign-up" label="Sign up!" /></p>
+        <dma-anchor class="text-sm" route="/forgot-password" label="Forgot credentials?" />
+    </form>
+</article>
