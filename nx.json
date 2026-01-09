@@ -86,6 +86,9 @@
             "changeDetection": "OnPush",
             "type": "component"
         },
+        "@nx/angular:directive": {
+            "type": "directive"
+        },
         "@nx/angular:library": {
             "addTailwind": true,
             "linter": "eslint",
