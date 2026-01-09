@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { RequestService } from '@dnd-mapp/shared/ui';
+import { map } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthServerService {
@@ -9,6 +10,8 @@ export class AuthServerService {
     private baseUrl = new URL('https://localhost.auth.dndmapp.dev:4350');
 
     public get<Response>(endPoint: string, params?: URLSearchParams) {
-        return this.requestService.get<Response>(new URL(endPoint, this.baseUrl), params);
+        return this.requestService
+            .get<Response>(new URL(endPoint, this.baseUrl), params)
+            .pipe(map((response) => response?.body));
     }
 }
