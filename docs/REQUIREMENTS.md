@@ -44,3 +44,39 @@
 
 ### Change password
 
+### Authorization
+
+```mermaid
+---
+title: Authorization flow
+---
+sequenceDiagram
+    actor Us as User
+    participant Cl as Client
+    participant AC as Auth Client
+    participant AS as Auth Server
+%%    participant AD@{ "type" : "database" } as Auth Database
+    participant AD as Auth Database
+    
+    Us ->> Cl: Clicks "Login" button
+    Cl ->> Cl: Generates Code verifier & -Challenge
+    Cl ->> AS: Send /auth/authorize request
+    AS ->> AD: Keep track of Code Challenge
+    AS ->> Cl: Redirect to login page
+    Cl ->> AC: Follow Redirect
+    AC ->> Us: Show login page
+    Us ->> AC: Enter credentials and press "Login" button
+    AC ->> AS: Send `/auth/login` request
+    AS ->> AD: Fetch User account
+    AD ->> AS: Return User account
+    AS ->> AS: Verify credentials
+    AS ->> AC: Confirm successful login with Authorization Code
+    AC ->> Cl: Redirect to client
+    Cl ->> AS: Send `/auth/tokens` request
+    AS ->> AD: Check for Code Challenge
+    AD ->> AS: Return Code Challenge
+    AS ->> AS: Verify Code Challenge and Authorization Code
+    AS ->> AS: Generate tokens
+    AS ->> AD: Persist refresh token
+    AS ->> Cl: Return tokens in cookies
+```
