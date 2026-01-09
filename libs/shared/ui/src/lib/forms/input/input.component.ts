@@ -2,6 +2,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, input, output, si
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor } from '@angular/forms';
 import { debounceTime, Subject } from 'rxjs';
+import { ControlContainerComponent } from '../control-container';
 import { NgOnChange, NgOnTouched } from '../models';
 import { provideValueAccessor } from '../providers';
 import { DEFAULT_INPUT_TYPE, inputTypeAttribute } from './input-type';
@@ -12,7 +13,7 @@ const INPUT_DEBOUNCE_TIME = 500 as const;
     selector: 'dma-input',
     templateUrl: './input.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [],
+    imports: [ControlContainerComponent],
     providers: [provideValueAccessor(InputComponent)],
 })
 export class InputComponent implements ControlValueAccessor {
@@ -33,6 +34,8 @@ export class InputComponent implements ControlValueAccessor {
     protected readonly _value = signal('');
 
     protected readonly _disabled = signal(false);
+
+    protected readonly focussed = signal(false);
 
     private ngOnChange: NgOnChange<string>;
     private ngOnTouched: NgOnTouched;
@@ -75,11 +78,16 @@ export class InputComponent implements ControlValueAccessor {
     }
 
     public onFocus() {
+        this.focussed.set(true);
         this.ngOnTouched();
     }
 
     public onInput(value: string) {
         this.inputSubject.next(value);
+    }
+
+    protected onBlur() {
+        this.focussed.set(false);
     }
 
     private change(value: string) {
