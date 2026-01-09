@@ -1,0 +1,12 @@
+<label [for]="inputId()" class="mb-1 block font-medium">{{ label() }}</label>
+<input
+    class="block w-full rounded-md border p-1 px-2 outline-blue-400 focus:border-blue-400"
+    #input
+    [type]="inputType()"
+    [id]="inputId()"
+    [value]="_value()"
+    [disabled]="_disabled()"
+    [placeholder]="placeholder()"
+    (focus)="onFocus()"
+    (input)="onInput(input.value)"
+/>
