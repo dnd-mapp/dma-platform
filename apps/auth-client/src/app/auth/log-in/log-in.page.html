@@ -12,10 +12,14 @@
                 label="Username"
                 placeholder="TheLegend27"
                 formControlName="username"
-            ></dma-input>
+            >
+                <dma-icon dma-so-user-icon dmaLeadingIcon />
+            </dma-input>
         </div>
         <div class="mb-4">
-            <dma-input inputType="password" inputId="password-input" label="Password" formControlName="password" />
+            <dma-input inputType="password" inputId="password-input" label="Password" formControlName="password">
+                <dma-icon dma-so-lock-icon dmaLeadingIcon />
+            </dma-input>
         </div>
         <div class="flex justify-end">
             <button class="w-full" type="submit" dma-button="primary" [disabled]="loginForm.invalid">Log in</button>

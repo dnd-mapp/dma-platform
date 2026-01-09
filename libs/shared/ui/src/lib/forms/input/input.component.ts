@@ -1,8 +1,19 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, input, output, signal } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import {
+    booleanAttribute,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    contentChild,
+    input,
+    output,
+    signal,
+} from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor } from '@angular/forms';
 import { debounceTime, Subject } from 'rxjs';
 import { ControlContainerComponent } from '../control-container';
+import { LeadingIconDirective } from '../leading-icon';
 import { NgOnChange, NgOnTouched } from '../models';
 import { provideValueAccessor } from '../providers';
 import { DEFAULT_INPUT_TYPE, inputTypeAttribute } from './input-type';
@@ -13,7 +24,7 @@ const INPUT_DEBOUNCE_TIME = 500 as const;
     selector: 'dma-input',
     templateUrl: './input.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ControlContainerComponent],
+    imports: [ControlContainerComponent, LeadingIconDirective, NgTemplateOutlet],
     providers: [provideValueAccessor(InputComponent)],
 })
 export class InputComponent implements ControlValueAccessor {
@@ -37,11 +48,15 @@ export class InputComponent implements ControlValueAccessor {
 
     protected readonly focussed = signal(false);
 
+    protected readonly showLeadingIcon = computed(() => this.leadingIcon() !== undefined);
+
     private ngOnChange: NgOnChange<string>;
     private ngOnTouched: NgOnTouched;
 
     private inputSubject = new Subject<string>();
     private input$ = this.inputSubject.asObservable();
+
+    private readonly leadingIcon = contentChild(LeadingIconDirective);
 
     public constructor() {
         toObservable(this.value)

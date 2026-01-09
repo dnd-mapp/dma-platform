@@ -1,6 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AnchorComponent, ButtonComponent, InputComponent } from '@dnd-mapp/shared/ui';
+import {
+    AnchorComponent,
+    ButtonComponent,
+    InputComponent,
+    LeadingIconDirective,
+    SoLockIconComponent,
+    SoUserIconComponent,
+} from '@dnd-mapp/shared/ui';
 
 @Component({
     selector: 'dma-log-in',
@@ -9,7 +16,15 @@ import { AnchorComponent, ButtonComponent, InputComponent } from '@dnd-mapp/shar
     host: {
         '[class]': `'h-full block'`,
     },
-    imports: [ReactiveFormsModule, ButtonComponent, InputComponent, AnchorComponent],
+    imports: [
+        ReactiveFormsModule,
+        ButtonComponent,
+        InputComponent,
+        AnchorComponent,
+        SoUserIconComponent,
+        LeadingIconDirective,
+        SoLockIconComponent,
+    ],
 })
 export class LogInPage {
     private readonly formBuilder = inject(FormBuilder);

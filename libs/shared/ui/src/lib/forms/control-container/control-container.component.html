@@ -1,1 +1,10 @@
+@if (showLeadingIcon()) {
+    <div class="text-neutral-700">
+        <ng-container *ngTemplateOutlet="leadingIcon" />
+    </div>
+}
 <ng-content />
+
+<ng-template #leadingIcon>
+    <ng-content select="[dmaLeadingIcon]" />
+</ng-template>

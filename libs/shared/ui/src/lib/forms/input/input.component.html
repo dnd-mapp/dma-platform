@@ -1,5 +1,10 @@
 <label [for]="inputId()" class="mb-1 block font-medium">{{ label() }}</label>
 <dma-control-container [focussed]="focussed()" [disabled]="_disabled()">
+    @if (showLeadingIcon()) {
+        <ng-container dmaLeadingIcon>
+            <ng-container *ngTemplateOutlet="leadingIcon" />
+        </ng-container>
+    }
     <input
         class="block w-full outline-none"
         #input
@@ -13,3 +18,7 @@
         (input)="onInput(input.value)"
     />
 </dma-control-container>
+
+<ng-template #leadingIcon>
+    <ng-content select="[dmaLeadingIcon]" />
+</ng-template>
