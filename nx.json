@@ -72,14 +72,6 @@
                 "targetName": "test"
             },
             "exclude": ["e2e/auth-server/**/*"]
-        },
-        {
-            "plugin": "@nx/vitest",
-            "options": {
-                "testTargetName": "vitest:test",
-                "ciTargetName": "test-ci",
-                "testMode": "watch"
-            }
         }
     ],
     "generators": {

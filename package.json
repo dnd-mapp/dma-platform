@@ -60,7 +60,6 @@
     "@nx/node": "~22.3.0",
     "@nx/playwright": "~22.3.0",
     "@nx/vite": "~22.3.0",
-    "@nx/vitest": "~22.3.0",
     "@nx/web": "~22.3.0",
     "@nx/webpack": "~22.3.0",
     "@nx/workspace": "~22.3.0",
