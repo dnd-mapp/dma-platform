@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import type { RedirectResponseDto } from '@dnd-mapp/auth/domain';
+import type { LoginDto, RedirectResponseDto } from '@dnd-mapp/auth/domain';
 import { sha256 } from '@dnd-mapp/shared/ui';
 import { nanoid } from 'nanoid';
 import { from, map, of, switchMap } from 'rxjs';
@@ -27,6 +27,10 @@ export class AuthService {
                 ),
             ),
         );
+    }
+
+    public login(data: LoginDto) {
+        return this.authServerService.post<RedirectResponseDto, LoginDto>(`${this.endPoint}/login`, data);
     }
 
     private generateState() {

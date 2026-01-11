@@ -11,5 +11,5 @@ export class LoginDto {
 
     @IsNotEmpty()
     @IsString()
-    public state: string;
+    public loginChallenge: string;
 }
