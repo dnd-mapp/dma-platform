@@ -37,8 +37,31 @@ erDiagram
         timestamp   updateAt
     }
     
+    token_blacklist {
+        string      id          PK,FK
+        timestamp   expires_at
+    }
+    
+    refresh_tokens {
+        string      id                  PK
+        string      session_id
+        string      access_token
+        string      identity_token
+        bool        revoked
+        string      hash
+        timestamp   expires_at
+        string      user_id             FK
+        
+        timestamp   created_at
+    }
+    
     clients ||--o{ authorization_transactions : Executes
+    users ||--o{ refresh_tokens : Obtains
 ```
+
+## Token blacklist
+
+Contains IDs (jti) of the Access and Identity tokens (JWT) until they expire. The `expires_at` column is calculated based on the validatity time for the Access or Identity token in combination with the created time of the Refresh token. After the expiration time has reached, the entry is removed.
 
 ## Authorization Transaction
 
