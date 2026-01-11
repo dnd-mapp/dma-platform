@@ -7,6 +7,10 @@ export const appRoutes: Routes = [
         redirectTo: 'login',
     },
     {
+        path: 'forgot-password',
+        loadComponent: async () => (await import('../../auth/forgot-password')).ForgotPasswordPage,
+    },
+    {
         path: 'login',
         loadComponent: async () => (await import('../../auth/log-in')).LogInPage,
     },
