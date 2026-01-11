@@ -32,3 +32,7 @@ Thumbs.db
 
 **/.env
 cert*.pem
+.docker/mariadb/root-password.txt
+.docker/mariadb/init/
+.docker/mariadb/data/
+.docker/dbeaver/
