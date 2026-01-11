@@ -13,9 +13,11 @@ export class AuthService {
 
     private codeVerifier: string;
     private state: string;
+    private nonce: string;
 
     public authorize() {
         return this.generateState().pipe(
+            switchMap(() => this.generateNonce()),
             switchMap(() => this.generateCodeVerifier()),
             switchMap((codeVerifier) => this.generateCodeChallenge(codeVerifier)),
             switchMap((codeChallenge) =>
@@ -30,6 +32,11 @@ export class AuthService {
     private generateState() {
         this.state = nanoid();
         return of(this.state);
+    }
+
+    private generateNonce() {
+        this.nonce = nanoid();
+        return of(this.nonce);
     }
 
     private generateCodeVerifier() {
@@ -47,6 +54,7 @@ export class AuthService {
         return new URLSearchParams({
             codeChallenge: codeChallenge,
             state: this.state,
+            nonce: this.nonce,
         });
     }
 }
