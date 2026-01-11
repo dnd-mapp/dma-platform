@@ -25,3 +25,10 @@ model User {
 
     @@map(name: "users")
 }
+
+model Client {
+    id           String @id @default(nanoid())
+    redirectUrls String @map(name: "redirect_urls")
+
+    @@map(name: "clients")
+}

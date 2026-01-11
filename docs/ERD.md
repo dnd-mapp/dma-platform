@@ -2,10 +2,10 @@
 
 ```mermaid
 ---
-title: User
+title: Auth Server
 ---
 erDiagram
-    User {
+    users {
         string id       PK
         string username UK
         string email
@@ -13,8 +13,13 @@ erDiagram
         
         int version
 
-        timestamp createdAt
-        timestamp updatedAt
-        timestamp deletedAt
+        timestamp created_at
+        timestamp updated_at
+        timestamp deleted_at
+    }
+    
+    clients {
+        string id               PK
+        string redirect_urls
     }
 ```
