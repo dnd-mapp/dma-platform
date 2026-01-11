@@ -31,8 +31,10 @@ erDiagram
     }
     
     clients {
-        string id               PK
-        string redirect_urls
+        string      id              PK
+        string      redirect_urls
+        timestamp   createdAt
+        timestamp   updateAt
     }
     
     clients ||--o{ authorization_transactions : Executes

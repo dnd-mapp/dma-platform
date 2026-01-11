@@ -30,6 +30,9 @@ model Client {
     id           String @id @default(nanoid())
     redirectUrls String @map(name: "redirect_urls")
 
+    createdAt DateTime  @default(now()) @map(name: "created_at")
+    updatedAt DateTime  @updatedAt @map(name: "updated_at")
+
     authorizationTransactions AuthorizationTransaction[]
 
     @@map(name: "clients")
