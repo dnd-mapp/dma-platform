@@ -10,7 +10,9 @@ export class AuthController {
 
         return {
             // TODO - Retrieve URL from registered Auth Client
-            url: 'https://localhost.auth.dndmapp.dev:4300',
+            url: 'https://localhost.auth.dndmapp.dev:4300?loginChallenge=my-login-challenge',
+        };
+    }
         };
     }
 }
