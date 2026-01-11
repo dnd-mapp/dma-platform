@@ -11,4 +11,8 @@ export class RequestService {
         }
         return this.httpClient.get<Response>(url.toString(), { observe: 'response' });
     }
+
+    public post<ResponseBody, RequestBody>(url: URL, data: RequestBody) {
+        return this.httpClient.post<ResponseBody>(url.toString(), data, { observe: 'response' });
+    }
 }

@@ -9,9 +9,15 @@ export class AuthServerService {
     // TODO - Read the base URL for the Auth server from a configuration file
     private baseUrl = new URL('https://localhost.auth.dndmapp.dev:4350');
 
-    public get<Response>(endPoint: string, params?: URLSearchParams) {
+    public get<ResponseBody>(endPoint: string, params?: URLSearchParams) {
         return this.requestService
-            .get<Response>(new URL(endPoint, this.baseUrl), params)
-            .pipe(map((response) => response?.body));
+            .get<ResponseBody>(new URL(endPoint, this.baseUrl), params)
+            .pipe(map((response) => response.body));
+    }
+
+    public post<ResponseBody, RequestBody>(endPoint: string, data: RequestBody) {
+        return this.requestService
+            .post<ResponseBody, RequestBody>(new URL(endPoint, this.baseUrl), data)
+            .pipe(map((response) => response.body!));
     }
 }
