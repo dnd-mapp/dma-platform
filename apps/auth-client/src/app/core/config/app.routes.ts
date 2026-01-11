@@ -23,6 +23,10 @@ export const appRoutes: Routes = [
         loadComponent: async () => (await import('../../auth/profile')).ProfilePage,
     },
     {
+        path: 'reset-password',
+        loadComponent: async () => (await import('../../auth/reset-password')).ResetPasswordPage,
+    },
+    {
         path: '**',
         redirectTo: 'not-found',
     },
