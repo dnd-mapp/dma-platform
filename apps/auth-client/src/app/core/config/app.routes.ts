@@ -27,6 +27,10 @@ export const appRoutes: Routes = [
         loadComponent: async () => (await import('../../auth/reset-password')).ResetPasswordPage,
     },
     {
+        path: 'sign-up',
+        loadComponent: async () => (await import('../../auth/sign-up')).SignUpPage,
+    },
+    {
         path: '**',
         redirectTo: 'not-found',
     },
