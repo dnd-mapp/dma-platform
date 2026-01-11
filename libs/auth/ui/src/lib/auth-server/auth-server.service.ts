@@ -15,6 +15,10 @@ export class AuthServerService {
             .pipe(map((response) => response.body));
     }
 
+    public redirect(endPoint: string, params?: URLSearchParams) {
+        this.requestService.redirect(new URL(endPoint, this.baseUrl), params);
+    }
+
     public post<ResponseBody, RequestBody>(endPoint: string, data: RequestBody) {
         return this.requestService
             .post<ResponseBody, RequestBody>(new URL(endPoint, this.baseUrl), data)

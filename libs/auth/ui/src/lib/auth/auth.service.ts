@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import type { LoginDto, RedirectResponseDto } from '@dnd-mapp/auth/domain';
 import { sha256 } from '@dnd-mapp/shared/ui';
 import { nanoid } from 'nanoid';
-import { from, map, of, switchMap } from 'rxjs';
+import { from, map, of, switchMap, tap } from 'rxjs';
 import { AuthServerService } from '../auth-server';
 
 @Injectable({ providedIn: 'root' })
@@ -20,11 +20,8 @@ export class AuthService {
             switchMap(() => this.generateNonce()),
             switchMap(() => this.generateCodeVerifier()),
             switchMap((codeVerifier) => this.generateCodeChallenge(codeVerifier)),
-            switchMap((codeChallenge) =>
-                this.authServerService.get<RedirectResponseDto>(
-                    `${this.endPoint}/authorize`,
-                    this.authorizeParams(codeChallenge),
-                ),
+            tap((codeChallenge) =>
+                this.authServerService.redirect(`${this.endPoint}/authorize`, this.authorizeParams(codeChallenge)),
             ),
         );
     }

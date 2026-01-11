@@ -12,6 +12,13 @@ export class RequestService {
         return this.httpClient.get<Response>(url.toString(), { observe: 'response' });
     }
 
+    public redirect(url: URL, params?: URLSearchParams) {
+        if (params) {
+            url.search = params.toString();
+        }
+        location.href = url.toString();
+    }
+
     public post<ResponseBody, RequestBody>(url: URL, data: RequestBody) {
         return this.httpClient.post<ResponseBody>(url.toString(), data, { observe: 'response' });
     }

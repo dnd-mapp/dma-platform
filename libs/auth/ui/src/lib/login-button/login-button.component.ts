@@ -14,11 +14,6 @@ export class LoginButtonComponent {
     private readonly authService = inject(AuthService);
 
     protected onLogin() {
-        this.authService
-            .authorize()
-            .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe({
-                next: (initializeAuth) => (location.href = initializeAuth!.url),
-            });
+        this.authService.authorize().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
     }
 }

@@ -1,17 +1,21 @@
 import { AuthorizeQueryParamsDto, LoginDto } from '@dnd-mapp/auth/domain';
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Post, Query, Res } from '@nestjs/common';
+import { FastifyReply } from 'fastify';
 
 @Controller('/auth')
 export class AuthController {
     @Get('/authorize')
-    public async authorize(@Query() queryParams: AuthorizeQueryParamsDto) {
+    public async authorize(
+        @Query() queryParams: AuthorizeQueryParamsDto,
+        @Res({ passthrough: true }) response: FastifyReply,
+    ) {
         // TODO - Persist code challenge and state so that they can be verified later
         console.log({ queryParams });
 
-        return {
+        response.status(HttpStatus.FOUND).headers({
             // TODO - Retrieve URL from registered Auth Client
-            url: 'https://localhost.auth.dndmapp.dev:4300?loginChallenge=my-login-challenge',
-        };
+            Location: 'https://localhost.auth.dndmapp.dev:4300?loginChallenge=my-login-challenge',
+        });
     }
 
     @Post('/login')
