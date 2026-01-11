@@ -1,0 +1,34 @@
+name: dnd-mapp
+services:
+    dbeaver:
+        image: dbeaver/cloudbeaver:25.3.2
+        container_name: dbeaver
+        restart: unless-stopped
+        ports:
+            -   '8978:8978'
+        depends_on:
+            -   database-mariadb
+        volumes:
+            -   ./dbeaver/data:/opt/cloudbeaver/workspace
+    database-mariadb:
+        image: mariadb:12.1.2-noble
+        container_name: mariadb
+        restart: unless-stopped
+        healthcheck:
+            test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
+            start_period: 10s
+            interval: 10s
+            timeout: 5s
+            retries: 3
+        ports:
+            -   '3306:3306'
+        volumes:
+            -   ./mariadb/init:/docker-entrypoint-initdb.d
+            -   ./mariadb/data:/var/lib/mysql:Z
+        env_file:
+            -   .env
+        secrets:
+            - mariadb-root-password
+secrets:
+    mariadb-root-password:
+        file: ./mariadb/root-password.txt
