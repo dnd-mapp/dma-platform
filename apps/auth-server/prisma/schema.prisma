@@ -30,5 +30,23 @@ model Client {
     id           String @id @default(nanoid())
     redirectUrls String @map(name: "redirect_urls")
 
+    authorizationTransactions AuthorizationTransaction[]
+
     @@map(name: "clients")
+}
+
+model AuthorizationTransaction {
+    id             String @id @default(nanoid())
+    state          String
+    nonce          String
+    codeChallenge  String @map(name: "code_challenge")
+    loginChallenge String @map(name: "login_challenge")
+    clientId String @map(name: "client_id")
+
+    authorizationCode       String?   @map(name: "authorization_code")
+    authorizationCodeExpiry DateTime? @map(name: "authorization_code_expiry")
+
+    client Client @relation(fields: [clientId], references: [id], map: "fk_client_authorization_transaction")
+
+    @@map(name: "authorization_transactions")
 }
