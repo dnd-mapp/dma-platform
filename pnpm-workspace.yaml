@@ -1,0 +1,32 @@
+packages:
+    - apps/*
+    - libs/**/*
+
+blockExoticSubdeps: true
+
+engineStrict: true
+
+executionEnv:
+    nodeVersion: 24.13.0
+
+ignoreDepScripts: true
+
+ignoreScripts: true
+
+minimumReleaseAge: 10080
+
+nodeVersion: 24.13.0
+
+packageManagerStrictVersion: true
+
+savePrefix: '~'
+
+strictDepBuilds: true
+
+trustPolicy: no-downgrade
+
+trustPolicyIgnoreAfter: 10080
+
+useNodeVersion: 24.13.0
+
+verifyDepsBeforeRun: prompt

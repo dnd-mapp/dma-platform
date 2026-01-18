@@ -1,0 +1,38 @@
+{
+    "exclude": ["node_modules", "tmp"],
+    "compileOnSave": false,
+    "compilerOptions": {
+        "baseUrl": ".",
+        "declaration": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "forceConsistentCasingInFileNames": true,
+        "importHelpers": true,
+        "lib": ["ES2024", "DOM"],
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "newLine": "lf",
+        "noImplicitAny": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noPropertyAccessFromIndexSignature": true,
+        "noUncheckedIndexedAccess": true,
+        "noUnusedParameters": true,
+        "noUnusedLocals": true,
+        "paths": {
+            "@dnd-mapp/dnd-mapp/test": ["./apps/dnd-mapp/test/index.ts"]
+        },
+        "rootDir": ".",
+        "skipDefaultLibCheck": true,
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "strictBindCallApply": true,
+        "strictBuiltinIteratorReturn": true,
+        "strictFunctionTypes": true,
+        "strictNullChecks": true,
+        "strictPropertyInitialization": true,
+        "target": "ES2024",
+        "useUnknownInCatchVariables": true
+    }
+}

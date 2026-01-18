@@ -1,0 +1,13 @@
+.idea/
+
+.vscode/*
+!.vscode/extensions.json
+
+.nx/*
+
+.angular/
+node_modules/
+dist/
+reports/
+
+**/*.pem

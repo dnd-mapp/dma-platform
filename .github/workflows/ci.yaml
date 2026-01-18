@@ -1,0 +1,51 @@
+name: CI
+on:
+    push:
+        branches:
+            - main
+permissions:
+    contents: read
+    actions: read
+jobs:
+    ci:
+        name: CI
+        runs-on: ubuntu-22.04
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v6
+              with:
+                  fetch-depth: 0
+                  filter: tree:0
+
+            - name: Set up Nx references
+              uses: nrwl/nx-set-shas@v4
+
+            - name: Set up Pnpm
+              uses: pnpm/action-setup@v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v6
+              with:
+                  node-version-file: .tool-versions
+                  cache-dependency-path: pnpm-lock.yaml
+                  cache: pnpm
+
+            - name: Install dependencies
+              shell: bash
+              run: pnpm install --frozen-lockfile
+
+            - name: Check formatting
+              shell: bash
+              run: pnpm exec nx format:check --base "${{ env.NX_BASE }}" --head "${{ env.NX_HEAD }}"
+
+            - name: Run linting
+              shell: bash
+              run: pnpm exec nx affected -t lint --base "${{ env.NX_BASE }}" --head "${{ env.NX_HEAD }}"
+
+            - name: Compile code
+              shell: bash
+              run: pnpm exec nx affected -t build --base "${{ env.NX_BASE }}" --head "${{ env.NX_HEAD }}"
+
+            - name: Run tests
+              shell: bash
+              run: pnpm exec nx affected -t test --base "${{ env.NX_BASE }}" --head "${{ env.NX_HEAD }}"

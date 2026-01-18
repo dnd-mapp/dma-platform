@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+      "Angular.ng-template",
+      "bradlc.vscode-tailwindcss",
+      "dbaeumer.vscode-eslint",
+      "jdx.dev.mise",
+      "ms-playwright.playwright",
+      "nrwl.angular-console",
+      "prettier.prettier-vscode",
+      "vitest.explorer"
+  ]
+}

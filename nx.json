@@ -1,0 +1,51 @@
+{
+    "$schema": "./node_modules/nx/schemas/nx-schema.json",
+    "defaultProject": "dnd-mapp",
+    "defaultBase": "main",
+    "neverConnectToCloud": true,
+    "namedInputs": {
+        "sharedGlobals": [],
+        "default": ["{projectRoot}/**/*", "sharedGlobals"],
+        "production": ["default", "!{projectRoot}/vite.config.mts", "!{projectRoot}/**/?(*.)spec.ts"]
+    },
+    "cli": {
+        "packageManager": "pnpm"
+    },
+    "workspaceLayout": {
+        "appsDir": "apps",
+        "libsDir": "libs"
+    },
+    "targetDefaults": {
+        "@angular/build:application": {
+            "cache": true,
+            "dependsOn": ["^build"],
+            "inputs": ["default", "^default"]
+        },
+        "@nx/eslint:lint": {
+            "cache": true,
+            "inputs": ["default", "{workspaceRoot}/eslint.config.mjs"]
+        }
+    },
+    "plugins": [
+        {
+            "plugin": "@nx/playwright/plugin",
+            "options": {
+                "targetName": "e2e"
+            }
+        },
+        {
+            "plugin": "@nx/eslint/plugin",
+            "options": {
+                "targetName": "lint"
+            }
+        }
+    ],
+    "generators": {
+        "@nx/angular:application": {
+            "e2eTestRunner": "playwright",
+            "linter": "eslint",
+            "style": "css",
+            "unitTestRunner": "vitest-analog"
+        }
+    }
+}
