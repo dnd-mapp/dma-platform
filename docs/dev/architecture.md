@@ -15,8 +15,11 @@ dma-platform/
 ├── apps/
 │   └── dnd-mapp/         # Main Angular Web Application
 ├── docs/                 # Documentation hub
-└── e2e/
-    └── dnd-mapp/         # Playwright End-to-End tests
+├── e2e/
+│   └── dnd-mapp/         # Playwright End-to-End tests
+└── libs/
+    └── shared/
+        └── ui/           # Generic UI components & Lazy Pages (@dnd-mapp/shared-ui)
 ```
 
 ## 🧩 Architectural Principles
