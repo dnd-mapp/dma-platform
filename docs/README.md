@@ -22,6 +22,7 @@ We use GitHub-native tooling to track our progress:
 - **[Architecture Decision Records (ADRs)](./adr/README.md)**: The "Why" behind our tech.
 - **[Live Roadmap ↗](https://github.com/orgs/dnd-mapp/projects/2)**: View our current sprints and feature progress.
 - **[Issue Tracker ↗](https://github.com/dnd-mapp/dma-platform/issues)**: Report bugs or suggest new features.
+- **[Changelog ↗](../CHANGELOG.md)**: History of changes and releases.
 
 ---
 
