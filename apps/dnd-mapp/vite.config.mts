@@ -30,9 +30,10 @@ export default defineConfig({
         include: ['src/**/*.spec.ts'],
         name: 'dnd-mapp',
         open: false,
-        outputFile: `${reportsDirectory}/index.html`,
         passWithNoTests: true,
-        reporters: ['dot', 'html'],
+        reporters: [
+            'dot',
+        ],
         setupFiles: ['test/test-setup.ts'],
         sequence: {
             shuffle: true,
