@@ -6,6 +6,12 @@
     "sourceRoot": "apps/dnd-mapp/src",
     "tags": ["platform:web", "scope:dnd-mapp"],
     "targets": {
+        "docker-build": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "docker buildx build -f {projectRoot}/.docker/Dockerfile -t dndmapp/dnd-mapp:latest ."
+            }
+        },
         "build": {
             "executor": "@angular/build:application",
             "outputs": ["{options.outputPath}"],
