@@ -65,6 +65,7 @@
         },
         "serve": {
             "executor": "@angular/build:dev-server",
+            "dependsOn": ["auth-client:serve"],
             "continuous": true,
             "options": {
                 "buildTarget": "dnd-mapp:build:development",
