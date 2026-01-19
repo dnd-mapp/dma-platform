@@ -1,0 +1,19 @@
+{
+    "name": "auth-server-e2e",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "application",
+    "implicitDependencies": ["auth-server"],
+    "targets": {
+        "e2e": {
+            "executor": "@nx/jest:jest",
+            "dependsOn": ["auth-server:serve"],
+            "outputs": ["{workspaceRoot}/reports/{projectRoot}"],
+            "cache": true,
+            "options": {
+                "collectCoverage": false,
+                "jestConfig": "{projectRoot}/jest.config.cts",
+                "passWithNoTests": true
+            }
+        }
+    }
+}

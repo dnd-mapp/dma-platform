@@ -1,0 +1,14 @@
+{
+    "extends": "./tsconfig.json",
+    "include": ["src/**/*.ts"],
+    "exclude": ["jest.config.cts", "src/**/*.spec.ts"],
+    "compilerOptions": {
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "module": "CommonJS",
+        "outDir": "../../dist/out-tsc",
+        "target": "ES2024",
+        "moduleResolution": "node",
+        "types": ["node"]
+    }
+}

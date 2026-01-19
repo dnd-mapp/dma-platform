@@ -14,6 +14,8 @@ All notable changes to the **D&D Mapp Platform** will be documented in this file
 - **Application:** Created `auth-client` for centralized Identity and Access Management (IAM).
 - **Infrastructure:** Containerized `auth-client` with Nginx and Docker.
 - **Documentation:** Added `auth-client` to SSL/DNS setup and workspace architecture guides.
+- **Application:** Created `auth-server` (NestJS) for centralized authentication and token management.
+- **Documentation:** Added `auth-server` to Architecture and SSL/DNS guides.
 
 ### ⚙️ Changed
 

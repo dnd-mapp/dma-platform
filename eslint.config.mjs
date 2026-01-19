@@ -27,12 +27,20 @@ export default [
                             onlyDependOnLibsWithTags: ['scope:auth-client', 'scope:shared'],
                         },
                         {
+                            sourceTag: 'scope:auth-server',
+                            onlyDependOnLibsWithTags: ['scope:auth-server', 'scope:shared'],
+                        },
+                        {
                             sourceTag: 'scope:shared',
                             onlyDependOnLibsWithTags: ['scope:shared'],
                         },
                         {
                             sourceTag: 'platform:web',
                             allowedExternalImports: ['@analogjs/*', '@angular/*', '@nx/*', '@vitest/*', 'rxjs', 'vite'],
+                        },
+                        {
+                            sourceTag: 'platform:server',
+                            allowedExternalImports: ['@nestjs/*', 'rxjs'],
                         },
                     ],
                 },

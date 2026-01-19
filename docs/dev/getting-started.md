@@ -36,6 +36,14 @@ Ensure you have the following installed:
     pnpm install
     ```
 
+## 🔑 Environment Variables
+
+The workspace uses a unified `.env` file in the root directory.
+
+1.  **Template:** Refer to the commented-out values in the root for required keys.
+2.  **Naming Convention:** Variables are prefixed by the application they belong to (e.g., `AUTH_SERVER_`, `AUTH_DB_`).
+3.  **Security:** Never commit your `.env` file. It is ignored by Git to protect your peppers, passwords, and private keys.
+
 ## 🚀 Serving the Application
 
 To start the primary web application:
