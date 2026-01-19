@@ -5,6 +5,9 @@ import { RouterOutlet } from '@angular/router';
     selector: 'dma-root',
     templateUrl: './root.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '[class]': `'flex flex-col h-dvh'`,
+    },
     imports: [RouterOutlet],
 })
 export class RootComponent {}
