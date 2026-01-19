@@ -3,7 +3,7 @@ import { RootHarness } from '@dnd-mapp/dnd-mapp/test';
 import { setupTestEnvironment } from '@dnd-mapp/shared-ui/test';
 import { RootComponent } from './root.component';
 
-describe('App', () => {
+describe('RootComponent', () => {
     @Component({
         template: `<dma-root />`,
         imports: [RootComponent],
