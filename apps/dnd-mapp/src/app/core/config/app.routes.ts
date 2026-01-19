@@ -18,6 +18,10 @@ export const appRoutes: Routes = [
         loadComponent: async () => (await import('@dnd-mapp/shared-ui/pages/not-found')).NotFoundPage,
     },
     {
+        path: 'knowledge-center',
+        loadChildren: async () => (await import('../../knowledge-center')).knowledgeCenterRoutes,
+    },
+    {
         path: '**',
         redirectTo: 'not-found',
     },
