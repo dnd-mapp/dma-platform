@@ -40,7 +40,7 @@ export default [
                         },
                         {
                             sourceTag: 'platform:server',
-                            allowedExternalImports: ['@nestjs/*', 'fastify', 'rxjs'],
+                            allowedExternalImports: ['@nestjs/*', 'fastify', 'jest', 'rxjs'],
                         },
                     ],
                 },
