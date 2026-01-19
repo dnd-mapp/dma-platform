@@ -15,6 +15,13 @@ import {
     host: {
         '[class]': `'flex flex-col h-dvh bg-neutral-50 text-neutral-900'`,
     },
-    imports: [RouterOutlet, AppTopBarComponent, NavBrandComponent, VerticalRuleComponent, NavbarComponent, NavLinkComponent],
+    imports: [
+        RouterOutlet,
+        AppTopBarComponent,
+        NavBrandComponent,
+        VerticalRuleComponent,
+        NavbarComponent,
+        NavLinkComponent,
+    ],
 })
 export class RootComponent {}
