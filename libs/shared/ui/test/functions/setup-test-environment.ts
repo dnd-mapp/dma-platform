@@ -6,6 +6,7 @@ import { TestBed } from '@angular/core/testing';
 interface SetupTestEnvironmentParams<Harness extends ComponentHarness, Component = unknown> {
     testComponent: Type<Component>;
     harness: HarnessQuery<Harness>;
+    providers?: unknown[];
 }
 
 export async function setupTestEnvironment<Harness extends ComponentHarness, Component = unknown>(
@@ -13,6 +14,7 @@ export async function setupTestEnvironment<Harness extends ComponentHarness, Com
 ) {
     TestBed.configureTestingModule({
         imports: [params.testComponent],
+        providers: [...(params.providers ? params.providers : [])],
     });
 
     const harnessLoader = TestbedHarnessEnvironment.loader(TestBed.createComponent(params.testComponent));
