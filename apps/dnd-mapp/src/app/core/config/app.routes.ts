@@ -6,6 +6,10 @@ export const appRoutes: Routes = [
         loadComponent: async () => (await import('../home')).HomePage,
     },
     {
+        path: 'characters',
+        loadChildren: async () => (await import('../../characters')).characterRoutes,
+    },
+    {
         path: 'not-found',
         loadComponent: async () => (await import('@dnd-mapp/shared-ui/pages/not-found')).NotFoundPage,
     },
