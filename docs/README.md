@@ -23,6 +23,7 @@ Our technical stack is built on a **Nx Monorepo** with **Angular**, **pnpm**, an
 - **[Local SSL & DNS](./dev/ssl-dns-setup.md)**: Certificates and hosts file.
 - **[Architecture Overview](./dev/architecture.md)**: Nx workspace and shared libs.
 - **[Testing Strategy](./dev/testing-guide.md)**: Vitest & Playwright.
+- **[Docker Guide](./dev/docker-guide.md)**: All about containerization using Docker.
 
 ### 🏛 Project Governance
 
