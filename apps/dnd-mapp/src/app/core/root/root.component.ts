@@ -6,7 +6,7 @@ import { RouterOutlet } from '@angular/router';
     templateUrl: './root.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[class]': `'flex flex-col h-dvh'`,
+        '[class]': `'flex flex-col h-dvh bg-neutral-50 text-neutral-900'`,
     },
     imports: [RouterOutlet],
 })
