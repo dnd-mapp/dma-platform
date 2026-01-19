@@ -6,6 +6,15 @@ Welcome to the central documentation hub for the `dma-platform`. This directory 
 
 ## 🗺️ Navigation
 
+### 🎭 User Guides
+
+Discover the features and tools available for your sessions.
+
+- **[Character Management](./user/character-management.md)**: Automated 5e calculations.
+- **[Virtual Tabletop (VTT)](./user/vtt-guide.md)**: Interactive battle maps.
+- **[Campaign Organizer](./user/campaign-organizer.md)**: Lore and session notes.
+- **[Game Toolbox](./user/game-toolbox.md)**: Dice rollers and databases.
+
 ### 🛠 Developer Hub
 
 Our technical stack is built on a **Nx Monorepo** with **Angular**, **pnpm**, and **Vitest**.
