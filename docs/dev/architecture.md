@@ -13,10 +13,12 @@ We use **Nx** to manage our workspace. This allows us to share logic between the
 ```text
 dma-platform/
 ├── apps/
+│   ├── auth-client/      # Identity & Account Management
 │   └── dnd-mapp/         # Main Angular Web Application
 ├── docs/                 # Documentation hub
-├── e2e/
-│   └── dnd-mapp/         # Playwright End-to-End tests
+├── e2e/                  # Playwright End-to-End tests
+│   ├── auth-client/      
+│   └── dnd-mapp/
 └── libs/
     └── shared/
         └── ui/           # Generic UI components & Lazy Pages (@dnd-mapp/shared-ui)

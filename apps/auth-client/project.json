@@ -1,15 +1,15 @@
 {
-    "name": "dnd-mapp",
+    "name": "auth-client",
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "projectType": "application",
     "prefix": "dma",
-    "sourceRoot": "apps/dnd-mapp/src",
-    "tags": ["platform:web", "scope:dnd-mapp"],
+    "sourceRoot": "apps/auth-client/src",
+    "tags": ["platform:web", "scope:auth-client"],
     "targets": {
         "docker-build": {
             "executor": "nx:run-commands",
             "options": {
-                "command": "docker buildx build -f {projectRoot}/.docker/Dockerfile -t dndmapp/dnd-mapp:latest ."
+                "command": "docker buildx build -f {projectRoot}/.docker/Dockerfile -t dndmapp/auth-client:latest ."
             }
         },
         "build": {
@@ -65,11 +65,10 @@
         },
         "serve": {
             "executor": "@angular/build:dev-server",
-            "dependsOn": ["auth-client:serve"],
             "continuous": true,
             "options": {
-                "buildTarget": "dnd-mapp:build:development",
-                "port": 4200
+                "buildTarget": "auth-client:build:development",
+                "port": 4300
             },
             "defaultConfiguration": "https",
             "configurations": {
@@ -77,7 +76,7 @@
                     "host": "localhost"
                 },
                 "https": {
-                    "host": "localhost.www.dndmapp.dev",
+                    "host": "localhost.auth.dndmapp.dev",
                     "ssl": true,
                     "sslCert": "ssl-cert.pem",
                     "sslKey": "ssl-key.pem"

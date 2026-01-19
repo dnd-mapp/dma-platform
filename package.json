@@ -27,7 +27,7 @@
   ],
   "scripts": {
     "nx": "pnpm exec nx",
-    "gen:ssl-cert": "mkcert -key-file ssl-key.pem -cert-file ssl-cert.pem localhost.www.dndmapp.dev localhost 127.0.0.1"
+    "gen:ssl-cert": "mkcert -key-file ssl-key.pem -cert-file ssl-cert.pem localhost.www.dndmapp.dev localhost.auth.dndmapp.dev localhost 127.0.0.1"
   },
   "packageManager": "pnpm@10.28.0",
   "engines": {

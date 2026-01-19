@@ -12,9 +12,10 @@ You must map the application domain to your local loopback address (`127.0.0.1`)
 
 **Required Mapping:**
 
-| Application | Local Domain                |
-|-------------|-----------------------------|
-| `dnd-mapp`  | `localhost.www.dndmapp.dev` |
+| Application   | Local Domain                 |
+|---------------|------------------------------|
+| `dnd-mapp`    | `localhost.www.dndmapp.dev`  |
+| `auth-client` | `localhost.auth.dndmapp.dev` |
 
 **File Locations:**
 
@@ -25,6 +26,7 @@ You must map the application domain to your local loopback address (`127.0.0.1`)
 
 ```text
 127.0.0.1 localhost.www.dndmapp.dev
+127.0.0.1 localhost.auth.dndmapp.dev
 ```
 
 ## 🔑 2. Local HTTPS Setup

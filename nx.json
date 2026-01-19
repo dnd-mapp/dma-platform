@@ -50,7 +50,9 @@
             "e2eTestRunner": "playwright",
             "linter": "eslint",
             "style": "css",
-            "unitTestRunner": "vitest-analog"
+            "unitTestRunner": "vitest-analog",
+            "bundler": "esbuild",
+            "ssr": false
         },
         "@nx/angular:component": {
             "style": "css",
