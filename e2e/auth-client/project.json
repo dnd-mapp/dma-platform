@@ -1,0 +1,25 @@
+{
+    "name": "auth-client-e2e",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "application",
+    "sourceRoot": "e2e/auth-client/src",
+    "implicitDependencies": ["auth-client"],
+    "targets": {
+        "playwright-install": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "playwright install chromium firefox webkit"
+            }
+        },
+        "e2e": {
+            "executor": "nx:run-commands",
+            "dependsOn": ["playwright-install"],
+            "outputs": ["{workspaceRoot}/reports/{projectRoot}"],
+            "cache": true,
+            "options": {
+                "command": "playwright test",
+                "cwd": "{projectRoot}"
+            }
+        }
+    }
+}

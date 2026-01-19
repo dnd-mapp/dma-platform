@@ -11,10 +11,13 @@ All notable changes to the **D&D Mapp Platform** will be documented in this file
 - **Library:** Created `shared-ui` library to centralize reusable Angular components and pages.
 - **Library:** Implemented secondary entry points for lazy-loading (`@dnd-mapp/shared-ui/pages/*`).
 - **Testing:** Added `@dnd-mapp/shared-ui/test` entry point for component harnesses and shared test utilities.
+- **Application:** Created `auth-client` for centralized Identity and Access Management (IAM).
+- **Infrastructure:** Containerized `auth-client` with Nginx and Docker.
+- **Documentation:** Added `auth-client` to SSL/DNS setup and workspace architecture guides.
 
 ### ⚙️ Changed
 
-- (Changes in existing functionality)
+- **SSL/DNS:** Updated local development requirements to include `localhost.auth.dndmapp.dev`.
 
 ### ⚠️ Deprecated
 

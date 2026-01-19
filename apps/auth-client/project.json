@@ -1,0 +1,116 @@
+{
+    "name": "auth-client",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "application",
+    "prefix": "dma",
+    "sourceRoot": "apps/auth-client/src",
+    "tags": ["platform:web", "scope:auth-client"],
+    "targets": {
+        "docker-build": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "docker buildx build -f {projectRoot}/.docker/Dockerfile -t dndmapp/auth-client:latest ."
+            }
+        },
+        "build": {
+            "executor": "@angular/build:application",
+            "outputs": ["{options.outputPath}"],
+            "cache": true,
+            "options": {
+                "assets": [
+                    {
+                        "glob": "**/*",
+                        "input": "{projectRoot}/public"
+                    },
+                    {
+                        "glob": "**/*",
+                        "input": "libs/shared/ui/public"
+                    }
+                ],
+                "browser": "{projectRoot}/src/main.ts",
+                "inlineStyleLanguage": "css",
+                "outputHashing": "none",
+                "outputPath": "dist/{projectRoot}",
+                "security": {
+                    "autoCsp": true
+                },
+                "styles": ["{projectRoot}/src/styles.css"],
+                "tsConfig": "{projectRoot}/tsconfig.app.json"
+            },
+            "defaultConfiguration": "production",
+            "configurations": {
+                "production": {
+                    "budgets": [
+                        {
+                            "type": "initial",
+                            "maximumWarning": "500kb",
+                            "maximumError": "1mb"
+                        },
+                        {
+                            "type": "anyComponentStyle",
+                            "maximumWarning": "4kb",
+                            "maximumError": "8kb"
+                        }
+                    ],
+                    "subresourceIntegrity": true
+                },
+                "development": {
+                    "extractLicenses": false,
+                    "namedChunks": true,
+                    "optimization": false,
+                    "sourceMap": true,
+                    "watch": true
+                }
+            }
+        },
+        "serve": {
+            "executor": "@angular/build:dev-server",
+            "continuous": true,
+            "options": {
+                "buildTarget": "auth-client:build:development",
+                "port": 4300
+            },
+            "defaultConfiguration": "https",
+            "configurations": {
+                "http": {
+                    "host": "localhost"
+                },
+                "https": {
+                    "host": "localhost.auth.dndmapp.dev",
+                    "ssl": true,
+                    "sslCert": "ssl-cert.pem",
+                    "sslKey": "ssl-key.pem"
+                }
+            }
+        },
+        "playwright-install": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "playwright install chromium"
+            }
+        },
+        "test": {
+            "executor": "nx:run-commands",
+            "dependsOn": ["playwright-install"],
+            "outputs": ["{workspaceRoot}/reports/{projectRoot}"],
+            "cache": true,
+            "options": {
+                "cwd": "{projectRoot}"
+            },
+            "defaultConfiguration": "ci",
+            "configurations": {
+                "ci": {
+                    "command": "vitest run"
+                },
+                "development": {
+                    "command": "vitest --ui --watch"
+                }
+            }
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "outputs": ["{options.outputFile}"],
+            "cache": true
+        }
+    }
+}

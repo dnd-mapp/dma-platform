@@ -23,6 +23,10 @@ export default [
                             onlyDependOnLibsWithTags: ['scope:dnd-mapp', 'scope:shared'],
                         },
                         {
+                            sourceTag: 'scope:auth-client',
+                            onlyDependOnLibsWithTags: ['scope:auth-client', 'scope:shared'],
+                        },
+                        {
                             sourceTag: 'scope:shared',
                             onlyDependOnLibsWithTags: ['scope:shared'],
                         },
