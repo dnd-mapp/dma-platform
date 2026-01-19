@@ -13,11 +13,13 @@ We use **Nx** to manage our workspace. This allows us to share logic between the
 ```text
 dma-platform/
 ├── apps/
-│   ├── auth-client/      # Identity & Account Management
-│   └── dnd-mapp/         # Main Angular Web Application
+│   ├── auth-client/      # Angular (Identity & Account Management)
+│   ├── auth-server/      # NestJS (Identity API)
+│   └── dnd-mapp/         # Angular (Main Web Application)
 ├── docs/                 # Documentation hub
 ├── e2e/                  # Playwright End-to-End tests
 │   ├── auth-client/      
+│   ├── auth-server/      
 │   └── dnd-mapp/
 └── libs/
     └── shared/
@@ -35,7 +37,7 @@ The goal of this repository is to centralize D&D 5e game logic. By placing game 
 We follow a **Container/Presenter** pattern:
 
 -   **Containers:** Handle data fetching via services and manage state.
--   **Presenters:** Pure UI components that receive data via `@Input` and emit via `@Output`.
+-   **Presenters:** Pure UI components that receive data via Input and Output signals.
 
 ### 3. Styling Strategy
 

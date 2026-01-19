@@ -1,0 +1,54 @@
+{
+    "name": "auth-server",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "apps/auth-server/src",
+    "projectType": "application",
+    "tags": ["platform:server", "scope:auth-server"],
+    "targets": {
+        "build": {
+            "executor": "nx:run-commands",
+            "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+            "cache": true,
+            "options": {
+                "command": "webpack-cli build",
+                "cwd": "{projectRoot}"
+            },
+            "defaultConfiguration": "production",
+            "configurations": {
+                "production": {
+                    "args": ["--node-env production"]
+                },
+                "development": {
+                    "args": ["--node-env development"]
+                }
+            }
+        },
+        "serve": {
+            "executor": "@nx/js:node",
+            "continuous": true,
+            "options": {
+                "buildTarget": "auth-server:build:development",
+                "inspect": false,
+                "runBuildTargetDependencies": false
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/reports/{projectRoot}"],
+            "cache": true,
+            "options": {
+                "jestConfig": "{projectRoot}/jest.config.cts",
+                "passWithNoTests": true
+            },
+            "defaultConfiguration": "ci",
+            "configurations": {
+                "ci": {
+                    "ci": true
+                },
+                "development": {
+                    "watchAll": true
+                }
+            }
+        }
+    }
+}

@@ -9,8 +9,10 @@
         "production": [
             "default",
             "!{projectRoot}/vite.config.mts",
-            "!{projectRoot}/**/?(*.)spec.ts",
-            "!{projectRoot}/tsconfig.spec.json"
+            "!{projectRoot}/**/*.spec.ts",
+            "!{projectRoot}/tsconfig.spec.json",
+            "!{projectRoot}/jest.config.cts",
+            "!{projectRoot}/test/**/*.ts"
         ]
     },
     "cli": {
@@ -33,15 +35,33 @@
     },
     "plugins": [
         {
+            "plugin": "@nx/eslint/plugin",
+            "options": {
+                "targetName": "lint"
+            }
+        },
+        {
+            "plugin": "@nx/jest/plugin",
+            "options": {
+                "targetName": "test"
+            },
+            "exclude": ["e2e/auth-server/**/*"]
+        },
+        {
             "plugin": "@nx/playwright/plugin",
             "options": {
                 "targetName": "e2e"
             }
         },
         {
-            "plugin": "@nx/eslint/plugin",
+            "plugin": "@nx/webpack/plugin",
             "options": {
-                "targetName": "lint"
+                "buildTargetName": "build",
+                "serveTargetName": "serve",
+                "previewTargetName": "preview",
+                "buildDepsTargetName": "build-deps",
+                "watchDepsTargetName": "watch-deps",
+                "serveStaticTargetName": "serve-static"
             }
         }
     ],
@@ -64,6 +84,10 @@
             "linter": "eslint",
             "publishable": false,
             "unitTestRunner": "vitest-analog"
+        },
+        "@nx/nest:application": {
+            "linter": "eslint",
+            "unitTestRunner": "jest"
         }
     }
 }

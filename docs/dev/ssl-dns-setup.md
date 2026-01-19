@@ -12,10 +12,14 @@ You must map the application domain to your local loopback address (`127.0.0.1`)
 
 **Required Mapping:**
 
-| Application   | Local Domain                 |
-|---------------|------------------------------|
-| `dnd-mapp`    | `localhost.www.dndmapp.dev`  |
-| `auth-client` | `localhost.auth.dndmapp.dev` |
+| Application   | Local Domain                 | Port |
+|---------------|------------------------------|------|
+| `dnd-mapp`    | `localhost.www.dndmapp.dev`  | 4200 |
+| `auth-client` | `localhost.auth.dndmapp.dev` | 4300 |
+| `auth-server` | `localhost.auth.dndmapp.dev` | 4350 |
+
+> [!NOTE]
+> Both Auth applications share the same base domain but run on different ports.
 
 **File Locations:**
 

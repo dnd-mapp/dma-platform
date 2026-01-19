@@ -2,6 +2,7 @@
 
 .vscode/*
 !.vscode/extensions.json
+!.vscode/launch.json
 
 .nx/*
 
@@ -12,3 +13,4 @@ reports/
 **/__screenshots__/
 
 **/*.pem
+**/.env
