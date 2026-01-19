@@ -6,7 +6,12 @@
     "namedInputs": {
         "sharedGlobals": [],
         "default": ["{projectRoot}/**/*", "sharedGlobals"],
-        "production": ["default", "!{projectRoot}/vite.config.mts", "!{projectRoot}/**/?(*.)spec.ts"]
+        "production": [
+            "default",
+            "!{projectRoot}/vite.config.mts",
+            "!{projectRoot}/**/?(*.)spec.ts",
+            "!{projectRoot}/tsconfig.spec.json"
+        ]
     },
     "cli": {
         "packageManager": "pnpm"
@@ -17,13 +22,13 @@
     },
     "targetDefaults": {
         "@angular/build:application": {
-            "cache": true,
             "dependsOn": ["^build"],
-            "inputs": ["default", "^default"]
+            "inputs": ["production", "^production"],
+            "cache": true
         },
         "@nx/eslint:lint": {
-            "cache": true,
-            "inputs": ["default", "{workspaceRoot}/eslint.config.mjs"]
+            "inputs": ["default", "{workspaceRoot}/eslint.config.mjs"],
+            "cache": true
         }
     },
     "plugins": [
@@ -45,6 +50,17 @@
             "e2eTestRunner": "playwright",
             "linter": "eslint",
             "style": "css",
+            "unitTestRunner": "vitest-analog"
+        },
+        "@nx/angular:component": {
+            "style": "css",
+            "changeDetection": "OnPush",
+            "type": "component"
+        },
+        "@nx/angular:library": {
+            "buildable": false,
+            "linter": "eslint",
+            "publishable": false,
             "unitTestRunner": "vitest-analog"
         }
     }

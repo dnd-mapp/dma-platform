@@ -20,6 +20,12 @@ nx test dnd-mapp -c development
 nx test dnd-mapp
 ```
 
+## 🧪 Component Harnesses
+
+To make our tests more resilient to DOM changes, we use the Harness pattern. These are exported via `@dnd-mapp/shared-ui/test`.
+
+Consuming apps should use these harnesses in their integration tests instead of using `querySelectors`.
+
 ## 🎭 E2E Testing (Playwright)
 
 Playwright handles browser-based automation for critical user paths (e.g., Character Creation).

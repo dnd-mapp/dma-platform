@@ -8,7 +8,9 @@ All notable changes to the **D&D Mapp Platform** will be documented in this file
 
 ### ✨ Added
 
-- (New features)
+- **Library:** Created `shared-ui` library to centralize reusable Angular components and pages.
+- **Library:** Implemented secondary entry points for lazy-loading (`@dnd-mapp/shared-ui/pages/*`).
+- **Testing:** Added `@dnd-mapp/shared-ui/test` entry point for component harnesses and shared test utilities.
 
 ### ⚙️ Changed
 

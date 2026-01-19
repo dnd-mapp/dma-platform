@@ -5,10 +5,10 @@ import { playwright } from '@vitest/browser-playwright';
 import { defineConfig } from 'vite';
 
 const isCI = Boolean(process.env['CI']);
-const reportsDirectory = '../../reports/apps/dnd-mapp';
+const reportsDirectory = '../../../reports/libs/shared/ui';
 
 export default defineConfig({
-    cacheDir: '../../node_modules/.vite/apps/dnd-mapp',
+    cacheDir: '../../../node_modules/.vite/libs/shared/ui',
     plugins: [angular(), nxViteTsPaths()],
     root: __dirname,
     test: {
@@ -29,7 +29,7 @@ export default defineConfig({
         },
         globals: true,
         include: ['src/**/*.spec.ts'],
-        name: 'dnd-mapp',
+        name: 'shared-ui',
         open: false,
         passWithNoTests: true,
         reporters: [
@@ -41,6 +41,6 @@ export default defineConfig({
         sequence: {
             shuffle: true,
         },
-        uiBase: '/dnd-mapp/',
+        uiBase: '/shared-ui/',
     },
 });
