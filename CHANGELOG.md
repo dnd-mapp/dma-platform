@@ -41,6 +41,7 @@ All notable changes to the **D&D Mapp Platform** will be documented in this file
 - **Dev Tooling:** Automated SSL certificate generation and local DNS mapping.
 - **Testing:** Vitest bridge for Angular unit testing and Playwright for E2E.
 - **Documentation:** Centralized `/docs` hub including ADRs (Architecture Decision Records).
+- **Infrastructure:** Containerized the `dnd-mapp` application using Docker.
 
 ### ⚙️ Changed
 
