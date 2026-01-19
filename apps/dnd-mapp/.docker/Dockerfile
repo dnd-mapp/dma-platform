@@ -1,4 +1,4 @@
-FROM dhi.io/node:24.13.0-dev AS builder
+FROM --platform="$BUILDPLATFORM" dhi.io/node:24.13.0-dev AS builder
 
 RUN corepack enable
 
