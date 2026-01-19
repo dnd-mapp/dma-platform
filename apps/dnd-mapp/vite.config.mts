@@ -4,6 +4,7 @@ import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import { playwright } from '@vitest/browser-playwright';
 import { defineConfig } from 'vite';
 
+const isCI = Boolean(process.env['CI']);
 const reportsDirectory = '../../reports/apps/dnd-mapp';
 
 export default defineConfig({
@@ -33,6 +34,8 @@ export default defineConfig({
         passWithNoTests: true,
         reporters: [
             'dot',
+            ['html', { outputFile: `${reportsDirectory}/index.html` }],
+            ...(isCI ? ['github-actions'] : []),
         ],
         setupFiles: ['test/test-setup.ts'],
         sequence: {
