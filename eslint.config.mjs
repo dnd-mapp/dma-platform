@@ -15,6 +15,7 @@ export default [
                 {
                     enforceBuildableLibDependency: true,
                     allowCircularSelfDependency: true,
+                    checkDynamicDependenciesExceptions: ['@dnd-mapp/shared-ui/pages/*'],
                     allow: ['^.*/eslint\\.config\\.mjs$'],
                     depConstraints: [
                         {
