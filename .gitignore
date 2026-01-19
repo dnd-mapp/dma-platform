@@ -13,3 +13,4 @@ reports/
 **/__screenshots__/
 
 **/*.pem
+**/.env
