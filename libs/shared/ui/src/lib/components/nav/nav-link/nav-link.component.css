@@ -1,0 +1,7 @@
+@reference 'tailwindcss';
+
+:host {
+    a.active {
+        @apply text-neutral-900 text-shadow-lg;
+    }
+}
