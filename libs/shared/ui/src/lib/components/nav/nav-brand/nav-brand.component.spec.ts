@@ -1,22 +1,20 @@
 import { Component } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { RootHarness } from '@dnd-mapp/dnd-mapp/test';
-import { setupTestEnvironment } from '@dnd-mapp/shared-ui/test';
-import { appRoutes } from '../config';
-import { RootComponent } from './root.component';
+import { NavBrandHarness, setupTestEnvironment } from '@dnd-mapp/shared-ui/test';
+import { NavBrandComponent } from './nav-brand.component';
 
-describe('RootComponent', () => {
+describe('NavBrandComponent', () => {
     @Component({
-        template: `<dma-root />`,
-        imports: [RootComponent],
+        template: `<dma-nav-brand appName="My app" />`,
+        imports: [NavBrandComponent],
     })
     class TestComponent {}
 
     async function setupTest() {
         const { harness } = await setupTestEnvironment({
             testComponent: TestComponent,
-            harness: RootHarness,
-            providers: [provideRouter(appRoutes)],
+            harness: NavBrandHarness,
+            providers: [provideRouter([])],
         });
 
         return {
