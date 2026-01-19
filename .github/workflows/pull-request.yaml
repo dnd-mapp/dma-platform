@@ -1,0 +1,13 @@
+name: Pull request
+on:
+    pull_request:
+permissions:
+    contents: read
+    actions: read
+jobs:
+    ci:
+        name: CI
+        runs-on: ubuntu-22.04
+        steps:
+            - name: CI
+              uses: ./.github/actions/ci
