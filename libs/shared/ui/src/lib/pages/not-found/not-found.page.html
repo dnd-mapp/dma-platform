@@ -1,1 +1,15 @@
-<p>not-found works!</p>
+<div class="flex gap-6 items-center bg-neutral-100 px-6 py-8 rounded-md">
+    <img src="images/404.png" alt="404.png" width="586" height="384" class="rounded-md" />
+    <div>
+        <h1>Page Not Found</h1>
+        <p class="mb-4">
+            We can't find the page you're looking for.
+            <br />
+            You can either return to the previous page, visit our homepage or contact our support team.
+        </p>
+        <div class="flex gap-3">
+            <button type="button" dma-button="primary" (click)="onVisitHomePage()">Visit Homepage</button>
+            <button type="button" dma-button (click)="onContactUs()">Contact us</button>
+        </div>
+    </div>
+</div>
