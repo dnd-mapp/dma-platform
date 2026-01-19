@@ -1,1 +1,2 @@
 export * from './app-top-bar.harness';
+export * from './nav-brand.harness';
