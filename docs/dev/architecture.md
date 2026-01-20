@@ -22,6 +22,8 @@ dma-platform/
 │   ├── auth-server/      
 │   └── dnd-mapp/
 └── libs/
+    ├── auth/
+    │   └── ui/           # Auth components & services (@dnd-mapp/auth-ui)
     └── shared/
         └── ui/           # Generic UI components & Lazy Pages (@dnd-mapp/shared-ui)
 ```

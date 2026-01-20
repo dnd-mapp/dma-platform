@@ -16,6 +16,8 @@ All notable changes to the **D&D Mapp Platform** will be documented in this file
 - **Documentation:** Added `auth-client` to SSL/DNS setup and workspace architecture guides.
 - **Application:** Created `auth-server` (NestJS) for centralized authentication and token management.
 - **Documentation:** Added `auth-server` to Architecture and SSL/DNS guides.
+- **Library:** Created `auth-ui` (@dnd-mapp/auth-ui) to centralize identity services and authentication components.
+- **Infrastructure:** Added ESLint boundary rules to allow apps to consume `auth-ui` while maintaining isolation for `shared-ui`.
 
 ### ⚙️ Changed
 

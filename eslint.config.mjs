@@ -20,15 +20,19 @@ export default [
                     depConstraints: [
                         {
                             sourceTag: 'scope:dnd-mapp',
-                            onlyDependOnLibsWithTags: ['scope:dnd-mapp', 'scope:shared'],
+                            onlyDependOnLibsWithTags: ['scope:dnd-mapp', 'scope:shared', 'scope:auth-ui'],
                         },
                         {
                             sourceTag: 'scope:auth-client',
-                            onlyDependOnLibsWithTags: ['scope:auth-client', 'scope:shared'],
+                            onlyDependOnLibsWithTags: ['scope:auth-client', 'scope:shared', 'scope:auth-ui'],
                         },
                         {
                             sourceTag: 'scope:auth-server',
                             onlyDependOnLibsWithTags: ['scope:auth-server', 'scope:shared'],
+                        },
+                        {
+                            sourceTag: 'scope:auth-ui',
+                            onlyDependOnLibsWithTags: ['scope:shared'],
                         },
                         {
                             sourceTag: 'scope:shared',
