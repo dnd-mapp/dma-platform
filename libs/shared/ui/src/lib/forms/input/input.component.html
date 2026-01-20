@@ -16,8 +16,26 @@
         (blur)="onBlur()"
         (input)="onInput(input.value)"
     />
+    @if (hasTrailingIcon()) {
+        <ng-container [ngTemplateOutlet]="trailingIcon" dmaTrailingIcon />
+    } @else if (_valid()) {
+        <dma-icon dma-so-check-icon class="m-1 text-emerald-500" />
+    } @else if (_invalid()) {
+        <dma-icon dma-so-triangle-exclamation-icon class="m-1 text-red-500" />
+    }
+    @if (hasActionButton()) {
+        <ng-container [ngTemplateOutlet]="actionButton" dmaActionButton />
+    }
 </dma-container>
 
 <ng-template #leadingIcon>
     <ng-content select="[dmaLeadingIcon]" />
+</ng-template>
+
+<ng-template #trailingIcon>
+    <ng-content select="[dmaTrailingIcon]" />
+</ng-template>
+
+<ng-template #actionButton>
+    <ng-content select="[dmaActionButton]" />
 </ng-template>

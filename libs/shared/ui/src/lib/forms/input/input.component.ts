@@ -16,8 +16,10 @@ import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { debounceTime, Subject } from 'rxjs';
 import { SoCheckIconComponent, SoTriangleExclamationIconComponent } from '../../icons';
+import { ActionButtonDirective } from '../action-button';
 import { ContainerComponent } from '../container';
 import { LeadingIconDirective } from '../leading-icon';
+import { TrailingIconDirective } from '../trailing-icon';
 import { NgTouched, NgValueChange } from '../types';
 import { DEFAULT_INPUT_TYPE, inputTypeAttribute } from './input-type';
 
@@ -34,6 +36,8 @@ const INPUT_DEBOUNCE_MS = 500;
         NgTemplateOutlet,
         ContainerComponent,
         LeadingIconDirective,
+        TrailingIconDirective,
+        ActionButtonDirective,
         SoCheckIconComponent,
         SoTriangleExclamationIconComponent,
     ],
@@ -74,9 +78,17 @@ export class InputComponent implements ControlValueAccessor, OnInit {
 
     protected readonly hasLeadingIcon = computed(() => Boolean(this.leadingIcon()));
 
+    protected readonly hasTrailingIcon = computed(() => Boolean(this.trailingIcon()));
+
+    protected readonly hasActionButton = computed(() => Boolean(this.actionButton()));
+
     private readonly inputSubject = new Subject<string>();
 
     private readonly leadingIcon = contentChild(LeadingIconDirective);
+
+    private readonly trailingIcon = contentChild(TrailingIconDirective);
+
+    private readonly actionButton = contentChild(ActionButtonDirective);
 
     private ngTouched: NgTouched | undefined;
     private ngChanged: NgValueChange<string> | undefined;

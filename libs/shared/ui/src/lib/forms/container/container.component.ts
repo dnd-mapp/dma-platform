@@ -8,7 +8,9 @@ import {
     input,
     signal,
 } from '@angular/core';
+import { ActionButtonDirective } from '../action-button';
 import { LeadingIconDirective } from '../leading-icon';
+import { TrailingIconDirective } from '../trailing-icon';
 
 @Component({
     selector: 'dma-container',
@@ -42,7 +44,11 @@ export class ContainerComponent {
 
     protected readonly hover = signal(false);
 
+    protected readonly hasActionButton = computed(() => Boolean(this.actionButton()));
+
     protected readonly hasLeadingIcon = computed(() => Boolean(this.leadingIcon()));
+
+    protected readonly hasTrailingIcon = computed(() => Boolean(this.trailingIcon()) && !this.hasActionButton());
 
     protected readonly isFocused = computed(() => this.focus() && !this.disabled());
 
@@ -53,6 +59,10 @@ export class ContainerComponent {
     protected readonly isInvalid = computed(() => this.invalid() && !this.disabled());
 
     private readonly leadingIcon = contentChild(LeadingIconDirective);
+
+    private readonly trailingIcon = contentChild(TrailingIconDirective);
+
+    private readonly actionButton = contentChild(ActionButtonDirective);
 
     protected onMouseenter() {
         if (this.disabled()) return;
