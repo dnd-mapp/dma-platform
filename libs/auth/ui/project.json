@@ -1,0 +1,39 @@
+{
+    "name": "auth-ui",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/auth/ui/src",
+    "prefix": "dma",
+    "projectType": "library",
+    "tags": ["scope:auth-ui", "platform:web"],
+    "targets": {
+        "playwright-install": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "playwright install chromium"
+            }
+        },
+        "test": {
+            "executor": "nx:run-commands",
+            "dependsOn": ["playwright-install"],
+            "outputs": ["{workspaceRoot}/reports/{projectRoot}"],
+            "cache": true,
+            "options": {
+                "cwd": "{projectRoot}"
+            },
+            "defaultConfiguration": "ci",
+            "configurations": {
+                "ci": {
+                    "command": "vitest run"
+                },
+                "development": {
+                    "command": "vitest --ui --watch"
+                }
+            }
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "outputs": ["{options.outputFile}"],
+            "cache": true
+        }
+    }
+}
