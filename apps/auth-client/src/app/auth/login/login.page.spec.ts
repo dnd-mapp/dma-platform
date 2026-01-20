@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
-import { LogInHarness } from '@dnd-mapp/auth-client/test';
+import { LoginHarness } from '@dnd-mapp/auth-client/test';
 import { setupTestEnvironment } from '@dnd-mapp/shared-ui/test';
-import { LogInPage } from './log-in.page';
+import { LoginPage } from './login.page';
 
-describe('LogInPage', () => {
+describe('LoginPage', () => {
     @Component({
-        template: `<dma-log-in />`,
-        imports: [LogInPage],
+        template: `<dma-login />`,
+        imports: [LoginPage],
     })
     class TestComponent {}
 
     async function setupTest() {
         const { harness } = await setupTestEnvironment({
             testComponent: TestComponent,
-            harness: LogInHarness,
+            harness: LoginHarness,
         });
 
         return {
