@@ -85,6 +85,10 @@
             "publishable": false,
             "unitTestRunner": "vitest-analog"
         },
+        "@nx/angular:service": {
+            "addTypeToClassName": true,
+            "type": "service"
+        },
         "@nx/nest:application": {
             "linter": "eslint",
             "unitTestRunner": "jest"
