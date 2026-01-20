@@ -8,7 +8,7 @@ import {
     input,
     signal,
 } from '@angular/core';
-import { LeadingIconDirective } from '@dnd-mapp/shared-ui';
+import { LeadingIconDirective } from '../leading-icon';
 
 @Component({
     selector: 'dma-container',

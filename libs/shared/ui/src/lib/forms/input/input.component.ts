@@ -18,7 +18,7 @@ const INPUT_DEBOUNCE_MS = 500;
     host: {
         '[class]': `'block mb-6'`,
     },
-    imports: [ContainerComponent, NgTemplateOutlet, LeadingIconDirective],
+    imports: [NgTemplateOutlet, ContainerComponent, LeadingIconDirective],
     providers: [provideValueAccessor(InputComponent)],
 })
 export class InputComponent implements ControlValueAccessor {
