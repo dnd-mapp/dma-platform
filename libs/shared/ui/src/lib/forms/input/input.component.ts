@@ -36,6 +36,8 @@ export class InputComponent implements ControlValueAccessor {
 
     public readonly inputType = input(DEFAULT_INPUT_TYPE, { transform: inputTypeAttribute });
 
+    public readonly focusChange = output<boolean>();
+
     protected readonly focus = signal(false);
 
     protected readonly _value = signal<string>('');
@@ -80,6 +82,7 @@ export class InputComponent implements ControlValueAccessor {
 
     protected onFocus() {
         this.focus.set(true);
+        this.focusChange.emit(true);
 
         if (this.ngTouched) {
             this.ngTouched();
@@ -88,6 +91,7 @@ export class InputComponent implements ControlValueAccessor {
 
     protected onBlur() {
         this.focus.set(false);
+        this.focusChange.emit(false);
     }
 
     protected onInput(value: string) {
