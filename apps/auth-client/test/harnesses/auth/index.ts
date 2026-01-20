@@ -1,2 +1,2 @@
-export * from './log-in.harness';
+export * from './login.harness';
 export * from './sign-up.harness';

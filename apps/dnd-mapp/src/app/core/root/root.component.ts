@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { LoginButtonComponent } from '@dnd-mapp/auth-ui';
+import { LoginButtonComponent, SignUpButtonComponent } from '@dnd-mapp/auth-ui';
 import {
     AppTopBarComponent,
     NavbarComponent,
@@ -24,6 +24,7 @@ import {
         NavbarComponent,
         NavLinkComponent,
         LoginButtonComponent,
+        SignUpButtonComponent,
     ],
 })
 export class RootComponent {}

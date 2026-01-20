@@ -8,7 +8,7 @@ export const appRoutes: Routes = [
     },
     {
         path: 'log-in',
-        loadComponent: async () => (await import('../../auth/log-in')).LogInPage,
+        loadComponent: async () => (await import('../../auth/login')).LoginPage,
     },
     {
         path: 'not-found',
