@@ -15,7 +15,7 @@ import { LeadingIconDirective } from '../leading-icon';
     templateUrl: './container.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[class]': `'inline-flex gap-2 border rounded-md'`,
+        '[class]': `'inline-flex gap-2 border rounded-md w-full'`,
         '[class.border-neutral-400]': '!hover() && !focus()',
         '[class.border-neutral-900]': 'isHovered()',
         '[class.border-blue-400]': 'isFocused()',
