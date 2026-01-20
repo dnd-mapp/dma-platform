@@ -1,0 +1,15 @@
+@if (hasLeadingIcon()) {
+    <ng-container [ngTemplateOutlet]="leadingIcon" />
+}
+<ng-content />
+
+<ng-template #leadingIcon>
+    <div
+        class="text-neutral-500 p-1 border-e"
+        [class.border-neutral-400]="!hover() && !focus()"
+        [class.border-neutral-900]="isHovered()"
+        [class.border-blue-400]="isFocused()"
+    >
+        <ng-content select="[dmaLeadingIcon]" />
+    </div>
+</ng-template>
