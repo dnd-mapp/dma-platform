@@ -3,6 +3,8 @@ import {
     booleanAttribute,
     ChangeDetectionStrategy,
     Component,
+    computed,
+    contentChild,
     DestroyRef,
     inject,
     input,
@@ -70,7 +72,11 @@ export class InputComponent implements ControlValueAccessor, OnInit {
 
     protected readonly _invalid = signal(false);
 
+    protected readonly hasLeadingIcon = computed(() => Boolean(this.leadingIcon()));
+
     private readonly inputSubject = new Subject<string>();
+
+    private readonly leadingIcon = contentChild(LeadingIconDirective);
 
     private ngTouched: NgTouched | undefined;
     private ngChanged: NgValueChange<string> | undefined;

@@ -1,6 +1,8 @@
 <label class="block mb-2" [for]="inputId()">{{ label() }}</label>
-    <ng-container [ngTemplateOutlet]="leadingIcon" dmaLeadingIcon />
 <dma-container [focus]="focus()" [disabled]="_disabled()" [valid]="_valid()" [invalid]="_invalid()">
+    @if (hasLeadingIcon()) {
+        <ng-container [ngTemplateOutlet]="leadingIcon" dmaLeadingIcon />
+    }
     <input
         class="outline-none w-full"
         type="text"
