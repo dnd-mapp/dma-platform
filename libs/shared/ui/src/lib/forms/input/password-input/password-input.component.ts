@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
 import { SoKeyIconComponent } from '../../../icons';
-import { provideValueAccessor } from '../../functions';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { LeadingIconDirective } from '../../leading-icon';
 import { NgTouched, NgValueChange } from '../../types';
 import { InputComponent } from '../input.component';
@@ -11,15 +11,29 @@ import { InputComponent } from '../input.component';
     templateUrl: './password-input.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [InputComponent, LeadingIconDirective, SoKeyIconComponent],
-    providers: [provideValueAccessor(PasswordInputComponent)],
 })
-export class PasswordInputComponent implements ControlValueAccessor {
+export class PasswordInputComponent implements ControlValueAccessor, OnInit {
+    private readonly destroyRef = inject(DestroyRef);
+    private readonly control = inject(NgControl, { self: true, optional: true });
+
     private ngTouched: NgTouched | undefined;
     private ngChanged: NgValueChange<string> | undefined;
 
-    protected value = signal('');
+    protected readonly value = signal('');
 
-    protected disabled = signal(false);
+    protected readonly disabled = signal(false);
+
+    protected readonly valid = signal(false);
+
+    protected readonly invalid = signal(false);
+
+    public constructor() {
+        this.setValueAccessor();
+    }
+
+    public ngOnInit() {
+        this.listenToValueChanges();
+    }
 
     public writeValue(value: string) {
         this.value.set(value);
@@ -45,5 +59,20 @@ export class PasswordInputComponent implements ControlValueAccessor {
     protected onFocusChange(focussed: boolean) {
         if (!this.ngTouched || !focussed) return;
         this.ngTouched();
+    }
+
+    private setValueAccessor() {
+        if (this.control === null) return;
+        this.control.valueAccessor = this;
+    }
+
+    private listenToValueChanges() {
+        if (this.control === null || this.control.statusChanges === null) return;
+        this.control.statusChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+            next: (status) => {
+                this.valid.set(status === 'VALID');
+                this.invalid.set(status === 'INVALID');
+            },
+        });
     }
 }

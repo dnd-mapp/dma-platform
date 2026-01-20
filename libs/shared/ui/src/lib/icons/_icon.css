@@ -1,0 +1,5 @@
+@reference 'tailwindcss';
+
+:host {
+    @apply w-6 shrink-0 flex items-center justify-center;
+}
