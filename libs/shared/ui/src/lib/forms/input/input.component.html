@@ -1,0 +1,21 @@
+<label class="block mb-2" [for]="inputId()">{{ label() }}</label>
+<dma-container [focus]="focus()" [disabled]="_disabled()">
+    <ng-container [ngTemplateOutlet]="leadingIcon" dmaLeadingIcon />
+    <input
+        class="outline-none"
+        type="text"
+        #input
+        [id]="inputId()"
+        [type]="inputType()"
+        [placeholder]="placeholder()"
+        [value]="_value()"
+        [disabled]="_disabled()"
+        (focus)="onFocus()"
+        (blur)="onBlur()"
+        (input)="onInput(input.value)"
+    />
+</dma-container>
+
+<ng-template #leadingIcon>
+    <ng-content select="[dmaLeadingIcon]" />
+</ng-template>
