@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { AuthService } from '@dnd-mapp/auth-ui';
 import { AppTopBarComponent, NavBrandComponent, VerticalRuleComponent } from '@dnd-mapp/shared-ui';
 
 @Component({
@@ -7,8 +8,13 @@ import { AppTopBarComponent, NavBrandComponent, VerticalRuleComponent } from '@d
     templateUrl: './root.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[class]': `'flex flex-col h-dvh bg-neutral-50 text-neutral-900'`,
+        '[class]': `'flex flex-col h-dvh'`,
+        '[class.bg-blue-100]': `!authService.authenticated()`,
+        '[class.bg-neutral-50]': `authService.authenticated()`,
+        '[class.text-neutral-900]': `authService.authenticated()`,
     },
     imports: [RouterOutlet, AppTopBarComponent, NavBrandComponent, VerticalRuleComponent],
 })
-export class RootComponent {}
+export class RootComponent {
+    protected readonly authService = inject(AuthService);
+}
