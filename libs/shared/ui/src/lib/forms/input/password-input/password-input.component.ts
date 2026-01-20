@@ -1,16 +1,27 @@
-import { SoKeyIconComponent } from '../../../icons';
 import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { ButtonComponent } from '../../../components';
+import { SoEyeIconComponent, SoEyeSlashIconComponent, SoKeyIconComponent } from '../../../icons';
+import { ActionButtonDirective } from '../../action-button';
 import { LeadingIconDirective } from '../../leading-icon';
 import { NgTouched, NgValueChange } from '../../types';
+import { InputType, InputTypes } from '../input-type';
 import { InputComponent } from '../input.component';
 
 @Component({
     selector: 'dma-password-input',
     templateUrl: './password-input.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [InputComponent, LeadingIconDirective, SoKeyIconComponent],
+    imports: [
+        InputComponent,
+        LeadingIconDirective,
+        ActionButtonDirective,
+        ButtonComponent,
+        SoKeyIconComponent,
+        SoEyeSlashIconComponent,
+        SoEyeIconComponent,
+    ],
 })
 export class PasswordInputComponent implements ControlValueAccessor, OnInit {
     private readonly destroyRef = inject(DestroyRef);
@@ -26,6 +37,12 @@ export class PasswordInputComponent implements ControlValueAccessor, OnInit {
     protected readonly valid = signal(false);
 
     protected readonly invalid = signal(false);
+
+    protected readonly passwordVisible = signal(false);
+
+    protected readonly inputType = computed<InputType>(() =>
+        this.passwordVisible() ? InputTypes.TEXT : InputTypes.PASSWORD,
+    );
 
     public constructor() {
         this.setValueAccessor();
@@ -59,6 +76,10 @@ export class PasswordInputComponent implements ControlValueAccessor, OnInit {
     protected onFocusChange(focussed: boolean) {
         if (!this.ngTouched || !focussed) return;
         this.ngTouched();
+    }
+
+    protected onTogglePasswordVisibility() {
+        this.passwordVisible.update((passwordVisible) => !passwordVisible);
     }
 
     private setValueAccessor() {
