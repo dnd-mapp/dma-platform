@@ -15,6 +15,10 @@ export const appRoutes: Routes = [
         loadComponent: async () => (await import('@dnd-mapp/shared-ui/pages/not-found')).NotFoundPage,
     },
     {
+        path: 'sign-up',
+        loadComponent: async () => (await import('../../auth/sign-up')).SignUpPage,
+    },
+    {
         path: '**',
         redirectTo: 'not-found',
     },
