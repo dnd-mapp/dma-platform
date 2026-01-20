@@ -1,2 +1,2 @@
 export * from './container.harness';
-export * from './input.harness';
+export * from './input';

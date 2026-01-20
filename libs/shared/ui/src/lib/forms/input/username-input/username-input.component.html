@@ -1,0 +1,13 @@
+<dma-input
+    inputId="username-input"
+    label="Username"
+    placeholder="TheLegend27"
+    [disabled]="disabled()"
+    [value]="value()"
+    [valid]="valid()"
+    [invalid]="invalid()"
+    (valueChange)="onValueChange($event)"
+    (focusChange)="onFocusChange($event)"
+>
+    <dma-icon dma-so-user-icon dmaLeadingIcon />
+</dma-input>

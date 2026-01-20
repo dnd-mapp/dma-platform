@@ -3,13 +3,29 @@
 }
 <ng-content />
 
+@if (hasActionButton()) {
+    <ng-container [ngTemplateOutlet]="actionButton" />
+} @else if (hasTrailingIcon()) {
+    <ng-container [ngTemplateOutlet]="trailingIcon" />
+}
+
 <ng-template #leadingIcon>
     <div
-        class="text-neutral-500 p-1 border-e"
-        [class.border-neutral-400]="!hover() && !focus()"
+        class="text-neutral-500 p-1 border-e shrink-0"
+        [class.border-neutral-400]="!hover() && !focus() && !valid() && !invalid()"
         [class.border-neutral-900]="isHovered()"
-        [class.border-blue-400]="isFocused()"
+        [class.border-blue-500]="isFocused()"
+        [class.border-emerald-500]="isValid()"
+        [class.border-red-500]="isInvalid()"
     >
         <ng-content select="[dmaLeadingIcon]" />
     </div>
+</ng-template>
+
+<ng-template #trailingIcon>
+    <ng-content select="[dmaTrailingIcon]" />
+</ng-template>
+
+<ng-template #actionButton>
+    <ng-content select="[dmaActionButton]" />
 </ng-template>
