@@ -7,7 +7,7 @@ import { buttonTypeAttribute, ButtonTypes, DEFAULT_BUTTON_TYPE } from './button-
     template: `<ng-content />`,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[class]': `'px-4 py-2 rounded-md font-medium cursor-pointer disabled:cursor-default disabled:opacity-33 disabled:bg-neutral-400 disabled:text-neutral-900'`,
+        '[class]': `'px-4 py-1 rounded-md font-medium cursor-pointer disabled:cursor-default disabled:opacity-33 disabled:bg-neutral-400 disabled:text-neutral-900'`,
         '[class.text-neutral-900]': `isBase()`,
         '[class.bg-neutral-100]': `isBase()`,
         '[class.hover:bg-neutral-200]': `isBase()`,
