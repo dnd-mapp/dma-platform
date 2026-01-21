@@ -1,6 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { base64, StorageKeys, StorageService, TEXT_ENCODER } from '@dnd-mapp/shared-ui';
+import { base64, sha256, StorageKeys, StorageService, TEXT_ENCODER } from '@dnd-mapp/shared-ui';
 import { nanoid } from 'nanoid';
+import { from, map, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -14,10 +15,20 @@ export class AuthService {
 
         this.storageService.setItem(StorageKeys.CODE_VERIFIER, codeVerifier);
 
-        location.href = 'https://localhost.auth.dndmapp.dev:4350/authorize';
+        return this.generateCodeChallenge(codeVerifier).pipe(
+            tap((codeChallenge) => {
+                location.href = `https://localhost.auth.dndmapp.dev:4350/authorize?codeChallenge=${codeChallenge}`;
+            }),
+        );
     }
 
     private generateCodeVerifier() {
         return base64(nanoid(), this.textEncoder);
+    }
+
+    private generateCodeChallenge(codeVerifier: string) {
+        return from(sha256(codeVerifier, this.textEncoder)).pipe(
+            map((hashBuffer) => base64(new Uint8Array(hashBuffer))),
+        );
     }
 }
