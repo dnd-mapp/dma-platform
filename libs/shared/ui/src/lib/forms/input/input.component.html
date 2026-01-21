@@ -18,9 +18,9 @@
     />
     @if (hasTrailingIcon()) {
         <ng-container [ngTemplateOutlet]="trailingIcon" dmaTrailingIcon />
-    } @else if (_valid()) {
+    } @else if (_valid() && !hasTrailingIcon() && !hasActionButton()) {
         <dma-icon dma-so-check-icon class="m-1 text-emerald-500" />
-    } @else if (_invalid()) {
+    } @else if (_invalid() && !hasTrailingIcon() && !hasActionButton()) {
         <dma-icon dma-so-triangle-exclamation-icon class="m-1 text-red-500" />
     }
     @if (hasActionButton()) {
