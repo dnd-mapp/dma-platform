@@ -12,12 +12,16 @@ export class AuthService {
 
     public authorize() {
         const codeVerifier = this.generateCodeVerifier();
+        const state = nanoid();
+        const nonce = nanoid();
 
         this.storageService.setItem(StorageKeys.CODE_VERIFIER, codeVerifier);
+        this.storageService.setItem(StorageKeys.AUTH_STATE, state);
+        this.storageService.setItem(StorageKeys.ID_NONCE, nonce);
 
         return this.generateCodeChallenge(codeVerifier).pipe(
             tap((codeChallenge) => {
-                location.href = `https://localhost.auth.dndmapp.dev:4350/authorize?codeChallenge=${codeChallenge}`;
+                location.href = `https://localhost.auth.dndmapp.dev:4350/authorize?codeChallenge=${codeChallenge}&state=${state}&nonce=${nonce}`;
             }),
         );
     }
