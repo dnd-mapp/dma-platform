@@ -1,7 +1,7 @@
 {
     "extends": "./tsconfig.json",
     "include": ["src/**/*.ts"],
-    "exclude": ["jest.config.cts", "src/**/*.spec.ts"],
+    "exclude": ["vite.config.mts", "src/**/*.spec.ts"],
     "compilerOptions": {
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,

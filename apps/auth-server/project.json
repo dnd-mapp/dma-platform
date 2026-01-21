@@ -33,20 +33,19 @@
             }
         },
         "test": {
-            "executor": "@nx/jest:jest",
+            "executor": "nx:run-commands",
             "outputs": ["{workspaceRoot}/reports/{projectRoot}"],
             "cache": true,
             "options": {
-                "jestConfig": "{projectRoot}/jest.config.cts",
-                "passWithNoTests": true
+                "cwd": "{projectRoot}"
             },
             "defaultConfiguration": "ci",
             "configurations": {
                 "ci": {
-                    "ci": true
+                    "command": "vitest run"
                 },
                 "development": {
-                    "watchAll": true
+                    "command": "vitest --ui --watch"
                 }
             }
         }
