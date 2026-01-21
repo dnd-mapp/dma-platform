@@ -4,7 +4,7 @@
     "sourceRoot": "libs/shared/ui/src",
     "prefix": "dma",
     "projectType": "library",
-    "tags": ["scope:shared", "platform:web"],
+    "tags": ["scope:shared-ui", "platform:web"],
     "targets": {
         "playwright-install": {
             "executor": "nx:run-commands",
