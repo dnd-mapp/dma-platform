@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, signal 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { SoUserIconComponent } from '../../../icons';
+import { InvalidMessageDirective } from '../../invalid-message';
 import { LeadingIconDirective } from '../../leading-icon';
 import { NgTouched, NgValueChange } from '../../types';
 import { InputComponent } from '../input.component';
@@ -10,7 +11,7 @@ import { InputComponent } from '../input.component';
     selector: 'dma-username-input',
     templateUrl: './username-input.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [InputComponent, SoUserIconComponent, LeadingIconDirective],
+    imports: [InputComponent, SoUserIconComponent, LeadingIconDirective, InvalidMessageDirective],
 })
 export class UsernameInputComponent implements ControlValueAccessor, OnInit {
     private readonly control = inject(NgControl, { self: true, optional: true });
@@ -26,6 +27,8 @@ export class UsernameInputComponent implements ControlValueAccessor, OnInit {
     protected readonly valid = signal(false);
 
     protected readonly invalid = signal(false);
+
+    protected readonly hasRequiredError = signal(false);
 
     public constructor() {
         this.setValueAccessor();
@@ -72,6 +75,8 @@ export class UsernameInputComponent implements ControlValueAccessor, OnInit {
             next: (status) => {
                 this.valid.set(status === 'VALID');
                 this.invalid.set(status === 'INVALID');
+
+                this.hasRequiredError.set(this.control?.hasError('required') === true);
             },
         });
     }

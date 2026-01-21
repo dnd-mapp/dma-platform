@@ -1,4 +1,4 @@
-<label class="block mb-2" [for]="inputId()">{{ label() }}</label>
+<label class="block mb-2 font-medium" [for]="inputId()">{{ label() }}</label>
 <dma-container [focus]="focus()" [disabled]="_disabled()" [valid]="_valid()" [invalid]="_invalid()">
     @if (hasLeadingIcon()) {
         <ng-container [ngTemplateOutlet]="leadingIcon" dmaLeadingIcon />
@@ -28,6 +28,10 @@
     }
 </dma-container>
 
+@if (hasInvalidMessage()) {
+    <ng-container [ngTemplateOutlet]="invalidMessage" />
+}
+
 <ng-template #leadingIcon>
     <ng-content select="[dmaLeadingIcon]" />
 </ng-template>
@@ -38,4 +42,8 @@
 
 <ng-template #actionButton>
     <ng-content select="[dmaActionButton]" />
+</ng-template>
+
+<ng-template #invalidMessage>
+    <ng-content select="[dmaInvalidMessage]" />
 </ng-template>
