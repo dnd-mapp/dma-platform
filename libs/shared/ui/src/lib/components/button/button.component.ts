@@ -42,7 +42,5 @@ export class ButtonComponent {
 
     protected readonly isSmall = computed(() => this.size() === ButtonSizes.SMALL);
 
-    protected readonly isProcessing = computed(() => (this.processing() ? '' : undefined));
-
     protected readonly isDisabled = computed(() => (this.disabled() || this.processing() ? '' : undefined));
 }
