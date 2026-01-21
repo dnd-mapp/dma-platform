@@ -1,0 +1,6 @@
+@if (processing()) {
+    <dma-icon class="row-span-full col-span-full animate-spin" dma-so-spinner-icon />
+}
+<div class="row-span-full col-span-full" [class.invisible]="processing()">
+    <ng-content />
+</div>
