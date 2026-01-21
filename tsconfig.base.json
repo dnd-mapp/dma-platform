@@ -27,7 +27,8 @@
             "@dnd-mapp/dnd-mapp/test": ["./apps/dnd-mapp/test/index.ts"],
             "@dnd-mapp/shared-ui": ["./libs/shared/ui/src/index.ts"],
             "@dnd-mapp/shared-ui/pages/*": ["./libs/shared/ui/src/lib/pages/*"],
-            "@dnd-mapp/shared-ui/test": ["./libs/shared/ui/test/index.ts"]
+            "@dnd-mapp/shared-ui/test": ["./libs/shared/ui/test/index.ts"],
+            "@dnd-mapp/shared-utils": ["./libs/shared/utils/src/index.ts"]
         },
         "rootDir": ".",
         "skipDefaultLibCheck": true,

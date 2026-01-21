@@ -20,23 +20,37 @@ export default [
                     depConstraints: [
                         {
                             sourceTag: 'scope:dnd-mapp',
-                            onlyDependOnLibsWithTags: ['scope:dnd-mapp', 'scope:shared', 'scope:auth-ui'],
+                            onlyDependOnLibsWithTags: [
+                                'scope:dnd-mapp',
+                                'scope:shared-ui',
+                                'scope:auth-ui',
+                                'scope:shared-utils',
+                            ],
                         },
                         {
                             sourceTag: 'scope:auth-client',
-                            onlyDependOnLibsWithTags: ['scope:auth-client', 'scope:shared', 'scope:auth-ui'],
+                            onlyDependOnLibsWithTags: [
+                                'scope:auth-client',
+                                'scope:shared-ui',
+                                'scope:auth-ui',
+                                'scope:shared-utils',
+                            ],
                         },
                         {
                             sourceTag: 'scope:auth-server',
-                            onlyDependOnLibsWithTags: ['scope:auth-server', 'scope:shared'],
+                            onlyDependOnLibsWithTags: ['scope:auth-server', 'scope:shared-ui', 'scope:shared-utils'],
                         },
                         {
                             sourceTag: 'scope:auth-ui',
-                            onlyDependOnLibsWithTags: ['scope:shared'],
+                            onlyDependOnLibsWithTags: ['scope:shared-ui', 'scope:shared-utils'],
                         },
                         {
-                            sourceTag: 'scope:shared',
-                            onlyDependOnLibsWithTags: ['scope:shared'],
+                            sourceTag: 'scope:shared-ui',
+                            onlyDependOnLibsWithTags: ['scope:shared-utils'],
+                        },
+                        {
+                            sourceTag: 'scope:shared-utils',
+                            onlyDependOnLibsWithTags: [],
                         },
                         {
                             sourceTag: 'platform:web',

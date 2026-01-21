@@ -1,20 +1,12 @@
 {
-    "name": "shared-ui",
+    "name": "shared-utils",
     "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/shared/ui/src",
-    "prefix": "dma",
+    "sourceRoot": "libs/shared/utils/src",
     "projectType": "library",
-    "tags": ["scope:shared-ui", "platform:web"],
+    "tags": ["scope:shared-utils"],
     "targets": {
-        "playwright-install": {
-            "executor": "nx:run-commands",
-            "options": {
-                "command": "playwright install chromium"
-            }
-        },
         "test": {
             "executor": "nx:run-commands",
-            "dependsOn": ["playwright-install"],
             "outputs": ["{workspaceRoot}/reports/{projectRoot}"],
             "cache": true,
             "options": {
@@ -29,11 +21,6 @@
                     "command": "vitest --ui --watch"
                 }
             }
-        },
-        "lint": {
-            "executor": "@nx/eslint:lint",
-            "outputs": ["{options.outputFile}"],
-            "cache": true
         }
     }
 }

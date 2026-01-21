@@ -25,7 +25,8 @@ dma-platform/
     ├── auth/
     │   └── ui/           # Auth components & services (@dnd-mapp/auth-ui)
     └── shared/
-        └── ui/           # Generic UI components & Lazy Pages (@dnd-mapp/shared-ui)
+        ├── ui/           # Generic UI components & Lazy Pages (@dnd-mapp/shared-ui)
+        └── utils/        # Pure TS helpers (@dnd-mapp/shared-utils)
 ```
 
 ## 🧩 Architectural Principles

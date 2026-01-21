@@ -92,6 +92,11 @@
             "addTypeToClassName": true,
             "type": "service"
         },
+        "@nx/js:library": {
+            "bundler": "none",
+            "unitTestRunner": "vitest",
+            "linter": "eslint"
+        },
         "@nx/nest:application": {
             "linter": "eslint",
             "unitTestRunner": "jest"
