@@ -10,4 +10,12 @@
     (focusChange)="onFocusChange($event)"
 >
     <dma-icon dma-so-user-icon dmaLeadingIcon />
+
+    @if (invalid()) {
+        <p dmaInvalidMessage class="text-red-500 text-sm">
+            @if (hasRequiredError()) {
+                You must provide a username
+            }
+        </p>
+    }
 </dma-input>

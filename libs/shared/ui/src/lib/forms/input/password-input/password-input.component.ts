@@ -4,6 +4,7 @@ import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { ButtonComponent } from '../../../components';
 import { SoEyeIconComponent, SoEyeSlashIconComponent, SoKeyIconComponent } from '../../../icons';
 import { ActionButtonDirective } from '../../action-button';
+import { InvalidMessageDirective } from '../../invalid-message';
 import { LeadingIconDirective } from '../../leading-icon';
 import { NgTouched, NgValueChange } from '../../types';
 import { InputType, InputTypes } from '../input-type';
@@ -21,6 +22,7 @@ import { InputComponent } from '../input.component';
         SoKeyIconComponent,
         SoEyeSlashIconComponent,
         SoEyeIconComponent,
+        InvalidMessageDirective,
     ],
 })
 export class PasswordInputComponent implements ControlValueAccessor, OnInit {
@@ -43,6 +45,8 @@ export class PasswordInputComponent implements ControlValueAccessor, OnInit {
     protected readonly inputType = computed<InputType>(() =>
         this.passwordVisible() ? InputTypes.TEXT : InputTypes.PASSWORD,
     );
+
+    protected readonly hasRequiredError = signal(false);
 
     public constructor() {
         this.setValueAccessor();
@@ -93,6 +97,8 @@ export class PasswordInputComponent implements ControlValueAccessor, OnInit {
             next: (status) => {
                 this.valid.set(status === 'VALID');
                 this.invalid.set(status === 'INVALID');
+
+                this.hasRequiredError.set(this.control?.hasError('required') === true);
             },
         });
     }

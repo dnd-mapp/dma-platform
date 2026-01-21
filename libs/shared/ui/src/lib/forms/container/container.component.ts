@@ -17,7 +17,7 @@ import { TrailingIconDirective } from '../trailing-icon';
     templateUrl: './container.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[class]': `'flex items-center gap-2 border rounded-md w-full'`,
+        '[class]': `'flex items-center gap-2 border rounded-md w-full mb-1'`,
         '[class.border-neutral-400]': '!hover() && !focus() && !valid() && !invalid()',
         '[class.border-neutral-900]': 'isHovered()',
         '[class.border-blue-400]': 'isFocused()',

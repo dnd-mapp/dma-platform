@@ -18,6 +18,7 @@ import { debounceTime, Subject } from 'rxjs';
 import { SoCheckIconComponent, SoTriangleExclamationIconComponent } from '../../icons';
 import { ActionButtonDirective } from '../action-button';
 import { ContainerComponent } from '../container';
+import { InvalidMessageDirective } from '../invalid-message';
 import { LeadingIconDirective } from '../leading-icon';
 import { TrailingIconDirective } from '../trailing-icon';
 import { NgTouched, NgValueChange } from '../types';
@@ -82,6 +83,8 @@ export class InputComponent implements ControlValueAccessor, OnInit {
 
     protected readonly hasActionButton = computed(() => Boolean(this.actionButton()));
 
+    protected readonly hasInvalidMessage = computed(() => Boolean(this.invalidMessage()));
+
     private readonly inputSubject = new Subject<string>();
 
     private readonly leadingIcon = contentChild(LeadingIconDirective);
@@ -89,6 +92,8 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     private readonly trailingIcon = contentChild(TrailingIconDirective);
 
     private readonly actionButton = contentChild(ActionButtonDirective);
+
+    private readonly invalidMessage = contentChild(InvalidMessageDirective);
 
     private ngTouched: NgTouched | undefined;
     private ngChanged: NgValueChange<string> | undefined;

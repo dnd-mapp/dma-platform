@@ -1,4 +1,4 @@
-<label class="block mb-2" [for]="inputId()">{{ label() }}</label>
+<label class="block mb-2 font-medium" [for]="inputId()">{{ label() }}</label>
 <dma-container [focus]="focus()" [disabled]="_disabled()" [valid]="_valid()" [invalid]="_invalid()">
     @if (hasLeadingIcon()) {
         <ng-container [ngTemplateOutlet]="leadingIcon" dmaLeadingIcon />
@@ -18,15 +18,19 @@
     />
     @if (hasTrailingIcon()) {
         <ng-container [ngTemplateOutlet]="trailingIcon" dmaTrailingIcon />
-    } @else if (_valid()) {
+    } @else if (_valid() && !hasTrailingIcon() && !hasActionButton()) {
         <dma-icon dma-so-check-icon class="m-1 text-emerald-500" />
-    } @else if (_invalid()) {
+    } @else if (_invalid() && !hasTrailingIcon() && !hasActionButton()) {
         <dma-icon dma-so-triangle-exclamation-icon class="m-1 text-red-500" />
     }
     @if (hasActionButton()) {
         <ng-container [ngTemplateOutlet]="actionButton" dmaActionButton />
     }
 </dma-container>
+
+@if (hasInvalidMessage()) {
+    <ng-container [ngTemplateOutlet]="invalidMessage" />
+}
 
 <ng-template #leadingIcon>
     <ng-content select="[dmaLeadingIcon]" />
@@ -38,4 +42,8 @@
 
 <ng-template #actionButton>
     <ng-content select="[dmaActionButton]" />
+</ng-template>
+
+<ng-template #invalidMessage>
+    <ng-content select="[dmaInvalidMessage]" />
 </ng-template>
