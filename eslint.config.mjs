@@ -54,11 +54,19 @@ export default [
                         },
                         {
                             sourceTag: 'platform:web',
-                            allowedExternalImports: ['@analogjs/*', '@angular/*', '@nx/*', '@vitest/*', 'rxjs', 'vite'],
+                            allowedExternalImports: [
+                                '@analogjs/*',
+                                '@angular/*',
+                                '@nx/*',
+                                '@vitest/*',
+                                'nanoid',
+                                'rxjs',
+                                'vite',
+                            ],
                         },
                         {
                             sourceTag: 'platform:server',
-                            allowedExternalImports: ['@nestjs/*', 'fastify', 'jest', 'rxjs'],
+                            allowedExternalImports: ['@nestjs/*', '@nx/*', 'fastify', 'nanoid', 'rxjs', 'vite'],
                         },
                     ],
                 },
