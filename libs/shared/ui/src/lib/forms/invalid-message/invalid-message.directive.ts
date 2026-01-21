@@ -1,8 +1,4 @@
 import { Directive } from '@angular/core';
 
-@Directive({
-    selector: '[dmaInvalidMessage]',
-})
-export class InvalidMessageDirective {
-    constructor() {}
-}
+@Directive({ selector: '[dmaInvalidMessage]' })
+export class InvalidMessageDirective {}
