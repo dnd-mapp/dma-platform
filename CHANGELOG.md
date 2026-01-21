@@ -18,6 +18,8 @@ All notable changes to the **D&D Mapp Platform** will be documented in this file
 - **Documentation:** Added `auth-server` to Architecture and SSL/DNS guides.
 - **Library:** Created `auth-ui` (@dnd-mapp/auth-ui) to centralize identity services and authentication components.
 - **Infrastructure:** Added ESLint boundary rules to allow apps to consume `auth-ui` while maintaining isolation for `shared-ui`.
+- **Library:** Created `shared-utils` (@dnd-mapp/shared-utils) for platform-agnostic TypeScript helpers.
+- **Infrastructure:** Enforced "Leaf Dependency" status for `shared-utils` via ESLint to ensure zero circular dependencies.
 
 ### ⚙️ Changed
 

@@ -35,8 +35,12 @@ export default [
                             onlyDependOnLibsWithTags: ['scope:shared'],
                         },
                         {
-                            sourceTag: 'scope:shared',
-                            onlyDependOnLibsWithTags: ['scope:shared'],
+                            sourceTag: 'scope:shared-ui',
+                            onlyDependOnLibsWithTags: ['scope:shared-utils'],
+                        },
+                        {
+                            sourceTag: 'scope:shared-utils',
+                            onlyDependOnLibsWithTags: [],
                         },
                         {
                             sourceTag: 'platform:web',
