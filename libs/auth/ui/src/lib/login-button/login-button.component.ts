@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ButtonComponent } from '@dnd-mapp/shared-ui';
+import { AuthService } from '../auth';
 
 @Component({
     selector: 'dma-login-button',
@@ -8,7 +9,9 @@ import { ButtonComponent } from '@dnd-mapp/shared-ui';
     imports: [ButtonComponent],
 })
 export class LoginButtonComponent {
+    private readonly authService = inject(AuthService);
+
     protected onLogIn() {
-        location.href = 'https://localhost.auth.dndmapp.dev:4350/authorize';
+        this.authService.authorize();
     }
 }
