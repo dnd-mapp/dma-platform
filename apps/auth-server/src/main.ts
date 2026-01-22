@@ -1,8 +1,9 @@
 import { Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { FastifyAdapter } from '@nestjs/platform-fastify';
 import { readFile } from 'fs/promises';
-import { AppModule } from './app';
+import { AppModule, AuthServerConfig, ConfigurationNamespaces, ServerConfig } from './app';
 
 async function getSslFiles() {
     const certPath = process.env['SSL_CERT_PATH'];
@@ -26,9 +27,9 @@ async function bootstrap() {
         AppModule,
         new FastifyAdapter(ssl ? { https: { cert: cert, key: key } } : undefined),
     );
+    const configService = app.get(ConfigService<AuthServerConfig, true>);
+    const { host, port } = configService.get<ServerConfig>(ConfigurationNamespaces.SERVER);
 
-    const host = process.env['AUTH_SERVER_HOST'] || 'localhost';
-    const port = process.env['AUTH_SERVER_PORT'] || 4350;
     await app.listen(port, host);
 
     Logger.log(`🚀 Application is running on: ${ssl ? 'https' : 'http'}://${host}:${port}`);
