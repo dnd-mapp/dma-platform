@@ -27,6 +27,9 @@ async function bootstrap() {
     const app = await NestFactory.create(
         AppModule,
         new FastifyAdapter(ssl ? { https: { cert: cert, key: key } } : undefined),
+        {
+            logger: ['log', 'warn', 'error', 'fatal'],
+        },
     );
     const configService = app.get(ConfigService<AuthServerConfig, true>);
     const { host, port } = configService.get<ServerConfig>(ConfigurationNamespaces.SERVER);
