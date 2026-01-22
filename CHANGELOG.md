@@ -20,6 +20,8 @@ All notable changes to the **D&D Mapp Platform** will be documented in this file
 - **Infrastructure:** Added ESLint boundary rules to allow apps to consume `auth-ui` while maintaining isolation for `shared-ui`.
 - **Library:** Created `shared-utils` (@dnd-mapp/shared-utils) for platform-agnostic TypeScript helpers.
 - **Infrastructure:** Enforced "Leaf Dependency" status for `shared-utils` via ESLint to ensure zero circular dependencies.
+- **Library:** Created `backend-utils` (@dnd-mapp/backend-utils) for server-side TypeScript utilities.
+- **Infrastructure:** Configured ESLint boundaries to prevent `backend-utils` from being imported into Angular applications.
 
 ### ⚙️ Changed
 
