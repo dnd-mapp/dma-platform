@@ -1,9 +1,10 @@
+import { AuthServerConfig, ConfigurationNamespaces, ServerConfig } from '@dnd-mapp/backend-utils';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { FastifyAdapter } from '@nestjs/platform-fastify';
 import { readFile } from 'fs/promises';
-import { AppModule, AuthServerConfig, ConfigurationNamespaces, ServerConfig } from './app';
+import { AppModule } from './app';
 
 async function getSslFiles() {
     const certPath = process.env['SSL_CERT_PATH'];
@@ -26,6 +27,9 @@ async function bootstrap() {
     const app = await NestFactory.create(
         AppModule,
         new FastifyAdapter(ssl ? { https: { cert: cert, key: key } } : undefined),
+        {
+            logger: ['log', 'warn', 'error', 'fatal'],
+        },
     );
     const configService = app.get(ConfigService<AuthServerConfig, true>);
     const { host, port } = configService.get<ServerConfig>(ConfigurationNamespaces.SERVER);

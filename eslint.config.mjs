@@ -75,12 +75,15 @@ export default [
                         {
                             sourceTag: 'platform:server',
                             allowedExternalImports: [
+                                '@dotenvx/*',
                                 '@nestjs/*',
                                 '@nx/*',
+                                '@prisma/*',
                                 'class-transformer',
                                 'class-validator',
                                 'fastify',
                                 'nanoid',
+                                'prisma/*',
                                 'rxjs',
                                 'vite',
                             ],

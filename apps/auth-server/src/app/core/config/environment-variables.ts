@@ -1,10 +1,5 @@
+import { EnvironmentVariables, MAX_PORT, MIN_PORT } from '@dnd-mapp/backend-utils';
 import { IsNotEmpty, IsNumber, IsOptional, IsString, Max, Min } from 'class-validator';
-import { MAX_SERVER_PORT, MIN_SERVER_PORT } from './constants';
-
-export const EnvironmentVariables = {
-    AUTH_SERVER_HOST: 'AUTH_SERVER_HOST',
-    AUTH_SERVER_PORT: 'AUTH_SERVER_PORT',
-} as const;
 
 export class Environment {
     @IsNotEmpty()
@@ -12,9 +7,33 @@ export class Environment {
     @IsOptional()
     [EnvironmentVariables.AUTH_SERVER_HOST]?: string;
 
-    @Max(MAX_SERVER_PORT)
-    @Min(MIN_SERVER_PORT)
+    @Max(MAX_PORT)
+    @Min(MIN_PORT)
     @IsNumber({ allowNaN: false, allowInfinity: false, maxDecimalPlaces: 0 })
     @IsOptional()
     [EnvironmentVariables.AUTH_SERVER_PORT]?: number;
+
+    @IsNotEmpty()
+    @IsString()
+    @IsOptional()
+    [EnvironmentVariables.AUTH_DB_HOST]?: string;
+
+    @Max(MAX_PORT)
+    @Min(MIN_PORT)
+    @IsNumber({ allowNaN: false, allowInfinity: false, maxDecimalPlaces: 0 })
+    @IsOptional()
+    [EnvironmentVariables.AUTH_DB_PORT]?: number;
+
+    @IsNotEmpty()
+    @IsString()
+    @IsOptional()
+    [EnvironmentVariables.AUTH_DB_SCHEMA]?: string;
+
+    @IsNotEmpty()
+    @IsString()
+    @IsOptional()
+    [EnvironmentVariables.AUTH_DB_USER]?: string;
+
+    @IsString()
+    [EnvironmentVariables.AUTH_DB_PASSWORD]!: string;
 }
