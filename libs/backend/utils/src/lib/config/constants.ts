@@ -7,3 +7,10 @@ export const DEFAULT_AUTH_SERVER_CONFIG = {
     port: 4350,
 };
 
+export const DEFAULT_AUTH_DB_CONFIG = {
+    host: 'localhost',
+    port: 3306,
+    schema: 'my_db',
+    user: 'root',
+    password: 'password',
+};

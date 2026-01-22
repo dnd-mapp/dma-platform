@@ -12,4 +12,28 @@ export class Environment {
     @IsNumber({ allowNaN: false, allowInfinity: false, maxDecimalPlaces: 0 })
     @IsOptional()
     [EnvironmentVariables.AUTH_SERVER_PORT]?: number;
+
+    @IsNotEmpty()
+    @IsString()
+    @IsOptional()
+    [EnvironmentVariables.AUTH_DB_HOST]?: string;
+
+    @Max(MAX_PORT)
+    @Min(MIN_PORT)
+    @IsNumber({ allowNaN: false, allowInfinity: false, maxDecimalPlaces: 0 })
+    @IsOptional()
+    [EnvironmentVariables.AUTH_DB_PORT]?: number;
+
+    @IsNotEmpty()
+    @IsString()
+    @IsOptional()
+    [EnvironmentVariables.AUTH_DB_SCHEMA]?: string;
+
+    @IsNotEmpty()
+    @IsString()
+    @IsOptional()
+    [EnvironmentVariables.AUTH_DB_USER]?: string;
+
+    @IsString()
+    [EnvironmentVariables.AUTH_DB_PASSWORD]!: string;
 }

@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+    engineType   = "client"
+    moduleFormat = "cjs"
+    output       = "../src/prisma"
+    provider     = "prisma-client"
+}
+
+datasource db {
+    provider = "mysql"
+}
+
+model User {
+    id       String @id @default(nanoid())
+    username String @unique(map: "uq_user_username")
+    password String
+
+    @@map(name: "users")
+}
+
+model Client {
+    id       String @id @default(nanoid())
+    audience String @unique(map: "uq_client_audience")
+
+    authTransactions AuthTransaction[]
+    redirectUrls     RedirectUrl[]
+
+    @@map(name: "clients")
+}
+
+model AuthTransaction {
+    id       String @id @default(nanoid())
+    state    String
+    nonce    String
+    clientId String @map(name: "client_id")
+
+    client Client @relation(fields: [clientId], references: [id], map: "fk_client_auth_transaction")
+
+    @@map(name: "auth_transactions")
+}
+
+model RedirectUrl {
+    id       String @id @default(nanoid())
+    url      String
+    clientId String @map(name: "client_id")
+
+    client Client @relation(fields: [clientId], references: [id], map: "fk_client_redirect_urls")
+
+    @@map(name: "redirect_urls")
+}

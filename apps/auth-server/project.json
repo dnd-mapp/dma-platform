@@ -5,8 +5,19 @@
     "projectType": "application",
     "tags": ["platform:server", "scope:auth-server"],
     "targets": {
+        "prisma-generate": {
+            "executor": "nx:run-commands",
+            "inputs": ["{projectRoot}/prisma.config.ts", "{projectRoot}/prisma/schema.prisma"],
+            "outputs": ["{projectRoot}/src/prisma"],
+            "cache": true,
+            "options": {
+                "command": "prisma generate",
+                "cwd": "{projectRoot}"
+            }
+        },
         "build": {
             "executor": "nx:run-commands",
+            "dependsOn": ["prisma-generate"],
             "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
             "cache": true,
             "options": {
