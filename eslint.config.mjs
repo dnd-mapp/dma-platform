@@ -74,7 +74,16 @@ export default [
                         },
                         {
                             sourceTag: 'platform:server',
-                            allowedExternalImports: ['@nestjs/*', '@nx/*', 'fastify', 'nanoid', 'rxjs', 'vite'],
+                            allowedExternalImports: [
+                                '@nestjs/*',
+                                '@nx/*',
+                                'class-transformer',
+                                'class-validator',
+                                'fastify',
+                                'nanoid',
+                                'rxjs',
+                                'vite',
+                            ],
                         },
                     ],
                 },
