@@ -81,6 +81,7 @@ export default [
                                 'class-validator',
                                 'fastify',
                                 'nanoid',
+                                'prisma/*',
                                 'rxjs',
                                 'vite',
                             ],
