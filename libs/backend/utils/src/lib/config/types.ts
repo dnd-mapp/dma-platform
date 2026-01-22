@@ -1,4 +1,4 @@
-import { ConfigurationNamespaces } from '@dnd-mapp/backend-utils';
+import { ConfigurationNamespaces } from './configuration-namespace';
 
 export interface ServerConfig {
     host: string;
