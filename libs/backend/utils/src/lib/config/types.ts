@@ -7,4 +7,5 @@ export interface ServerConfig {
 
 export interface AuthServerConfig {
     [ConfigurationNamespaces.SERVER]: ServerConfig;
+    [ConfigurationNamespaces.DATABASE]: DatabaseConfig;
 }
