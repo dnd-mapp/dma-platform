@@ -1,9 +1,10 @@
+import { ConfigurationNamespaces } from '@dnd-mapp/backend-utils';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { FastifyAdapter } from '@nestjs/platform-fastify';
 import { readFile } from 'fs/promises';
-import { AppModule, AuthServerConfig, ConfigurationNamespaces, ServerConfig } from './app';
+import { AppModule, AuthServerConfig, ServerConfig } from './app';
 
 async function getSslFiles() {
     const certPath = process.env['SSL_CERT_PATH'];
