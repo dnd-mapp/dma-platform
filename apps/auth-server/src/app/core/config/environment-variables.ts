@@ -1,10 +1,6 @@
+import { EnvironmentVariables } from '@dnd-mapp/backend-utils';
 import { IsNotEmpty, IsNumber, IsOptional, IsString, Max, Min } from 'class-validator';
 import { MAX_SERVER_PORT, MIN_SERVER_PORT } from './constants';
-
-export const EnvironmentVariables = {
-    AUTH_SERVER_HOST: 'AUTH_SERVER_HOST',
-    AUTH_SERVER_PORT: 'AUTH_SERVER_PORT',
-} as const;
 
 export class Environment {
     @IsNotEmpty()
