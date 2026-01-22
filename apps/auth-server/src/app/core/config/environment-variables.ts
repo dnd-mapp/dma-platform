@@ -1,6 +1,5 @@
-import { EnvironmentVariables } from '@dnd-mapp/backend-utils';
+import { EnvironmentVariables, MAX_SERVER_PORT, MIN_SERVER_PORT } from '@dnd-mapp/backend-utils';
 import { IsNotEmpty, IsNumber, IsOptional, IsString, Max, Min } from 'class-validator';
-import { MAX_SERVER_PORT, MIN_SERVER_PORT } from './constants';
 
 export class Environment {
     @IsNotEmpty()
