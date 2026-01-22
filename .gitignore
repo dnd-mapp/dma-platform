@@ -17,3 +17,4 @@ reports/
 
 **/*.pem
 **/.env
+**/public/config.json
