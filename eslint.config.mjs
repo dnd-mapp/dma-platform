@@ -38,7 +38,11 @@ export default [
                         },
                         {
                             sourceTag: 'scope:auth-server',
-                            onlyDependOnLibsWithTags: ['scope:auth-server', 'scope:shared-ui', 'scope:shared-utils'],
+                            onlyDependOnLibsWithTags: [
+                                'scope:auth-server',
+                                'scope:backend-utils',
+                                'scope:shared-utils',
+                            ],
                         },
                         {
                             sourceTag: 'scope:auth-ui',
@@ -46,6 +50,10 @@ export default [
                         },
                         {
                             sourceTag: 'scope:shared-ui',
+                            onlyDependOnLibsWithTags: ['scope:shared-utils'],
+                        },
+                        {
+                            sourceTag: 'scope:backend-utils',
                             onlyDependOnLibsWithTags: ['scope:shared-utils'],
                         },
                         {
@@ -66,7 +74,16 @@ export default [
                         },
                         {
                             sourceTag: 'platform:server',
-                            allowedExternalImports: ['@nestjs/*', '@nx/*', 'fastify', 'nanoid', 'rxjs', 'vite'],
+                            allowedExternalImports: [
+                                '@nestjs/*',
+                                '@nx/*',
+                                'class-transformer',
+                                'class-validator',
+                                'fastify',
+                                'nanoid',
+                                'rxjs',
+                                'vite',
+                            ],
                         },
                     ],
                 },

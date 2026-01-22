@@ -24,6 +24,8 @@ dma-platform/
 └── libs/
     ├── auth/
     │   └── ui/           # Auth components & services (@dnd-mapp/auth-ui)
+    ├── backend/
+    │   └── utils/        # Node.js specific helpers (@dnd-mapp/backend-utils)
     └── shared/
         ├── ui/           # Generic UI components & Lazy Pages (@dnd-mapp/shared-ui)
         └── utils/        # Pure TS helpers (@dnd-mapp/shared-utils)
@@ -63,6 +65,8 @@ We use `@analogjs/vitest-angular` as a bridge to enable **Vitest**.
 The use of `localhost.www.dndmapp.dev` via the `hosts` file allows us to simulate subdomains and handle SSL certificates in a way that mirrors our eventual production environment.
 
 ---
+
 **See Also:**
-* [Testing Strategy](./testing-guide.md)
-* [SSL & DNS Setup](./ssl-dns-setup.md) 
+
+- [Testing Strategy](./testing-guide.md)
+- [SSL & DNS Setup](./ssl-dns-setup.md) 

@@ -1,0 +1,26 @@
+{
+    "name": "backend-utils",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/backend/utils/src",
+    "projectType": "library",
+    "tags": ["scope:backend-utils", "platform:server"],
+    "targets": {
+        "test": {
+            "executor": "nx:run-commands",
+            "outputs": ["{workspaceRoot}/reports/{projectRoot}"],
+            "cache": true,
+            "options": {
+                "cwd": "{projectRoot}"
+            },
+            "defaultConfiguration": "ci",
+            "configurations": {
+                "ci": {
+                    "command": "vitest run"
+                },
+                "development": {
+                    "command": "vitest --ui --watch"
+                }
+            }
+        }
+    }
+}
