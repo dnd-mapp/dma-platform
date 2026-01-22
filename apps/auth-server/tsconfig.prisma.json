@@ -1,4 +1,4 @@
 {
     "extends": "./tsconfig.json",
-    "files": ["prisma.config.ts"]
+    "files": ["prisma.config.ts", "prisma/seed.ts"]
 }
