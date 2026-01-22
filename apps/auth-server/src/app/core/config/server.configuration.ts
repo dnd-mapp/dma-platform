@@ -1,7 +1,6 @@
 import {
     ConfigurationNamespaces,
-    DEFAULT_AUTH_SERVER_HOST,
-    DEFAULT_AUTH_SERVER_PORT,
+    DEFAULT_AUTH_SERVER_CONFIG,
     EnvironmentVariables,
     ServerConfig,
 } from '@dnd-mapp/backend-utils';
@@ -12,7 +11,7 @@ export default registerAs(
     ConfigurationNamespaces.SERVER,
     () =>
         ({
-            host: process.env[EnvironmentVariables.AUTH_SERVER_HOST] || DEFAULT_AUTH_SERVER_HOST,
-            port: parseInt(DEFAULT_AUTH_SERVER_PORT, process.env[EnvironmentVariables.AUTH_SERVER_PORT]),
+            host: process.env[EnvironmentVariables.AUTH_SERVER_HOST] || DEFAULT_AUTH_SERVER_CONFIG.host,
+            port: parseInt(DEFAULT_AUTH_SERVER_CONFIG.port, process.env[EnvironmentVariables.AUTH_SERVER_PORT]),
         }) satisfies ServerConfig,
 );
