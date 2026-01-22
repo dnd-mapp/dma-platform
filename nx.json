@@ -11,7 +11,6 @@
             "!{projectRoot}/vite.config.mts",
             "!{projectRoot}/**/*.spec.ts",
             "!{projectRoot}/tsconfig.spec.json",
-            "!{projectRoot}/jest.config.cts",
             "!{projectRoot}/test/**/*.ts"
         ]
     },
@@ -39,13 +38,6 @@
             "options": {
                 "targetName": "lint"
             }
-        },
-        {
-            "plugin": "@nx/jest/plugin",
-            "options": {
-                "targetName": "test"
-            },
-            "exclude": ["e2e/auth-server/**/*"]
         },
         {
             "plugin": "@nx/playwright/plugin",

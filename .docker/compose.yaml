@@ -6,3 +6,15 @@ services:
         restart: unless-stopped
         ports:
             - '4200:4200'
+    auth-client:
+        image: dndmapp/auth-client
+        container_name: auth-client
+        restart: unless-stopped
+        ports:
+            - '4300:4300'
+    auth-server:
+        image: dndmapp/auth-server
+        container_name: auth-server
+        restart: unless-stopped
+        ports:
+            - '4350:4350'
