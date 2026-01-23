@@ -25,11 +25,14 @@ All notable changes to the **D&D Mapp Platform** will be documented in this file
 - **Library:** Created `auth-domain` (@dnd-mapp/auth-domain) to house shared DTOs and data models.
 - **Infrastructure:** Integrated `class-validator` and `class-transformer` for cross-platform data validation.
 - **CI/CD:** Enforced boundary rules allowing `auth-domain` to be shared between NestJS and Angular projects.
+- **Library:** Created `backend-core` (@dnd-mapp/backend-core) for shared NestJS Providers, Modules, and Repositories.
 
 ### ⚙️ Changed
 
 - **SSL/DNS:** Updated local development requirements to include `localhost.auth.dndmapp.dev`.
 - **Infrastructure:** Added `.gitattributes` to enforce consistent LF line endings across all platforms and optimize GitHub language statistics.
+- **Refactor:** Split `backend-utils` to remove NestJS decorators, enabling its use in Prisma seed scripts and standalone Node tools.
+- **Infrastructure:** Updated ESLint rules to reflect the new `backend-core` vs `backend-utils` hierarchy.
 
 ### ⚠️ Deprecated
 

@@ -3,7 +3,6 @@ import { config } from '@dotenvx/dotenvx';
 import { defineConfig } from 'prisma/config';
 import { DatabaseConfiguration, databaseUrl, EnvironmentVariables } from '../../libs/backend/utils/src';
 import { parseInt } from '../../libs/shared/utils/src';
-/* eslint-enable @nx/enforce-module-boundaries */
 
 config({ path: ['../../.env'], strict: false, ignore: ['MISSING_ENV_FILE'], quiet: true });
 

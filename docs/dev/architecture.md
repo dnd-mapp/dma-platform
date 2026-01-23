@@ -26,6 +26,7 @@ dma-platform/
     │   ├── domain/       # Shared DTOs & Models (@dnd-mapp/auth-domain)
     │   └── ui/           # Auth components & services (@dnd-mapp/auth-ui)
     ├── backend/
+    │   ├── core/         # NestJS Modules, Services, DI logic (@dnd-mapp/backend-core)
     │   └── utils/        # Node.js specific helpers (@dnd-mapp/backend-utils)
     └── shared/
         ├── ui/           # Generic UI components & Lazy Pages (@dnd-mapp/shared-ui)

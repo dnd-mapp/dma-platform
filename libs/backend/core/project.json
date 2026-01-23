@@ -1,0 +1,26 @@
+{
+    "name": "backend-core",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/backend/core/src",
+    "projectType": "library",
+    "tags": ["scope:backend-core", "platform:server"],
+    "targets": {
+        "test": {
+            "executor": "nx:run-commands",
+            "outputs": ["{workspaceRoot}/reports/{projectRoot}"],
+            "cache": true,
+            "options": {
+                "cwd": "{projectRoot}"
+            },
+            "defaultConfiguration": "ci",
+            "configurations": {
+                "ci": {
+                    "command": "vitest run"
+                },
+                "development": {
+                    "command": "vitest --ui --watch"
+                }
+            }
+        }
+    }
+}
