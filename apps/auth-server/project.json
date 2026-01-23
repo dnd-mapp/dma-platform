@@ -23,6 +23,14 @@
                 "cwd": "{projectRoot}"
             }
         },
+        "prisma-migrate-reset": {
+            "dependsOn": ["prisma-generate"],
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "prisma migrate reset --force",
+                "cwd": "{projectRoot}"
+            }
+        },
         "docker-build": {
             "executor": "nx:run-commands",
             "options": {

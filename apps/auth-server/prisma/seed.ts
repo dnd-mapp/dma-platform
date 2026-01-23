@@ -2,6 +2,7 @@ import {
     DatabaseConfiguration,
     DEFAULT_AUTH_DB_CONFIG,
     EnvironmentVariables,
+    hashPassword,
     isProduction,
 } from '@dnd-mapp/backend-utils';
 import { parseInt } from '@dnd-mapp/shared-utils';
@@ -16,6 +17,8 @@ const databaseConfig: DatabaseConfiguration = {
     user: process.env[EnvironmentVariables.AUTH_DB_USER] || DEFAULT_AUTH_DB_CONFIG.user,
     password: process.env[EnvironmentVariables.AUTH_DB_PASSWORD] || DEFAULT_AUTH_DB_CONFIG.password,
 };
+
+const passwordPepper = process.env[EnvironmentVariables.AUTH_SERVER_PASSWORD_PEPPER];
 
 const mariaDbAdapter = new PrismaMariaDb({
     user: databaseConfig.user,
@@ -40,7 +43,7 @@ async function generateClientConfig(clientId: string) {
     await writeFile(dndMappClientConfigPath, `${JSON.stringify(clientConfig, null, 4)}\n`);
 }
 
-async function generateClients() {
+async function seedClients() {
     const client = await prisma.client.create({
         data: {
             audience: 'dnd-mapp',
@@ -60,8 +63,20 @@ async function generateClients() {
     }
 }
 
+async function seedUsers() {
+    if (!passwordPepper) return;
+    await prisma.user.create({
+        data: {
+            username: 'admin',
+            password: await hashPassword('changemenow', passwordPepper),
+        },
+    });
+}
+
 export async function seed() {
-    await generateClients();
+    if (!passwordPepper) throw new Error('Password Pepper is required');
+    await seedClients();
+    await seedUsers();
 }
 
 seed().finally(async () => {
