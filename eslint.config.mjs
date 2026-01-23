@@ -86,6 +86,7 @@ export default [
                                 '@nestjs/*',
                                 '@nx/*',
                                 '@prisma/*',
+                                'argon2',
                                 'class-transformer',
                                 'class-validator',
                                 'fastify',
