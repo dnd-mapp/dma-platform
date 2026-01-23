@@ -43,6 +43,7 @@ export default [
                             onlyDependOnLibsWithTags: [
                                 'scope:auth-server',
                                 'scope:auth-domain',
+                                'scope:backend-core',
                                 'scope:backend-utils',
                                 'scope:shared-utils',
                             ],
@@ -54,6 +55,10 @@ export default [
                         {
                             sourceTag: 'scope:shared-ui',
                             onlyDependOnLibsWithTags: ['scope:shared-utils'],
+                        },
+                        {
+                            sourceTag: 'scope:backend-core',
+                            onlyDependOnLibsWithTags: ['scope:backend-utils', 'scope:shared-utils'],
                         },
                         {
                             sourceTag: 'scope:backend-utils',
@@ -86,6 +91,7 @@ export default [
                                 '@nestjs/*',
                                 '@nx/*',
                                 '@prisma/*',
+                                'argon2',
                                 'class-transformer',
                                 'class-validator',
                                 'fastify',

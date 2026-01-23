@@ -1,7 +1,7 @@
+import { ConfigurationNamespaces, DatabaseConfig } from '@dnd-mapp/backend-utils';
 import { Inject, Injectable, Logger, OnApplicationShutdown, OnModuleInit, Type } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PrismaMariaDb } from '@prisma/adapter-mariadb';
-import { ConfigurationNamespaces, DatabaseConfig } from '../config';
 import { PrismaClient } from './types';
 import { PRISMA_CLIENT_CTOR } from './with-prisma-client';
 

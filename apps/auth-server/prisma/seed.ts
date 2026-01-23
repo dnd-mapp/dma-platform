@@ -1,17 +1,24 @@
-/* eslint-disable @nx/enforce-module-boundaries */
+import {
+    DatabaseConfiguration,
+    DEFAULT_AUTH_DB_CONFIG,
+    EnvironmentVariables,
+    hashPassword,
+    isProduction,
+} from '@dnd-mapp/backend-utils';
+import { parseInt } from '@dnd-mapp/shared-utils';
 import { PrismaMariaDb } from '@prisma/adapter-mariadb';
 import { readFile, writeFile } from 'fs/promises';
-import { parseInt } from '../../../libs/shared/utils/src';
 import { PrismaClient } from '../src/prisma/client';
-/* eslint-enable @nx/enforce-module-boundaries */
 
-const databaseConfig = {
-    host: process.env['AUTH_DB_HOST'] || 'localhost',
-    port: parseInt(3306, process.env['AUTH_DB_PORT']),
-    schema: process.env['AUTH_DB_SCHEMA'] || 'my_db',
-    user: process.env['AUTH_DB_USER'] || 'root',
-    password: process.env['AUTH_DB_PASSWORD'] || 'password',
+const databaseConfig: DatabaseConfiguration = {
+    host: process.env[EnvironmentVariables.AUTH_DB_HOST] || DEFAULT_AUTH_DB_CONFIG.host,
+    port: parseInt(DEFAULT_AUTH_DB_CONFIG.port, process.env[EnvironmentVariables.AUTH_DB_PORT]),
+    schema: process.env[EnvironmentVariables.AUTH_DB_SCHEMA] || DEFAULT_AUTH_DB_CONFIG.schema,
+    user: process.env[EnvironmentVariables.AUTH_DB_USER] || DEFAULT_AUTH_DB_CONFIG.user,
+    password: process.env[EnvironmentVariables.AUTH_DB_PASSWORD] || DEFAULT_AUTH_DB_CONFIG.password,
 };
+
+const passwordPepper = process.env[EnvironmentVariables.AUTH_SERVER_PASSWORD_PEPPER];
 
 const mariaDbAdapter = new PrismaMariaDb({
     user: databaseConfig.user,
@@ -36,7 +43,7 @@ async function generateClientConfig(clientId: string) {
     await writeFile(dndMappClientConfigPath, `${JSON.stringify(clientConfig, null, 4)}\n`);
 }
 
-export async function seed() {
+async function seedClients() {
     const client = await prisma.client.create({
         data: {
             audience: 'dnd-mapp',
@@ -50,10 +57,26 @@ export async function seed() {
 
     console.log(`Created Client with ID: "${client.id}"`);
 
-    if (process.env['NODE_ENV'] !== 'production') {
+    if (!isProduction()) {
         console.log('Creating Client config files...');
         await generateClientConfig(client.id);
     }
+}
+
+async function seedUsers() {
+    if (!passwordPepper) return;
+    await prisma.user.create({
+        data: {
+            username: 'admin',
+            password: await hashPassword('changemenow', passwordPepper),
+        },
+    });
+}
+
+export async function seed() {
+    if (!passwordPepper) throw new Error('Password Pepper is required');
+    await seedClients();
+    await seedUsers();
 }
 
 seed().finally(async () => {

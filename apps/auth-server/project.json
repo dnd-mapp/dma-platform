@@ -16,9 +16,18 @@
             }
         },
         "prisma-seed": {
+            "dependsOn": ["prisma-generate"],
             "executor": "nx:run-commands",
             "options": {
                 "command": "prisma db seed",
+                "cwd": "{projectRoot}"
+            }
+        },
+        "prisma-migrate-reset": {
+            "dependsOn": ["prisma-generate"],
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "prisma migrate reset --force",
                 "cwd": "{projectRoot}"
             }
         },
