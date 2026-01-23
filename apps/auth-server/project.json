@@ -16,6 +16,7 @@
             }
         },
         "prisma-seed": {
+            "dependsOn": ["prisma-generate"],
             "executor": "nx:run-commands",
             "options": {
                 "command": "prisma db seed",
