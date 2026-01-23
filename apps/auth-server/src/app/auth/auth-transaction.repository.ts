@@ -1,6 +1,6 @@
 import { AuthorizeQueryParams, AuthTransactionBuilder } from '@dnd-mapp/auth-domain';
 import { PrismaClient, AuthTransaction as RawAuthTransaction } from '@dnd-mapp/auth-server/prisma/client';
-import { DatabaseService } from '@dnd-mapp/backend-utils';
+import { DatabaseService } from '@dnd-mapp/backend-core';
 import { Injectable } from '@nestjs/common';
 
 function fromRawToDto(raw: RawAuthTransaction) {
