@@ -26,6 +26,7 @@ All notable changes to the **D&D Mapp Platform** will be documented in this file
 ### ⚙️ Changed
 
 - **SSL/DNS:** Updated local development requirements to include `localhost.auth.dndmapp.dev`.
+- **Infrastructure:** Added `.gitattributes` to enforce consistent LF line endings across all platforms and optimize GitHub language statistics.
 
 ### ⚠️ Deprecated
 

@@ -22,6 +22,12 @@
                 "cwd": "{projectRoot}"
             }
         },
+        "docker-build": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "docker buildx build -f {projectRoot}/.docker/Dockerfile -t dndmapp/auth-server:latest ."
+            }
+        },
         "build": {
             "executor": "nx:run-commands",
             "dependsOn": ["prisma-generate"],
