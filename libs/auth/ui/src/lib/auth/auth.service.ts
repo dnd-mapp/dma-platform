@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { base64, sha256, StorageKeys, StorageService, TEXT_ENCODER } from '@dnd-mapp/shared-ui';
+import { base64, ConfigService, sha256, StorageKeys, StorageService, TEXT_ENCODER } from '@dnd-mapp/shared-ui';
 import { nanoid } from 'nanoid';
 import { from, map, tap } from 'rxjs';
 
@@ -7,6 +7,7 @@ import { from, map, tap } from 'rxjs';
 export class AuthService {
     private readonly textEncoder = inject(TEXT_ENCODER);
     private readonly storageService = inject(StorageService);
+    private readonly configService = inject(ConfigService);
 
     public readonly authenticated = signal(false);
 
@@ -21,7 +22,8 @@ export class AuthService {
 
         return this.generateCodeChallenge(codeVerifier).pipe(
             tap((codeChallenge) => {
-                location.href = `https://localhost.auth.dndmapp.dev:4350/authorize?codeChallenge=${codeChallenge}&state=${state}&nonce=${nonce}`;
+                const clientId = this.configService.config()?.clientId;
+                location.href = `https://localhost.auth.dndmapp.dev:4350/authorize?codeChallenge=${codeChallenge}&state=${state}&nonce=${nonce}&clientId=${clientId}`;
             }),
         );
     }
