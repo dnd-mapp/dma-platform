@@ -9,7 +9,7 @@ import { HealthModule } from './health';
 @Module({
     imports: [
         ConfigModule.forRoot(configModuleOptions),
-        DatabaseModule.withPrismaClient(PrismaClient),
+        DatabaseModule.forRoot(PrismaClient),
         HealthModule,
         AuthModule,
     ],
