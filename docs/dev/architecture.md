@@ -23,6 +23,7 @@ dma-platform/
 │   └── dnd-mapp/
 └── libs/
     ├── auth/
+    │   ├── domain/       # Shared DTOs & Models (@dnd-mapp/auth-domain)
     │   └── ui/           # Auth components & services (@dnd-mapp/auth-ui)
     ├── backend/
     │   └── utils/        # Node.js specific helpers (@dnd-mapp/backend-utils)

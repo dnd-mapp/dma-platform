@@ -22,6 +22,9 @@ All notable changes to the **D&D Mapp Platform** will be documented in this file
 - **Infrastructure:** Enforced "Leaf Dependency" status for `shared-utils` via ESLint to ensure zero circular dependencies.
 - **Library:** Created `backend-utils` (@dnd-mapp/backend-utils) for server-side TypeScript utilities.
 - **Infrastructure:** Configured ESLint boundaries to prevent `backend-utils` from being imported into Angular applications.
+- **Library:** Created `auth-domain` (@dnd-mapp/auth-domain) to house shared DTOs and data models.
+- **Infrastructure:** Integrated `class-validator` and `class-transformer` for cross-platform data validation.
+- **CI/CD:** Enforced boundary rules allowing `auth-domain` to be shared between NestJS and Angular projects.
 
 ### ⚙️ Changed
 

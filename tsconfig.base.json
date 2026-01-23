@@ -23,6 +23,7 @@
         "paths": {
             "@dnd-mapp/auth-client/test": ["./apps/auth-client/test/index.ts"],
             "@dnd-mapp/auth-server/prisma/*": ["./apps/auth-server/src/prisma/*"],
+            "@dnd-mapp/auth-domain": ["./libs/auth/domain/src/index.ts"],
             "@dnd-mapp/auth-ui": ["./libs/auth/ui/src/index.ts"],
             "@dnd-mapp/auth-ui/test": ["./libs/auth/ui/test/index.ts"],
             "@dnd-mapp/backend-utils": ["./libs/backend/utils/src/index.ts"],

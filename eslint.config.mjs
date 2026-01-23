@@ -23,6 +23,7 @@ export default [
                             onlyDependOnLibsWithTags: [
                                 'scope:dnd-mapp',
                                 'scope:shared-ui',
+                                'scope:auth-domain',
                                 'scope:auth-ui',
                                 'scope:shared-utils',
                             ],
@@ -32,6 +33,7 @@ export default [
                             onlyDependOnLibsWithTags: [
                                 'scope:auth-client',
                                 'scope:shared-ui',
+                                'scope:auth-domain',
                                 'scope:auth-ui',
                                 'scope:shared-utils',
                             ],
@@ -40,6 +42,7 @@ export default [
                             sourceTag: 'scope:auth-server',
                             onlyDependOnLibsWithTags: [
                                 'scope:auth-server',
+                                'scope:auth-domain',
                                 'scope:backend-utils',
                                 'scope:shared-utils',
                             ],
@@ -54,6 +57,10 @@ export default [
                         },
                         {
                             sourceTag: 'scope:backend-utils',
+                            onlyDependOnLibsWithTags: ['scope:shared-utils'],
+                        },
+                        {
+                            sourceTag: 'scope:auth-domain',
                             onlyDependOnLibsWithTags: ['scope:shared-utils'],
                         },
                         {
