@@ -6,9 +6,10 @@ import { withPrismaClient } from './with-prisma-client';
 
 @Module({})
 export class DatabaseModule {
-    public static withPrismaClient<T extends PrismaClient>(ctor: Type<T>): DynamicModule {
+    public static forRoot<T extends PrismaClient>(ctor: Type<T>): DynamicModule {
         return {
             module: DatabaseModule,
+            global: true,
             imports: [ConfigModule],
             providers: [withPrismaClient<T>(ctor), DatabaseService<T>],
             exports: [DatabaseService<T>],

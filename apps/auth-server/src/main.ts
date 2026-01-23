@@ -29,6 +29,11 @@ async function bootstrap() {
         new FastifyAdapter(ssl ? { https: { cert: cert, key: key } } : undefined),
         {
             logger: ['log', 'warn', 'error', 'fatal'],
+            cors: {
+                origin: [],
+                methods: ['GET', 'POST'],
+                allowedHeaders: ['content-type', 'authorization'],
+            },
         },
     );
     const configService = app.get(ConfigService<AuthServerConfig, true>);
