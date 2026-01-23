@@ -22,8 +22,18 @@ export class AuthService {
 
         return this.generateCodeChallenge(codeVerifier).pipe(
             tap((codeChallenge) => {
-                const clientId = this.configService.config()?.clientId;
-                location.href = `https://localhost.auth.dndmapp.dev:4350/authorize?codeChallenge=${codeChallenge}&state=${state}&nonce=${nonce}&clientId=${clientId}`;
+                const clientId = this.configService.config.clientId;
+                const redirectUrl = location.href;
+
+                const url = new URL('https://localhost.auth.dndmapp.dev:4350/authorize');
+
+                url.searchParams.set('codeChallenge', codeChallenge);
+                url.searchParams.set('state', state);
+                url.searchParams.set('nonce', nonce);
+                url.searchParams.set('clientId', clientId);
+                url.searchParams.set('redirectUrl', redirectUrl);
+
+                location.href = url.toString();
             }),
         );
     }
