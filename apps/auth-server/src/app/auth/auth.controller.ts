@@ -1,5 +1,5 @@
-import { AuthorizeQueryParams } from '@dnd-mapp/auth-domain';
-import { Controller, Get, HttpStatus, Query, Res } from '@nestjs/common';
+import { AuthorizeQueryParams, LoginDto, RedirectResponseDto } from '@dnd-mapp/auth-domain';
+import { Body, Controller, Get, HttpStatus, Post, Query, Res } from '@nestjs/common';
 import { FastifyReply } from 'fastify';
 import { AuthService } from './auth.service';
 
@@ -18,8 +18,22 @@ export class AuthController {
     ) {
         const loginChallenge = await this.authService.authorize(queryParams);
 
+        const url = new URL('https://localhost.auth.dndmapp.dev:4300/log-in');
+        url.searchParams.set('loginChallenge', loginChallenge);
+
         response.status(HttpStatus.FOUND).headers({
-            location: `https://localhost.auth.dndmapp.dev:4300/log-in?loginChallenge=${loginChallenge}`,
+            location: url.toString(),
         });
+    }
+
+    @Post('/login')
+    public async login(@Body() data: LoginDto) {
+        const { redirectUrl, state, authCode } = await this.authService.login(data);
+
+        const url = new URL(redirectUrl);
+        url.searchParams.set('state', state);
+        url.searchParams.set('authCode', authCode);
+
+        return new RedirectResponseDto(url.toString());
     }
 }
