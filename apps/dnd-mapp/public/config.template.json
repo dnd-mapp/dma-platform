@@ -1,3 +1,4 @@
 {
-    "clientId": "clientId"
+    "clientId": "clientId",
+    "authServerBaseUrl": "https://localhost.auth.dndmapp.dev:4350"
 }

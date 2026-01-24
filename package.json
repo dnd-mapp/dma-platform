@@ -49,6 +49,11 @@
       }
     ]
   },
+  "msw": {
+    "workerDirectory": [
+      ".msw"
+    ]
+  },
   "dependencies": {
     "@angular/cdk": "~21.1.0",
     "@angular/common": "~21.1.0",
@@ -115,6 +120,7 @@
     "eslint": "~9.39.0",
     "eslint-config-prettier": "~10.0.0",
     "eslint-plugin-playwright": "~2.4.0",
+    "msw": "~2.12.0",
     "nx": "~22.3.0",
     "playwright": "~1.57.0",
     "prettier": "~3.7.0",

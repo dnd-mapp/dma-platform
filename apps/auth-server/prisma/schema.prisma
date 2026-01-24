@@ -30,11 +30,14 @@ model Client {
 }
 
 model AuthTransaction {
-    id            String @id @default(nanoid())
-    state         String
-    nonce         String
-    codeChallenge String @map(name: "code_challenge")
-    clientId      String @map(name: "client_id")
+    id             String    @id @default(nanoid())
+    state          String
+    nonce          String
+    codeChallenge  String    @map(name: "code_challenge")
+    redirectUrl    String
+    authCode       String?   @map(name: "auth_code")
+    authCodeExpiry DateTime? @map(name: "auth_code_expiry")
+    clientId       String    @map(name: "client_id")
 
     client Client @relation(fields: [clientId], references: [id], map: "fk_client_auth_transaction")
 

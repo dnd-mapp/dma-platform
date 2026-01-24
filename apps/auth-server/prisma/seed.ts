@@ -49,7 +49,7 @@ async function seedClients() {
             audience: 'dnd-mapp',
             redirectUrls: {
                 createMany: {
-                    data: [{ url: 'http://localhost:4200' }, { url: 'https://localhost.www.dndmapp.dev:4200' }],
+                    data: [{ url: 'http://localhost:4200/' }, { url: 'https://localhost.www.dndmapp.dev:4200/' }],
                 },
             },
         },

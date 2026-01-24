@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { LoginButtonComponent, SignUpButtonComponent } from '@dnd-mapp/auth-ui';
+import { AuthServerService, LoginButtonComponent, SignUpButtonComponent } from '@dnd-mapp/auth-ui';
 import {
     AppTopBarComponent,
     NavbarComponent,
@@ -27,4 +27,10 @@ import {
         SignUpButtonComponent,
     ],
 })
-export class RootComponent {}
+export class RootComponent implements OnInit {
+    private readonly authServerService = inject(AuthServerService);
+
+    public ngOnInit() {
+        this.authServerService.initialize();
+    }
+}

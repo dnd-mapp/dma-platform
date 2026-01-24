@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { AuthService } from '@dnd-mapp/auth-ui';
+import { AuthServerService, AuthService } from '@dnd-mapp/auth-ui';
 import { AppTopBarComponent, NavBrandComponent, VerticalRuleComponent } from '@dnd-mapp/shared-ui';
 
 @Component({
@@ -15,6 +15,11 @@ import { AppTopBarComponent, NavBrandComponent, VerticalRuleComponent } from '@d
     },
     imports: [RouterOutlet, AppTopBarComponent, NavBrandComponent, VerticalRuleComponent],
 })
-export class RootComponent {
+export class RootComponent implements OnInit {
     protected readonly authService = inject(AuthService);
+    protected readonly authServerService = inject(AuthServerService);
+
+    public ngOnInit() {
+        this.authServerService.initialize();
+    }
 }

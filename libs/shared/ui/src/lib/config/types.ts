@@ -1,3 +1,4 @@
 export interface ClientConfig {
-    clientId: string;
+    clientId?: string;
+    authServerBaseUrl: string;
 }

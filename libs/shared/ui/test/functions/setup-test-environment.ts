@@ -7,6 +7,7 @@ interface SetupTestEnvironmentParams<Harness extends ComponentHarness, Component
     testComponent?: Type<Component>;
     harness?: HarnessQuery<Harness>;
     providers?: unknown[];
+    afterConfig?: () => void | Promise<void>;
 }
 
 export async function setupTestEnvironment<Harness extends ComponentHarness, Component = unknown>(
@@ -22,6 +23,10 @@ export async function setupTestEnvironment<Harness extends ComponentHarness, Com
     let fixture: ComponentFixture<Component> | undefined;
     let harnessLoader: HarnessLoader | undefined;
 
+    if (params.afterConfig) {
+        const promise = params.afterConfig();
+        if (promise instanceof Promise) await promise;
+    }
     if (testComponent) {
         fixture = TestBed.createComponent(testComponent);
         harnessLoader = TestbedHarnessEnvironment.loader(fixture);

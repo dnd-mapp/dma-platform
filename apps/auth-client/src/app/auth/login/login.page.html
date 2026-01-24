@@ -1,1 +1,8 @@
-<p>login works!</p>
+<form class="inline-block bg-neutral-100 p-12 rounded-md shadow-md" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <h1 class="text-2xl!">Login</h1>
+    <dma-username-input formControlName="username" />
+    <dma-password-input formControlName="password" />
+    <button type="submit" dma-button="primary" [disabled]="loginForm.invalid" [processing]="processing()">
+        Log In
+    </button>
+</form>
