@@ -1,3 +1,4 @@
+import { ClientDto } from '../client';
 import { AuthTransactionDto } from './auth-transaction.dto';
 
 export class AuthTransactionBuilder {
@@ -9,11 +10,6 @@ export class AuthTransactionBuilder {
 
     public withId(id: string) {
         this.authTransaction.id = id;
-        return this;
-    }
-
-    public withClientId(clientId: string) {
-        this.authTransaction.clientId = clientId;
         return this;
     }
 
@@ -29,6 +25,26 @@ export class AuthTransactionBuilder {
 
     public withCodeChallenge(codeChallenge: string) {
         this.authTransaction.codeChallenge = codeChallenge;
+        return this;
+    }
+
+    public withRedirectUrl(redirectUrl: string) {
+        this.authTransaction.redirectUrl = redirectUrl;
+        return this;
+    }
+
+    public withClient(client: ClientDto) {
+        this.authTransaction.client = client;
+        return this;
+    }
+
+    public withAuthCode(authCode: string | null) {
+        this.authTransaction.authCode = authCode;
+        return this;
+    }
+
+    public authCodeExpiresAt(timestamp: Date | null) {
+        this.authTransaction.authCodeExpiry = timestamp;
         return this;
     }
 }

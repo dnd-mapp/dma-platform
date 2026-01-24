@@ -16,4 +16,9 @@ export class RedirectUrlBuilder {
         this.redirectUrl.url = url;
         return this;
     }
+
+    public withClientId(clientId: string) {
+        this.redirectUrl.clientId = clientId;
+        return this;
+    }
 }
