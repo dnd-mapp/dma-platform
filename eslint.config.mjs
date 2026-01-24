@@ -5,7 +5,7 @@ export default [
     ...nx.configs['flat/typescript'],
     ...nx.configs['flat/javascript'],
     {
-        ignores: ['.angular', '.nx', '**/dist', '**/node_modules', '**/reports'],
+        ignores: ['.angular', '.nx', '**/dist', '**/node_modules', '**/reports', '.msw'],
     },
     {
         files: ['**/*.ts', '**/*.cts', '**/*.mts', '**/*.js', '**/*.cjs', '**/*.mjs'],
@@ -79,6 +79,8 @@ export default [
                                 '@angular/*',
                                 '@nx/*',
                                 '@vitest/*',
+                                'msw',
+                                'msw/*',
                                 'nanoid',
                                 'rxjs',
                                 'vite',
