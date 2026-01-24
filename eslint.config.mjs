@@ -50,7 +50,7 @@ export default [
                         },
                         {
                             sourceTag: 'scope:auth-ui',
-                            onlyDependOnLibsWithTags: ['scope:shared-ui', 'scope:shared-utils'],
+                            onlyDependOnLibsWithTags: ['scope:shared-ui', 'scope:auth-domain', 'scope:shared-utils'],
                         },
                         {
                             sourceTag: 'scope:shared-ui',
