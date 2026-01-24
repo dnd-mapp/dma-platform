@@ -3,6 +3,7 @@ import { ConfigurationNamespaces } from './configuration-namespace';
 export interface ServerConfig {
     host: string;
     port: number;
+    passwordPepper: string;
 }
 
 export interface DatabaseConfig {

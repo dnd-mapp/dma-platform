@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { LoginButtonComponent, SignUpButtonComponent } from '@dnd-mapp/auth-ui';
 import {
@@ -8,6 +8,7 @@ import {
     NavLinkComponent,
     VerticalRuleComponent,
 } from '@dnd-mapp/shared-ui';
+import { AuthServerService } from '../../../../../../libs/auth/ui/src/lib/auth/auth-server.service';
 
 @Component({
     selector: 'dma-root',
@@ -27,4 +28,10 @@ import {
         SignUpButtonComponent,
     ],
 })
-export class RootComponent {}
+export class RootComponent implements OnInit {
+    private readonly authServerService = inject(AuthServerService);
+
+    public ngOnInit() {
+        this.authServerService.initialize();
+    }
+}
