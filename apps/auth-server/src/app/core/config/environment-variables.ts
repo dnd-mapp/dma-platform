@@ -15,6 +15,10 @@ export class Environment {
 
     @IsNotEmpty()
     @IsString()
+    [EnvironmentVariables.AUTH_SERVER_PASSWORD_PEPPER]!: string;
+
+    @IsNotEmpty()
+    @IsString()
     @IsOptional()
     [EnvironmentVariables.AUTH_DB_HOST]?: string;
 
