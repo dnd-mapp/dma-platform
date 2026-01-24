@@ -1,6 +1,11 @@
+import { provideHttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { LoginHarness } from '@dnd-mapp/auth-client/test';
+import { ConfigService } from '@dnd-mapp/shared-ui';
 import { setupTestEnvironment } from '@dnd-mapp/shared-ui/test';
+import { lastValueFrom } from 'rxjs';
 import { LoginPage } from './login.page';
 
 describe('LoginPage', () => {
@@ -14,6 +19,11 @@ describe('LoginPage', () => {
         const { harness } = await setupTestEnvironment({
             testComponent: TestComponent,
             harness: LoginHarness,
+            providers: [provideRouter([]), provideHttpClient()],
+            afterConfig: async () => {
+                const configService = TestBed.inject(ConfigService);
+                await lastValueFrom(configService.initialize());
+            },
         });
 
         return {
