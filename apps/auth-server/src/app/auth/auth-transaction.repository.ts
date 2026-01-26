@@ -65,4 +65,8 @@ export class AuthTransactionRepository {
         });
         return fromRawAuthTransactionToDto(result);
     }
+
+    public async removeById(authTransactionId: string) {
+        await this.databaseService.prisma.authTransaction.delete({ where: { id: authTransactionId } });
+    }
 }
