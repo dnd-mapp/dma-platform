@@ -90,6 +90,7 @@ export default [
                             sourceTag: 'platform:server',
                             allowedExternalImports: [
                                 '@dotenvx/*',
+                                '@fastify/*',
                                 '@nestjs/*',
                                 '@nx/*',
                                 '@prisma/*',
