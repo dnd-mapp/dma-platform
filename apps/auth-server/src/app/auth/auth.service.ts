@@ -17,6 +17,7 @@ import { ForbiddenException, Injectable, UnauthorizedException } from '@nestjs/c
 import { ConfigService } from '@nestjs/config';
 import { nanoid } from 'nanoid';
 import { ClientService } from '../client';
+import { TokenService } from '../token';
 import { UserService } from '../user';
 import { AuthTransactionRepository } from './auth-transaction.repository';
 
@@ -25,21 +26,24 @@ const AUTH_CODE_EXPIRY = 600_000;
 
 @Injectable()
 export class AuthService {
-    private readonly authTransactionRepository: AuthTransactionRepository;
+    private readonly configService: ConfigService<AuthServerConfig, true>;
     private readonly clientService: ClientService;
     private readonly userService: UserService;
-    private readonly configService: ConfigService<AuthServerConfig, true>;
+    private readonly tokenService: TokenService;
+    private readonly authTransactionRepository: AuthTransactionRepository;
 
     public constructor(
-        authTransactionRepository: AuthTransactionRepository,
+        configService: ConfigService<AuthServerConfig, true>,
         clientService: ClientService,
         userService: UserService,
-        configService: ConfigService<AuthServerConfig, true>,
+        tokenService: TokenService,
+        authTransactionRepository: AuthTransactionRepository,
     ) {
-        this.authTransactionRepository = authTransactionRepository;
+        this.configService = configService;
         this.clientService = clientService;
         this.userService = userService;
-        this.configService = configService;
+        this.tokenService = tokenService;
+        this.authTransactionRepository = authTransactionRepository;
     }
 
     public async authorize(params: AuthorizeQueryParams) {
@@ -93,13 +97,21 @@ export class AuthService {
             if (
                 !authTransaction ||
                 !authTransaction.authCodeExpiry ||
+                !authTransaction.user ||
                 codeChallenge !== authTransaction.codeChallenge ||
                 authTransaction.authCodeExpiry.getTime() < now.getTime()
             ) {
                 throw new UnauthorizedException();
             }
-            // TODO - Generate Access (JWT), ID (JWT), and refresh (opaque) tokens
             // TODO - Remove authTransaction
+            const refreshToken = await this.tokenService.createRefreshToken({ userId: authTransaction.user?.id });
+
+            // TODO - Generate Access (JWT) and ID (JWT) tokens
+            return {
+                refreshToken: refreshToken,
+            };
         }
+        // TODO - Generate new tokens using refresh token.
+        return {};
     }
 }

@@ -1,4 +1,10 @@
-import { AuthorizeQueryParams, type GetTokenDto, LoginDto, RedirectResponseDto } from '@dnd-mapp/auth-domain';
+import {
+    AuthorizeQueryParams,
+    CookieNames,
+    type GetTokenDto,
+    LoginDto,
+    RedirectResponseDto,
+} from '@dnd-mapp/auth-domain';
 import { Body, Controller, Get, HttpStatus, Post, Query, Res } from '@nestjs/common';
 import { FastifyReply } from 'fastify';
 import { AuthService } from './auth.service';
@@ -38,7 +44,19 @@ export class AuthController {
     }
 
     @Post('/token')
-    public async token(@Body() data: GetTokenDto) {
-        await this.authService.token(data);
+    public async token(@Body() data: GetTokenDto, @Res({ passthrough: true }) response: FastifyReply) {
+        const tokens = await this.authService.token(data);
+
+        if (tokens?.refreshToken?.plainToken) {
+            const { plainToken, expiresAt } = tokens.refreshToken;
+
+            response.setCookie(CookieNames.REFRESH_TOKEN, plainToken, {
+                maxAge: Math.round((expiresAt.getTime() - Date.now()) / 1000),
+                path: '/',
+                sameSite: 'strict',
+                secure: true,
+                httpOnly: true,
+            });
+        }
     }
 }
