@@ -26,6 +26,16 @@ export class AuthTransactionRepository {
         return fromRawAuthTransactionToDto(result);
     }
 
+    public async findOneByAuthCodeAndClientId(authCode: string, clientId: string) {
+        const result = await this.databaseService.prisma.authTransaction.findFirst({
+            select: selectAuthTransactionProperties,
+            where: { authCode: authCode, clientId: clientId },
+        });
+
+        if (result === null) return null;
+        return fromRawAuthTransactionToDto(result);
+    }
+
     public async create(data: AuthorizeQueryParams) {
         const { clientId, nonce, state, codeChallenge, redirectUrl } = data;
 

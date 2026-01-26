@@ -1,8 +1,15 @@
-import { AuthorizeQueryParams, isRedirectUrlValid, LoginDto } from '@dnd-mapp/auth-domain';
+import {
+    AuthorizeQueryParams,
+    GetTokenDto,
+    hasAuthCodeGrant,
+    isRedirectUrlValid,
+    LoginDto,
+} from '@dnd-mapp/auth-domain';
 import {
     AuthServerConfig,
     ConfigurationNamespaces,
     fromBase64,
+    sha256,
     toBase64,
     verifyPassword,
 } from '@dnd-mapp/backend-utils';
@@ -69,5 +76,29 @@ export class AuthService {
             state: authTransaction.state,
             redirectUrl: authTransaction.redirectUrl,
         };
+    }
+
+    public async token(data: GetTokenDto) {
+        if (hasAuthCodeGrant(data)) {
+            const { authCode, clientId, codeVerifier } = data;
+
+            const authTransaction = await this.authTransactionRepository.findOneByAuthCodeAndClientId(
+                authCode,
+                clientId,
+            );
+            const codeChallenge = sha256(codeVerifier);
+            const now = new Date();
+
+            if (
+                !authTransaction ||
+                !authTransaction.authCodeExpiry ||
+                codeChallenge !== authTransaction.codeChallenge ||
+                authTransaction.authCodeExpiry.getTime() < now.getTime()
+            ) {
+                throw new UnauthorizedException();
+            }
+            // TODO - Generate Access (JWT), ID (JWT), and refresh (opaque) tokens
+            // TODO - Remove authTransaction
+        }
     }
 }
