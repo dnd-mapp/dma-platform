@@ -1,4 +1,5 @@
 import { AuthServerConfig, ConfigurationNamespaces, ServerConfig } from '@dnd-mapp/backend-utils';
+import fastifyCookie from '@fastify/cookie';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
@@ -43,11 +44,14 @@ async function bootstrap() {
                 ],
                 methods: ['GET', 'POST'],
                 allowedHeaders: ['content-type', 'authorization'],
+                credentials: true,
             },
         },
     );
     const configService = app.get(ConfigService<AuthServerConfig, true>);
     const { host, port } = configService.get<ServerConfig>(ConfigurationNamespaces.SERVER);
+
+    await app.register(fastifyCookie);
 
     await app.listen(port, host);
 
