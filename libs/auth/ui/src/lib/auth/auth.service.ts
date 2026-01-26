@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { type GetTokenDto, type LoginDto, TokenGrantType, TokenGrantTypes } from '@dnd-mapp/auth-domain';
+import { type GetTokenDto, hasAuthCodeGrant, type LoginDto, TokenGrantType } from '@dnd-mapp/auth-domain';
 import { base64, ConfigService, sha256, StorageKeys, StorageService, TEXT_ENCODER } from '@dnd-mapp/shared-ui';
 import { nanoid } from 'nanoid';
 import { from, map, tap } from 'rxjs';
@@ -66,7 +66,7 @@ export class AuthService {
         }
         const data: GetTokenDto = { clientId: clientId, grantType: params.grantType, authCode: params.authCode };
 
-        if (data.grantType === TokenGrantTypes.AUTH_CODE) {
+        if (hasAuthCodeGrant(data)) {
             const codeVerifier = this.storageService.getItem<string>(StorageKeys.CODE_VERIFIER);
 
             if (!codeVerifier) {

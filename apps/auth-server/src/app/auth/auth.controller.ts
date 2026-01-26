@@ -1,4 +1,4 @@
-import { AuthorizeQueryParams, LoginDto, RedirectResponseDto } from '@dnd-mapp/auth-domain';
+import { AuthorizeQueryParams, type GetTokenDto, LoginDto, RedirectResponseDto } from '@dnd-mapp/auth-domain';
 import { Body, Controller, Get, HttpStatus, Post, Query, Res } from '@nestjs/common';
 import { FastifyReply } from 'fastify';
 import { AuthService } from './auth.service';
@@ -35,5 +35,10 @@ export class AuthController {
         url.searchParams.set('authCode', authCode);
 
         return new RedirectResponseDto(url.toString());
+    }
+
+    @Post('/token')
+    public async token(@Body() data: GetTokenDto) {
+        await this.authService.token(data);
     }
 }
