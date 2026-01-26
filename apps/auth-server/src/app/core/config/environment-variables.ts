@@ -19,6 +19,10 @@ export class Environment {
 
     @IsNotEmpty()
     @IsString()
+    [EnvironmentVariables.AUTH_SERVER_COOKIE_SECRET]!: string;
+
+    @IsNotEmpty()
+    @IsString()
     @IsOptional()
     [EnvironmentVariables.AUTH_DB_HOST]?: string;
 

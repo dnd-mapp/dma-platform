@@ -4,6 +4,7 @@ export interface ServerConfig {
     host: string;
     port: number;
     passwordPepper: string;
+    cookieSecret: string;
 }
 
 export interface DatabaseConfig {

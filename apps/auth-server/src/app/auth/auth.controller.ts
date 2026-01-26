@@ -24,6 +24,7 @@ export class AuthController {
     ) {
         const loginChallenge = await this.authService.authorize(queryParams);
 
+        // TODO - Use configuration to determine route of auth-client
         const url = new URL('https://localhost.auth.dndmapp.dev:4300/log-in');
         url.searchParams.set('loginChallenge', loginChallenge);
 
@@ -55,6 +56,7 @@ export class AuthController {
                 path: '/',
                 sameSite: 'strict',
                 secure: true,
+                signed: true,
                 httpOnly: true,
             });
         }

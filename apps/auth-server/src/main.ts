@@ -49,9 +49,13 @@ async function bootstrap() {
         },
     );
     const configService = app.get(ConfigService<AuthServerConfig, true>);
-    const { host, port } = configService.get<ServerConfig>(ConfigurationNamespaces.SERVER);
+    const { host, port, cookieSecret } = configService.get<ServerConfig>(ConfigurationNamespaces.SERVER);
 
-    await app.register(fastifyCookie);
+    await app.register(fastifyCookie, {
+        // TODO - Enable secret rotation.
+        secret: cookieSecret,
+        algorithm: 'sha256',
+    });
 
     await app.listen(port, host);
 
