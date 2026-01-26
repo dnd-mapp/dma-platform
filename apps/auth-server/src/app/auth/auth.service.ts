@@ -68,6 +68,7 @@ export class AuthService {
 
         authTransaction.authCode = nanoid();
         authTransaction.authCodeExpiry = new Date(Date.now() + AUTH_CODE_EXPIRY);
+        authTransaction.user = user;
 
         await this.authTransactionRepository.update(authTransaction);
 

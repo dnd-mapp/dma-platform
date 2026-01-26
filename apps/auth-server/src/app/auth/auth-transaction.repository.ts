@@ -53,13 +53,14 @@ export class AuthTransactionRepository {
     }
 
     public async update(data: AuthTransactionDto) {
-        const { id, authCode, authCodeExpiry } = data;
+        const { id, authCode, authCodeExpiry, user } = data;
         const result = await this.databaseService.prisma.authTransaction.update({
             select: selectAuthTransactionProperties,
             where: { id: id },
             data: {
                 authCode: authCode,
                 authCodeExpiry: authCodeExpiry,
+                userId: user?.id,
             },
         });
         return fromRawAuthTransactionToDto(result);

@@ -1,4 +1,5 @@
 import { ClientDto, selectClientProperties } from '../client';
+import { selectUserProperties, UserDto } from '../user';
 
 export const selectAuthTransactionProperties = {
     id: true,
@@ -11,6 +12,9 @@ export const selectAuthTransactionProperties = {
     client: {
         select: selectClientProperties,
     },
+    user: {
+        select: selectUserProperties,
+    },
 };
 
 export class AuthTransactionDto {
@@ -22,4 +26,5 @@ export class AuthTransactionDto {
     public authCode: string | null = null;
     public authCodeExpiry: Date | null = null;
     public client!: ClientDto;
+    public user!: UserDto | null;
 }

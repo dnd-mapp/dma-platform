@@ -1,5 +1,6 @@
-import { AuthTransactionBuilder } from '@dnd-mapp/auth-domain';
-import { fromRawClientToDto } from '../client/functions';
+import { fromRawClientToDto } from '../client';
+import { fromRawUserToDto } from '../user';
+import { AuthTransactionBuilder } from './auth-transaction.builder';
 import type { AuthTransactionDto } from './auth-transaction.dto';
 
 export function fromRawAuthTransactionToDto(raw: AuthTransactionDto) {
@@ -12,5 +13,6 @@ export function fromRawAuthTransactionToDto(raw: AuthTransactionDto) {
         .withAuthCode(raw.authCode)
         .authCodeExpiresAt(raw.authCodeExpiry)
         .withClient(fromRawClientToDto(raw.client))
+        .withUser(raw.user ? fromRawUserToDto(raw.user) : null)
         .build();
 }

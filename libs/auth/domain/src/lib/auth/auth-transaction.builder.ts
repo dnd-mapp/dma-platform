@@ -1,4 +1,5 @@
 import { ClientDto } from '../client';
+import { UserDto } from '../user';
 import { AuthTransactionDto } from './auth-transaction.dto';
 
 export class AuthTransactionBuilder {
@@ -30,6 +31,11 @@ export class AuthTransactionBuilder {
 
     public withRedirectUrl(redirectUrl: string) {
         this.authTransaction.redirectUrl = redirectUrl;
+        return this;
+    }
+
+    public withUser(user: UserDto | null) {
+        this.authTransaction.user = user;
         return this;
     }
 
