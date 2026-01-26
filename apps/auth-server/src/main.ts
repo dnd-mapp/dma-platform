@@ -2,7 +2,7 @@ import { AuthServerConfig, ConfigurationNamespaces, ServerConfig } from '@dnd-ma
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
-import { FastifyAdapter } from '@nestjs/platform-fastify';
+import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 import { readFile } from 'fs/promises';
 import { AppModule } from './app';
 
@@ -24,16 +24,21 @@ async function getSslFiles() {
 async function bootstrap() {
     const { ssl, cert, key } = await getSslFiles();
 
-    const app = await NestFactory.create(
+    const app = await NestFactory.create<NestFastifyApplication>(
         AppModule,
         new FastifyAdapter(ssl ? { https: { cert: cert, key: key } } : undefined),
         {
             logger: ['log', 'warn', 'error', 'fatal'],
             cors: {
+                // TODO - Retrieve valid origins from registered client their redirect URLs
                 origin: [
                     'http://localhost:4300',
+                    'https://localhost:4300',
+                    'http://localhost.auth.dndmapp.dev:4300',
                     'https://localhost.auth.dndmapp.dev:4300',
                     'http://localhost:4200',
+                    'https://localhost:4200',
+                    'http://localhost.www.dndmapp.dev:4200',
                     'https://localhost.www.dndmapp.dev:4200',
                 ],
                 methods: ['GET', 'POST'],
