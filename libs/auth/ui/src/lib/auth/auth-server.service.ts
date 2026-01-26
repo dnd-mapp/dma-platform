@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import type { LoginDto, RedirectResponseDto } from '@dnd-mapp/auth-domain';
+import type { GetTokenDto, LoginDto, RedirectResponseDto } from '@dnd-mapp/auth-domain';
 import { ConfigService, RequestService } from '@dnd-mapp/shared-ui';
 
 interface AuthorizeParams {
@@ -39,5 +39,9 @@ export class AuthServerService {
             new URL('/login', this.baseUrl).toString(),
             data,
         );
+    }
+
+    public token(data: GetTokenDto) {
+        return this.requestService.post(new URL('/token', this.baseUrl).toString(), data);
     }
 }

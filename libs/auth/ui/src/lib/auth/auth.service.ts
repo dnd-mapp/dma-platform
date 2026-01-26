@@ -1,9 +1,15 @@
 import { inject, Injectable, signal } from '@angular/core';
-import type { LoginDto } from '@dnd-mapp/auth-domain';
+import { type GetTokenDto, type LoginDto, TokenGrantType, TokenGrantTypes } from '@dnd-mapp/auth-domain';
 import { base64, ConfigService, sha256, StorageKeys, StorageService, TEXT_ENCODER } from '@dnd-mapp/shared-ui';
 import { nanoid } from 'nanoid';
 import { from, map, tap } from 'rxjs';
 import { AuthServerService } from './auth-server.service';
+
+interface GetTokenParams {
+    state: string;
+    authCode: string;
+    grantType: TokenGrantType;
+}
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -41,6 +47,34 @@ export class AuthService {
 
     public login(data: LoginDto) {
         return this.authServerService.login(data);
+    }
+
+    public token(params: GetTokenParams) {
+        const storedState = this.storageService.getItem<string>(StorageKeys.AUTH_STATE);
+
+        if (storedState === null) {
+            throw new Error('No state found in stored.');
+        } else {
+            if (storedState !== params.state) {
+                throw new Error('Invalid state found for authorization.');
+            }
+        }
+        const clientId = this.configService.config.clientId;
+
+        if (!clientId) {
+            throw new Error('ClientId is required');
+        }
+        const data: GetTokenDto = { clientId: clientId, grantType: params.grantType, authCode: params.authCode };
+
+        if (data.grantType === TokenGrantTypes.AUTH_CODE) {
+            const codeVerifier = this.storageService.getItem<string>(StorageKeys.CODE_VERIFIER);
+
+            if (!codeVerifier) {
+                throw new Error('Code verifier is required');
+            }
+            data.codeVerifier = codeVerifier;
+        }
+        return this.authServerService.token(data);
     }
 
     private generateCodeVerifier() {
