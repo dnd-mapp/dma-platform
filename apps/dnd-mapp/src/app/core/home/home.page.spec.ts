@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { provideRouter } from '@angular/router';
 import { HomeHarness } from '@dnd-mapp/dnd-mapp/test';
 import { setupTestEnvironment } from '@dnd-mapp/shared-ui/test';
 import { HomePage } from './home.page';
@@ -14,6 +15,7 @@ describe('HomePage', () => {
         const { harness } = await setupTestEnvironment({
             testComponent: TestComponent,
             harness: HomeHarness,
+            providers: [provideRouter([])],
         });
 
         return {

@@ -30,7 +30,12 @@ async function bootstrap() {
         {
             logger: ['log', 'warn', 'error', 'fatal'],
             cors: {
-                origin: ['http://localhost:4300', 'https://localhost.auth.dndmapp.dev:4300'],
+                origin: [
+                    'http://localhost:4300',
+                    'https://localhost.auth.dndmapp.dev:4300',
+                    'http://localhost:4200',
+                    'https://localhost.www.dndmapp.dev:4200',
+                ],
                 methods: ['GET', 'POST'],
                 allowedHeaders: ['content-type', 'authorization'],
             },
