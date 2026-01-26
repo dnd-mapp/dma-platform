@@ -27,6 +27,8 @@ export class HomePage implements OnInit {
                 authCode: authCode,
                 grantType: TokenGrantTypes.AUTH_CODE,
             });
+            // TODO - Remove state and authCode from route
+            // TODO - Remove state and codeVerifier from storage
             request.pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
         }
     }
