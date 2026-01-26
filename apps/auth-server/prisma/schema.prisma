@@ -1,5 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// This is your Prisma schema file. Learn more about it in the docs: https://pris.ly/d/prisma-schema
 generator client {
     engineType   = "client"
     moduleFormat = "cjs"
@@ -16,6 +15,9 @@ model User {
     username String @unique(map: "uq_user_username")
     password String
 
+    refreshTokens    RefreshToken[]
+    authTransactions AuthTransaction[]
+
     @@map(name: "users")
 }
 
@@ -23,25 +25,10 @@ model Client {
     id       String @id @default(nanoid())
     audience String @unique(map: "uq_client_audience")
 
-    authTransactions AuthTransaction[]
     redirectUrls     RedirectUrl[]
+    authTransactions AuthTransaction[]
 
     @@map(name: "clients")
-}
-
-model AuthTransaction {
-    id             String    @id @default(nanoid())
-    state          String
-    nonce          String
-    codeChallenge  String    @map(name: "code_challenge")
-    redirectUrl    String
-    authCode       String?   @map(name: "auth_code")
-    authCodeExpiry DateTime? @map(name: "auth_code_expiry")
-    clientId       String    @map(name: "client_id")
-
-    client Client @relation(fields: [clientId], references: [id], map: "fk_client_auth_transaction")
-
-    @@map(name: "auth_transactions")
 }
 
 model RedirectUrl {
@@ -52,4 +39,34 @@ model RedirectUrl {
     client Client @relation(fields: [clientId], references: [id], map: "fk_client_redirect_urls")
 
     @@map(name: "redirect_urls")
+}
+
+model AuthTransaction {
+    id             String    @id @default(nanoid())
+    state          String
+    nonce          String
+    codeChallenge  String    @map(name: "code_challenge")
+    redirectUrl    String
+    authCode       String?   @map(name: "auth_code")
+    authCodeExpiry DateTime? @map(name: "auth_code_expiry")
+    userId         String?   @map(name: "user_id")
+    clientId       String    @map(name: "client_id")
+
+    client Client @relation(fields: [clientId], references: [id], map: "fk_client_auth_transaction")
+    user   User?  @relation(fields: [userId], references: [id], map: "fk_user_auth_transaction")
+
+    @@map(name: "auth_transactions")
+}
+
+model RefreshToken {
+    id        String   @id @default(nanoid())
+    tokenHash String   @map(name: "token_hash")
+    expiresAt DateTime @map(name: "expires_at")
+    revoked   Boolean  @default(false)
+    familyId  String   @default(nanoid()) @map(name: "family_id")
+    userId    String   @map(name: "user_id")
+
+    user User @relation(fields: [userId], references: [id], map: "fk_user_refresh_token")
+
+    @@map(name: "refresh_tokens")
 }
