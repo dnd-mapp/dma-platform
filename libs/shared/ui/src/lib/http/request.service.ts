@@ -15,7 +15,7 @@ export class RequestService {
         return {
             processing: processing,
             request: this.httpClient
-                .post<ResponseBody>(url, data, { observe: 'response' })
+                .post<ResponseBody>(url, data, { observe: 'response', withCredentials: true })
                 .pipe(finalize(() => processing.set(false))),
         };
     }
