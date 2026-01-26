@@ -103,10 +103,11 @@ export class AuthService {
             ) {
                 throw new UnauthorizedException();
             }
-            // TODO - Remove authTransaction
             const refreshToken = await this.tokenService.createRefreshToken({ userId: authTransaction.user?.id });
 
             // TODO - Generate Access (JWT) and ID (JWT) tokens
+
+            await this.authTransactionRepository.removeById(authTransaction.id);
             return {
                 refreshToken: refreshToken,
             };
