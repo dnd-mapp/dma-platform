@@ -17,6 +17,7 @@
             "outputs": ["{options.outputPath}"],
             "cache": true,
             "options": {
+                "allowedCommonJsDependencies": ["class-validator"],
                 "assets": [
                     {
                         "glob": "**/*",
