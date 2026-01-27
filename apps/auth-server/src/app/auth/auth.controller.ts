@@ -52,9 +52,11 @@ export class AuthController {
             const { plainToken, expiresAt } = tokens.refreshToken;
 
             response.setCookie(CookieNames.REFRESH_TOKEN, plainToken, {
-                maxAge: Math.round((expiresAt.getTime() - Date.now()) / 1000),
+                maxAge: Math.round((expiresAt.getTime() - Date.now()) / 1_000),
                 path: '/',
                 sameSite: 'strict',
+                // TODO - Compute domain dynamically
+                domain: '.dndmapp.dev',
                 secure: true,
                 signed: true,
                 httpOnly: true,
