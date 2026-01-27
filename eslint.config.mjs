@@ -79,6 +79,7 @@ export default [
                                 '@angular/*',
                                 '@nx/*',
                                 '@vitest/*',
+                                'jwt-decode',
                                 'msw',
                                 'msw/*',
                                 'nanoid',
