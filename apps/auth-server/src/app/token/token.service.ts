@@ -1,5 +1,6 @@
 import { sha256 } from '@dnd-mapp/backend-utils';
 import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { nanoid } from 'nanoid';
 import { TokenRepository } from './token.repository';
 
@@ -7,15 +8,24 @@ interface CreateRefreshTokenParams {
     userId: string;
 }
 
+interface CreateAccessTokenParams {
+    userId: string;
+}
+
 /** Refresh token expiration time in ms. Valid for 31 days. */
 const REFRESH_TOKEN_EXPIRATION_TIME = 2_678_400_000;
 
+/** Access token expiration time in seconds. Valid for 5 minutes. */
+const ACCESS_TOKEN_EXPIRATION_TIME = 300;
+
 @Injectable()
 export class TokenService {
+    private readonly jwtService: JwtService;
     private readonly tokenRepository: TokenRepository;
 
-    public constructor(tokenRepository: TokenRepository) {
+    public constructor(jwtService: JwtService, tokenRepository: TokenRepository) {
         this.tokenRepository = tokenRepository;
+        this.jwtService = jwtService;
     }
 
     public async createRefreshToken(params: CreateRefreshTokenParams) {
@@ -30,5 +40,22 @@ export class TokenService {
             })),
             plainToken: token,
         };
+    }
+
+    public async createAccessToken(params: CreateAccessTokenParams) {
+        return await this.jwtService.signAsync(
+            {},
+            {
+                algorithm: 'ES512',
+                allowInsecureKeySizes: false,
+                allowInvalidAsymmetricKeyTypes: false,
+                audience: ['https://localhost.auth.dndmapp.dev:4350'],
+                expiresIn: ACCESS_TOKEN_EXPIRATION_TIME,
+                issuer: 'https://localhost.auth.dndmapp.dev:4350',
+                notBefore: 0,
+                jwtid: nanoid(),
+                subject: params.userId,
+            },
+        );
     }
 }

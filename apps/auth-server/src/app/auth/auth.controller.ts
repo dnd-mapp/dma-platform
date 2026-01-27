@@ -59,6 +59,11 @@ export class AuthController {
                 signed: true,
                 httpOnly: true,
             });
+
+            return {
+                accessToken: tokens?.accessToken,
+            };
         }
+        return {};
     }
 }
