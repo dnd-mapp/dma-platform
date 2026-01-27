@@ -24,7 +24,7 @@ export class AuthService {
     private readonly configService = inject(ConfigService);
     private readonly authServerService = inject(AuthServerService);
 
-    public readonly authenticated = signal(false);
+    public readonly authenticated = computed(() => Boolean(this.idToken()));
 
     public readonly accessToken = signal<string | null>(null);
 
