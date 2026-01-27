@@ -19,6 +19,18 @@ export class Environment {
 
     @IsNotEmpty()
     @IsString()
+    [EnvironmentVariables.AUTH_SERVER_COOKIE_SECRET]!: string;
+
+    @IsNotEmpty()
+    @IsString()
+    [EnvironmentVariables.AUTH_SERVER_JWT_PUBLIC_KEY_PATH]!: string;
+
+    @IsNotEmpty()
+    @IsString()
+    [EnvironmentVariables.AUTH_SERVER_JWT_PRIVATE_KEY_PATH]!: string;
+
+    @IsNotEmpty()
+    @IsString()
     @IsOptional()
     [EnvironmentVariables.AUTH_DB_HOST]?: string;
 

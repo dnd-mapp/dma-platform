@@ -4,6 +4,11 @@ export interface ServerConfig {
     host: string;
     port: number;
     passwordPepper: string;
+    cookieSecret: string;
+    jwt: {
+        publicKeyPath: string;
+        privateKeyPath: string;
+    };
 }
 
 export interface DatabaseConfig {
