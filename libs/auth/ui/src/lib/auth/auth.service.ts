@@ -89,6 +89,9 @@ export class AuthService {
                 tap((tokens) => {
                     if (!this.validateIdToken(tokens?.idToken)) return;
                     this.accessToken.set(tokens?.accessToken ?? null);
+
+                    this.storageService.removeItem(StorageKeys.CODE_VERIFIER);
+                    this.storageService.removeItem(StorageKeys.AUTH_STATE);
                 }),
             ),
             processing: processing,
