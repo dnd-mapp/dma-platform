@@ -26,6 +26,8 @@ export class AuthService {
 
     public readonly authenticated = signal(false);
 
+    private readonly accessToken = signal<string | null>(null);
+
     public authorize() {
         const codeVerifier = this.generateCodeVerifier();
         const state = nanoid();
@@ -86,6 +88,7 @@ export class AuthService {
                 map((response) => response.body),
                 tap((tokens) => {
                     if (!this.validateIdToken(tokens?.idToken)) return;
+                    this.accessToken.set(tokens?.accessToken ?? null);
                 }),
             ),
             processing: processing,
