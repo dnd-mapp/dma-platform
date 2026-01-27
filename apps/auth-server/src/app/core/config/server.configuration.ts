@@ -16,6 +16,10 @@ export default registerAs(
             /* eslint-disable @typescript-eslint/no-non-null-assertion */
             passwordPepper: process.env[EnvironmentVariables.AUTH_SERVER_PASSWORD_PEPPER]!,
             cookieSecret: process.env[EnvironmentVariables.AUTH_SERVER_COOKIE_SECRET]!,
+            jwt: {
+                publicKeyPath: process.env[EnvironmentVariables.AUTH_SERVER_JWT_PUBLIC_KEY_PATH]!,
+                privateKeyPath: process.env[EnvironmentVariables.AUTH_SERVER_JWT_PRIVATE_KEY_PATH]!,
+            },
             /* eslint-enable @typescript-eslint/no-non-null-assertion */
         }) satisfies ServerConfig,
 );
