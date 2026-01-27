@@ -9,8 +9,12 @@
         </dma-navbar>
     </ng-container>
     <ng-container ngProjectAs="nav-end">
-        <dma-login-button />
-        <dma-sign-up-button />
+        @if (authService.authenticated()) {
+            <dma-profile-button />
+        } @else {
+            <dma-login-button />
+            <dma-sign-up-button />
+        }
     </ng-container>
 </dma-app-top-bar>
 <main class="grow flex justify-center">

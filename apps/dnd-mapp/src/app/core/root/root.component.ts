@@ -1,6 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { AuthServerService, LoginButtonComponent, SignUpButtonComponent } from '@dnd-mapp/auth-ui';
+import {
+    AuthServerService,
+    AuthService,
+    LoginButtonComponent,
+    ProfileButtonComponent,
+    SignUpButtonComponent,
+} from '@dnd-mapp/auth-ui';
 import {
     AppTopBarComponent,
     NavbarComponent,
@@ -25,9 +31,11 @@ import {
         NavLinkComponent,
         LoginButtonComponent,
         SignUpButtonComponent,
+        ProfileButtonComponent,
     ],
 })
 export class RootComponent implements OnInit {
+    protected readonly authService = inject(AuthService);
     private readonly authServerService = inject(AuthServerService);
 
     public ngOnInit() {
