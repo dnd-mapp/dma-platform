@@ -1,3 +1,3 @@
 export const CookieNames = {
-    REFRESH_TOKEN: '__Host-Http-Refresh-Token',
+    REFRESH_TOKEN: '__Http-Refresh-Token',
 } as const;
