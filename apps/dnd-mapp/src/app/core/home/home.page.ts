@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TokenGrantTypes } from '@dnd-mapp/auth-domain';
 import { AuthService } from '@dnd-mapp/auth-ui';
+import { from, switchMap } from 'rxjs';
 
 @Component({
     selector: 'dma-home',
@@ -15,6 +16,7 @@ import { AuthService } from '@dnd-mapp/auth-ui';
 })
 export class HomePage implements OnInit {
     private readonly route = inject(ActivatedRoute);
+    private readonly router = inject(Router);
     private readonly destroyRef = inject(DestroyRef);
     private readonly authService = inject(AuthService);
 
@@ -27,9 +29,12 @@ export class HomePage implements OnInit {
                 authCode: authCode,
                 grantType: TokenGrantTypes.AUTH_CODE,
             });
-            // TODO - Remove state and authCode from route
-            // TODO - Remove state and codeVerifier from storage
-            request.pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
+            request
+                .pipe(
+                    switchMap(() => this.clearAuthCodeAndStateFromRoute()),
+                    takeUntilDestroyed(this.destroyRef),
+                )
+                .subscribe();
         }
     }
 
@@ -46,5 +51,14 @@ export class HomePage implements OnInit {
             state: null,
             authCode: null,
         };
+    }
+
+    private clearAuthCodeAndStateFromRoute() {
+        const urlTree = this.router.parseUrl(this.router.url);
+
+        delete urlTree.queryParams['state'];
+        delete urlTree.queryParams['authCode'];
+
+        return from(this.router.navigateByUrl(urlTree.toString()));
     }
 }
