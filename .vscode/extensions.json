@@ -3,10 +3,10 @@
         "Angular.ng-template",
         "bradlc.vscode-tailwindcss",
         "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
         "jdx.dev.mise",
         "ms-playwright.playwright",
         "nrwl.angular-console",
-        "prettier.prettier-vscode",
         "vitest.explorer",
         "firsttris.vscode-jest-runner"
     ]

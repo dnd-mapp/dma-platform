@@ -1,6 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { type GetTokenDto, hasAuthCodeGrant, type LoginDto, TokenGrantType } from '@dnd-mapp/auth-domain';
 import { base64, ConfigService, sha256, StorageKeys, StorageService, TEXT_ENCODER } from '@dnd-mapp/shared-ui';
+import { jwtDecode, JwtPayload } from 'jwt-decode';
 import { nanoid } from 'nanoid';
 import { from, map, tap } from 'rxjs';
 import { AuthServerService } from './auth-server.service';
@@ -11,6 +12,11 @@ interface GetTokenParams {
     grantType: TokenGrantType;
 }
 
+interface DmaJwtIdTokenPayload extends JwtPayload {
+    username: string;
+    nonce?: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class AuthService {
     private readonly textEncoder = inject(TEXT_ENCODER);
@@ -19,6 +25,8 @@ export class AuthService {
     private readonly authServerService = inject(AuthServerService);
 
     public readonly authenticated = signal(false);
+
+    private readonly accessToken = signal<string | null>(null);
 
     public authorize() {
         const codeVerifier = this.generateCodeVerifier();
@@ -74,7 +82,20 @@ export class AuthService {
             }
             data.codeVerifier = codeVerifier;
         }
-        return this.authServerService.token(data);
+        const { request, processing } = this.authServerService.token(data);
+        return {
+            request: request.pipe(
+                map((response) => response.body),
+                tap((tokens) => {
+                    if (!this.validateIdToken(tokens?.idToken)) return;
+                    this.accessToken.set(tokens?.accessToken ?? null);
+
+                    this.storageService.removeItem(StorageKeys.CODE_VERIFIER);
+                    this.storageService.removeItem(StorageKeys.AUTH_STATE);
+                }),
+            ),
+            processing: processing,
+        };
     }
 
     private generateCodeVerifier() {
@@ -85,5 +106,25 @@ export class AuthService {
         return from(sha256(codeVerifier, this.textEncoder)).pipe(
             map((hashBuffer) => base64(new Uint8Array(hashBuffer))),
         );
+    }
+
+    private validateIdToken(idToken?: string) {
+        if (!idToken) throw new Error('no ID token was returned');
+        const header = jwtDecode(idToken, { header: true });
+        const token = jwtDecode<DmaJwtIdTokenPayload>(idToken);
+
+        const nonce = this.storageService.getItem<string>(StorageKeys.ID_NONCE);
+
+        if (header.alg !== 'ES512') throw new Error('Invalid token');
+        if (header.typ !== 'JWT') throw new Error('Invalid token');
+        if (token.iss !== 'https://localhost.auth.dndmapp.dev:4350') throw new Error('Invalid token');
+        if (nonce && token.nonce && token.nonce !== nonce) {
+            this.storageService.removeItem(StorageKeys.ID_NONCE);
+            throw new Error('Invalid token');
+        }
+        if (nonce) {
+            this.storageService.removeItem(StorageKeys.ID_NONCE);
+        }
+        return true;
     }
 }

@@ -5,3 +5,4 @@ export * from './functions';
 export * from './get-token.dto';
 export * from './login.dto';
 export * from './redirect-response.dto';
+export * from './tokens-response.dto';
