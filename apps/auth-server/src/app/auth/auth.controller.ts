@@ -2,11 +2,14 @@ import {
     AuthorizeQueryParams,
     CookieNames,
     type GetTokenDto,
+    hasAuthCodeGrant,
     LoginDto,
     RedirectResponseDto,
 } from '@dnd-mapp/auth-domain';
-import { Body, Controller, Get, HttpStatus, Post, Query, Res } from '@nestjs/common';
+import { UnsignResult } from '@fastify/cookie';
+import { Body, Controller, Get, HttpStatus, Post, Query, Res, UnauthorizedException } from '@nestjs/common';
 import { FastifyReply } from 'fastify';
+import { Cookies } from '../core/decorators';
 import { AuthService } from './auth.service';
 
 @Controller()
@@ -45,7 +48,15 @@ export class AuthController {
     }
 
     @Post('/token')
-    public async token(@Body() data: GetTokenDto, @Res({ passthrough: true }) response: FastifyReply) {
+    public async token(
+        @Body() data: GetTokenDto,
+        @Res({ passthrough: true }) response: FastifyReply,
+        @Cookies(CookieNames.REFRESH_TOKEN) refreshToken?: UnsignResult,
+    ) {
+        if (!hasAuthCodeGrant(data) && (!refreshToken || !refreshToken?.valid)) throw new UnauthorizedException();
+        if (!hasAuthCodeGrant(data) && refreshToken?.valid && refreshToken.value) {
+            data.plainToken = refreshToken.value;
+        }
         const tokens = await this.authService.token(data);
 
         if (tokens?.refreshToken?.plainToken) {
