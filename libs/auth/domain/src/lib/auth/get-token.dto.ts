@@ -14,6 +14,7 @@ export class GetTokenWithAuthCodeDto {
 
 export class GetTokenWithRefreshTokenDto {
     public clientId!: string;
+    public plainToken!: string;
     public grantType: TokenGrantType = TokenGrantTypes.REFRESH_TOKEN;
 }
 

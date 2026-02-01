@@ -74,7 +74,10 @@ export class AuthService {
         if (!clientId) {
             throw new Error('ClientId is required');
         }
-        const data: GetTokenDto = { clientId: clientId, grantType: params.grantType, authCode: params.authCode };
+        const data = {
+            grantType: params.grantType,
+            clientId: clientId,
+        } as GetTokenDto;
 
         if (hasAuthCodeGrant(data)) {
             const codeVerifier = this.storageService.getItem<string>(StorageKeys.CODE_VERIFIER);
