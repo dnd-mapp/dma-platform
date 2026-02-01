@@ -60,14 +60,8 @@ export class AuthService {
     }
 
     public token(params: GetTokenParams) {
-        const storedState = this.storageService.getItem<string>(StorageKeys.AUTH_STATE);
-
-        if (storedState === null) {
-            throw new Error('No state found in stored.');
-        } else {
-            if (storedState !== params.state) {
-                throw new Error('Invalid state found for authorization.');
-            }
+        if (params.grantType === TokenGrantTypes.AUTH_CODE && params.state) {
+            this.validateState(params.state);
         }
         const clientId = this.configService.config.clientId;
 
@@ -132,5 +126,17 @@ export class AuthService {
         }
         this.idToken.set(token);
         return true;
+    }
+
+    private validateState(state: string) {
+        const storedState = this.storageService.getItem<string>(StorageKeys.AUTH_STATE);
+
+        if (storedState === null) {
+            throw new Error('No state found in stored.');
+        } else {
+            if (storedState !== state) {
+                throw new Error('Invalid state found for authorization.');
+            }
+        }
     }
 }
