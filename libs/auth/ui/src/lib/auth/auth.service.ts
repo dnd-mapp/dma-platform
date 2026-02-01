@@ -3,7 +3,7 @@ import { type GetTokenDto, hasAuthCodeGrant, type LoginDto, TokenGrantType } fro
 import { base64, ConfigService, sha256, StorageKeys, StorageService, TEXT_ENCODER } from '@dnd-mapp/shared-ui';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 import { nanoid } from 'nanoid';
-import { from, map, tap } from 'rxjs';
+import { catchError, EMPTY, from, map, tap } from 'rxjs';
 import { AuthServerService } from './auth-server.service';
 
 interface GetTokenParams {
@@ -59,7 +59,7 @@ export class AuthService {
         return this.authServerService.login(data);
     }
 
-    public token(params: GetTokenParams) {
+    public token(params: GetTokenParams, silent = false) {
         if (params.grantType === TokenGrantTypes.AUTH_CODE && params.state) {
             this.validateState(params.state);
         }
@@ -91,6 +91,10 @@ export class AuthService {
 
                     this.storageService.removeItem(StorageKeys.CODE_VERIFIER);
                     this.storageService.removeItem(StorageKeys.AUTH_STATE);
+                }),
+                catchError((error) => {
+                    if (silent) return EMPTY;
+                    throw error;
                 }),
             ),
             processing: processing,
