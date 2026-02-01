@@ -23,3 +23,7 @@ export type GetTokenDto = GetTokenWithAuthCodeDto | GetTokenWithRefreshTokenDto;
 export function hasAuthCodeGrant(data: GetTokenDto): data is GetTokenWithAuthCodeDto {
     return data.grantType === TokenGrantTypes.AUTH_CODE;
 }
+
+export function isRefreshTokenValid(token: string, tokenHash: string) {
+    return token === tokenHash;
+}
