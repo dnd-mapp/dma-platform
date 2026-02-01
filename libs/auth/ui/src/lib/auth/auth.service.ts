@@ -1,5 +1,11 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { type GetTokenDto, hasAuthCodeGrant, type LoginDto, TokenGrantType } from '@dnd-mapp/auth-domain';
+import {
+    type GetTokenDto,
+    hasAuthCodeGrant,
+    type LoginDto,
+    TokenGrantType,
+    TokenGrantTypes,
+} from '@dnd-mapp/auth-domain';
 import { base64, ConfigService, sha256, StorageKeys, StorageService, TEXT_ENCODER } from '@dnd-mapp/shared-ui';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 import { nanoid } from 'nanoid';
@@ -7,9 +13,9 @@ import { catchError, EMPTY, from, map, tap } from 'rxjs';
 import { AuthServerService } from './auth-server.service';
 
 interface GetTokenParams {
-    state: string;
-    authCode: string;
     grantType: TokenGrantType;
+    state?: string;
+    authCode?: string;
 }
 
 interface DmaJwtIdTokenPayload extends JwtPayload {
@@ -73,13 +79,14 @@ export class AuthService {
             clientId: clientId,
         } as GetTokenDto;
 
-        if (hasAuthCodeGrant(data)) {
+        if (hasAuthCodeGrant(data) && params.authCode) {
             const codeVerifier = this.storageService.getItem<string>(StorageKeys.CODE_VERIFIER);
 
             if (!codeVerifier) {
                 throw new Error('Code verifier is required');
             }
             data.codeVerifier = codeVerifier;
+            data.authCode = params.authCode;
         }
         const { request, processing } = this.authServerService.token(data);
         return {
