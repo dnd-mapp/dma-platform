@@ -126,5 +126,21 @@ export class AuthService {
         ) {
             throw new UnauthorizedException();
         }
+        await this.tokenService.revokeRefreshToken(currentRefreshToken.id);
+
+        const refreshToken = await this.tokenService.createRefreshToken({
+            userId: currentRefreshToken.user.id,
+            familyId: currentRefreshToken.familyId,
+        });
+        const accessToken = await this.tokenService.createAccessToken({ userId: currentRefreshToken.user.id });
+        const idToken = await this.tokenService.createIDToken({
+            user: currentRefreshToken.user,
+        });
+
+        return {
+            refreshToken: refreshToken,
+            accessToken: accessToken,
+            idToken: idToken,
+        };
     }
 }

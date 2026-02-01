@@ -7,6 +7,7 @@ import { TokenRepository } from './token.repository';
 
 interface CreateRefreshTokenParams {
     userId: string;
+    familyId?: string;
 }
 
 interface CreateAccessTokenParams {
@@ -14,8 +15,8 @@ interface CreateAccessTokenParams {
 }
 
 interface CreateIDTokenParams {
-    nonce: string;
     user: UserDto;
+    nonce?: string;
 }
 
 /** Refresh token expiration time in ms. Valid for 31 days. */
@@ -37,6 +38,10 @@ export class TokenService {
         this.jwtService = jwtService;
     }
 
+    public async getByHash(plainToken: string) {
+        return await this.tokenRepository.findOneByTokenHash(sha256(plainToken));
+    }
+
     public async createRefreshToken(params: CreateRefreshTokenParams) {
         const expiresAt = new Date(Date.now() + REFRESH_TOKEN_EXPIRATION_TIME);
         const token = nanoid();
@@ -46,6 +51,7 @@ export class TokenService {
                 userId: params.userId,
                 expiresAt: expiresAt,
                 tokenHash: sha256(token),
+                ...(params.familyId ? { familyId: params.familyId } : {}),
             })),
             plainToken: token,
         };
@@ -71,8 +77,8 @@ export class TokenService {
     public async createIDToken(params: CreateIDTokenParams) {
         return await this.jwtService.signAsync(
             {
-                nonce: params.nonce,
                 username: params.user.username,
+                ...(params.nonce ? { nonce: params.nonce } : {}),
             },
             {
                 algorithm: 'ES512',
@@ -86,5 +92,9 @@ export class TokenService {
                 subject: params.user.id,
             },
         );
+    }
+
+    public async revokeRefreshToken(tokenId: string) {
+        return await this.tokenRepository.revokeOneById(tokenId);
     }
 }

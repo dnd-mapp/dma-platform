@@ -58,26 +58,22 @@ export class AuthController {
             data.plainToken = refreshToken.value;
         }
         const tokens = await this.authService.token(data);
+        const { plainToken, expiresAt } = tokens.refreshToken;
 
-        if (tokens?.refreshToken?.plainToken) {
-            const { plainToken, expiresAt } = tokens.refreshToken;
+        response.setCookie(CookieNames.REFRESH_TOKEN, plainToken, {
+            maxAge: Math.round((expiresAt.getTime() - Date.now()) / 1_000),
+            path: '/',
+            sameSite: 'strict',
+            // TODO - Compute domain dynamically
+            domain: '.dndmapp.dev',
+            secure: true,
+            signed: true,
+            httpOnly: true,
+        });
 
-            response.setCookie(CookieNames.REFRESH_TOKEN, plainToken, {
-                maxAge: Math.round((expiresAt.getTime() - Date.now()) / 1_000),
-                path: '/',
-                sameSite: 'strict',
-                // TODO - Compute domain dynamically
-                domain: '.dndmapp.dev',
-                secure: true,
-                signed: true,
-                httpOnly: true,
-            });
-
-            return {
-                accessToken: tokens?.accessToken,
-                idToken: tokens?.idToken,
-            };
-        }
-        return {};
+        return {
+            accessToken: tokens?.accessToken,
+            idToken: tokens?.idToken,
+        };
     }
 }

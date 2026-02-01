@@ -11,6 +11,16 @@ export class TokenRepository {
         this.databaseService = databaseService;
     }
 
+    public async findOneByTokenHash(tokenHash: string) {
+        const result = await this.databaseService.prisma.refreshToken.findFirst({
+            select: selectRefreshTokenProperties,
+            where: { tokenHash: tokenHash },
+        });
+
+        if (!result) return null;
+        return fromRawRefreshTokenToDto(result);
+    }
+
     public async create(data: CreateRefreshTokenDto) {
         const { familyId, userId, tokenHash, expiresAt } = data;
 
@@ -21,6 +31,18 @@ export class TokenRepository {
                 userId: userId,
                 tokenHash: tokenHash,
                 expiresAt: expiresAt,
+            },
+        });
+
+        return fromRawRefreshTokenToDto(result);
+    }
+
+    public async revokeOneById(tokenId: string) {
+        const result = await this.databaseService.prisma.refreshToken.update({
+            select: selectRefreshTokenProperties,
+            where: { id: tokenId },
+            data: {
+                revoked: true,
             },
         });
 
