@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
+import { TokenGrantTypes } from '@dnd-mapp/auth-domain';
 import {
     AuthServerService,
     AuthService,
@@ -36,9 +38,14 @@ import {
 })
 export class RootComponent implements OnInit {
     protected readonly authService = inject(AuthService);
+    private readonly destroyRef = inject(DestroyRef);
     private readonly authServerService = inject(AuthServerService);
 
     public ngOnInit() {
         this.authServerService.initialize();
+        this.authService
+            .token({ grantType: TokenGrantTypes.REFRESH_TOKEN }, true)
+            .request.pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe();
     }
 }

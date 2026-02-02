@@ -1,15 +1,21 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { type GetTokenDto, hasAuthCodeGrant, type LoginDto, TokenGrantType } from '@dnd-mapp/auth-domain';
+import {
+    type GetTokenDto,
+    hasAuthCodeGrant,
+    type LoginDto,
+    TokenGrantType,
+    TokenGrantTypes,
+} from '@dnd-mapp/auth-domain';
 import { base64, ConfigService, sha256, StorageKeys, StorageService, TEXT_ENCODER } from '@dnd-mapp/shared-ui';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 import { nanoid } from 'nanoid';
-import { from, map, tap } from 'rxjs';
+import { catchError, EMPTY, from, map, tap } from 'rxjs';
 import { AuthServerService } from './auth-server.service';
 
 interface GetTokenParams {
-    state: string;
-    authCode: string;
     grantType: TokenGrantType;
+    state?: string;
+    authCode?: string;
 }
 
 interface DmaJwtIdTokenPayload extends JwtPayload {
@@ -59,30 +65,28 @@ export class AuthService {
         return this.authServerService.login(data);
     }
 
-    public token(params: GetTokenParams) {
-        const storedState = this.storageService.getItem<string>(StorageKeys.AUTH_STATE);
-
-        if (storedState === null) {
-            throw new Error('No state found in stored.');
-        } else {
-            if (storedState !== params.state) {
-                throw new Error('Invalid state found for authorization.');
-            }
+    public token(params: GetTokenParams, silent = false) {
+        if (params.grantType === TokenGrantTypes.AUTH_CODE && params.state) {
+            this.validateState(params.state);
         }
         const clientId = this.configService.config.clientId;
 
         if (!clientId) {
             throw new Error('ClientId is required');
         }
-        const data: GetTokenDto = { clientId: clientId, grantType: params.grantType, authCode: params.authCode };
+        const data = {
+            grantType: params.grantType,
+            clientId: clientId,
+        } as GetTokenDto;
 
-        if (hasAuthCodeGrant(data)) {
+        if (hasAuthCodeGrant(data) && params.authCode) {
             const codeVerifier = this.storageService.getItem<string>(StorageKeys.CODE_VERIFIER);
 
             if (!codeVerifier) {
                 throw new Error('Code verifier is required');
             }
             data.codeVerifier = codeVerifier;
+            data.authCode = params.authCode;
         }
         const { request, processing } = this.authServerService.token(data);
         return {
@@ -94,6 +98,10 @@ export class AuthService {
 
                     this.storageService.removeItem(StorageKeys.CODE_VERIFIER);
                     this.storageService.removeItem(StorageKeys.AUTH_STATE);
+                }),
+                catchError((error) => {
+                    if (silent) return EMPTY;
+                    throw error;
                 }),
             ),
             processing: processing,
@@ -129,5 +137,17 @@ export class AuthService {
         }
         this.idToken.set(token);
         return true;
+    }
+
+    private validateState(state: string) {
+        const storedState = this.storageService.getItem<string>(StorageKeys.AUTH_STATE);
+
+        if (storedState === null) {
+            throw new Error('No state found in stored.');
+        } else {
+            if (storedState !== state) {
+                throw new Error('Invalid state found for authorization.');
+            }
+        }
     }
 }

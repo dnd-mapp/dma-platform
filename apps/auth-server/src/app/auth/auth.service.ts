@@ -3,6 +3,7 @@ import {
     GetTokenDto,
     hasAuthCodeGrant,
     isRedirectUrlValid,
+    isRefreshTokenValid,
     LoginDto,
 } from '@dnd-mapp/auth-domain';
 import {
@@ -117,7 +118,29 @@ export class AuthService {
                 idToken: idToken,
             };
         }
-        // TODO - Generate new tokens using refresh token.
-        return {};
+        const currentRefreshToken = await this.tokenService.getByHash(data.plainToken);
+
+        if (
+            currentRefreshToken === null ||
+            !isRefreshTokenValid(sha256(data.plainToken), currentRefreshToken.tokenHash)
+        ) {
+            throw new UnauthorizedException();
+        }
+        await this.tokenService.revokeRefreshToken(currentRefreshToken.id);
+
+        const refreshToken = await this.tokenService.createRefreshToken({
+            userId: currentRefreshToken.user.id,
+            familyId: currentRefreshToken.familyId,
+        });
+        const accessToken = await this.tokenService.createAccessToken({ userId: currentRefreshToken.user.id });
+        const idToken = await this.tokenService.createIDToken({
+            user: currentRefreshToken.user,
+        });
+
+        return {
+            refreshToken: refreshToken,
+            accessToken: accessToken,
+            idToken: idToken,
+        };
     }
 }
