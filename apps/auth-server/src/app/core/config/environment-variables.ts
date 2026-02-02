@@ -1,5 +1,5 @@
 import { EnvironmentVariables, MAX_PORT, MIN_PORT } from '@dnd-mapp/backend-utils';
-import { IsNotEmpty, IsNumber, IsOptional, IsString, Max, Min } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString, Max, Min, MinLength } from 'class-validator';
 
 export class Environment {
     @IsNotEmpty()
@@ -17,6 +17,7 @@ export class Environment {
     @IsString()
     [EnvironmentVariables.AUTH_SERVER_PASSWORD_PEPPER]!: string;
 
+    @MinLength(32)
     @IsNotEmpty()
     @IsString()
     [EnvironmentVariables.AUTH_SERVER_COOKIE_SECRET]!: string;

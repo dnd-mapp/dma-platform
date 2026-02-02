@@ -14,7 +14,7 @@ import {
     toBase64,
     verifyPassword,
 } from '@dnd-mapp/backend-utils';
-import { ForbiddenException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { ForbiddenException, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { nanoid } from 'nanoid';
 import { ClientService } from '../client';
@@ -32,6 +32,7 @@ export class AuthService {
     private readonly userService: UserService;
     private readonly tokenService: TokenService;
     private readonly authTransactionRepository: AuthTransactionRepository;
+    private readonly logger = new Logger(AuthService.name);
 
     public constructor(
         configService: ConfigService<AuthServerConfig, true>,
@@ -52,10 +53,16 @@ export class AuthService {
 
         const client = await this.clientService.getById(clientId);
 
-        if (client === null || !isRedirectUrlValid(client.redirectUrls, redirectUrl)) {
+        if (client === null) {
+            this.logger.warn(`Authorization failed: Client "${clientId}" not found`);
+            throw new ForbiddenException();
+        }
+        if (!isRedirectUrlValid(client.redirectUrls, redirectUrl)) {
+            this.logger.warn(`Authorization failed: Invalid redirect URL "${redirectUrl}" for client "${clientId}"`);
             throw new ForbiddenException();
         }
         const { id } = await this.authTransactionRepository.create(params);
+        this.logger.log(`Auth transaction created: "${id}" for client "${clientId}"`);
         return toBase64(id);
     }
 
@@ -69,13 +76,22 @@ export class AuthService {
         const user = await this.userService.getByUsername(username);
 
         const passwordMatch = await verifyPassword(password, user?.password ?? nanoid(), passwordPepper);
-        if (authTransaction === null || user === null || !passwordMatch) throw new UnauthorizedException();
-
+        if (authTransaction === null) {
+            this.logger.warn(`Login failed: Invalid login challenge "${authTransactionId}"`);
+            throw new UnauthorizedException();
+        }
+        if (user === null || !passwordMatch) {
+            this.logger.warn(
+                `Login failed: Invalid credentials for user "${username}" in transaction "${authTransactionId}"`,
+            );
+            throw new UnauthorizedException();
+        }
         authTransaction.authCode = nanoid();
         authTransaction.authCodeExpiry = new Date(Date.now() + AUTH_CODE_EXPIRY);
         authTransaction.user = user;
 
         await this.authTransactionRepository.update(authTransaction);
+        this.logger.log(`Login successful: User "${user.id}" assigned authCode for transaction "${authTransactionId}"`);
 
         return {
             authCode: authTransaction.authCode,
@@ -97,11 +113,23 @@ export class AuthService {
 
             if (
                 !authTransaction ||
-                !authTransaction.authCodeExpiry ||
                 !authTransaction.user ||
-                codeChallenge !== authTransaction.codeChallenge ||
-                authTransaction.authCodeExpiry.getTime() < now.getTime()
+                !authTransaction.authCodeExpiry ||
+                !authTransaction.authCode
             ) {
+                this.logger.warn(`Token exchange failed: No transaction found for authCode.`);
+                throw new UnauthorizedException();
+            }
+            if (codeChallenge !== authTransaction.codeChallenge) {
+                this.logger.warn(
+                    `Token exchange failed: PKCE code verifier mismatch for transaction "${authTransaction.id}"`,
+                );
+                throw new UnauthorizedException();
+            }
+            if (authTransaction.authCodeExpiry.getTime() < now.getTime()) {
+                this.logger.warn(
+                    `Token exchange failed: PKCE code verifier mismatch for transaction "${authTransaction.id}"`,
+                );
                 throw new UnauthorizedException();
             }
             const refreshToken = await this.tokenService.createRefreshToken({ userId: authTransaction.user.id });
@@ -112,6 +140,8 @@ export class AuthService {
             });
 
             await this.authTransactionRepository.removeById(authTransaction.id);
+            this.logger.log(`Tokens issued via authCode for user "${authTransaction.user.id}"`);
+
             return {
                 refreshToken: refreshToken,
                 accessToken: accessToken,
@@ -124,8 +154,11 @@ export class AuthService {
             currentRefreshToken === null ||
             !isRefreshTokenValid(sha256(data.plainToken), currentRefreshToken.tokenHash)
         ) {
+            this.logger.warn(`Refresh failed: Invalid or non-existent refresh token hash.`);
             throw new UnauthorizedException();
         }
+        this.logger.log(`Refreshing tokens for user "${currentRefreshToken.user.id}"`);
+
         await this.tokenService.revokeRefreshToken(currentRefreshToken.id);
 
         const refreshToken = await this.tokenService.createRefreshToken({
