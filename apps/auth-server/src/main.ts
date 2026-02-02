@@ -1,4 +1,5 @@
 import { AuthServerConfig, ConfigurationNamespaces, ServerConfig } from '@dnd-mapp/backend-utils';
+import { tryCatch } from '@dnd-mapp/shared-utils';
 import fastifyCookie from '@fastify/cookie';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -24,6 +25,12 @@ async function getSslFiles() {
 
 async function bootstrap() {
     const { ssl, cert, key } = await getSslFiles();
+
+    if (ssl) {
+        Logger.log('SSL Configuration detected. Starting server in HTTPS mode');
+    } else {
+        Logger.warn('No SSL certificates found. Starting server in insecure HTTP mode');
+    }
 
     const app = await NestFactory.create<NestFastifyApplication>(
         AppModule,
@@ -56,9 +63,14 @@ async function bootstrap() {
         secret: cookieSecret,
         algorithm: 'sha256',
     });
+    Logger.log('Fastify Cookie plugin registered');
 
-    await app.listen(port, host);
+    const { error } = await tryCatch(app.listen(port, host));
 
+    if (error) {
+        Logger.fatal(`Failed to start the application: ${error.message}`, error.stack);
+        process.exit(1);
+    }
     Logger.log(`🚀 Application is running on: ${ssl ? 'https' : 'http'}://${host}:${port}`);
 }
 

@@ -7,7 +7,7 @@ import {
     RedirectResponseDto,
 } from '@dnd-mapp/auth-domain';
 import { UnsignResult } from '@fastify/cookie';
-import { Body, Controller, Get, HttpStatus, Post, Query, Res, UnauthorizedException } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Logger, Post, Query, Res, UnauthorizedException } from '@nestjs/common';
 import { FastifyReply } from 'fastify';
 import { Cookies } from '../core/decorators';
 import { AuthService } from './auth.service';
@@ -15,6 +15,7 @@ import { AuthService } from './auth.service';
 @Controller()
 export class AuthController {
     private readonly authService: AuthService;
+    private readonly logger = new Logger(AuthController.name);
 
     public constructor(authService: AuthService) {
         this.authService = authService;
@@ -25,6 +26,7 @@ export class AuthController {
         @Query() queryParams: AuthorizeQueryParams,
         @Res({ passthrough: true }) response: FastifyReply,
     ) {
+        this.logger.log(`Authorization request initiated for client: "${queryParams.clientId}"`);
         const loginChallenge = await this.authService.authorize(queryParams);
 
         // TODO - Use configuration to determine route of auth-client
@@ -53,12 +55,17 @@ export class AuthController {
         @Res({ passthrough: true }) response: FastifyReply,
         @Cookies(CookieNames.REFRESH_TOKEN) refreshToken?: UnsignResult,
     ) {
-        if (!hasAuthCodeGrant(data) && (!refreshToken || !refreshToken?.valid)) throw new UnauthorizedException();
+        if (!hasAuthCodeGrant(data) && (!refreshToken || !refreshToken?.valid)) {
+            this.logger.warn(`Token request failed: Invalid or missing refresh token. Grant: "${data.grantType}"`);
+            throw new UnauthorizedException();
+        }
         if (!hasAuthCodeGrant(data) && refreshToken?.valid && refreshToken.value) {
             data.plainToken = refreshToken.value;
         }
         const tokens = await this.authService.token(data);
         const { plainToken, expiresAt } = tokens.refreshToken;
+
+        this.logger.log(`Tokens issued successfully. Grant: "${data.grantType}"`);
 
         response.setCookie(CookieNames.REFRESH_TOKEN, plainToken, {
             maxAge: Math.round((expiresAt.getTime() - Date.now()) / 1_000),
