@@ -70,3 +70,9 @@ model RefreshToken {
 
     @@map(name: "refresh_tokens")
 }
+
+model TokenBlacklist {
+    jti String @id
+
+    @@map(name: "token_blacklist")
+}
