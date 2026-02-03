@@ -3,6 +3,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { readFile } from 'fs/promises';
+import { TokenBlacklistRepository } from './token-blacklist.repository';
+import { TokenBlacklistService } from './token-blacklist.service';
 import { TokenRepository } from './token.repository';
 import { TokenService } from './token.service';
 
@@ -24,7 +26,7 @@ import { TokenService } from './token.service';
             },
         }),
     ],
-    providers: [TokenService, TokenRepository],
+    providers: [TokenService, TokenBlacklistService, TokenRepository, TokenBlacklistRepository],
     exports: [TokenService],
 })
 export class TokenModule {}
