@@ -10,7 +10,7 @@ import { base64, ConfigService, sha256, StorageKeys, StorageService, TEXT_ENCODE
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 import { nanoid } from 'nanoid';
 import { catchError, EMPTY, from, map, tap } from 'rxjs';
-import { AuthServerService } from './auth-server.service';
+import { AuthServerService } from '../http';
 
 interface GetTokenParams {
     grantType: TokenGrantType;
