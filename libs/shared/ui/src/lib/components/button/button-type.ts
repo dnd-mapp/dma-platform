@@ -1,6 +1,7 @@
 export const ButtonTypes = {
     BASE: 'base',
     PRIMARY: 'primary',
+    DANGER_SUBTLE: 'danger-subtle',
 } as const;
 
 export type ButtonType = (typeof ButtonTypes)[keyof typeof ButtonTypes];
