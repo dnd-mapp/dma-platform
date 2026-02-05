@@ -55,7 +55,7 @@ export class AuthController {
         @Res({ passthrough: true }) response: FastifyReply,
         @Cookies(CookieNames.REFRESH_TOKEN) refreshToken?: UnsignResult,
     ) {
-        if (!hasAuthCodeGrant(data) && (!refreshToken || !refreshToken?.valid)) {
+        if (!hasAuthCodeGrant(data) && (!refreshToken || !refreshToken.valid)) {
             this.logger.warn(`Token request failed: Invalid or missing refresh token. Grant: "${data.grantType}"`);
             throw new UnauthorizedException();
         }
@@ -72,7 +72,6 @@ export class AuthController {
             path: '/',
             sameSite: 'strict',
             // TODO - Compute domain dynamically
-            domain: '.dndmapp.dev',
             secure: true,
             signed: true,
             httpOnly: true,
