@@ -109,6 +109,23 @@ export class AuthService {
         };
     }
 
+    public logout() {
+        const { request, processing } = this.authServerService.logout({
+            accessToken: this.accessToken()!,
+            idToken: this.idTokenRaw()!,
+        });
+
+        return {
+            request: request.pipe(
+                tap(() => {
+                    this.accessToken.set(null);
+                    this.idToken.set(null);
+                }),
+            ),
+            processing: processing,
+        };
+    }
+
     private generateCodeVerifier() {
         return base64(nanoid(), this.textEncoder);
     }
