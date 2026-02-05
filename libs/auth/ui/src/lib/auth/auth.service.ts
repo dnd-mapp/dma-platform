@@ -35,6 +35,7 @@ export class AuthService {
     public readonly accessToken = signal<string | null>(null);
 
     public readonly idToken = signal<DmaJwtIdTokenPayload | null>(null);
+    private readonly idTokenRaw = signal<string | null>(null);
 
     public authorize() {
         const codeVerifier = this.generateCodeVerifier();
@@ -135,6 +136,7 @@ export class AuthService {
         if (nonce) {
             this.storageService.removeItem(StorageKeys.ID_NONCE);
         }
+        this.idTokenRaw.set(idToken);
         this.idToken.set(token);
         return true;
     }
