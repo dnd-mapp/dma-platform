@@ -72,7 +72,8 @@ model RefreshToken {
 }
 
 model TokenBlacklist {
-    jti String @id
+    jti       String   @id
+    expiresAt DateTime @map(name: "expires_at")
 
     @@map(name: "token_blacklist")
 }
