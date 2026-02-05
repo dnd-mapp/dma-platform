@@ -16,6 +16,7 @@ const positions: ConnectedPosition[] = [
 @Directive({
     selector: '[dmaDropdownAnchor]',
     host: {
+        '[attr.dmaDropdownAnchor]': `''`,
         '(click)': 'onToggle()',
     },
 })
