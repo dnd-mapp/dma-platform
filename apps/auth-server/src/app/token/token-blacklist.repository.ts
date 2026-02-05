@@ -10,9 +10,12 @@ export class TokenBlacklistRepository {
         this.databaseService = databaseService;
     }
 
-    public async create(jti: string) {
+    public async create(jti: string, expiresAt: Date) {
         await this.databaseService.prisma.tokenBlacklist.create({
-            data: { jti: jti },
+            data: {
+                jti: jti,
+                expiresAt: expiresAt,
+            },
         });
     }
 }
