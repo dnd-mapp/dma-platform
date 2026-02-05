@@ -70,3 +70,10 @@ model RefreshToken {
 
     @@map(name: "refresh_tokens")
 }
+
+model TokenBlacklist {
+    jti       String   @id
+    expiresAt DateTime @map(name: "expires_at")
+
+    @@map(name: "token_blacklist")
+}

@@ -13,7 +13,7 @@ export class LoginButtonComponent {
     private readonly destroyRef = inject(DestroyRef);
     private readonly authService = inject(AuthService);
 
-    protected onLogIn() {
+    protected onLogin() {
         this.authService.authorize().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
     }
 }

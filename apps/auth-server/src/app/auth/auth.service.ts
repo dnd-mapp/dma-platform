@@ -18,6 +18,7 @@ import { ForbiddenException, Injectable, Logger, UnauthorizedException } from '@
 import { ConfigService } from '@nestjs/config';
 import { nanoid } from 'nanoid';
 import { ClientService } from '../client';
+import { DmaJwtService } from '../jwt';
 import { TokenService } from '../token';
 import { UserService } from '../user';
 import { AuthTransactionRepository } from './auth-transaction.repository';
@@ -32,6 +33,7 @@ export class AuthService {
     private readonly userService: UserService;
     private readonly tokenService: TokenService;
     private readonly authTransactionRepository: AuthTransactionRepository;
+    private readonly dmaJwtService: DmaJwtService;
     private readonly logger = new Logger(AuthService.name);
 
     public constructor(
@@ -39,12 +41,14 @@ export class AuthService {
         clientService: ClientService,
         userService: UserService,
         tokenService: TokenService,
+        dmaJwtService: DmaJwtService,
         authTransactionRepository: AuthTransactionRepository,
     ) {
         this.configService = configService;
         this.clientService = clientService;
         this.userService = userService;
         this.tokenService = tokenService;
+        this.dmaJwtService = dmaJwtService;
         this.authTransactionRepository = authTransactionRepository;
     }
 
@@ -133,8 +137,8 @@ export class AuthService {
                 throw new UnauthorizedException();
             }
             const refreshToken = await this.tokenService.createRefreshToken({ userId: authTransaction.user.id });
-            const accessToken = await this.tokenService.createAccessToken({ userId: authTransaction.user.id });
-            const idToken = await this.tokenService.createIDToken({
+            const accessToken = await this.dmaJwtService.createAccessToken({ userId: authTransaction.user.id });
+            const idToken = await this.dmaJwtService.createIDToken({
                 user: authTransaction.user,
                 nonce: authTransaction.nonce,
             });
@@ -165,8 +169,8 @@ export class AuthService {
             userId: currentRefreshToken.user.id,
             familyId: currentRefreshToken.familyId,
         });
-        const accessToken = await this.tokenService.createAccessToken({ userId: currentRefreshToken.user.id });
-        const idToken = await this.tokenService.createIDToken({
+        const accessToken = await this.dmaJwtService.createAccessToken({ userId: currentRefreshToken.user.id });
+        const idToken = await this.dmaJwtService.createIDToken({
             user: currentRefreshToken.user,
         });
 
