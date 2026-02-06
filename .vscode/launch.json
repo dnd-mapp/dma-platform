@@ -1,4 +1,15 @@
 {
     "version": "0.2.0",
-    "configurations": []
+    "configurations": [
+        {
+            "name": "Debug: auth-server",
+            "type": "node",
+            "request": "attach",
+            "cwd": "${workspaceFolder}/apps/auth-server",
+            "preLaunchTask": "auth-server:serve",
+            "autoAttachChildProcesses": true,
+            "port": 9200,
+            "skipFiles": ["<node_internals>/**"]
+        }
+    ]
 }
