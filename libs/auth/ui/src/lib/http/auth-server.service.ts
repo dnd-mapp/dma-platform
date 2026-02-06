@@ -18,6 +18,7 @@ export class AuthServerService {
     private baseUrl!: string;
 
     public initialize() {
+        console.log('AuthServerService::initialize');
         this.baseUrl = this.configService.config.authServerBaseUrl;
     }
 

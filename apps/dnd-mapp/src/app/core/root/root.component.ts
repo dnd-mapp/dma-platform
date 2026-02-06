@@ -42,6 +42,7 @@ export class RootComponent implements OnInit {
     private readonly authServerService = inject(AuthServerService);
 
     public ngOnInit() {
+        console.log('RootComponent::ngOnInit');
         this.authServerService.initialize();
         this.authService
             .token({ grantType: TokenGrantTypes.REFRESH_TOKEN }, true)

@@ -17,11 +17,13 @@ describe('RootComponent', () => {
     class TestComponent {}
 
     async function setupTest() {
+        console.log('setupTest');
         const { harness } = await setupTestEnvironment({
             testComponent: TestComponent,
             harness: RootHarness,
             providers: [provideRouter(appRoutes), provideHttpClient()],
             afterConfig: async () => {
+                console.log('afterConfig');
                 const configService = TestBed.inject(ConfigService);
                 await lastValueFrom(configService.initialize());
             },
@@ -33,7 +35,9 @@ describe('RootComponent', () => {
     }
 
     it('should create', async () => {
+        console.log('start it');
         const { harness } = await setupTest();
         expect(harness).toBeDefined();
+        console.log('end it');
     });
 });
