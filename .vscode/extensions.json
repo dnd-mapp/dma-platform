@@ -4,10 +4,11 @@
         "bradlc.vscode-tailwindcss",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
-        "jdx.dev.mise",
+        "firsttris.vscode-jest-runner",
+        "hverlin.mise-vscode",
+        "ms-azuretools.vscode-containers",
         "ms-playwright.playwright",
         "nrwl.angular-console",
-        "vitest.explorer",
-        "firsttris.vscode-jest-runner"
+        "tombi-toml.tombi"
     ]
 }
