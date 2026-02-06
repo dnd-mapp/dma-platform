@@ -14,13 +14,14 @@ import { buttonTypeAttribute, ButtonTypes, DEFAULT_BUTTON_TYPE } from './button-
         '[class.py-1]': 'isMedium()',
         '[class.p-1]': 'isSmall()',
         '[class.text-neutral-900]': `isBase()`,
-        '[class.bg-neutral-100]': `isBase()`,
-        '[class.hover:bg-neutral-200]': `isBase()`,
-        '[class.active:bg-neutral-300]': `isBase()`,
+        '[class.bg-neutral-100]': `isBase() || isDangerSubtle()`,
+        '[class.hover:bg-neutral-200]': `isBase() || isDangerSubtle()`,
+        '[class.active:bg-neutral-300]': `isBase() || isDangerSubtle()`,
         '[class.text-neutral-100]': `isPrimary()`,
         '[class.bg-blue-400]': `isPrimary()`,
         '[class.hover:bg-blue-500]': `isPrimary()`,
         '[class.active:bg-blue-600]': `isPrimary()`,
+        '[class.text-red-600]': `isDangerSubtle()`,
         '[attr.disabled]': 'isDisabled()',
     },
     imports: [SoSpinnerIconComponent],
@@ -37,6 +38,8 @@ export class ButtonComponent {
     protected readonly isBase = computed(() => this.buttonType() === ButtonTypes.BASE);
 
     protected readonly isPrimary = computed(() => this.buttonType() === ButtonTypes.PRIMARY);
+
+    protected readonly isDangerSubtle = computed(() => this.buttonType() === ButtonTypes.DANGER_SUBTLE);
 
     protected readonly isMedium = computed(() => this.size() === ButtonSizes.MEDIUM);
 

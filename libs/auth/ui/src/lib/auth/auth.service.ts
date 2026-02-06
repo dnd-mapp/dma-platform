@@ -10,7 +10,7 @@ import { base64, ConfigService, sha256, StorageKeys, StorageService, TEXT_ENCODE
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 import { nanoid } from 'nanoid';
 import { catchError, EMPTY, from, map, tap } from 'rxjs';
-import { AuthServerService } from './auth-server.service';
+import { AuthServerService } from '../http';
 
 interface GetTokenParams {
     grantType: TokenGrantType;
@@ -35,6 +35,7 @@ export class AuthService {
     public readonly accessToken = signal<string | null>(null);
 
     public readonly idToken = signal<DmaJwtIdTokenPayload | null>(null);
+    private readonly idTokenRaw = signal<string | null>(null);
 
     public authorize() {
         const codeVerifier = this.generateCodeVerifier();
@@ -108,6 +109,23 @@ export class AuthService {
         };
     }
 
+    public logout() {
+        const { request, processing } = this.authServerService.logout({
+            accessToken: this.accessToken()!,
+            idToken: this.idTokenRaw()!,
+        });
+
+        return {
+            request: request.pipe(
+                tap(() => {
+                    this.accessToken.set(null);
+                    this.idToken.set(null);
+                }),
+            ),
+            processing: processing,
+        };
+    }
+
     private generateCodeVerifier() {
         return base64(nanoid(), this.textEncoder);
     }
@@ -135,6 +153,7 @@ export class AuthService {
         if (nonce) {
             this.storageService.removeItem(StorageKeys.ID_NONCE);
         }
+        this.idTokenRaw.set(idToken);
         this.idToken.set(token);
         return true;
     }

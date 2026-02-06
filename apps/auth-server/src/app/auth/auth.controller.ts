@@ -4,21 +4,43 @@ import {
     type GetTokenDto,
     hasAuthCodeGrant,
     LoginDto,
+    LogoutDto,
     RedirectResponseDto,
 } from '@dnd-mapp/auth-domain';
 import { UnsignResult } from '@fastify/cookie';
-import { Body, Controller, Get, HttpStatus, Logger, Post, Query, Res, UnauthorizedException } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Get,
+    HttpStatus,
+    Logger,
+    Post,
+    Query,
+    Res,
+    UnauthorizedException,
+    UseGuards,
+} from '@nestjs/common';
 import { FastifyReply } from 'fastify';
 import { Cookies } from '../core/decorators';
+import { TokenBlacklistService, TokenService } from '../token';
+import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 
 @Controller()
 export class AuthController {
     private readonly authService: AuthService;
+    private readonly tokenService: TokenService;
+    private readonly tokenBlacklistService: TokenBlacklistService;
     private readonly logger = new Logger(AuthController.name);
 
-    public constructor(authService: AuthService) {
+    public constructor(
+        authService: AuthService,
+        tokenService: TokenService,
+        tokenBlacklistService: TokenBlacklistService,
+    ) {
         this.authService = authService;
+        this.tokenService = tokenService;
+        this.tokenBlacklistService = tokenBlacklistService;
     }
 
     @Get('/authorize')
@@ -55,7 +77,7 @@ export class AuthController {
         @Res({ passthrough: true }) response: FastifyReply,
         @Cookies(CookieNames.REFRESH_TOKEN) refreshToken?: UnsignResult,
     ) {
-        if (!hasAuthCodeGrant(data) && (!refreshToken || !refreshToken?.valid)) {
+        if (!hasAuthCodeGrant(data) && (!refreshToken || !refreshToken.valid)) {
             this.logger.warn(`Token request failed: Invalid or missing refresh token. Grant: "${data.grantType}"`);
             throw new UnauthorizedException();
         }
@@ -72,7 +94,6 @@ export class AuthController {
             path: '/',
             sameSite: 'strict',
             // TODO - Compute domain dynamically
-            domain: '.dndmapp.dev',
             secure: true,
             signed: true,
             httpOnly: true,
@@ -82,5 +103,31 @@ export class AuthController {
             accessToken: tokens?.accessToken,
             idToken: tokens?.idToken,
         };
+    }
+
+    @UseGuards(AuthGuard)
+    @Post('/logout')
+    public async logout(
+        @Body() data: LogoutDto,
+        @Res({ passthrough: true }) response: FastifyReply,
+        @Cookies(CookieNames.REFRESH_TOKEN) refreshToken?: UnsignResult,
+    ) {
+        await this.tokenBlacklistService.revoke(data.accessToken);
+        await this.tokenBlacklistService.revoke(data.idToken);
+
+        if (refreshToken && refreshToken.valid) {
+            const token = await this.tokenService.getByHash(refreshToken.value);
+
+            if (token) {
+                await this.tokenService.revokeRefreshToken(token.id);
+            }
+        }
+        response.clearCookie(CookieNames.REFRESH_TOKEN, {
+            secure: true,
+            path: '/',
+            signed: true,
+            sameSite: 'strict',
+            httpOnly: true,
+        });
     }
 }
