@@ -10,13 +10,16 @@ setupTestBed({ browserMode: true, zoneless: true });
 const { startWorker, resetWorker, stopWorker } = initializeMockServiceWorker(...clientHandlers, ...authServerHandlers);
 
 beforeAll(async () => {
+    console.log('beforeAll');
     await startWorker();
 });
 
 beforeEach(() => {
+    console.log('beforeEach');
     resetWorker();
 });
 
 afterAll(() => {
+    console.log('afterAll');
     stopWorker();
 });

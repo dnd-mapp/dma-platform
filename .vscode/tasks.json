@@ -1,0 +1,504 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        // auth-client
+        {
+            "label": "auth-client:build",
+            "type": "shell",
+            "command": "pnpm nx build auth-client",
+            "group": {
+                "kind": "build"
+            },
+            "problemMatcher": ["$tsc"]
+        },
+        {
+            "label": "auth-client:serve",
+            "type": "shell",
+            "command": "pnpm nx serve auth-client",
+            "isBackground": true,
+            "problemMatcher": ["$tsc-watch"]
+        },
+        {
+            "label": "auth-client:test:ci",
+            "type": "shell",
+            "command": "pnpm nx test auth-client",
+            "group": {
+                "kind": "test"
+            },
+            "problemMatcher": {
+                "owner": "vitest-ci",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^\\s*(?:✘|×)\\s+(.*):(\\d+):(\\d+)\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "message": 4
+                }
+            }
+        },
+        {
+            "label": "auth-client:test:development",
+            "type": "shell",
+            "command": "pnpm nx test auth-client -c development",
+            "group": {
+                "kind": "test"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "vitest",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                "regexp": "^\\s*(✘|×)\\s+(.*)\\s+(\\d+):(\\d+)$",
+                "file": 2,
+                "line": 3,
+                "column": 4,
+                "message": 2
+              },
+              "background": {
+                "activeOnStart": true,
+                "beginsPattern": ".*(RESTART|CHANGES).*|.*(RUN).*|.*(WAIT).*",
+                "endsPattern": ".*(PASS|FAIL).*|.*(Tests).*|.*(waiting for changes).*"
+              }
+            },
+        },
+        // auth-domain
+        {
+            "label": "auth-domain:test:ci",
+            "type": "shell",
+            "command": "pnpm nx test auth-domain",
+            "group": {
+                "kind": "test"
+            },
+            "problemMatcher": {
+                "owner": "vitest-ci",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^\\s*(?:✘|×)\\s+(.*):(\\d+):(\\d+)\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "message": 4
+                }
+            }
+        },
+        {
+            "label": "auth-domain:test:development",
+            "type": "shell",
+            "command": "pnpm nx test auth-domain -c development",
+            "group": {
+                "kind": "test"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "vitest",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                "regexp": "^\\s*(✘|×)\\s+(.*)\\s+(\\d+):(\\d+)$",
+                "file": 2,
+                "line": 3,
+                "column": 4,
+                "message": 2
+              },
+              "background": {
+                "activeOnStart": true,
+                "beginsPattern": ".*(RESTART|CHANGES).*|.*(RUN).*|.*(WAIT).*",
+                "endsPattern": ".*(PASS|FAIL).*|.*(Tests).*|.*(waiting for changes).*"
+              }
+            },
+        },
+        // auth-server
+        {
+            "label": "auth-server:prisma:migrate-dev",
+            "type": "shell",
+            "command": "pnpm prisma migrate dev",
+            "options": {
+                "cwd": "${workspaceFolder}/apps/auth-server"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "auth-server:prisma:migrate-reset",
+            "type": "shell",
+            "command": "pnpm prisma migrate reset --force",
+            "options": {
+                "cwd": "${workspaceFolder}/apps/auth-server"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "auth-server:prisma:seed",
+            "type": "shell",
+            "command": "pnpm prisma seed",
+            "options": {
+                "cwd": "${workspaceFolder}/apps/auth-server"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "auth-server:prisma:generate",
+            "type": "shell",
+            "command": "pnpm prisma generate",
+            "options": {
+                "cwd": "${workspaceFolder}/apps/auth-server"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "auth-server:build",
+            "type": "shell",
+            "command": "pnpm nx build auth-server",
+            "group": {
+                "kind": "build"
+            },
+            "problemMatcher": ["$tsc"]
+        },
+        {
+            "label": "auth-server:serve",
+            "type": "shell",
+            "command": "pnpm nx serve auth-server",
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "typescript",
+                "pattern": {
+                    "regexp": "^.*$"
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "webpack compiled",
+                    "endsPattern": "Nest application successfully started"
+                }
+            }
+        },
+        {
+            "label": "auth-server:test:ci",
+            "type": "shell",
+            "command": "pnpm nx test auth-server",
+            "group": {
+                "kind": "test"
+            },
+            "problemMatcher": {
+                "owner": "vitest-ci",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^\\s*(?:✘|×)\\s+(.*):(\\d+):(\\d+)\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "message": 4
+                }
+            }
+        },
+        {
+            "label": "auth-server:test:development",
+            "type": "shell",
+            "command": "pnpm nx test auth-server -c development",
+            "group": {
+                "kind": "test"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "vitest",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                "regexp": "^\\s*(✘|×)\\s+(.*)\\s+(\\d+):(\\d+)$",
+                "file": 2,
+                "line": 3,
+                "column": 4,
+                "message": 2
+              },
+              "background": {
+                "activeOnStart": true,
+                "beginsPattern": ".*(RESTART|CHANGES).*|.*(RUN).*|.*(WAIT).*",
+                "endsPattern": ".*(PASS|FAIL).*|.*(Tests).*|.*(waiting for changes).*"
+              }
+            },
+        },
+        // auth-ui
+        {
+            "label": "auth-ui:test:ci",
+            "type": "shell",
+            "command": "pnpm nx test auth-ui",
+            "group": {
+                "kind": "test"
+            },
+            "problemMatcher": {
+                "owner": "vitest-ci",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^\\s*(?:✘|×)\\s+(.*):(\\d+):(\\d+)\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "message": 4
+                }
+            }
+        },
+        {
+            "label": "auth-ui:test:development",
+            "type": "shell",
+            "command": "pnpm nx test auth-ui -c development",
+            "group": {
+                "kind": "test"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "vitest",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                "regexp": "^\\s*(✘|×)\\s+(.*)\\s+(\\d+):(\\d+)$",
+                "file": 2,
+                "line": 3,
+                "column": 4,
+                "message": 2
+              },
+              "background": {
+                "activeOnStart": true,
+                "beginsPattern": ".*(RESTART|CHANGES).*|.*(RUN).*|.*(WAIT).*",
+                "endsPattern": ".*(PASS|FAIL).*|.*(Tests).*|.*(waiting for changes).*"
+              }
+            },
+        },
+        // backend-core
+        {
+            "label": "backend-core:test:ci",
+            "type": "shell",
+            "command": "pnpm nx test backend-core",
+            "group": {
+                "kind": "test"
+            },
+            "problemMatcher": {
+                "owner": "vitest-ci",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^\\s*(?:✘|×)\\s+(.*):(\\d+):(\\d+)\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "message": 4
+                }
+            }
+        },
+        {
+            "label": "backend-core:test:development",
+            "type": "shell",
+            "command": "pnpm nx test backend-core -c development",
+            "group": {
+                "kind": "test"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "vitest",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                "regexp": "^\\s*(✘|×)\\s+(.*)\\s+(\\d+):(\\d+)$",
+                "file": 2,
+                "line": 3,
+                "column": 4,
+                "message": 2
+              },
+              "background": {
+                "activeOnStart": true,
+                "beginsPattern": ".*(RESTART|CHANGES).*|.*(RUN).*|.*(WAIT).*",
+                "endsPattern": ".*(PASS|FAIL).*|.*(Tests).*|.*(waiting for changes).*"
+              }
+            },
+        },
+        // backend-utils
+        {
+            "label": "backend-utils:test:ci",
+            "type": "shell",
+            "command": "pnpm nx test backend-utils",
+            "group": {
+                "kind": "test"
+            },
+            "problemMatcher": {
+                "owner": "vitest-ci",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^\\s*(?:✘|×)\\s+(.*):(\\d+):(\\d+)\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "message": 4
+                }
+            }
+        },
+        {
+            "label": "backend-utils:test:development",
+            "type": "shell",
+            "command": "pnpm nx test backend-utils -c development",
+            "group": {
+                "kind": "test"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "vitest",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                "regexp": "^\\s*(✘|×)\\s+(.*)\\s+(\\d+):(\\d+)$",
+                "file": 2,
+                "line": 3,
+                "column": 4,
+                "message": 2
+              },
+              "background": {
+                "activeOnStart": true,
+                "beginsPattern": ".*(RESTART|CHANGES).*|.*(RUN).*|.*(WAIT).*",
+                "endsPattern": ".*(PASS|FAIL).*|.*(Tests).*|.*(waiting for changes).*"
+              }
+            },
+        },
+        // dnd-mapp
+        {
+            "label": "dnd-mapp:build",
+            "type": "shell",
+            "command": "pnpm nx build dnd-mapp",
+            "group": {
+                "kind": "build"
+            },
+            "problemMatcher": ["$tsc"]
+        },
+        {
+            "label": "dnd-mapp:serve",
+            "type": "shell",
+            "command": "pnpm nx serve dnd-mapp",
+            "isBackground": true,
+            "problemMatcher": ["$tsc-watch"]
+        },
+        {
+            "label": "dnd-mapp:test:ci",
+            "type": "shell",
+            "command": "pnpm nx test dnd-mapp",
+            "group": {
+                "kind": "test"
+            },
+            "problemMatcher": {
+                "owner": "vitest-ci",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^\\s*(?:✘|×)\\s+(.*):(\\d+):(\\d+)\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "message": 4
+                }
+            }
+        },
+        {
+            "label": "dnd-mapp:test:development",
+            "type": "shell",
+            "command": "pnpm nx test dnd-mapp -c development",
+            "group": {
+                "kind": "test"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "vitest",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                "regexp": "^\\s*(✘|×)\\s+(.*)\\s+(\\d+):(\\d+)$",
+                "file": 2,
+                "line": 3,
+                "column": 4,
+                "message": 2
+              },
+              "background": {
+                "activeOnStart": true,
+                "beginsPattern": ".*(RESTART|CHANGES).*|.*(RUN).*|.*(WAIT).*",
+                "endsPattern": ".*(PASS|FAIL).*|.*(Tests).*|.*(waiting for changes).*"
+              }
+            },
+        },
+        // shared-ui
+        {
+            "label": "shared-ui:test:ci",
+            "type": "shell",
+            "command": "pnpm nx test shared-ui",
+            "group": {
+                "kind": "test"
+            },
+            "problemMatcher": {
+                "owner": "vitest-ci",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^\\s*(?:✘|×)\\s+(.*):(\\d+):(\\d+)\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "message": 4
+                }
+            }
+        },
+        {
+            "label": "shared-ui:test:development",
+            "type": "shell",
+            "command": "pnpm nx test shared-ui -c development",
+            "group": {
+                "kind": "test"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "vitest",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                "regexp": "^\\s*(✘|×)\\s+(.*)\\s+(\\d+):(\\d+)$",
+                "file": 2,
+                "line": 3,
+                "column": 4,
+                "message": 2
+              },
+              "background": {
+                "activeOnStart": true,
+                "beginsPattern": ".*(RESTART|CHANGES).*|.*(RUN).*|.*(WAIT).*",
+                "endsPattern": ".*(PASS|FAIL).*|.*(Tests).*|.*(waiting for changes).*"
+              }
+            },
+        },
+        // shared-utils
+        {
+            "label": "shared-utils:test:ci",
+            "type": "shell",
+            "command": "pnpm nx test shared-utils",
+            "group": {
+                "kind": "test"
+            },
+            "problemMatcher": {
+                "owner": "vitest-ci",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^\\s*(?:✘|×)\\s+(.*):(\\d+):(\\d+)\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "message": 4
+                }
+            }
+        },
+        {
+            "label": "shared-utils:test:development",
+            "type": "shell",
+            "command": "pnpm nx test shared-utils -c development",
+            "group": {
+                "kind": "test"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "vitest",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                "regexp": "^\\s*(✘|×)\\s+(.*)\\s+(\\d+):(\\d+)$",
+                "file": 2,
+                "line": 3,
+                "column": 4,
+                "message": 2
+              },
+              "background": {
+                "activeOnStart": true,
+                "beginsPattern": ".*(RESTART|CHANGES).*|.*(RUN).*|.*(WAIT).*",
+                "endsPattern": ".*(PASS|FAIL).*|.*(Tests).*|.*(waiting for changes).*"
+              }
+            },
+        }
+    ]
+}

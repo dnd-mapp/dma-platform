@@ -61,8 +61,9 @@
             "continuous": true,
             "options": {
                 "buildTarget": "auth-server:build:development",
-                "inspect": false,
-                "runBuildTargetDependencies": false
+                "runBuildTargetDependencies": false,
+                "inspect": true,
+                "port": 9200
             }
         },
         "test": {
