@@ -88,7 +88,7 @@ export class AuthService {
             this.logger.warn(
                 `Login failed: Invalid credentials for user "${username}" in transaction "${authTransactionId}"`,
             );
-            throw new UnauthorizedException();
+            throw new UnauthorizedException('Invalid username/password');
         }
         authTransaction.authCode = nanoid();
         authTransaction.authCodeExpiry = new Date(Date.now() + AUTH_CODE_EXPIRY);
