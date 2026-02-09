@@ -1,3 +1,4 @@
+import { httpStatusCode, HttpStatusNames, ServerError } from '@dnd-mapp/shared-utils';
 import { ArgumentsHost, Catch, ClassProvider, ExceptionFilter, HttpException } from '@nestjs/common';
 import { HttpExceptionBody } from '@nestjs/common/interfaces/http/http-exception-body.interface';
 import { APP_FILTER } from '@nestjs/core';
@@ -19,14 +20,17 @@ export class HttpExceptionFilter implements ExceptionFilter {
         const exceptionBody = exception.getResponse();
 
         if (typeof exceptionBody !== 'string') {
-            const { statusCode, message, error } = exceptionBody as HttpExceptionBody;
+            const { statusCode, message } = exceptionBody as HttpExceptionBody;
+            const status = httpStatusCode(statusCode);
 
-            response.status(statusCode).send({
-                status: statusCode,
-                error: error,
+            const serverError: ServerError = {
+                status: status,
+                error: HttpStatusNames[status],
                 timestamp: new Date(),
-                message: message,
-            });
+                message: message as string,
+            };
+
+            response.status(statusCode).send(serverError);
         } else {
             const status = exception.getStatus();
 

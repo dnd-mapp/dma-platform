@@ -45,7 +45,6 @@ export class LoginPage {
                 map((response) => response.body),
                 tap((redirect) => {
                     if (!redirect) throw new Error('Failed to redirect back to client');
-                    console.log(redirect.url);
                     location.href = redirect.url;
                 }),
                 takeUntilDestroyed(this.destroyRef),
