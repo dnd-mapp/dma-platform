@@ -1,4 +1,4 @@
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideClientConfig, serverErrorInterceptor } from '@dnd-mapp/shared-ui';
@@ -9,6 +9,6 @@ export const appConfig: ApplicationConfig = {
         provideBrowserGlobalErrorListeners(),
         provideRouter(appRoutes),
         provideClientConfig(),
-        provideHttpClient(withInterceptors([serverErrorInterceptor])),
+        provideHttpClient(withFetch(), withInterceptors([serverErrorInterceptor])),
     ],
 };
