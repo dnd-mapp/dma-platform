@@ -37,26 +37,10 @@ async function bootstrap() {
         new FastifyAdapter(ssl ? { https: { cert: cert, key: key } } : undefined),
         {
             logger: ['log', 'warn', 'error', 'fatal'],
-            cors: {
-                // TODO - Retrieve valid origins from registered client their redirect URLs
-                origin: [
-                    'http://localhost:4300',
-                    'https://localhost:4300',
-                    'http://localhost.auth.dndmapp.dev:4300',
-                    'https://localhost.auth.dndmapp.dev:4300',
-                    'http://localhost:4200',
-                    'https://localhost:4200',
-                    'http://localhost.www.dndmapp.dev:4200',
-                    'https://localhost.www.dndmapp.dev:4200',
-                ],
-                methods: ['GET', 'POST'],
-                allowedHeaders: ['content-type', 'authorization'],
-                credentials: true,
-            },
         },
     );
     const configService = app.get(ConfigService<AuthServerConfig, true>);
-    const { host, port, cookieSecret } = configService.get<ServerConfig>(ConfigurationNamespaces.SERVER);
+    const { host, port, cookieSecret, cors } = configService.get<ServerConfig>(ConfigurationNamespaces.SERVER);
 
     await app.register(fastifyCookie, {
         // TODO - Enable secret rotation.
@@ -64,6 +48,14 @@ async function bootstrap() {
         algorithm: 'sha256',
     });
     Logger.log('Fastify Cookie plugin registered');
+
+    app.enableCors({
+        // TODO - Retrieve valid origins from registered client their redirect URLs
+        origin: cors.origins,
+        methods: ['GET', 'POST'],
+        allowedHeaders: ['content-type', 'authorization'],
+        credentials: true,
+    });
 
     const { error } = await tryCatch(app.listen(port, host));
 

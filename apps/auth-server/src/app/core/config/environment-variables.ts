@@ -32,6 +32,10 @@ export class Environment {
 
     @IsNotEmpty()
     @IsString()
+    [EnvironmentVariables.AUTH_SERVER_CORS_ORIGINS]!: string;
+
+    @IsNotEmpty()
+    @IsString()
     @IsOptional()
     [EnvironmentVariables.AUTH_DB_HOST]?: string;
 
