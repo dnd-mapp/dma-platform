@@ -9,8 +9,7 @@ import { lastValueFrom } from 'rxjs';
 import { appRoutes } from '../config';
 import { RootComponent } from './root.component';
 
-// TODO - Unfocus once error in CI pipeline has been figured out
-describe.only('RootComponent', () => {
+describe('RootComponent', () => {
     @Component({
         template: `<dma-root />`,
         imports: [RootComponent],
