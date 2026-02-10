@@ -7,7 +7,6 @@ export class RequestService {
     private readonly httpClient = inject(HttpClient);
 
     public get<ResponseBody>(url: string) {
-        console.log('RequestService::get');
         return this.httpClient.get<ResponseBody>(url, { observe: 'response' });
     }
 
