@@ -43,4 +43,7 @@ export default defineConfig({
         },
         uiBase: '/auth-client/',
     },
+    worker: {
+        plugins: () => [nxViteTsPaths()],
+    },
 });
