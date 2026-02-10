@@ -2,6 +2,7 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+import { AuthServerService } from '@dnd-mapp/auth-ui';
 import { RootHarness } from '@dnd-mapp/dnd-mapp/test';
 import { ConfigService } from '@dnd-mapp/shared-ui';
 import { setupTestEnvironment } from '@dnd-mapp/shared-ui/test';
@@ -23,7 +24,10 @@ describe('RootComponent', () => {
             providers: [provideRouter(appRoutes), provideHttpClient(withFetch())],
             afterConfig: async () => {
                 const configService = TestBed.inject(ConfigService);
+                const authServerService = TestBed.inject(AuthServerService);
+
                 await lastValueFrom(configService.initialize());
+                authServerService.initialize();
             },
         });
 

@@ -2,13 +2,7 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
 import { TokenGrantTypes } from '@dnd-mapp/auth-domain';
-import {
-    AuthServerService,
-    AuthService,
-    LoginButtonComponent,
-    ProfileButtonComponent,
-    SignUpButtonComponent,
-} from '@dnd-mapp/auth-ui';
+import { AuthService, LoginButtonComponent, ProfileButtonComponent, SignUpButtonComponent } from '@dnd-mapp/auth-ui';
 import {
     AppTopBarComponent,
     NavbarComponent,
@@ -37,12 +31,10 @@ import {
     ],
 })
 export class RootComponent implements OnInit {
-    protected readonly authService = inject(AuthService);
     private readonly destroyRef = inject(DestroyRef);
-    private readonly authServerService = inject(AuthServerService);
+    protected readonly authService = inject(AuthService);
 
     public ngOnInit() {
-        this.authServerService.initialize();
         this.authService
             .token({ grantType: TokenGrantTypes.REFRESH_TOKEN }, true)
             .request.pipe(takeUntilDestroyed(this.destroyRef))
