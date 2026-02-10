@@ -6,15 +6,8 @@
     "projectType": "library",
     "tags": ["scope:auth-ui", "platform:web"],
     "targets": {
-        "playwright-install": {
-            "executor": "nx:run-commands",
-            "options": {
-                "command": "playwright install chromium"
-            }
-        },
         "test": {
             "executor": "nx:run-commands",
-            "dependsOn": ["playwright-install"],
             "outputs": ["{workspaceRoot}/reports/{projectRoot}"],
             "cache": true,
             "options": {

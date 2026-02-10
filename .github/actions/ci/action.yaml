@@ -20,4 +20,6 @@ runs:
 
         - name: Run tests
           shell: bash
-          run: pnpm exec nx affected -t test --base "${{ env.NX_BASE }}" --head "${{ env.NX_HEAD }}"
+          run: |
+              pnpm playwright:install
+              pnpm exec nx affected -t test --base "${{ env.NX_BASE }}" --head "${{ env.NX_HEAD }}"
