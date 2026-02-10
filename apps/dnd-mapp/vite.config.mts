@@ -12,8 +12,6 @@ export default defineConfig({
     plugins: [angular(), nxViteTsPaths()],
     root: __dirname,
     test: {
-        // TODO - Remove once error in CI pipeline has been figured out
-        allowOnly: true,
         browser: {
             enabled: true,
             headless: true,

@@ -13,7 +13,6 @@ interface SetupTestEnvironmentParams<Harness extends ComponentHarness, Component
 export async function setupTestEnvironment<Harness extends ComponentHarness, Component = unknown>(
     params: SetupTestEnvironmentParams<Harness, Component> = {},
 ) {
-    console.log('setupTestEnvironment');
     const { providers, testComponent, harness } = params;
 
     TestBed.configureTestingModule({

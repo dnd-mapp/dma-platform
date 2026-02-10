@@ -1,7 +1,8 @@
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+import { AuthServerService } from '@dnd-mapp/auth-ui';
 import { RootHarness } from '@dnd-mapp/dnd-mapp/test';
 import { ConfigService } from '@dnd-mapp/shared-ui';
 import { setupTestEnvironment } from '@dnd-mapp/shared-ui/test';
@@ -9,8 +10,7 @@ import { lastValueFrom } from 'rxjs';
 import { appRoutes } from '../config';
 import { RootComponent } from './root.component';
 
-// TODO - Unfocus once error in CI pipeline has been figured out
-describe.only('RootComponent', () => {
+describe('RootComponent', () => {
     @Component({
         template: `<dma-root />`,
         imports: [RootComponent],
@@ -18,15 +18,16 @@ describe.only('RootComponent', () => {
     class TestComponent {}
 
     async function setupTest() {
-        console.log('setupTest');
         const { harness } = await setupTestEnvironment({
             testComponent: TestComponent,
             harness: RootHarness,
-            providers: [provideRouter(appRoutes), provideHttpClient()],
+            providers: [provideRouter(appRoutes), provideHttpClient(withFetch())],
             afterConfig: async () => {
-                console.log('afterConfig');
                 const configService = TestBed.inject(ConfigService);
+                const authServerService = TestBed.inject(AuthServerService);
+
                 await lastValueFrom(configService.initialize());
+                authServerService.initialize();
             },
         });
 
@@ -36,9 +37,7 @@ describe.only('RootComponent', () => {
     }
 
     it('should create', async () => {
-        console.log('start it');
         const { harness } = await setupTest();
         expect(harness).toBeDefined();
-        console.log('end it');
     });
 });

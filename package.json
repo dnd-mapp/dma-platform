@@ -28,7 +28,7 @@
   "scripts": {
     "nx": "pnpm exec nx",
     "gen:ssl-cert": "mkcert -key-file ssl-key.pem -cert-file ssl-cert.pem localhost.www.dndmapp.dev localhost.auth.dndmapp.dev localhost 127.0.0.1",
-    "playwright:install": "pnpm playwright install chromium webkit firefox"
+    "playwright:install": "pnpm playwright install chromium webkit firefox --with-deps"
   },
   "packageManager": "pnpm@10.28.1",
   "engines": {

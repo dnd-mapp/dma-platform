@@ -1,22 +1,19 @@
 import { Component } from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { RootHarness } from '@dnd-mapp/auth-client/test';
+import { ForgotPasswordHarness } from '@dnd-mapp/auth-client/test';
 import { setupTestEnvironment } from '@dnd-mapp/shared-ui/test';
-import { appRoutes } from '../config';
-import { RootComponent } from './root.component';
+import { ForgotPasswordPage } from './forgot-password.page';
 
-describe('RootComponent', () => {
+describe('SignUpPage', () => {
     @Component({
-        template: `<dma-root />`,
-        imports: [RootComponent],
+        template: `<dma-forgot-password />`,
+        imports: [ForgotPasswordPage],
     })
     class TestComponent {}
 
     async function setupTest() {
         const { harness } = await setupTestEnvironment({
             testComponent: TestComponent,
-            harness: RootHarness,
-            providers: [provideRouter(appRoutes)],
+            harness: ForgotPasswordHarness,
         });
 
         return {
