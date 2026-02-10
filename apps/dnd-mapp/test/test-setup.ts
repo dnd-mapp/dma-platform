@@ -11,7 +11,7 @@ beforeAll(async () => {
     await startWorker();
 });
 
-beforeEach(() => {
+afterEach(() => {
     resetWorker();
 });
 
