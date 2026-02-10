@@ -1,4 +1,4 @@
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
@@ -20,7 +20,7 @@ describe('RootComponent', () => {
         const { harness } = await setupTestEnvironment({
             testComponent: TestComponent,
             harness: RootHarness,
-            providers: [provideRouter(appRoutes), provideHttpClient()],
+            providers: [provideRouter(appRoutes), provideHttpClient(withFetch())],
             afterConfig: async () => {
                 const configService = TestBed.inject(ConfigService);
                 await lastValueFrom(configService.initialize());

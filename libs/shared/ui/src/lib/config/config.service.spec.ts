@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { setupTestEnvironment } from '@dnd-mapp/shared-ui/test';
 import { ConfigService } from './config.service';
 
 describe('ConfigService', () => {
     async function setupTest() {
         await setupTestEnvironment({
-            providers: [provideHttpClient()],
+            providers: [provideHttpClient(withFetch())],
         });
 
         return {
