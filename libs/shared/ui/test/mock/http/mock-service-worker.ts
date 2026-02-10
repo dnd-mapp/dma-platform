@@ -4,7 +4,7 @@ import { SetupWorker, setupWorker } from 'msw/browser';
 let mockServiceWorker: SetupWorker;
 
 async function startWorker() {
-    await mockServiceWorker.start({ onUnhandledRequest: 'warn' });
+    await mockServiceWorker.start({ quiet: true, onUnhandledRequest: 'warn' });
 }
 
 function resetWorker() {
