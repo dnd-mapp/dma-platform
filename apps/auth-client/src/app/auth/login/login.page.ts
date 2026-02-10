@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AuthService } from '@dnd-mapp/auth-ui';
 import { ButtonComponent, PasswordInputComponent, UsernameInputComponent } from '@dnd-mapp/shared-ui';
 import { map, tap } from 'rxjs';
@@ -13,7 +13,7 @@ import { map, tap } from 'rxjs';
     host: {
         '[class]': `'flex h-full justify-center items-center'`,
     },
-    imports: [ReactiveFormsModule, ButtonComponent, UsernameInputComponent, PasswordInputComponent],
+    imports: [ReactiveFormsModule, RouterLink, ButtonComponent, UsernameInputComponent, PasswordInputComponent],
 })
 export class LoginPage {
     private readonly formBuilder = inject(FormBuilder);
