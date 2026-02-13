@@ -6,14 +6,14 @@ hr {
     @apply my-3 border-neutral-400;
 }
 
-a {
+a:not(header a) {
     @apply text-blue-400;
 }
 
-a:hover {
+a:not(header a):hover {
     @apply text-blue-500;
 }
 
-a:active {
+a:not(header a):active {
     @apply text-blue-600;
 }

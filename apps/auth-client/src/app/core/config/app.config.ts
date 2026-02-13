@@ -2,14 +2,13 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideAuthServerService } from '@dnd-mapp/auth-ui';
-import { provideClientConfig, serverErrorInterceptor } from '@dnd-mapp/shared-ui';
+import { serverErrorInterceptor } from '@dnd-mapp/shared-ui';
 import { appRoutes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
     providers: [
         provideBrowserGlobalErrorListeners(),
         provideRouter(appRoutes),
-        provideClientConfig(),
         provideAuthServerService(),
         provideHttpClient(withFetch(), withInterceptors([serverErrorInterceptor])),
     ],
