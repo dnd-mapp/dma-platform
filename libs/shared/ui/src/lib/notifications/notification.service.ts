@@ -1,9 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { NotificationConfig } from './notification-types';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService {
-    public showNotification(config: NotificationConfig) {
-        console.log({ config });
+    private readonly notifications = signal<NotificationConfig[]>([]);
+
+    public readonly notifications$ = this.notifications.asReadonly();
+
+    public showNotification(notification: NotificationConfig) {
+        this.notifications.update((notifications) => [...notifications, notification]);
     }
 }
