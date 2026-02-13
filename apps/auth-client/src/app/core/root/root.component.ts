@@ -1,7 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AuthService } from '@dnd-mapp/auth-ui';
-import { AppTopBarComponent, NavBrandComponent, VerticalRuleComponent } from '@dnd-mapp/shared-ui';
+import {
+    AppTopBarComponent,
+    NavBrandComponent,
+    NotificationsZoneComponent,
+    VerticalRuleComponent,
+} from '@dnd-mapp/shared-ui';
 
 @Component({
     selector: 'dma-root',
@@ -13,7 +18,7 @@ import { AppTopBarComponent, NavBrandComponent, VerticalRuleComponent } from '@d
         '[class.bg-neutral-50]': `authService.authenticated()`,
         '[class.text-neutral-900]': `authService.authenticated()`,
     },
-    imports: [RouterOutlet, AppTopBarComponent, NavBrandComponent, VerticalRuleComponent],
+    imports: [RouterOutlet, AppTopBarComponent, NavBrandComponent, VerticalRuleComponent, NotificationsZoneComponent],
 })
 export class RootComponent {
     protected readonly authService = inject(AuthService);
