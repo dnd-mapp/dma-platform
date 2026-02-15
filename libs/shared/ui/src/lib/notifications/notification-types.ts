@@ -6,8 +6,9 @@ export const NotificationTypes = {
 
 export type NotificationType = (typeof NotificationTypes)[keyof typeof NotificationTypes];
 
-export interface NotificationConfig {
+export interface NotificationData {
     type: NotificationType;
-    title: string;
     message: string;
+    timestamp: Date;
+    title?: string;
 }

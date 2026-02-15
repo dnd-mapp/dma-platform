@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
+import { NgComponentOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { NotificationComponent } from './notification.component';
 import { NotificationService } from './notification.service';
 
 @Component({
@@ -6,16 +8,14 @@ import { NotificationService } from './notification.service';
     templateUrl: './notifications-zone.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[class]': `'absolute bottom-4 left-4'`,
+        '[class]': `'flex flex-col gap-3 absolute bottom-4 left-4'`,
     },
-    imports: [],
+    imports: [NgComponentOutlet],
 })
 export class NotificationsZoneComponent {
     private readonly notificationService = inject(NotificationService);
 
-    constructor() {
-        effect(() => {
-            console.log(this.notificationService.notifications$());
-        });
-    }
+    protected readonly notificationComponent = NotificationComponent;
+
+    protected readonly notifications = computed(() => this.notificationService.notifications$().slice(0, 3));
 }
