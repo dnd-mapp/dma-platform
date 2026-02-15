@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { ApplicationInitStatus, Component } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+import { authInterceptor, provideAuthServerService } from '@dnd-mapp/auth-ui';
 import { ProfileButtonHarness } from '@dnd-mapp/auth-ui/test';
+import { provideHttp, serverErrorInterceptor } from '@dnd-mapp/shared-ui';
 import { setupTestEnvironment } from '@dnd-mapp/shared-ui/test';
 import { ProfileButtonComponent } from './profile-button.component';
 
@@ -14,6 +17,10 @@ describe('ProfileButtonComponent', () => {
         const { harness } = await setupTestEnvironment({
             testComponent: TestComponent,
             harness: ProfileButtonHarness,
+            providers: [provideHttp(serverErrorInterceptor, authInterceptor), provideAuthServerService()],
+            afterConfig: async () => {
+                await TestBed.inject(ApplicationInitStatus).donePromise;
+            },
         });
 
         return {
