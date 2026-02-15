@@ -18,12 +18,6 @@ import { hashPassword } from '@dnd-mapp/backend-utils';
 const hash = await hashPassword('my-secure-password', pepper);
 ```
 
-## 🧪 Testing
-
-Unit tests are powered by Vitest in a Node environment.
-
-- **Command:** `nx test backend-utils`
-
 ## 📁 Categorization
 
 Common utilities are included here:

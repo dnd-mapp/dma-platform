@@ -13,9 +13,6 @@ dist/
 
 node_modules/
 
-reports/
-**/__screenshots__/
-
 **/*.pem
 **/.env
 **/public/config.json

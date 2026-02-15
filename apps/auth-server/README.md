@@ -90,10 +90,3 @@ The API is configured to run on port **4350** using the shared platform SSL cert
 
 - **Generate Client:** `nx prisma-generate auth-server`
 - **Migrations:** `nx prisma-migrate auth-server`
-
----
-
-## 🧪 Testing
-
-- **Unit:** `nx test auth-server`
-- **E2E:** `nx e2e auth-server-e2e`

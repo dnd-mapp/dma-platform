@@ -20,8 +20,6 @@ pnpm-lock.yaml
 .vscode/
 
 .angular/
-.msw/
 .nx/
 node_modules/
 dist/
-reports/

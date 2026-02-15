@@ -65,23 +65,6 @@
                 "inspect": true,
                 "port": 9200
             }
-        },
-        "test": {
-            "executor": "nx:run-commands",
-            "outputs": ["{workspaceRoot}/reports/{projectRoot}"],
-            "cache": true,
-            "options": {
-                "cwd": "{projectRoot}"
-            },
-            "defaultConfiguration": "ci",
-            "configurations": {
-                "ci": {
-                    "command": "vitest run"
-                },
-                "development": {
-                    "command": "vitest --ui --watch"
-                }
-            }
         }
     }
 }

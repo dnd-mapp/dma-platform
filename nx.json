@@ -6,13 +6,7 @@
     "namedInputs": {
         "sharedGlobals": [],
         "default": ["{projectRoot}/**/*", "sharedGlobals"],
-        "production": [
-            "default",
-            "!{projectRoot}/vite.config.mts",
-            "!{projectRoot}/**/*.spec.ts",
-            "!{projectRoot}/tsconfig.spec.json",
-            "!{projectRoot}/test/**/*.ts"
-        ]
+        "production": ["default"]
     },
     "cli": {
         "packageManager": "pnpm"
@@ -40,12 +34,6 @@
             }
         },
         {
-            "plugin": "@nx/playwright/plugin",
-            "options": {
-                "targetName": "e2e"
-            }
-        },
-        {
             "plugin": "@nx/webpack/plugin",
             "options": {
                 "buildTargetName": "build",
@@ -59,10 +47,10 @@
     ],
     "generators": {
         "@nx/angular:application": {
-            "e2eTestRunner": "playwright",
+            "e2eTestRunner": "none",
             "linter": "eslint",
             "style": "css",
-            "unitTestRunner": "vitest-analog",
+            "unitTestRunner": "none",
             "bundler": "esbuild",
             "ssr": false
         },
@@ -78,7 +66,7 @@
             "buildable": false,
             "linter": "eslint",
             "publishable": false,
-            "unitTestRunner": "vitest-analog"
+            "unitTestRunner": "none"
         },
         "@nx/angular:service": {
             "addTypeToClassName": true,
@@ -86,12 +74,12 @@
         },
         "@nx/js:library": {
             "bundler": "none",
-            "unitTestRunner": "vitest",
+            "unitTestRunner": "none",
             "linter": "eslint"
         },
         "@nx/nest:application": {
             "linter": "eslint",
-            "unitTestRunner": "jest"
+            "unitTestRunner": "none"
         }
     }
 }

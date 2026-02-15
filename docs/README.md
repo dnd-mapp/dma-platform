@@ -17,12 +17,11 @@ Discover the features and tools available for your sessions.
 
 ### 🛠 Developer Hub
 
-Our technical stack is built on a **Nx Monorepo** with **Angular**, **pnpm**, and **Vitest**.
+Our technical stack is built on a **Nx Monorepo** with **Angular**, and **pnpm**.
 
 - **[Getting Started](./dev/getting-started.md)**: Environment setup (Node 24, pnpm 10).
 - **[Local SSL & DNS](./dev/ssl-dns-setup.md)**: Certificates and hosts file.
 - **[Architecture Overview](./dev/architecture.md)**: Nx workspace and shared libs.
-- **[Testing Strategy](./dev/testing-guide.md)**: Vitest & Playwright.
 - **[Docker Guide](./dev/docker-guide.md)**: All about containerization using Docker.
 
 ### 🏛 Project Governance
