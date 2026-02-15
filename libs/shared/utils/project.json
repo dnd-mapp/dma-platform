@@ -4,23 +4,5 @@
     "sourceRoot": "libs/shared/utils/src",
     "projectType": "library",
     "tags": ["scope:shared-utils"],
-    "targets": {
-        "test": {
-            "executor": "nx:run-commands",
-            "outputs": ["{workspaceRoot}/reports/{projectRoot}"],
-            "cache": true,
-            "options": {
-                "cwd": "{projectRoot}"
-            },
-            "defaultConfiguration": "ci",
-            "configurations": {
-                "ci": {
-                    "command": "vitest run"
-                },
-                "development": {
-                    "command": "vitest --ui --watch"
-                }
-            }
-        }
-    }
+    "targets": {}
 }

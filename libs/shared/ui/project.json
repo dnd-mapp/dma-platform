@@ -6,23 +6,6 @@
     "projectType": "library",
     "tags": ["scope:shared-ui", "platform:web"],
     "targets": {
-        "test": {
-            "executor": "nx:run-commands",
-            "outputs": ["{workspaceRoot}/reports/{projectRoot}"],
-            "cache": true,
-            "options": {
-                "cwd": "{projectRoot}"
-            },
-            "defaultConfiguration": "ci",
-            "configurations": {
-                "ci": {
-                    "command": "vitest run"
-                },
-                "development": {
-                    "command": "vitest --ui --watch"
-                }
-            }
-        },
         "lint": {
             "executor": "@nx/eslint:lint",
             "outputs": ["{options.outputFile}"],

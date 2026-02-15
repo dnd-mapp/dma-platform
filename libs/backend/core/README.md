@@ -20,9 +20,3 @@ Since this library utilizes NestJS decorators, it must only be imported by other
 ```typescript
 import { DatabaseService } from '@dnd-mapp/backend-core';
 ```
-
-## 🧪 Testing
-
-Unit tests are powered by Vitest using the standard platform bridge.
-
-- **Command:** `nx test backend-core`

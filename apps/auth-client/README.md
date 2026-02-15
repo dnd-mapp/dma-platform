@@ -34,9 +34,6 @@ Ensure your [Local SSL & DNS](../../docs/dev/ssl-dns-setup.md) is configured to 
 
 - **Framework:** Angular (v21+)
 - **Shared Components:** Consumes `@dnd-mapp/shared-ui` for layout and forms.
-- **Testing:**
-    - Unit: `nx test auth-client` (Vitest)
-    - E2E: `nx e2e auth-client-e2e` (Playwright)
 
 ---
 

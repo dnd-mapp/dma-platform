@@ -1,6 +1,5 @@
 .angular/
 dist/
-reports/
 
 .idea/
 .vscode/
@@ -9,6 +8,6 @@ node_modules/
 
 .github/
 docs/
-e2e/
 
 **/*.pem
+**/.env*

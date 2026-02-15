@@ -24,9 +24,3 @@ import { AuthService, LogInButtonComponent } from '@dnd-mapp/auth-ui';
 ## 🎨 Styling
 
 Like other libraries in this monorepo, `auth-ui` is not buildable. It relies on the consuming application's Tailwind configuration.
-
-## 🧪 Testing
-
-Unit tests are powered by Vitest. This library also exports test harnesses for its UI components to simplify integration testing in the apps.
-
-- **Command:** `nx test auth-ui`

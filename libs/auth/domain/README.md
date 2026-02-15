@@ -12,9 +12,3 @@ Classes in this library use decorators from **`class-validator`** and **`class-t
 
 - **Backend:** NestJS uses these models with the `ValidationPipe` to automatically validate incoming request bodies and query parameters.
 - **Frontend:** Angular applications can use these models to ensure data structure consistency and perform manual validation if required.
-
-## 🧪 Testing
-
-As these models are the backbone of our API contracts, ensure that any changes are reflected in the unit tests to prevent breaking changes between the server and clients.
-
-- **Command:** `nx test auth-domain`

@@ -24,8 +24,8 @@ export class LoginPage {
     protected processing = signal(false);
 
     protected readonly loginForm = this.formBuilder.nonNullable.group({
-        username: this.formBuilder.nonNullable.control('', [Validators.required]),
-        password: this.formBuilder.nonNullable.control('', [Validators.required]),
+        username: this.formBuilder.nonNullable.control('admin', [Validators.required]),
+        password: this.formBuilder.nonNullable.control('changemenow', [Validators.required]),
     });
 
     protected onLogin() {

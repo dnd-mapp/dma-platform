@@ -17,10 +17,6 @@ dma-platform/
 │   ├── auth-server/      # NestJS (Identity API)
 │   └── dnd-mapp/         # Angular (Main Web Application)
 ├── docs/                 # Documentation hub
-├── e2e/                  # Playwright End-to-End tests
-│   ├── auth-client/      
-│   ├── auth-server/      
-│   └── dnd-mapp/
 └── libs/
     ├── auth/
     │   ├── domain/       # Shared DTOs & Models (@dnd-mapp/auth-domain)
@@ -55,13 +51,6 @@ We use **Tailwind CSS** for all styling.
 
 ## 🔄 Technical Decisions
 
-### Why AnalogJS for Testing?
-
-We use `@analogjs/vitest-angular` as a bridge to enable **Vitest**.
-
--   **Benefit:** Provides a 10x faster unit testing experience compared to Karma.
--   **Constraint:** We do not use other AnalogJS features (SSR/Routing) to keep the Angular footprint standard.
-
 ### Local Development Loopback
 
 The use of `localhost.www.dndmapp.dev` via the `hosts` file allows us to simulate subdomains and handle SSL certificates in a way that mirrors our eventual production environment.
@@ -70,5 +59,4 @@ The use of `localhost.www.dndmapp.dev` via the `hosts` file allows us to simulat
 
 **See Also:**
 
-- [Testing Strategy](./testing-guide.md)
 - [SSL & DNS Setup](./ssl-dns-setup.md) 

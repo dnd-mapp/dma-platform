@@ -18,12 +18,6 @@ import { tryCatchSync } from '@dnd-mapp/shared-utils';
 const { data, error } = tryCatchSync(() => someFunctionThatMightThrowErrors());
 ```
 
-## 🧪 Testing
-
-As this library contains the "atomic" logic of our platform, maintaining high test coverage is essential.
-
-- **Unit Tests:** `nx test shared-utils` (Vitest)
-
 ## 📁 Categorization
 
 Common utilities are included here:
