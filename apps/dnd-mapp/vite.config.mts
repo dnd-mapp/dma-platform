@@ -29,6 +29,7 @@ export default defineConfig({
         },
         globals: true,
         include: ['src/**/*.spec.ts'],
+        maxConcurrency: 1,
         name: 'dnd-mapp',
         open: false,
         passWithNoTests: true,
@@ -39,6 +40,7 @@ export default defineConfig({
         ],
         setupFiles: ['test/test-setup.ts'],
         sequence: {
+            setupFiles: 'list',
             shuffle: true,
         },
         uiBase: '/dnd-mapp/',
