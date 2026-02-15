@@ -1,6 +1,6 @@
 import { ApplicationInitStatus, Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { ProfileButtonHarness, setupMockHandlers } from '@dnd-mapp/auth-ui/test';
+import { ProfileButtonHarness } from '@dnd-mapp/auth-ui/test';
 import { provideHttp, serverErrorInterceptor } from '@dnd-mapp/shared-ui';
 import { setupTestEnvironment } from '@dnd-mapp/shared-ui/test';
 import { authInterceptor, provideAuthServerService } from '../http';
@@ -14,8 +14,6 @@ describe('ProfileButtonComponent', () => {
     class TestComponent {}
 
     async function setupTest() {
-        await setupMockHandlers();
-
         const { harness } = await setupTestEnvironment({
             testComponent: TestComponent,
             harness: ProfileButtonHarness,
