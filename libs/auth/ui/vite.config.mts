@@ -27,6 +27,7 @@ export default defineConfig({
             reportOnFailure: true,
             reportsDirectory: `${reportsDirectory}/coverage`,
         },
+        fileParallelism: false,
         globals: true,
         include: ['src/**/*.spec.ts'],
         maxConcurrency: 1,
