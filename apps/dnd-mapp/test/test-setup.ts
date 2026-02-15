@@ -11,12 +11,12 @@ beforeAll(async () => {
     await startWorker();
 });
 
-afterEach(() => {
-    resetWorker();
-});
-
 afterAll(() => {
     stopWorker();
+});
+
+afterEach(() => {
+    resetWorker();
 });
 
 setupTestBed({ browserMode: true, zoneless: true });
