@@ -10,6 +10,7 @@ import {
     AuthServerConfig,
     ConfigurationNamespaces,
     fromBase64,
+    hashPassword,
     sha256,
     toBase64,
     verifyPassword,
@@ -79,7 +80,9 @@ export class AuthService {
         const authTransaction = await this.authTransactionRepository.findOneById(authTransactionId);
         const user = await this.userService.getByUsername(username);
 
-        const passwordMatch = await verifyPassword(password, user?.password ?? nanoid(), passwordPepper);
+        const passwordHash = user?.password ?? (await hashPassword(nanoid(), passwordPepper));
+        const passwordMatch = await verifyPassword(password, passwordHash, passwordPepper);
+
         if (authTransaction === null) {
             this.logger.warn(`Login failed: Invalid login challenge "${authTransactionId}"`);
             throw new UnauthorizedException();
