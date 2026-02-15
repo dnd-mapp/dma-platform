@@ -3,9 +3,9 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RootHarness } from '@dnd-mapp/auth-client/test';
 import { authInterceptor, provideAuthServerService } from '@dnd-mapp/auth-ui';
-import { authServerHandlers } from '@dnd-mapp/auth-ui/test';
+import { setupMockHandlers } from '@dnd-mapp/auth-ui/test';
 import { provideHttp, serverErrorInterceptor } from '@dnd-mapp/shared-ui';
-import { clientHandlers, getMockServiceWorker, setupTestEnvironment, test } from '@dnd-mapp/shared-ui/test';
+import { setupTestEnvironment, test } from '@dnd-mapp/shared-ui/test';
 import { appRoutes } from '../config';
 import { RootComponent } from './root.component';
 
@@ -17,8 +17,7 @@ describe('RootComponent', () => {
     class TestComponent {}
 
     async function setupTest() {
-        const msw = getMockServiceWorker();
-        msw.resetHandlers(...clientHandlers, ...authServerHandlers);
+        await setupMockHandlers();
 
         const { harness } = await setupTestEnvironment({
             testComponent: TestComponent,

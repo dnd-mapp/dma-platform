@@ -1,8 +1,8 @@
 import { ApplicationInitStatus, Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { authServerHandlers, LoginButtonHarness } from '@dnd-mapp/auth-ui/test';
+import { LoginButtonHarness, setupMockHandlers } from '@dnd-mapp/auth-ui/test';
 import { provideHttp, serverErrorInterceptor } from '@dnd-mapp/shared-ui';
-import { clientHandlers, getMockServiceWorker, setupTestEnvironment, test } from '@dnd-mapp/shared-ui/test';
+import { setupTestEnvironment, test } from '@dnd-mapp/shared-ui/test';
 import { authInterceptor, provideAuthServerService } from '../http';
 import { LoginButtonComponent } from './login-button.component';
 
@@ -14,8 +14,7 @@ describe('LoginButtonComponent', () => {
     class TestComponent {}
 
     async function setupTest() {
-        const msw = getMockServiceWorker();
-        msw.resetHandlers(...clientHandlers, ...authServerHandlers);
+        await setupMockHandlers();
 
         const { harness } = await setupTestEnvironment({
             testComponent: TestComponent,

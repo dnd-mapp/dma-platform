@@ -1,15 +1,14 @@
 import { ApplicationInitStatus } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { authInterceptor, provideAuthServerService } from '@dnd-mapp/auth-ui';
-import { authServerHandlers } from '@dnd-mapp/auth-ui/test';
+import { setupMockHandlers } from '@dnd-mapp/auth-ui/test';
 import { provideHttp, serverErrorInterceptor } from '@dnd-mapp/shared-ui';
-import { clientHandlers, getMockServiceWorker, setupTestEnvironment, test } from '@dnd-mapp/shared-ui/test';
+import { setupTestEnvironment, test } from '@dnd-mapp/shared-ui/test';
+import { authInterceptor, provideAuthServerService } from '../http';
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
     async function setupTest() {
-        const msw = getMockServiceWorker();
-        msw.resetHandlers(...clientHandlers, ...authServerHandlers);
+        await setupMockHandlers();
 
         await setupTestEnvironment({
             providers: [provideHttp(serverErrorInterceptor, authInterceptor), provideAuthServerService()],
