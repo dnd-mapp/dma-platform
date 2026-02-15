@@ -1,12 +1,16 @@
 import { ApplicationInitStatus } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { authInterceptor, provideAuthServerService } from '@dnd-mapp/auth-ui';
+import { authServerHandlers } from '@dnd-mapp/auth-ui/test';
 import { provideHttp, serverErrorInterceptor } from '@dnd-mapp/shared-ui';
-import { setupTestEnvironment } from '@dnd-mapp/shared-ui/test';
+import { clientHandlers, getMockServiceWorker, setupTestEnvironment, test } from '@dnd-mapp/shared-ui/test';
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
     async function setupTest() {
+        const msw = getMockServiceWorker();
+        msw.use(...clientHandlers, ...authServerHandlers);
+
         await setupTestEnvironment({
             providers: [provideHttp(serverErrorInterceptor, authInterceptor), provideAuthServerService()],
             afterConfig: async () => {
@@ -19,7 +23,7 @@ describe('AuthService', () => {
         };
     }
 
-    it('should be created', async () => {
+    test('should be created', async () => {
         const { service } = await setupTest();
         expect(service).toBeDefined();
     });

@@ -1,9 +1,9 @@
 import { ApplicationInitStatus, Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { authInterceptor, provideAuthServerService } from '@dnd-mapp/auth-ui';
-import { ProfileButtonHarness } from '@dnd-mapp/auth-ui/test';
+import { authServerHandlers, ProfileButtonHarness } from '@dnd-mapp/auth-ui/test';
 import { provideHttp, serverErrorInterceptor } from '@dnd-mapp/shared-ui';
-import { setupTestEnvironment } from '@dnd-mapp/shared-ui/test';
+import { clientHandlers, getMockServiceWorker, setupTestEnvironment, test } from '@dnd-mapp/shared-ui/test';
 import { ProfileButtonComponent } from './profile-button.component';
 
 describe('ProfileButtonComponent', () => {
@@ -14,6 +14,9 @@ describe('ProfileButtonComponent', () => {
     class TestComponent {}
 
     async function setupTest() {
+        const msw = getMockServiceWorker();
+        msw.use(...clientHandlers, ...authServerHandlers);
+
         const { harness } = await setupTestEnvironment({
             testComponent: TestComponent,
             harness: ProfileButtonHarness,
@@ -28,7 +31,7 @@ describe('ProfileButtonComponent', () => {
         };
     }
 
-    it('should create', async () => {
+    test('should create', async () => {
         const { harness } = await setupTest();
         expect(harness).toBeDefined();
     });
