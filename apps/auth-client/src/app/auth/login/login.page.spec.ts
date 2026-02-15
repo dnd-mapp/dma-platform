@@ -15,6 +15,7 @@ describe('LoginPage', () => {
     class TestComponent {}
 
     async function setupTest() {
+        console.log('setupTest');
         const { harness } = await setupTestEnvironment({
             testComponent: TestComponent,
             harness: LoginHarness,
@@ -24,6 +25,7 @@ describe('LoginPage', () => {
                 provideAuthServerService(),
             ],
             afterConfig: async () => {
+                console.log('afterConfig');
                 await TestBed.inject(ApplicationInitStatus).donePromise;
             },
         });

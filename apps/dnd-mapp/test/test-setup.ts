@@ -8,14 +8,17 @@ import { clientHandlers, initializeMockServiceWorker } from '@dnd-mapp/shared-ui
 const { startWorker, stopWorker, resetWorker } = initializeMockServiceWorker(...clientHandlers, ...authServerHandlers);
 
 beforeAll(async () => {
+    console.log('beforeAll');
     await startWorker();
 });
 
 afterAll(() => {
+    console.log('afterAll');
     stopWorker();
 });
 
 afterEach(() => {
+    console.log('afterEach');
     resetWorker();
 });
 

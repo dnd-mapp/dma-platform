@@ -16,6 +16,7 @@ describe('RootComponent', () => {
     class TestComponent {}
 
     async function setupTest() {
+        console.log('setupTest');
         const { harness } = await setupTestEnvironment({
             testComponent: TestComponent,
             harness: RootHarness,
@@ -25,6 +26,7 @@ describe('RootComponent', () => {
                 provideAuthServerService(),
             ],
             afterConfig: async () => {
+                console.log('afterConfig');
                 await TestBed.inject(ApplicationInitStatus).donePromise;
             },
         });

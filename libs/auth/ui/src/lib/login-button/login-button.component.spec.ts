@@ -14,11 +14,13 @@ describe('LoginButtonComponent', () => {
     class TestComponent {}
 
     async function setupTest() {
+        console.log('setupTest');
         const { harness } = await setupTestEnvironment({
             testComponent: TestComponent,
             harness: LoginButtonHarness,
             providers: [provideHttp(serverErrorInterceptor, authInterceptor), provideAuthServerService()],
             afterConfig: async () => {
+                console.log('afterConfig');
                 await TestBed.inject(ApplicationInitStatus).donePromise;
             },
         });
