@@ -17,6 +17,7 @@ export function serverErrorInterceptor(request: HttpRequest<unknown>, next: Http
                     type: NotificationTypes.ERROR,
                     title: title,
                     message: error.message,
+                    timestamp: new Date(error.timestamp),
                 });
                 throw error;
             }
