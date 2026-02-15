@@ -1,12 +1,10 @@
-import { provideHttpClient, withFetch } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { ApplicationInitStatus, Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { AuthServerService } from '@dnd-mapp/auth-ui';
+import { authInterceptor, provideAuthServerService } from '@dnd-mapp/auth-ui';
 import { RootHarness } from '@dnd-mapp/dnd-mapp/test';
-import { ConfigService } from '@dnd-mapp/shared-ui';
+import { provideHttp, serverErrorInterceptor } from '@dnd-mapp/shared-ui';
 import { setupTestEnvironment } from '@dnd-mapp/shared-ui/test';
-import { lastValueFrom } from 'rxjs';
 import { appRoutes } from '../config';
 import { RootComponent } from './root.component';
 
@@ -21,13 +19,13 @@ describe('RootComponent', () => {
         const { harness } = await setupTestEnvironment({
             testComponent: TestComponent,
             harness: RootHarness,
-            providers: [provideRouter(appRoutes), provideHttpClient(withFetch())],
+            providers: [
+                provideRouter(appRoutes),
+                provideHttp(serverErrorInterceptor, authInterceptor),
+                provideAuthServerService(),
+            ],
             afterConfig: async () => {
-                const configService = TestBed.inject(ConfigService);
-                const authServerService = TestBed.inject(AuthServerService);
-
-                await lastValueFrom(configService.initialize());
-                authServerService.initialize();
+                await TestBed.inject(ApplicationInitStatus).donePromise;
             },
         });
 
