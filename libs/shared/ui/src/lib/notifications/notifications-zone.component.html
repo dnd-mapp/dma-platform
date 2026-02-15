@@ -1,1 +1,3 @@
-<p>notifications-zone works!</p>
+@for (data of notifications(); track data.timestamp) {
+    <ng-container *ngComponentOutlet="notificationComponent; inputs: { data: data }" />
+}
