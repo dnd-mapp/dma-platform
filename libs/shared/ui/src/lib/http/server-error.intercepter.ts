@@ -10,6 +10,8 @@ export function serverErrorInterceptor(request: HttpRequest<unknown>, next: Http
     return next(request).pipe(
         catchError((response: HttpErrorResponse) => {
             if (!response.ok && (isServerErrorResponse(response.status) || isClientErrorResponse(response.status))) {
+                console.log({ response });
+
                 const error: ServerError = response.error;
                 const title = `${error.error} (${error.status})`;
 
@@ -17,6 +19,7 @@ export function serverErrorInterceptor(request: HttpRequest<unknown>, next: Http
                     type: NotificationTypes.ERROR,
                     title: title,
                     message: error.message,
+                    timestamp: new Date(error.timestamp),
                 });
                 throw error;
             }

@@ -1,12 +1,11 @@
-import { provideHttpClient, withFetch } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { ApplicationInitStatus, Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { AuthServerService } from '@dnd-mapp/auth-ui';
+import { authInterceptor, provideAuthServerService } from '@dnd-mapp/auth-ui';
+import { setupMockHandlers } from '@dnd-mapp/auth-ui/test';
 import { RootHarness } from '@dnd-mapp/dnd-mapp/test';
-import { ConfigService } from '@dnd-mapp/shared-ui';
-import { setupTestEnvironment } from '@dnd-mapp/shared-ui/test';
-import { lastValueFrom } from 'rxjs';
+import { provideHttp, serverErrorInterceptor } from '@dnd-mapp/shared-ui';
+import { setupTestEnvironment, test } from '@dnd-mapp/shared-ui/test';
 import { appRoutes } from '../config';
 import { RootComponent } from './root.component';
 
@@ -18,16 +17,18 @@ describe('RootComponent', () => {
     class TestComponent {}
 
     async function setupTest() {
+        await setupMockHandlers();
+
         const { harness } = await setupTestEnvironment({
             testComponent: TestComponent,
             harness: RootHarness,
-            providers: [provideRouter(appRoutes), provideHttpClient(withFetch())],
+            providers: [
+                provideRouter(appRoutes),
+                provideHttp(serverErrorInterceptor, authInterceptor),
+                provideAuthServerService(),
+            ],
             afterConfig: async () => {
-                const configService = TestBed.inject(ConfigService);
-                const authServerService = TestBed.inject(AuthServerService);
-
-                await lastValueFrom(configService.initialize());
-                authServerService.initialize();
+                await TestBed.inject(ApplicationInitStatus).donePromise;
             },
         });
 
@@ -36,7 +37,7 @@ describe('RootComponent', () => {
         };
     }
 
-    it('should create', async () => {
+    test('should create', async () => {
         const { harness } = await setupTest();
         expect(harness).toBeDefined();
     });

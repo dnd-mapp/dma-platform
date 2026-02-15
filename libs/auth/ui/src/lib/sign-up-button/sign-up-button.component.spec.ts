@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { SignUpButtonComponent } from '@dnd-mapp/auth-ui';
 import { SignUpButtonHarness } from '@dnd-mapp/auth-ui/test';
 import { setupTestEnvironment } from '@dnd-mapp/shared-ui/test';
+import { SignUpButtonComponent } from './sign-up-button.component';
 
 describe('SignUpButtonComponent', () => {
     @Component({

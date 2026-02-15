@@ -1,15 +1,17 @@
 import { ApplicationInitStatus, Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { LoginButtonHarness, setupMockHandlers } from '@dnd-mapp/auth-ui/test';
+import { provideRouter } from '@angular/router';
+import { authInterceptor, provideAuthServerService } from '@dnd-mapp/auth-ui';
+import { setupMockHandlers } from '@dnd-mapp/auth-ui/test';
+import { HomeHarness } from '@dnd-mapp/dnd-mapp/test';
 import { provideHttp, serverErrorInterceptor } from '@dnd-mapp/shared-ui';
 import { setupTestEnvironment, test } from '@dnd-mapp/shared-ui/test';
-import { authInterceptor, provideAuthServerService } from '../http';
-import { LoginButtonComponent } from './login-button.component';
+import { HomePage } from './home.page';
 
-describe('LoginButtonComponent', () => {
+describe('HomePage', () => {
     @Component({
-        template: `<dma-login-button />`,
-        imports: [LoginButtonComponent],
+        template: `<dma-home />`,
+        imports: [HomePage],
     })
     class TestComponent {}
 
@@ -18,8 +20,12 @@ describe('LoginButtonComponent', () => {
 
         const { harness } = await setupTestEnvironment({
             testComponent: TestComponent,
-            harness: LoginButtonHarness,
-            providers: [provideHttp(serverErrorInterceptor, authInterceptor), provideAuthServerService()],
+            harness: HomeHarness,
+            providers: [
+                provideRouter([]),
+                provideHttp(serverErrorInterceptor, authInterceptor),
+                provideAuthServerService(),
+            ],
             afterConfig: async () => {
                 await TestBed.inject(ApplicationInitStatus).donePromise;
             },

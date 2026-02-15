@@ -1,11 +1,11 @@
-import { provideHttpClient, withFetch } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { ApplicationInitStatus, Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { LoginHarness } from '@dnd-mapp/auth-client/test';
-import { ConfigService } from '@dnd-mapp/shared-ui';
-import { setupTestEnvironment } from '@dnd-mapp/shared-ui/test';
-import { lastValueFrom } from 'rxjs';
+import { authInterceptor, provideAuthServerService } from '@dnd-mapp/auth-ui';
+import { setupMockHandlers } from '@dnd-mapp/auth-ui/test';
+import { provideHttp, serverErrorInterceptor } from '@dnd-mapp/shared-ui';
+import { setupTestEnvironment, test } from '@dnd-mapp/shared-ui/test';
 import { LoginPage } from './login.page';
 
 describe('LoginPage', () => {
@@ -16,13 +16,18 @@ describe('LoginPage', () => {
     class TestComponent {}
 
     async function setupTest() {
+        await setupMockHandlers();
+
         const { harness } = await setupTestEnvironment({
             testComponent: TestComponent,
             harness: LoginHarness,
-            providers: [provideRouter([]), provideHttpClient(withFetch())],
+            providers: [
+                provideRouter([]),
+                provideHttp(serverErrorInterceptor, authInterceptor),
+                provideAuthServerService(),
+            ],
             afterConfig: async () => {
-                const configService = TestBed.inject(ConfigService);
-                await lastValueFrom(configService.initialize());
+                await TestBed.inject(ApplicationInitStatus).donePromise;
             },
         });
 
@@ -31,7 +36,7 @@ describe('LoginPage', () => {
         };
     }
 
-    it('should create', async () => {
+    test('should create', async () => {
         const { harness } = await setupTest();
         expect(harness).toBeDefined();
     });
