@@ -15,7 +15,7 @@ describe('ProfileButtonComponent', () => {
 
     async function setupTest() {
         const msw = getMockServiceWorker();
-        msw.use(...clientHandlers, ...authServerHandlers);
+        msw.resetHandlers(...clientHandlers, ...authServerHandlers);
 
         const { harness } = await setupTestEnvironment({
             testComponent: TestComponent,

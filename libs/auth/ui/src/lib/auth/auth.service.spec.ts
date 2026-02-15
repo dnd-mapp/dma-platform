@@ -9,7 +9,7 @@ import { AuthService } from './auth.service';
 describe('AuthService', () => {
     async function setupTest() {
         const msw = getMockServiceWorker();
-        msw.use(...clientHandlers, ...authServerHandlers);
+        msw.resetHandlers(...clientHandlers, ...authServerHandlers);
 
         await setupTestEnvironment({
             providers: [provideHttp(serverErrorInterceptor, authInterceptor), provideAuthServerService()],
