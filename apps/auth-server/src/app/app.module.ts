@@ -1,5 +1,5 @@
 import { PrismaClient } from '@dnd-mapp/auth-server/prisma/client';
-import { DatabaseModule, provideHttpExceptionFilter } from '@dnd-mapp/backend-core';
+import { DatabaseModule, provideErrorFilter, provideHttpExceptionFilter } from '@dnd-mapp/backend-core';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth';
@@ -17,6 +17,6 @@ import { UserModule } from './user';
         ClientModule,
         UserModule,
     ],
-    providers: [provideHttpExceptionFilter()],
+    providers: [provideErrorFilter(), provideHttpExceptionFilter()],
 })
 export class AppModule {}
