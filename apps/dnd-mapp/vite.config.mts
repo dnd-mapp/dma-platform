@@ -11,9 +11,6 @@ export default defineConfig({
     cacheDir: '../../node_modules/.vite/apps/dnd-mapp',
     plugins: [angular(), nxViteTsPaths()],
     root: __dirname,
-    server: {
-        port: 14200,
-    },
     test: {
         browser: {
             enabled: true,

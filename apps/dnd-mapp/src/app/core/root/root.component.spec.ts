@@ -5,7 +5,7 @@ import { authInterceptor, provideAuthServerService } from '@dnd-mapp/auth-ui';
 import { setupMockHandlers } from '@dnd-mapp/auth-ui/test';
 import { RootHarness } from '@dnd-mapp/dnd-mapp/test';
 import { provideHttp, serverErrorInterceptor } from '@dnd-mapp/shared-ui';
-import { setupTestEnvironment, test } from '@dnd-mapp/shared-ui/test';
+import { setupTestEnvironment } from '@dnd-mapp/shared-ui/test';
 import { appRoutes } from '../config';
 import { RootComponent } from './root.component';
 
@@ -37,7 +37,7 @@ describe('RootComponent', () => {
         };
     }
 
-    test('should create', async () => {
+    it('should create', async () => {
         const { harness } = await setupTest();
         expect(harness).toBeDefined();
     });

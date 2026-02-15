@@ -5,7 +5,7 @@ import { LoginHarness } from '@dnd-mapp/auth-client/test';
 import { authInterceptor, provideAuthServerService } from '@dnd-mapp/auth-ui';
 import { setupMockHandlers } from '@dnd-mapp/auth-ui/test';
 import { provideHttp, serverErrorInterceptor } from '@dnd-mapp/shared-ui';
-import { setupTestEnvironment, test } from '@dnd-mapp/shared-ui/test';
+import { setupTestEnvironment } from '@dnd-mapp/shared-ui/test';
 import { LoginPage } from './login.page';
 
 describe('LoginPage', () => {
@@ -36,7 +36,7 @@ describe('LoginPage', () => {
         };
     }
 
-    test('should create', async () => {
+    it('should create', async () => {
         const { harness } = await setupTest();
         expect(harness).toBeDefined();
     });

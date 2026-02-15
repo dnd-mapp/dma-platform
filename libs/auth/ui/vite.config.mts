@@ -11,9 +11,6 @@ export default defineConfig({
     cacheDir: '../../../node_modules/.vite/libs/auth/ui',
     plugins: [angular(), nxViteTsPaths()],
     root: __dirname,
-    server: {
-        port: 14000,
-    },
     test: {
         browser: {
             enabled: true,

@@ -2,7 +2,7 @@ import { ApplicationInitStatus, Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { LoginButtonHarness, setupMockHandlers } from '@dnd-mapp/auth-ui/test';
 import { provideHttp, serverErrorInterceptor } from '@dnd-mapp/shared-ui';
-import { setupTestEnvironment, test } from '@dnd-mapp/shared-ui/test';
+import { setupTestEnvironment } from '@dnd-mapp/shared-ui/test';
 import { authInterceptor, provideAuthServerService } from '../http';
 import { LoginButtonComponent } from './login-button.component';
 
@@ -30,7 +30,7 @@ describe('LoginButtonComponent', () => {
         };
     }
 
-    test('should create', async () => {
+    it('should create', async () => {
         const { harness } = await setupTest();
         expect(harness).toBeDefined();
     });
