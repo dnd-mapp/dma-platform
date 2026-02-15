@@ -10,9 +10,14 @@ export function serverErrorInterceptor(request: HttpRequest<unknown>, next: Http
     return next(request).pipe(
         catchError((response: HttpErrorResponse) => {
             if (!response.ok && (isServerErrorResponse(response.status) || isClientErrorResponse(response.status))) {
-                console.log({ response });
-
-                const error: ServerError = response.error;
+                const error: ServerError = response.error
+                    ? response.error
+                    : {
+                          error: response.statusText,
+                          status: response.status,
+                          message: response.message,
+                          timestamp: new Date(),
+                      };
                 const title = `${error.error} (${error.status})`;
 
                 notificationService.showNotification({
