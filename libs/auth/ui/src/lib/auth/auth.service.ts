@@ -1,4 +1,5 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import {
     type GetTokenDto,
     hasAuthCodeGrant,
@@ -9,7 +10,7 @@ import {
 import { base64, ConfigService, sha256, StorageKeys, StorageService, TEXT_ENCODER } from '@dnd-mapp/shared-ui';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 import { nanoid } from 'nanoid';
-import { catchError, EMPTY, from, map, tap } from 'rxjs';
+import { catchError, EMPTY, from, map, of, switchMap, tap } from 'rxjs';
 import { AuthServerService } from '../http';
 
 interface GetTokenParams {
@@ -23,8 +24,14 @@ interface DmaJwtIdTokenPayload extends JwtPayload {
     nonce?: string;
 }
 
+interface StoredState {
+    state: string;
+    redirectUrl: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+    private readonly router = inject(Router);
     private readonly textEncoder = inject(TEXT_ENCODER);
     private readonly storageService = inject(StorageService);
     private readonly configService = inject(ConfigService);
@@ -42,18 +49,21 @@ export class AuthService {
         const state = nanoid();
         const nonce = nanoid();
         const clientId = this.configService.config.clientId;
-        const redirectUrl = location.href;
+        const redirectUrl = new URL(location.href);
 
         if (!clientId) throw new Error('clientId is required');
         this.storageService.setItem(StorageKeys.CODE_VERIFIER, codeVerifier);
-        this.storageService.setItem(StorageKeys.AUTH_STATE, state);
+        this.storageService.setItem(StorageKeys.AUTH_STATE, {
+            state: state,
+            redirectUrl: redirectUrl.pathname,
+        } as StoredState);
         this.storageService.setItem(StorageKeys.ID_NONCE, nonce);
 
         return this.generateCodeChallenge(codeVerifier).pipe(
             tap((codeChallenge) =>
                 this.authServerService.authorize({
                     clientId: clientId,
-                    redirectUrl: redirectUrl,
+                    redirectUrl: redirectUrl.origin,
                     codeChallenge: codeChallenge,
                     state: state,
                     nonce: nonce,
@@ -67,8 +77,10 @@ export class AuthService {
     }
 
     public token(params: GetTokenParams, silent = false) {
+        let redirectUrl: string | undefined;
+
         if (params.grantType === TokenGrantTypes.AUTH_CODE && params.state) {
-            this.validateState(params.state);
+            redirectUrl = this.validateState(params.state);
         }
         const clientId = this.configService.config.clientId;
 
@@ -99,6 +111,10 @@ export class AuthService {
 
                     this.storageService.removeItem(StorageKeys.CODE_VERIFIER);
                     this.storageService.removeItem(StorageKeys.AUTH_STATE);
+                }),
+                switchMap((tokensResponse) => {
+                    if (!redirectUrl) return of(tokensResponse);
+                    return from(this.router.navigateByUrl(redirectUrl));
                 }),
                 catchError((error) => {
                     if (silent) return EMPTY;
@@ -159,14 +175,15 @@ export class AuthService {
     }
 
     private validateState(state: string) {
-        const storedState = this.storageService.getItem<string>(StorageKeys.AUTH_STATE);
+        const storedState = this.storageService.getItem<StoredState>(StorageKeys.AUTH_STATE);
 
         if (storedState === null) {
             throw new Error('No state found in stored.');
         } else {
-            if (storedState !== state) {
+            if (storedState.state !== state) {
                 throw new Error('Invalid state found for authorization.');
             }
         }
+        return storedState.redirectUrl;
     }
 }
