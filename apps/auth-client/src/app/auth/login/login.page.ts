@@ -4,7 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AuthService } from '@dnd-mapp/auth-ui';
 import { ButtonComponent, PasswordInputComponent, UsernameInputComponent } from '@dnd-mapp/shared-ui';
-import { map, tap } from 'rxjs';
+import { catchError, EMPTY, map, tap } from 'rxjs';
 
 @Component({
     selector: 'dma-login',
@@ -46,6 +46,13 @@ export class LoginPage {
                 tap((redirect) => {
                     if (!redirect) throw new Error('Failed to redirect back to client');
                     location.href = redirect.url;
+                }),
+                catchError((error) => {
+                    if (!error.error) throw error;
+
+                    this.loginForm.controls.username.setErrors({ invalid: true });
+                    this.loginForm.controls.password.setErrors({ invalid: true });
+                    return EMPTY;
                 }),
                 takeUntilDestroyed(this.destroyRef),
             )
