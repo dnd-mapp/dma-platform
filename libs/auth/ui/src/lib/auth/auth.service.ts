@@ -127,8 +127,8 @@ export class AuthService {
 
     public logout() {
         const { request, processing } = this.authServerService.logout({
-            accessToken: this.accessToken()!,
-            idToken: this.idTokenRaw()!,
+            accessToken: this.accessToken(),
+            idToken: this.idTokenRaw(),
         });
 
         return {

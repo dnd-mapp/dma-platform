@@ -112,9 +112,12 @@ export class AuthController {
         @Res({ passthrough: true }) response: FastifyReply,
         @Cookies(CookieNames.REFRESH_TOKEN) refreshToken?: UnsignResult,
     ) {
-        await this.tokenBlacklistService.revoke(data.accessToken);
-        await this.tokenBlacklistService.revoke(data.idToken);
-
+        if (data.accessToken) {
+            await this.tokenBlacklistService.revoke(data.accessToken);
+        }
+        if (data.idToken) {
+            await this.tokenBlacklistService.revoke(data.idToken);
+        }
         if (refreshToken && refreshToken.valid) {
             const token = await this.tokenService.getByHash(refreshToken.value);
 

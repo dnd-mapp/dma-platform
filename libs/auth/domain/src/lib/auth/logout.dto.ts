@@ -1,4 +1,4 @@
 export class LogoutDto {
-    public accessToken!: string;
-    public idToken!: string;
+    public accessToken!: string | null;
+    public idToken!: string | null;
 }
