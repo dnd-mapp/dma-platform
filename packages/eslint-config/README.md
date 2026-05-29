@@ -1,5 +1,10 @@
 # @dnd-mapp/eslint-config
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
+[![node: >=24.0.0](https://img.shields.io/badge/node-%3E%3D24.0.0-339933?logo=nodedotjs&logoColor=white)](package.json)
+[![eslint peer: >=10.0.0](https://img.shields.io/badge/eslint%20peer-%3E%3D10.0.0-4B32C3?logo=eslint&logoColor=white)](package.json)
+[![typescript-eslint peer: >=8.0.0](https://img.shields.io/badge/typescript--eslint%20peer-%3E%3D8.0.0-3178C6?logo=typescript&logoColor=white)](package.json)
+
 Shared [ESLint flat config](https://eslint.org/docs/latest/use/configure/configuration-files) for TypeScript and Angular projects in the D&D Mapp platform.
 
 ## Entry points
