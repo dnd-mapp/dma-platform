@@ -26,11 +26,17 @@ jobs:
             - name: Lint Realm
               run: pnpm --filter @dnd-mapp/realm lint
 
+            - name: Lint CSS (Realm)
+              run: pnpm --filter @dnd-mapp/realm lint-css
+
             - name: Lint E2E
               run: pnpm --filter @dnd-mapp/realm-e2e lint
 
             - name: Lint ESLint config
               run: pnpm --filter @dnd-mapp/eslint-config lint
+
+            - name: Lint Stylelint config
+              run: pnpm --filter @dnd-mapp/stylelint-config lint
 
             - name: Check formatting
               run: pnpm format-check
