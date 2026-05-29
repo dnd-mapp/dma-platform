@@ -1,0 +1,32 @@
+# Workspace settings
+packages:
+  - 'apps/*'
+  - 'packages/*'
+  - '!dist/**/*'
+
+# Dependency Resolution
+minimumReleaseAge: 4320 # 3 days
+minimumReleaseAgeExclude:
+  - '@dnd-mapp'
+trustPolicy: no-downgrade
+trustPolicyExclude:
+  - '@dnd-mapp'
+trustPolicyIgnoreAfter: 10080 # 7 days
+blockExoticSubdeps: true
+
+# Peer Dependency Settings
+strictPeerDependencies: true
+
+# CLI Settings
+engineStrict: true
+packageManagerStrict: true
+packageManagerStrictVersion: true
+managePackageManagerVersions: false
+
+# Build Settings
+ignoreDepScripts: true
+verifyDepsBeforeRun: error
+strictDepBuilds: true
+
+# Other Settings
+savePrefix: '~'

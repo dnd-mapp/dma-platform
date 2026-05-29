@@ -1,6 +1,13 @@
 {
-    "overrides": [],
-    "plugins": [],
+    "overrides": [
+        {
+            "files": ["pnpm-*.yaml", "package.json"],
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ],
+    "plugins": ["prettier-plugin-organize-imports"],
     "printWidth": 120,
     "quoteProps": "consistent",
     "singleQuote": true,
