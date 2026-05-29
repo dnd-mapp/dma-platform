@@ -113,16 +113,16 @@ importers:
   packages/eslint-config:
     dependencies:
       angular-eslint:
-        specifier: '*'
+        specifier: '>=21.0.0'
         version: 21.4.0(@angular/cli@21.2.12(@types/node@24.12.4)(chokidar@5.0.0))(chokidar@5.0.0)(eslint@10.4.0)(typescript-eslint@8.60.0(eslint@10.4.0)(typescript@5.9.3))(typescript@5.9.3)
       eslint:
-        specifier: '*'
+        specifier: '>=9.0.0'
         version: 10.4.0
       eslint-config-prettier:
-        specifier: '*'
+        specifier: '>=9.0.0'
         version: 10.1.8(eslint@10.4.0)
       typescript-eslint:
-        specifier: '*'
+        specifier: '>=8.0.0'
         version: 8.60.0(eslint@10.4.0)(typescript@5.9.3)
 
 packages:
