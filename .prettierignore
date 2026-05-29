@@ -21,7 +21,7 @@
 
 !.prettierrc
 
-node_modules/
+**/node_modules/
 pnpm-lock.yaml
 
 .run/
@@ -29,3 +29,9 @@ pnpm-lock.yaml
 .vscode/*
 !.vscode/extensions.json
 !.vscode/settings.json
+
+.angular/
+dist/
+
+coverage/
+reports/

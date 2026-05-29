@@ -13,6 +13,7 @@
     "start": "ng serve realm",
     "build": "ng build realm",
     "lint": "ng lint realm",
+    "lint-css": "stylelint \"**/*.scss\"",
     "test-ci": "ng test",
     "test-dev": "ng test -c dev"
   }

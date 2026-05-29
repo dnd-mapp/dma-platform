@@ -17,9 +17,10 @@ Monorepo for the D&D Mapp platform — libraries and applications powering chara
 
 ### Packages
 
-| Package                                           | Description                                  |
-|:--------------------------------------------------|:---------------------------------------------|
-| [eslint-config](packages/eslint-config/README.md) | Shared ESLint flat config for TS and Angular |
+| Package                                                   | Description                                  |
+|:----------------------------------------------------------|:---------------------------------------------|
+| [eslint-config](packages/eslint-config/README.md)         | Shared ESLint flat config for TS and Angular |
+| [stylelint-config](packages/stylelint-config/README.md)   | Shared Stylelint config for SCSS and Angular |
 
 ### End-to-end tests
 
@@ -59,11 +60,13 @@ Monorepo for the D&D Mapp platform — libraries and applications powering chara
     - [Playwright Test for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright) — run and debug e2e tests
     - [Vitest](https://marketplace.visualstudio.com/items?itemName=vitest.explorer) — run and debug unit tests
     - [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) — Markdown linting
+    - [Stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint) — inline SCSS lint diagnostics
 
 The workspace settings in `.vscode/settings.json` are pre-configured:
 
 - Prettier formats on save; a ruler is shown at column 120 to match `printWidth`
 - ESLint runs in flat config mode and applies auto-fixable fixes on save
+- Stylelint validates CSS and SCSS files and applies auto-fixable fixes on save
 - The project TypeScript installation (`node_modules/typescript`) is used instead of VS Code's bundled version
 - Build artifacts (`dist`, `coverage`, `.angular`) are hidden from the file explorer and excluded from search
 
@@ -80,6 +83,12 @@ The workspace settings in `.vscode/settings.json` are pre-configured:
 1. Open **Settings** → **Languages & Frameworks** → **JavaScript** → **Code Quality Tools** → **ESLint**.
 2. Select **Automatic ESLint configuration**.
 3. Enable **Run eslint --fix on save**.
+
+**Stylelint:**
+
+1. Open **Settings** → **Languages & Frameworks** → **Style Sheets** → **Stylelint**.
+2. Enable **Stylelint**.
+3. Set **Stylelint package** to the project's local installation (`node_modules/stylelint`).
 
 **Playwright:**
 

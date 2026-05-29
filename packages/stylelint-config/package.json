@@ -1,0 +1,32 @@
+{
+  "name": "@dnd-mapp/stylelint-config",
+  "version": "0.0.0",
+  "description": "Shared Stylelint configuration for SCSS and Angular projects.",
+  "keywords": [
+    "stylelint",
+    "stylelint-config",
+    "scss",
+    "angular"
+  ],
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.mjs"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "peerDependencies": {
+    "stylelint": ">=17.0.0",
+    "stylelint-config-clean-order": ">=8.0.0",
+    "stylelint-config-standard-scss": ">=17.0.0",
+    "stylelint-order": ">=8.0.0"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}
