@@ -16,13 +16,8 @@ runs:
           shell: bash
           run: pnpm --filter @dnd-mapp/realm build
 
-        - name: Install Playwright browsers
-          shell: bash
-          run: pnpm playwright-install
-
         - name: Unit tests
-          shell: bash
-          run: pnpm --filter @dnd-mapp/realm test-ci
+          uses: ./.github/actions/unit-test
 
         - name: E2E tests
           shell: bash

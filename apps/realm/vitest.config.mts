@@ -20,7 +20,7 @@ export default defineConfig({
             enabled: true,
             exclude: ['main.ts', '**/config/*.ts', '**/test/**/*'],
             provider: 'v8',
-            reporter: ['text-summary', 'html'],
+            reporter: ['text-summary', 'html', 'cobertura'],
             reportOnFailure: true,
             reportsDirectory: '../../coverage/apps/realm',
             thresholds: {
