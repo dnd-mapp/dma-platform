@@ -5,6 +5,7 @@
         "esbenp.prettier-vscode",
         "ms-playwright.playwright",
         "vitest.explorer",
-        "DavidAnson.vscode-markdownlint"
+        "DavidAnson.vscode-markdownlint",
+        "stylelint.vscode-stylelint"
     ]
 }
