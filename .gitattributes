@@ -1,0 +1,11 @@
+*                   text=auto
+
+*.md                text eol=lf
+
+.gitignore          text eol=lf
+.gitattributes      text eol=lf
+.github/CODEOWNERS  text eol=lf
+
+.editorconfig       text eol=lf
+
+LICENSE             text eol=lf
