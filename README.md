@@ -7,11 +7,25 @@
 
 Monorepo for the D&D Mapp platform — libraries and applications powering character management, campaign tools, and Virtual Tabletop sessions for D&D 5e.
 
-## Prerequisites
+## Projects
 
-- **[mise](https://mise.jdx.dev/getting-started.html)** — manages the Node.js and pnpm versions declared in `package.json`
+### Applications
+
+| App                            | Description                                                                    |
+|:-------------------------------|:-------------------------------------------------------------------------------|
+| [realm](apps/realm/README.md)  | Main frontend client — character management, campaign tools, and VTT sessions  |
+
+### End-to-end tests
+
+| Project                           | Target app                     |
+|:----------------------------------|:-------------------------------|
+| [realm-e2e](e2e/realm/README.md)  | [realm](apps/realm/README.md)  |
 
 ## Getting started
+
+### Prerequisites
+
+- **[mise](https://mise.jdx.dev/getting-started.html)** — manages the Node.js and pnpm versions declared in `package.json`
 
 1. Install mise by following the [official getting started guide](https://mise.jdx.dev/getting-started.html).
 
