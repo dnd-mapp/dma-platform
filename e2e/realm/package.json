@@ -1,15 +1,15 @@
 {
-    "name": "@dnd-mapp/realm-e2e",
-    "version": "0.0.0",
-    "description": "Playwright end-to-end tests for the Realm frontend client.",
-    "license": "MIT",
-    "private": true,
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/dnd-mapp/dma-platform.git",
-        "directory": "e2e/realm"
-    },
-    "scripts": {
-        "test": "playwright test"
-    }
+  "name": "@dnd-mapp/realm-e2e",
+  "version": "0.0.0",
+  "description": "Playwright end-to-end tests for the Realm frontend client.",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dnd-mapp/dma-platform.git",
+    "directory": "e2e/realm"
+  },
+  "scripts": {
+    "test": "playwright test"
+  }
 }
