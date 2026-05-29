@@ -1,0 +1,4 @@
+{
+    "extends": ["@dnd-mapp/stylelint-config"],
+    "ignoreFiles": ["dist/**", ".angular/**"]
+}
