@@ -86,4 +86,4 @@ jobs:
               run: pnpm playwright-install
 
             - name: Run E2E tests
-              run: pnpm --filter @dnd-mapp/realm-e2e test
+              run: pnpm --filter @dnd-mapp/realm-e2e test-ci
