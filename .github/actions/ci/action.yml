@@ -7,3 +7,7 @@ runs:
         - name: Check formatting
           shell: bash
           run: pnpm format-check
+
+        - name: Lint Markdown
+          shell: bash
+          run: pnpm lint:md
