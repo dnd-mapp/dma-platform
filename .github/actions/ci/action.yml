@@ -1,0 +1,9 @@
+name: CI Checks
+description: Runs CI checks for the platform.
+
+runs:
+    using: composite
+    steps:
+        - name: Check formatting
+          shell: bash
+          run: pnpm format-check
