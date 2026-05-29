@@ -8,7 +8,7 @@ export default defineConfig({
     forbidOnly: isCI,
     outputDir: '../../reports/e2e/realm/test-results',
     retries: isCI ? 2 : 0,
-    reporter: [['html', { outputFolder: '../../reports/e2e/realm' }], ...(isCI ? [['github'] as const] : [])],
+    reporter: [['html', { outputFolder: '../../reports/e2e/realm/html' }], ...(isCI ? [['github'] as const] : [])],
     use: {
         baseURL: 'http://localhost:4200',
         trace: 'on-first-retry',
