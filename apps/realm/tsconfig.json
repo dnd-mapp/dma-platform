@@ -1,0 +1,24 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "references": [{ "path": "tsconfig.app.json" }, { "path": "tsconfig.spec.json" }],
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "composite": true,
+        "lib": ["ES2024", "DOM", "DOM.AsyncIterable", "DOM.Iterable"],
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "outDir": "./dist/out-tsc",
+        "paths": {
+            "@/core/*": ["./src/core/*"],
+            "@/core/test/*": ["./test/core/*"]
+        },
+        "target": "es2024",
+        "useDefineForClassFields": false
+    },
+    "angularCompilerOptions": {
+        "enableI18nLegacyMessageIdFormat": false,
+        "strictInjectionParameters": true,
+        "strictStandalone": true,
+        "strictTemplates": true
+    }
+}
