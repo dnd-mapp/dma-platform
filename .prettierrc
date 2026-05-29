@@ -1,0 +1,8 @@
+{
+    "overrides": [],
+    "plugins": [],
+    "printWidth": 120,
+    "quoteProps": "consistent",
+    "singleQuote": true,
+    "tabWidth": 4
+}

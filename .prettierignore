@@ -1,0 +1,21 @@
+# Ignore everything
+*
+
+# Re-include folders
+!*/
+
+# Re-include specific file types
+!*.json
+!*.yaml
+!*.yml
+!*.html
+!*.css
+!*.scss
+!*.[cm]js
+!*.jsx
+!*.js
+!*.[cm]ts
+!*.tsx
+!*.ts
+
+!.prettierrc
