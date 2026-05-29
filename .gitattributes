@@ -5,6 +5,22 @@
 *.xml               text eol=lf
 *.yaml              text eol=lf
 *.json              text eol=lf
+*.ts                text eol=lf
+*.tsx               text eol=lf
+*.mts               text eol=lf
+*.cts               text eol=lf
+*.js                text eol=lf
+*.jsx               text eol=lf
+*.mjs               text eol=lf
+*.cjs               text eol=lf
+*.html              text eol=lf
+*.svg               text eol=lf
+*.scss              text eol=lf
+*.css               text eol=lf
+*.webmanifest       text eol=lf
+
+*.png               binary
+*.ico               binary
 
 .gitignore          text eol=lf
 .gitattributes      text eol=lf
