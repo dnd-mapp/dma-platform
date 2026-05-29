@@ -17,6 +17,7 @@
 !*.[cm]ts
 !*.tsx
 !*.ts
+!*.webmanifest
 
 !.prettierrc
 

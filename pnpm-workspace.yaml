@@ -1,6 +1,7 @@
 # Workspace settings
 packages:
   - 'apps/*'
+  - 'e2e/*'
   - 'packages/*'
   - '!dist/**/*'
 
@@ -11,6 +12,9 @@ minimumReleaseAgeExclude:
 trustPolicy: no-downgrade
 trustPolicyExclude:
   - '@dnd-mapp'
+  # TODO: Check if it can be removed after next upgrade of pnpm
+  - 'ast-v8-to-istanbul'
+  - 'tinyexec'
 trustPolicyIgnoreAfter: 10080 # 7 days
 blockExoticSubdeps: true
 

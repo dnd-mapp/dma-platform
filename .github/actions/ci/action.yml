@@ -11,3 +11,19 @@ runs:
         - name: Lint Markdown
           shell: bash
           run: pnpm lint:md
+
+        - name: Build
+          shell: bash
+          run: pnpm --filter @dnd-mapp/realm build
+
+        - name: Install Playwright browsers
+          shell: bash
+          run: pnpm playwright-install
+
+        - name: Unit tests
+          shell: bash
+          run: pnpm --filter @dnd-mapp/realm test-ci
+
+        - name: E2E tests
+          shell: bash
+          run: pnpm --filter @dnd-mapp/realm-e2e test
