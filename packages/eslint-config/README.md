@@ -4,19 +4,19 @@ Shared [ESLint flat config](https://eslint.org/docs/latest/use/configure/configu
 
 ## Entry points
 
-| Import | Use for |
-|--------|---------|
-| `@dnd-mapp/eslint-config` | Plain TypeScript / JavaScript projects |
-| `@dnd-mapp/eslint-config/angular` | Angular apps and libraries |
+| Import                            | Use for                                |
+|:----------------------------------|:---------------------------------------|
+| `@dnd-mapp/eslint-config`         | Plain TypeScript / JavaScript projects |
+| `@dnd-mapp/eslint-config/angular` | Angular apps and libraries             |
 
 ## Peer dependencies
 
-| Package | Required | When |
-|---------|----------|------|
-| `eslint` | yes | always |
-| `typescript-eslint` | yes | always |
-| `eslint-config-prettier` | yes | always |
-| `angular-eslint` | no | `./angular` entry only |
+| Package                  | Required | When                   |
+|:-------------------------|:--------:|:-----------------------|
+| `eslint`                 |   yes    | always                 |
+| `typescript-eslint`      |   yes    | always                 |
+| `eslint-config-prettier` |   yes    | always                 |
+| `angular-eslint`         |    no    | `./angular` entry only |
 
 ## Usage
 
