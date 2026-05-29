@@ -8,5 +8,7 @@
 .github/CODEOWNERS  text eol=lf
 
 .editorconfig       text eol=lf
+.prettierignore     text eol=lf
+.prettierrc         text eol=lf
 
 LICENSE             text eol=lf
