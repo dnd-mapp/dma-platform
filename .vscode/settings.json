@@ -1,4 +1,19 @@
 {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.rulers": [120],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    "eslint.useFlatConfig": true,
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "search.exclude": {
+        "**/dist": true,
+        "**/coverage": true,
+        "**/reports": true,
+        "**/.angular": true
+    },
+    "files.exclude": {
+        "**/.angular": true
+    }
 }

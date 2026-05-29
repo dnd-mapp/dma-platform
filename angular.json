@@ -65,6 +65,13 @@
                         "buildTarget": "realm:build:development"
                     }
                 },
+                "lint": {
+                    "builder": "@angular-eslint/builder:lint",
+                    "options": {
+                        "eslintConfig": "apps/realm/eslint.config.mjs",
+                        "lintFilePatterns": ["apps/realm/**/*.ts", "apps/realm/**/*.html"]
+                    }
+                },
                 "test": {
                     "builder": "@angular/build:unit-test",
                     "options": {

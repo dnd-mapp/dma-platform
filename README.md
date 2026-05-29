@@ -15,6 +15,12 @@ Monorepo for the D&D Mapp platform — libraries and applications powering chara
 |:-------------------------------|:-------------------------------------------------------------------------------|
 | [realm](apps/realm/README.md)  | Main frontend client — character management, campaign tools, and VTT sessions  |
 
+### Packages
+
+| Package                                           | Description                                  |
+|:--------------------------------------------------|:---------------------------------------------|
+| [eslint-config](packages/eslint-config/README.md) | Shared ESLint flat config for TS and Angular |
+
 ### End-to-end tests
 
 | Project                           | Target app                     |
@@ -45,18 +51,41 @@ Monorepo for the D&D Mapp platform — libraries and applications powering chara
 
 ### VS Code
 
-1. Install the [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) extension.
-2. Add the following to your workspace or user settings:
+1. Install the recommended extensions when prompted, or install them manually:
 
-    ```json
-    {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true
-    }
-    ```
+    - [Angular Language Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template) — template type-checking and autocompletion in HTML files
+    - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) — inline lint diagnostics
+    - [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) — formatting
+    - [Playwright Test for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright) — run and debug e2e tests
+    - [Vitest](https://marketplace.visualstudio.com/items?itemName=vitest.explorer) — run and debug unit tests
+    - [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) — Markdown linting
+
+The workspace settings in `.vscode/settings.json` are pre-configured:
+
+- Prettier formats on save; a ruler is shown at column 120 to match `printWidth`
+- ESLint runs in flat config mode and applies auto-fixable fixes on save
+- The project TypeScript installation (`node_modules/typescript`) is used instead of VS Code's bundled version
+- Build artifacts (`dist`, `coverage`, `.angular`) are hidden from the file explorer and excluded from search
 
 ### WebStorm
+
+**Prettier:**
 
 1. Open **Settings** → **Languages & Frameworks** → **Prettier**.
 2. Set **Prettier package** to the project's local installation (`node_modules/prettier`).
 3. Enable **Run on save**.
+
+**ESLint:**
+
+1. Open **Settings** → **Languages & Frameworks** → **JavaScript** → **Code Quality Tools** → **ESLint**.
+2. Select **Automatic ESLint configuration**.
+3. Enable **Run eslint --fix on save**.
+
+**Playwright:**
+
+1. Open **Run** → **Edit Configurations** → **+** → **Playwright**.
+2. Point the configuration to `e2e/realm/playwright.config.ts`.
+
+**Vitest:**
+
+WebStorm detects Vitest automatically. Tests appear in the **Services** panel. If not picked up, open `apps/realm/vitest.config.mts` and run a test file once to register the configuration.

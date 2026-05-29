@@ -8,9 +8,54 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-    ci:
-        name: CI
-        runs-on: ubuntu-latest
+    lint:
+        name: Lint
+        runs-on: ubuntu-22.04
+        permissions:
+            contents: read
+        steps:
+            - name: Checkout
+              uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+            - name: Setup workspace
+              uses: ./.github/actions/setup-workspace
+
+            - name: Lint TypeScript (root)
+              run: pnpm lint:ts
+
+            - name: Lint Realm
+              run: pnpm --filter @dnd-mapp/realm lint
+
+            - name: Lint E2E
+              run: pnpm --filter @dnd-mapp/realm-e2e lint
+
+            - name: Lint ESLint config
+              run: pnpm --filter @dnd-mapp/eslint-config lint
+
+            - name: Check formatting
+              run: pnpm format-check
+
+            - name: Lint Markdown
+              run: pnpm lint:md
+
+    build:
+        name: Build
+        runs-on: ubuntu-22.04
+        permissions:
+            contents: read
+        steps:
+            - name: Checkout
+              uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+            - name: Setup workspace
+              uses: ./.github/actions/setup-workspace
+
+            - name: Build
+              run: pnpm --filter @dnd-mapp/realm build
+
+    test:
+        name: Unit tests
+        runs-on: ubuntu-22.04
         permissions:
             contents: read
             code-quality: write
@@ -21,5 +66,24 @@ jobs:
             - name: Setup workspace
               uses: ./.github/actions/setup-workspace
 
-            - name: Run CI checks
-              uses: ./.github/actions/ci
+            - name: Run unit tests
+              uses: ./.github/actions/unit-test
+
+    e2e:
+        name: E2E tests
+        needs: [lint, build, test]
+        runs-on: ubuntu-22.04
+        permissions:
+            contents: read
+        steps:
+            - name: Checkout
+              uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+            - name: Setup workspace
+              uses: ./.github/actions/setup-workspace
+
+            - name: Install Playwright browsers
+              run: pnpm playwright-install
+
+            - name: Run E2E tests
+              run: pnpm --filter @dnd-mapp/realm-e2e test-ci

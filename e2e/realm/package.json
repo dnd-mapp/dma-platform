@@ -10,6 +10,8 @@
     "directory": "e2e/realm"
   },
   "scripts": {
-    "test": "playwright test"
+    "lint": "eslint .",
+    "test-ci": "playwright test",
+    "test-dev": "playwright test --ui"
   }
 }
