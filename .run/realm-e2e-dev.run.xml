@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="realm-e2e" type="js.build_tools.npm" folderName="e2e/realm">
+  <configuration default="false" name="realm-e2e-dev" type="js.build_tools.npm" folderName="e2e/realm">
     <package-json value="$PROJECT_DIR$/e2e/realm/package.json" />
     <command value="run" />
     <scripts>
-      <script value="test" />
+      <script value="test-dev" />
     </scripts>
     <node-interpreter value="project" />
     <envs />
