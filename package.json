@@ -1,0 +1,40 @@
+{
+  "name": "dma-platform",
+  "version": "0.0.0",
+  "description": "Monorepo for the D&D Mapp platform — libraries and applications powering character management, campaign tools, and Virtual Tabletop sessions for D&D 5e.",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "format": "prettier -w .",
+    "format-check": "prettier -l ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dnd-mapp/dma-platform.git"
+  },
+  "engines": {
+    "node": "24.16.0"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "24.16.0"
+    },
+    "packageManager": [
+      {
+        "name": "pnpm",
+        "version": "10.34.1",
+        "onFail": "error"
+      },
+      {
+        "name": "npm",
+        "version": "11.13.0",
+        "onFail": "warn"
+      }
+    ]
+  },
+  "devDependencies": {
+    "prettier": "~3.8.3",
+    "prettier-plugin-organize-imports": "~4.3.0"
+  }
+}
