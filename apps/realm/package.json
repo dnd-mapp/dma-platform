@@ -12,6 +12,7 @@
   "scripts": {
     "start": "ng serve realm",
     "build": "ng build realm",
+    "lint": "ng lint realm",
     "test-ci": "ng test",
     "test-dev": "ng test -c dev"
   }
