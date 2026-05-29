@@ -1,8 +1,8 @@
 # Workspace settings
 packages:
-    - 'apps/*'
-    - 'packages/*'
-    - '!dist/**/*'
+  - 'apps/*'
+  - 'packages/*'
+  - '!dist/**/*'
 
 # Dependency Resolution
 minimumReleaseAge: 4320 # 3 days
@@ -27,7 +27,6 @@ managePackageManagerVersions: false
 ignoreDepScripts: true
 verifyDepsBeforeRun: error
 strictDepBuilds: true
-
 
 # Other Settings
 savePrefix: '~'
