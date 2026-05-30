@@ -8,88 +8,35 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-    lint:
-        name: Lint
-        runs-on: ubuntu-22.04
-        permissions:
-            contents: read
-        steps:
-            - name: Checkout
-              uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
-            - name: Setup workspace
-              uses: ./.github/actions/setup-workspace
-
-            - name: Lint TypeScript (root)
-              run: pnpm lint-ts
-
-            - name: Lint Realm
-              run: pnpm --filter @dnd-mapp/realm lint-ts
-
-            - name: Lint CSS (Realm)
-              run: pnpm --filter @dnd-mapp/realm lint-css
-
-            - name: Lint E2E
-              run: pnpm --filter @dnd-mapp/realm-e2e lint-ts
-
-            - name: Lint ESLint config
-              run: pnpm --filter @dnd-mapp/eslint-config lint-ts
-
-            - name: Lint Stylelint config
-              run: pnpm --filter @dnd-mapp/stylelint-config lint-ts
-
-            - name: Check formatting
-              run: pnpm format-check
-
-            - name: Lint Markdown
-              run: pnpm lint-md
-
-    build:
-        name: Build
-        runs-on: ubuntu-22.04
-        permissions:
-            contents: read
-        steps:
-            - name: Checkout
-              uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
-            - name: Setup workspace
-              uses: ./.github/actions/setup-workspace
-
-            - name: Build
-              run: pnpm --filter @dnd-mapp/realm build
-
-    test:
-        name: Unit tests
+    ci:
+        name: CI
         runs-on: ubuntu-22.04
         permissions:
             contents: read
             code-quality: write
+            pull-requests: write
         steps:
             - name: Checkout
               uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+              with:
+                  fetch-depth: 0
 
             - name: Setup workspace
               uses: ./.github/actions/setup-workspace
 
-            - name: Run unit tests
-              uses: ./.github/actions/unit-test
+            - name: Run CI
+              run: pnpm moon ci --affected
 
-    e2e:
-        name: E2E tests
-        needs: [lint, build, test]
-        runs-on: ubuntu-22.04
-        permissions:
-            contents: read
-        steps:
-            - name: Checkout
-              uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+            - name: Report CI results
+              uses: moonrepo/run-report-action@bbe7e99bf2aca819ec660ec01fc59d84bdd492d6 # v1.10.0
+              if: success() || failure()
+              with:
+                  access-token: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: Setup workspace
-              uses: ./.github/actions/setup-workspace
-
-            - name: Install Playwright browsers
-              run: pnpm playwright-install
-
-            - name: Run E2E tests
-              run: pnpm --filter @dnd-mapp/realm-e2e test-ci
+            - name: Upload code coverage
+              if: hashFiles('coverage/apps/realm/cobertura-coverage.xml') != ''
+              uses: actions/upload-code-coverage@abb5995db9e0199b0e2bb9dbd136fce4cb1ec4d3 # v1.3.0
+              with:
+                  file: coverage/apps/realm/cobertura-coverage.xml
+                  language: javascript
+                  label: realm
