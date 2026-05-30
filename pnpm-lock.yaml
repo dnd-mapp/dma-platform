@@ -152,6 +152,8 @@ importers:
         specifier: '>=8.0.0'
         version: 8.60.0(eslint@10.4.0(jiti@2.6.1))(typescript@5.9.3)
 
+  packages/sigil: {}
+
   packages/stylelint-config:
     dependencies:
       stylelint:
