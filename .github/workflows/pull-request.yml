@@ -25,7 +25,7 @@ jobs:
               uses: ./.github/actions/setup-workspace
 
             - name: Run CI
-              run: pnpm moon ci --affected
+              run: pnpm moon ci
 
             - name: Report CI results
               uses: moonrepo/run-report-action@bbe7e99bf2aca819ec660ec01fc59d84bdd492d6 # v1.10.0
