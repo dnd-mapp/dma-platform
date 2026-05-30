@@ -12,3 +12,6 @@ coverage/
 reports/
 
 .husky/_
+
+certs/*
+!certs/.gitkeep

@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "prepare": "husky",
+    "certs:generate": "mkcert -cert-file certs/local.pem -key-file certs/local-key.pem localhost.www.dndmapp.dev localhost.auth.dndmapp.dev localhost 127.0.0.1 ::1",
     "ng": "ng",
     "commitlint": "commitlint",
     "lint:md": "markdownlint-cli2 --config .markdownlint-cli2.json",
