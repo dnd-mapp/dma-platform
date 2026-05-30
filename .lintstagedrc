@@ -1,0 +1,6 @@
+{
+    "*.{ts,mts,js,mjs,html,json,yml,yaml,css,scss}": "prettier -w",
+    "*.{ts,mts,js,mjs,html}": "eslint",
+    "*.scss": "stylelint",
+    "*.md": "markdownlint-cli2"
+}
