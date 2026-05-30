@@ -1,0 +1,39 @@
+$schema: 'https://moonrepo.dev/schemas/project.json'
+
+dependsOn:
+    - realm
+    - eslint-config
+    - stylelint-config
+
+tasks:
+    lint-ts:
+        command: 'pnpm lint-ts'
+        inputs:
+            - 'src/**/*.ts'
+            - 'playwright.config.ts'
+            - 'eslint.config.mjs'
+            - 'tsconfig.json'
+            - '/tsconfig.base.json'
+            - '/eslint.config.mjs'
+
+    test:
+        command: 'pnpm test-ci'
+        deps:
+            - 'root:playwright-install'
+            - 'realm:build'
+            - 'realm:lint-ts'
+            - 'realm:lint-css'
+            - 'realm:test'
+        inputs:
+            - 'src/**/*.ts'
+            - 'playwright.config.ts'
+            - 'tsconfig.json'
+            - '/tsconfig.base.json'
+        outputs:
+            - '/reports/e2e/realm/**'
+
+    test-dev:
+        command: 'pnpm test-dev'
+        preset: 'server'
+        deps:
+            - 'root:playwright-install'

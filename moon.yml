@@ -1,0 +1,26 @@
+$schema: 'https://moonrepo.dev/schemas/project.json'
+
+tasks:
+    format-check:
+        command: 'pnpm format-check'
+        inputs:
+            - '**/*.{ts,js,mjs,cjs,json,yaml,yml,scss,css,html}'
+            - '.prettierrc'
+            - '.prettierignore'
+
+    lint-ts:
+        command: 'pnpm lint-ts'
+        inputs:
+            - '*.{js,mjs,cjs,ts}'
+            - 'eslint.config.mjs'
+
+    lint-md:
+        command: 'pnpm lint-md'
+        inputs:
+            - '**/*.md'
+            - '.markdownlint-cli2.json'
+
+    playwright-install:
+        command: 'pnpm playwright-install'
+        inputs:
+            - 'package.json'
