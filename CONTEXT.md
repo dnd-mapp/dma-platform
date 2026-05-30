@@ -22,9 +22,24 @@ The main frontend client application (`apps/realm`). A single Angular SPA used b
 
 The custom NestJS authentication server (`apps/gatekeeper`). Issues and validates tokens for all platform apps. The single authority on User identity and session validity.
 
+## Sigil
+
+The platform's design token library (`packages/sigil`). Provides the visual language of the platform — colors, typography, spacing, and other design primitives — as SCSS variables and CSS custom properties. Supports theming via a three-layer token system. Has no Angular dependency. Consumed by both Arcane UI components and directly by frontend apps.
+
+Owns the **primitive** and **semantic** token layers. Compiles to CSS (custom properties on `:root` and `[data-theme]` selectors). Ships three self-hosted fonts (woff2): Metamorphous (headings), Lora (body), Inconsolata (monospace). Component tokens are owned by Arcane UI and expressed as CSS custom properties so apps can override them via the cascade.
+
 ## Arcane UI
 
-The custom Angular component and design system library (`packages/arcane-ui`). No third-party component framework — fully custom-built to support the platform's fantasy aesthetic. Consumed by Realm.
+A shared Angular library (`packages/arcane-ui`) providing generic, reusable UI components and services. Not tied to any visual theme — usable across multiple frontend apps in their own context. No third-party component framework. Components are documented and explored via co-located Storybook stories (Vite builder, documentation only). Unit tests follow the same pattern as Realm: Vitest in browser mode with Playwright and Angular CDK harnesses.
+
+Exposes six secondary entry points:
+
+- **`components`** — reusable UI components.
+- **`config`** — generic `ConfigService<T>` for loading typed JSON config at bootstrap via `APP_INITIALIZER`.
+- **`http`** — `HttpClient` wrapper and generic base services that resolve backend base URLs via `ConfigService`.
+- **`storage`** — browser storage abstractions.
+- **`theming`** — `ThemeService` managing light/dark mode, defaulting to `prefers-color-scheme`, user-overridable.
+- **`testing`** — CDK harnesses for Arcane UI components, for use in consumer app tests.
 
 ## Virtual Tabletop (VTT)
 
