@@ -1,0 +1,64 @@
+$schema: 'https://moonrepo.dev/schemas/project.json'
+
+dependsOn:
+    - sigil
+    - eslint-config
+    - stylelint-config
+
+tasks:
+    build:
+        command: 'pnpm build'
+        inputs:
+            - 'src/**/*'
+            - 'public/**/*'
+            - 'tsconfig.json'
+            - 'tsconfig.app.json'
+            - 'package.json'
+            - '/angular.json'
+            - '/tsconfig.base.json'
+            - '/tsconfig.json'
+        outputs:
+            - '/dist/apps/realm/**'
+
+    lint-ts:
+        command: 'pnpm lint-ts'
+        inputs:
+            - 'src/**/*.{ts,html}'
+            - 'eslint.config.mjs'
+            - 'tsconfig.json'
+            - 'tsconfig.app.json'
+            - '/angular.json'
+            - '/tsconfig.base.json'
+            - '/eslint.config.mjs'
+
+    lint-css:
+        command: 'pnpm lint-css'
+        inputs:
+            - 'src/**/*.scss'
+            - '.stylelintrc.json'
+
+    test:
+        command: 'pnpm test-ci'
+        deps:
+            - 'root:playwright-install'
+        inputs:
+            - 'src/**/*'
+            - 'test/**/*'
+            - 'vitest.config.mts'
+            - 'tsconfig.json'
+            - 'tsconfig.spec.json'
+            - '/tsconfig.base.json'
+            - '/tsconfig.json'
+        outputs:
+            - '/coverage/apps/realm/**'
+            - '/reports/apps/realm/**'
+
+    test-dev:
+        command: 'pnpm test-dev'
+        preset: 'server'
+        deps:
+            - 'root:playwright-install'
+
+    start:
+        command: 'pnpm start'
+        preset: 'server'

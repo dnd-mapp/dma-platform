@@ -9,8 +9,8 @@
     "ng": "ng",
     "moon": "moon",
     "commitlint": "commitlint",
-    "lint:md": "markdownlint-cli2 --config .markdownlint-cli2.json",
-    "lint:ts": "eslint .",
+    "lint-md": "markdownlint-cli2 --config .markdownlint-cli2.json",
+    "lint-ts": "eslint .",
     "playwright-install": "playwright install chromium --with-deps",
     "format": "prettier -w .",
     "format-check": "prettier -l ."

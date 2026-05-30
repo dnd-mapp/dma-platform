@@ -22,28 +22,28 @@ jobs:
               uses: ./.github/actions/setup-workspace
 
             - name: Lint TypeScript (root)
-              run: pnpm lint:ts
+              run: pnpm lint-ts
 
             - name: Lint Realm
-              run: pnpm --filter @dnd-mapp/realm lint
+              run: pnpm --filter @dnd-mapp/realm lint-ts
 
             - name: Lint CSS (Realm)
               run: pnpm --filter @dnd-mapp/realm lint-css
 
             - name: Lint E2E
-              run: pnpm --filter @dnd-mapp/realm-e2e lint
+              run: pnpm --filter @dnd-mapp/realm-e2e lint-ts
 
             - name: Lint ESLint config
-              run: pnpm --filter @dnd-mapp/eslint-config lint
+              run: pnpm --filter @dnd-mapp/eslint-config lint-ts
 
             - name: Lint Stylelint config
-              run: pnpm --filter @dnd-mapp/stylelint-config lint
+              run: pnpm --filter @dnd-mapp/stylelint-config lint-ts
 
             - name: Check formatting
               run: pnpm format-check
 
             - name: Lint Markdown
-              run: pnpm lint:md
+              run: pnpm lint-md
 
     build:
         name: Build
