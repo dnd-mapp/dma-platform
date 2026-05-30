@@ -27,12 +27,6 @@ jobs:
             - name: Run CI
               run: pnpm moon ci
 
-            - name: Report CI results
-              uses: moonrepo/run-report-action@bbe7e99bf2aca819ec660ec01fc59d84bdd492d6 # v1.10.0
-              if: success() || failure()
-              with:
-                  access-token: ${{ secrets.GITHUB_TOKEN }}
-
             - name: Upload code coverage
               if: hashFiles('coverage/apps/realm/cobertura-coverage.xml') != ''
               uses: actions/upload-code-coverage@abb5995db9e0199b0e2bb9dbd136fce4cb1ec4d3 # v1.3.0
