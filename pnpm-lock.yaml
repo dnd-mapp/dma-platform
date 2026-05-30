@@ -66,6 +66,9 @@ importers:
       '@dnd-mapp/stylelint-config':
         specifier: workspace:*
         version: link:packages/stylelint-config
+      '@moonrepo/cli':
+        specifier: ~2.2.5
+        version: 2.2.5
       '@playwright/test':
         specifier: ~1.60.0
         version: 1.60.0
@@ -1085,6 +1088,49 @@ packages:
     peerDependenciesMeta:
       '@cfworker/json-schema':
         optional: true
+
+  '@moonrepo/cli@2.2.5':
+    resolution: {integrity: sha512-MZPXJ7pvfcC77jedFPxwW4Z4XCPzeuBMmbVjRDFXq13bnyAYcaH5kdxkvyxX4WHeEHWyWuustOaJowZo3Q/SxA==}
+    hasBin: true
+
+  '@moonrepo/core-linux-arm64-gnu@2.2.5':
+    resolution: {integrity: sha512-61ajwr3oxCAC0vp879LgKzml3pu+kJ0xMd2Tr1fFMuqp+Xp9k+41VOaTlW7m3vhNQCTVuFFGKxh8KUeAtJk//w==}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
+  '@moonrepo/core-linux-arm64-musl@2.2.5':
+    resolution: {integrity: sha512-8gcRf1B+jxbdy4rdQzfXSg37ECsiThCKYHYYXfe4etzcC6CQjmmYeC7OxF+gxWK0mL6UbpuKso8zOcqSbYzjYw==}
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
+
+  '@moonrepo/core-linux-x64-gnu@2.2.5':
+    resolution: {integrity: sha512-kqZppmKKzdStXbOpWUS+rQlJiowO0ItwWP74oqJVpwUewAjqB2WLwG6IvhSAVHrVhC+9OCGm0g4iAESQBAEh2w==}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+
+  '@moonrepo/core-linux-x64-musl@2.2.5':
+    resolution: {integrity: sha512-UxyYR+SJ7er7Skb60saphEWsPN+oecqDIrNxdAYy+3Li7G9jzBK0j59Jj7j2c0pjlBSKao06DGmfM6WuBlE8eg==}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+
+  '@moonrepo/core-macos-arm64@2.2.5':
+    resolution: {integrity: sha512-DpvFXa/N4rc/vJygE6JBL1pW0DtX00h07xruWQYjdeOuv3RQClRQSwZJNJmGZKhZus4g/LccHgEGvRdu9IMC4w==}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@moonrepo/core-macos-x64@2.2.5':
+    resolution: {integrity: sha512-J4udAbRTnK+EarHu7nIKm2j5t4CY0I9hfoyGOSU9bsC3n91//YNrixPnCe34IA4irArNzqPnoDXlQv/v5mG8Pg==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@moonrepo/core-windows-x64-msvc@2.2.5':
+    resolution: {integrity: sha512-yYPMsOHL5daEPSTMp2JP+YrwmGjeu+Kp25UmRnllGDmofkCu4Gcv3ct6ljK+u1+W6q2Jc2ooY7eZ14dnKJnlug==}
+    cpu: [x64]
+    os: [win32]
 
   '@msgpackr-extract/msgpackr-extract-darwin-arm64@3.0.4':
     resolution: {integrity: sha512-LCkGo6JDfaBhgST7UpPWgNgLINpcpabaHfyz5OBx75nUYxBsaEPxjnyNjWpeb/xBup/682QnBfRBy2/LvPutZQ==}
@@ -5156,6 +5202,39 @@ snapshots:
       zod-to-json-schema: 3.25.2(zod@4.3.6)
     transitivePeerDependencies:
       - supports-color
+
+  '@moonrepo/cli@2.2.5':
+    dependencies:
+      detect-libc: 2.1.2
+    optionalDependencies:
+      '@moonrepo/core-linux-arm64-gnu': 2.2.5
+      '@moonrepo/core-linux-arm64-musl': 2.2.5
+      '@moonrepo/core-linux-x64-gnu': 2.2.5
+      '@moonrepo/core-linux-x64-musl': 2.2.5
+      '@moonrepo/core-macos-arm64': 2.2.5
+      '@moonrepo/core-macos-x64': 2.2.5
+      '@moonrepo/core-windows-x64-msvc': 2.2.5
+
+  '@moonrepo/core-linux-arm64-gnu@2.2.5':
+    optional: true
+
+  '@moonrepo/core-linux-arm64-musl@2.2.5':
+    optional: true
+
+  '@moonrepo/core-linux-x64-gnu@2.2.5':
+    optional: true
+
+  '@moonrepo/core-linux-x64-musl@2.2.5':
+    optional: true
+
+  '@moonrepo/core-macos-arm64@2.2.5':
+    optional: true
+
+  '@moonrepo/core-macos-x64@2.2.5':
+    optional: true
+
+  '@moonrepo/core-windows-x64-msvc@2.2.5':
+    optional: true
 
   '@msgpackr-extract/msgpackr-extract-darwin-arm64@3.0.4':
     optional: true
