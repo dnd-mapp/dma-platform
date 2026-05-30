@@ -10,8 +10,32 @@ updates:
       schedule:
           interval: weekly
       groups:
+          angular:
+              patterns:
+                  - '@angular/*'
+                  - '@angular-eslint/*'
+                  - 'angular-eslint'
+                  - '@ngrx/*'
+          eslint:
+              patterns:
+                  - 'eslint'
+                  - 'eslint-*'
+                  - 'typescript-eslint'
+          stylelint:
+              patterns:
+                  - 'stylelint'
+                  - 'stylelint-*'
+          testing:
+              patterns:
+                  - 'playwright'
+                  - '@playwright/*'
+                  - 'vitest'
+                  - '@vitest/*'
           tooling:
               patterns:
+                  - '@commitlint/*'
+                  - 'husky'
+                  - 'lint-staged'
                   - 'markdownlint*'
                   - 'prettier'
                   - 'prettier-*'
