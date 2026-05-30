@@ -23,4 +23,6 @@ runs:
         - name: Install dependencies
           if: inputs.install-dependencies == 'true'
           shell: bash
+          env:
+              HUSKY: 0
           run: pnpm install

@@ -48,6 +48,12 @@ Monorepo for the D&D Mapp platform — libraries and applications powering chara
     pnpm install
     ```
 
+4. Set up the Husky init script so that git hooks can find the correct Node and pnpm versions:
+
+    ```sh
+    mkdir -p ~/.config/husky && echo 'eval "$(mise activate bash)"' >> ~/.config/husky/init.sh
+    ```
+
 ## Editor setup
 
 ### VS Code
@@ -61,6 +67,7 @@ Monorepo for the D&D Mapp platform — libraries and applications powering chara
     - [Vitest](https://marketplace.visualstudio.com/items?itemName=vitest.explorer) — run and debug unit tests
     - [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) — Markdown linting
     - [Stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint) — inline SCSS lint diagnostics
+    - [Conventional Commits](https://marketplace.visualstudio.com/items?itemName=vivaxy.vscode-conventional-commits) — commit message builder that enforces the project's commit format
 
 The workspace settings in `.vscode/settings.json` are pre-configured:
 

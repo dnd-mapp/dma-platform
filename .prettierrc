@@ -11,6 +11,12 @@
             "options": {
                 "parser": "angular"
             }
+        },
+        {
+            "files": [".commitlintrc", ".lintstagedrc"],
+            "options": {
+                "parser": "json"
+            }
         }
     ],
     "plugins": ["prettier-plugin-organize-imports"],

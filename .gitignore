@@ -10,3 +10,5 @@ dist/
 
 coverage/
 reports/
+
+.husky/_

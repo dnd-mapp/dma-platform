@@ -1,5 +1,7 @@
 *                   text=auto
 
+*.sh                text eol=lf
+*.sh                text eol=lf
 *.md                text eol=lf
 *.yml               text eol=lf
 *.xml               text eol=lf
@@ -21,6 +23,11 @@
 
 *.png               binary
 *.ico               binary
+
+.husky/commit-msg   text eol=lf
+.husky/pre-commit   text eol=lf
+.lintstagedrc       text eol=lf
+.commitlintrc       text eol=lf
 
 .gitignore          text eol=lf
 .gitattributes      text eol=lf
