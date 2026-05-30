@@ -1,5 +1,9 @@
 $schema: 'https://moonrepo.dev/schemas/project.json'
 
+language: 'typescript'
+stack: 'frontend'
+layer: 'application'
+
 dependsOn:
     - sigil
     - eslint-config

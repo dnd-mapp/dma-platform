@@ -1,1 +1,12 @@
-# Configured in #52
+$schema: 'https://moonrepo.dev/schemas/workspace.json'
+
+projects:
+    realm: 'apps/realm'
+    sigil: 'packages/sigil'
+    eslint-config: 'packages/eslint-config'
+    stylelint-config: 'packages/stylelint-config'
+    realm-e2e: 'e2e/realm'
+    root: '.'
+
+vcs:
+    defaultBranch: 'main'

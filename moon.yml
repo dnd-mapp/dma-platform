@@ -1,5 +1,9 @@
 $schema: 'https://moonrepo.dev/schemas/project.json'
 
+language: 'javascript'
+stack: 'unknown'
+layer: 'tool'
+
 tasks:
     format-check:
         command: 'pnpm format-check'
