@@ -1,0 +1,16 @@
+{
+  "name": "@dnd-mapp/sigil",
+  "version": "0.0.0",
+  "description": "Design token library for the D&D Mapp platform — colors, typography, spacing, and other design primitives as SCSS variables and CSS custom properties.",
+  "keywords": [
+    "design-tokens",
+    "scss",
+    "css",
+    "theming"
+  ],
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}
