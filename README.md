@@ -54,6 +54,34 @@ Monorepo for the D&D Mapp platform — libraries and applications powering chara
     mkdir -p ~/.config/husky && echo 'eval "$(mise activate bash)"' >> ~/.config/husky/init.sh
     ```
 
+### Local HTTPS setup
+
+The dev server for `apps/realm` serves exclusively over HTTPS at `https://localhost.www.dndmapp.dev:4000`. The following one-time steps are required before running `ng serve realm`. Steps 1–3 require administrator privileges.
+
+1. Install [mkcert](https://github.com/FiloSottile/mkcert):
+
+    ```sh
+    winget install mkcert
+    ```
+
+2. Trust the mkcert local CA in your system certificate store:
+
+    ```sh
+    mkcert -install
+    ```
+
+3. Add the local hostnames to your `hosts` file (`C:\Windows\System32\drivers\etc\hosts`):
+
+    ```text
+    127.0.0.1 localhost.www.dndmapp.dev localhost.auth.dndmapp.dev
+    ```
+
+4. Generate the development certificate:
+
+    ```sh
+    pnpm certs:generate
+    ```
+
 ## Editor setup
 
 ### VS Code
