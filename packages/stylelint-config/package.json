@@ -18,7 +18,7 @@
     "src"
   ],
   "scripts": {
-    "lint": "eslint ."
+    "lint-ts": "eslint ."
   },
   "peerDependencies": {
     "stylelint": ">=17.0.0",

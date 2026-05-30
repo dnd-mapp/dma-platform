@@ -20,7 +20,7 @@
     "src"
   ],
   "scripts": {
-    "lint": "eslint ."
+    "lint-ts": "eslint ."
   },
   "peerDependencies": {
     "angular-eslint": ">=21.0.0",
