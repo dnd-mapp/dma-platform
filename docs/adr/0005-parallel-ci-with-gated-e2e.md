@@ -1,6 +1,6 @@
 # ADR 0005: Parallel CI jobs with E2E gated behind all other checks
 
-- **Status:** Accepted
+- **Status:** Superseded by [ADR 0008](0008-moonrepo-for-task-orchestration-and-affected-ci.md)
 - **Date:** 2026-05-29
 
 ## Context
