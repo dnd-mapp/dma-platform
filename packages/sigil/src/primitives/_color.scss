@@ -1,3 +1,7 @@
+// White and black — near-absolute with a faint maroon warmth (32°) for tonal consistency with surfaces
+$color-white: oklch(99% 0.006 32deg);
+$color-black: oklch(8% 0.006 32deg);
+
 // Maroon — primary brand
 $color-maroon-50: oklch(97% 0.01 32deg);
 $color-maroon-100: oklch(93% 0.02 32deg);

@@ -1,0 +1,26 @@
+@use '../primitives/color' as *;
+
+// Surface
+$color-surface-subtle: var(--color-surface-subtle, #{$color-maroon-100});
+$color-surface-default: var(--color-surface-default, #{$color-maroon-50});
+$color-surface-raised: var(--color-surface-raised, #{$color-white});
+$color-surface-overlay: var(--color-surface-overlay, #{$color-white});
+
+// Text
+$color-text-primary: var(--color-text-primary, #{$color-grey-900});
+$color-text-secondary: var(--color-text-secondary, #{$color-grey-600});
+$color-text-disabled: var(--color-text-disabled, #{$color-grey-400});
+$color-text-inverse: var(--color-text-inverse, #{$color-white});
+$color-text-on-interactive: var(--color-text-on-interactive, #{$color-white});
+
+// Border
+$color-border-subtle: var(--color-border-subtle, #{$color-grey-100});
+$color-border-default: var(--color-border-default, #{$color-grey-200});
+$color-border-strong: var(--color-border-strong, #{$color-grey-400});
+
+// Interactive
+$color-interactive-primary: var(--color-interactive-primary, #{$color-maroon-600});
+$color-interactive-primary-hover: var(--color-interactive-primary-hover, #{$color-maroon-700});
+$color-interactive-primary-active: var(--color-interactive-primary-active, #{$color-maroon-800});
+$color-interactive-danger: var(--color-interactive-danger, #{$color-red-600});
+$color-interactive-focus: var(--color-interactive-focus, #{$color-maroon-400});
