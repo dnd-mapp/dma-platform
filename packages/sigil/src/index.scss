@@ -1,2 +1,2 @@
-// Semantic token partials are forwarded here as they are added.
-// Primitives (src/primitives/) are internal — consumed by the semantic layer, not forwarded.
+@forward 'semantics/color';
+@forward 'semantics/typography';

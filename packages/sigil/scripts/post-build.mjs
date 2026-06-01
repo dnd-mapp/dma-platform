@@ -1,4 +1,4 @@
-import { copyFile, mkdir } from 'fs/promises';
+import { cp, mkdir, readFile, writeFile } from 'fs/promises';
 import { resolve } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -8,9 +8,14 @@ const distDir = resolve(pkgDir, '../../dist/packages/sigil');
 async function postBuild() {
     await mkdir(distDir, { recursive: true });
 
+    const pkg = JSON.parse(await readFile(resolve(pkgDir, 'package.json'), 'utf8'));
+    delete pkg.scripts;
+
     await Promise.all([
-        copyFile(resolve(pkgDir, 'package.json'), resolve(distDir, 'package.json')),
-        copyFile(resolve(pkgDir, 'README.md'), resolve(distDir, 'README.md')),
+        writeFile(resolve(distDir, 'package.json'), JSON.stringify(pkg, null, 2) + '\n'),
+        cp(resolve(pkgDir, 'README.md'), resolve(distDir, 'README.md')),
+        cp(resolve(pkgDir, 'src/primitives'), resolve(distDir, 'primitives'), { recursive: true }),
+        cp(resolve(pkgDir, 'src/tokens'), resolve(distDir, 'tokens'), { recursive: true }),
     ]);
 }
 
