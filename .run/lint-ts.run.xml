@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="realm-lint" type="js.build_tools.npm" folderName="apps/realm">
-    <package-json value="$PROJECT_DIR$/apps/realm/package.json" />
+  <configuration default="false" name="lint-ts" type="js.build_tools.npm" folderName="linting">
+    <package-json value="$PROJECT_DIR$/package.json" />
     <command value="run" />
     <scripts>
-      <script value="lint" />
+      <script value="lint-ts" />
     </scripts>
     <node-interpreter value="project" />
     <envs />

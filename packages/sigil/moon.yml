@@ -3,3 +3,27 @@ $schema: 'https://moonrepo.dev/schemas/project.json'
 language: 'scss'
 stack: 'frontend'
 layer: 'library'
+
+dependsOn:
+    - stylelint-config
+
+tasks:
+    build:
+        command: 'pnpm build'
+        inputs:
+            - 'src/**/*.scss'
+            - 'package.json'
+            - 'README.md'
+            - 'scripts/post-build.mjs'
+        outputs:
+            - '/dist/packages/sigil'
+
+    build-dev:
+        command: 'pnpm build-dev'
+        preset: 'server'
+
+    lint-css:
+        command: 'pnpm lint-css'
+        inputs:
+            - 'src/**/*.scss'
+            - '.stylelintrc.json'
