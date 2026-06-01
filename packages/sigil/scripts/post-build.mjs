@@ -16,6 +16,7 @@ async function postBuild() {
         cp(resolve(pkgDir, 'README.md'), resolve(distDir, 'README.md')),
         cp(resolve(pkgDir, 'src/primitives'), resolve(distDir, 'primitives'), { recursive: true }),
         cp(resolve(pkgDir, 'src/tokens'), resolve(distDir, 'tokens'), { recursive: true }),
+        cp(resolve(pkgDir, 'assets'), resolve(distDir, 'assets'), { recursive: true }),
     ]);
 }
 

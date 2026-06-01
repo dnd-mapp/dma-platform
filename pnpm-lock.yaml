@@ -66,6 +66,15 @@ importers:
       '@dnd-mapp/stylelint-config':
         specifier: workspace:*
         version: link:packages/stylelint-config
+      '@fontsource-variable/inconsolata':
+        specifier: ~5.2.8
+        version: 5.2.8
+      '@fontsource-variable/lora':
+        specifier: ~5.2.8
+        version: 5.2.8
+      '@fontsource/metamorphous':
+        specifier: ~5.2.8
+        version: 5.2.8
       '@moonrepo/cli':
         specifier: ~2.2.5
         version: 2.2.5
@@ -839,6 +848,15 @@ packages:
   '@eslint/plugin-kit@0.7.1':
     resolution: {integrity: sha512-rZAP3aVgB9ds9KOeUSL+zZ21hPmo8dh6fnIFwRQj5EAZl9gzR7wxYbYXYysAM8CTqGmUGyp2S4kUdV17MnGuWQ==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
+
+  '@fontsource-variable/inconsolata@5.2.8':
+    resolution: {integrity: sha512-IXXYUznF45QyPG05Q7NgsVFa4i1HnVyqbfEGLlHidZRElO0T3PCq6y+Vlz9nT4rnqsLqAkdi4wjhsoJey6pYTg==}
+
+  '@fontsource-variable/lora@5.2.8':
+    resolution: {integrity: sha512-cxjTJ9BbOWIzusewR4UMBLVePvTSWV6dtNaNsCkF/oKoyA68fJGWfaYCILOOP1BObE4dmjfZ3xo6m9hdHhtYhg==}
+
+  '@fontsource/metamorphous@5.2.8':
+    resolution: {integrity: sha512-5Xu68jzxWuazo6P8uQgNl0Sr5i2FcbuPXReOGg6M6EfFFw/WbMOgRH50eb9N3VLd1UGxZSzMfCdXizNCDnc2qQ==}
 
   '@gar/promise-retry@1.0.3':
     resolution: {integrity: sha512-GmzA9ckNokPypTg10pgpeHNQe7ph+iIKKmhKu3Ob9ANkswreCx7R3cKmY781K8QK3AqVL3xVh9A42JvIAbkkSA==}
@@ -4976,6 +4994,12 @@ snapshots:
     dependencies:
       '@eslint/core': 1.2.1
       levn: 0.4.1
+
+  '@fontsource-variable/inconsolata@5.2.8': {}
+
+  '@fontsource-variable/lora@5.2.8': {}
+
+  '@fontsource/metamorphous@5.2.8': {}
 
   '@gar/promise-retry@1.0.3': {}
 

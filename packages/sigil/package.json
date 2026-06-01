@@ -16,13 +16,15 @@
     },
     "./tokens/*": {
       "sass": "./tokens/_*.scss"
-    }
+    },
+    "./assets/fonts/*": "./assets/fonts/*"
   },
   "private": true,
   "engines": {
     "node": ">=24.0.0"
   },
   "scripts": {
+    "download-fonts": "node scripts/download-fonts.mjs",
     "postbuild": "node scripts/post-build.mjs",
     "build": "sass src/index.scss ../../dist/packages/sigil/index.css --source-map",
     "build-dev": "sass --watch src/index.scss ../../dist/packages/sigil/index.css --source-map",

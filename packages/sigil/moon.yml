@@ -12,6 +12,7 @@ tasks:
         command: 'pnpm build'
         inputs:
             - 'src/**/*.scss'
+            - 'assets/**/*'
             - 'package.json'
             - 'README.md'
             - 'scripts/post-build.mjs'
