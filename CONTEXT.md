@@ -38,7 +38,7 @@ Exposes six secondary entry points:
 - **`config`** — generic `ConfigService<T>` for loading typed JSON config at bootstrap via `APP_INITIALIZER`.
 - **`http`** — `HttpClient` wrapper and generic base services that resolve backend base URLs via `ConfigService`.
 - **`storage`** — browser storage abstractions.
-- **`theming`** — `ThemeService` managing light/dark mode, defaulting to `prefers-color-scheme`, user-overridable.
+- **`theming`** — `ThemeService` managing theme mode with three explicit states: `dark` (platform default), `light`, and `system` (follows `prefers-color-scheme`). In `system` mode no `[data-theme]` attribute is set and the CSS media query governs. In `dark` or `light` mode the attribute is written explicitly, overriding the media query.
 - **`testing`** — CDK harnesses for Arcane UI components, for use in consumer app tests.
 
 ## Virtual Tabletop (VTT)
