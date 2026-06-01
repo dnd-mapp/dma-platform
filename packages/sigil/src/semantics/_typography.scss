@@ -1,3 +1,4 @@
+@use '../primitives/font-family' as *;
 @use '../primitives/font-size' as *;
 @use '../primitives/font-weight' as *;
 @use '../primitives/line-height' as *;
@@ -24,4 +25,9 @@
     --typography-line-height-snug: #{$line-height-snug};
     --typography-line-height-normal: #{$line-height-normal};
     --typography-line-height-relaxed: #{$line-height-relaxed};
+
+    // Font family
+    --font-heading: #{$font-family-heading};
+    --font-body: #{$font-family-body};
+    --font-mono: #{$font-family-mono};
 }
