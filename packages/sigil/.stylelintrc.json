@@ -1,0 +1,3 @@
+{
+    "extends": ["@dnd-mapp/stylelint-config"]
+}
