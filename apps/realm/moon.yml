@@ -4,11 +4,6 @@ language: 'typescript'
 stack: 'frontend'
 layer: 'application'
 
-dependsOn:
-    - sigil
-    - eslint-config
-    - stylelint-config
-
 tasks:
     build:
         command: 'pnpm build'

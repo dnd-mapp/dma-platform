@@ -6,8 +6,6 @@ layer: 'automation'
 
 dependsOn:
     - realm
-    - eslint-config
-    - stylelint-config
 
 tasks:
     lint-ts:

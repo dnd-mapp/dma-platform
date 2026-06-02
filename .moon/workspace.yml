@@ -2,6 +2,7 @@ $schema: 'https://moonrepo.dev/schemas/workspace.json'
 
 projects:
     realm: 'apps/realm'
+    arcane-ui: 'packages/arcane-ui'
     sigil: 'packages/sigil'
     eslint-config: 'packages/eslint-config'
     stylelint-config: 'packages/stylelint-config'
