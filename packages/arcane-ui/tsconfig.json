@@ -1,7 +1,15 @@
 {
     "extends": "../../tsconfig.base.json",
     "references": [{ "path": "tsconfig.lib.json" }, { "path": "tsconfig.spec.json" }],
-    "include": ["src/**/*.ts"],
+    "include": [
+        "src/**/*.ts",
+        "components/**/*.ts",
+        "config/**/*.ts",
+        "http/**/*.ts",
+        "storage/**/*.ts",
+        "testing/**/*.ts",
+        "theming/**/*.ts"
+    ],
     "compilerOptions": {
         "composite": true,
         "experimentalDecorators": true,
