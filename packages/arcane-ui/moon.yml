@@ -4,10 +4,65 @@ language: 'typescript'
 stack: 'frontend'
 layer: 'library'
 
+dependsOn:
+    - sigil
+    - eslint-config
+    - stylelint-config
+
 tasks:
     build:
+        command: 'pnpm build'
+        inputs:
+            - 'src/**/*'
+            - 'ng-package.json'
+            - 'tsconfig.json'
+            - 'tsconfig.lib.json'
+            - 'tsconfig.lib.prod.json'
+            - 'package.json'
+            - '/angular.json'
+            - '/tsconfig.base.json'
+            - '/tsconfig.json'
+        outputs:
+            - '/dist/packages/arcane-ui'
+
     build-dev:
-    test-ci:
-    test:
+        command: 'pnpm build-dev'
+        preset: 'server'
+
     lint-ts:
+        command: 'pnpm lint-ts'
+        inputs:
+            - 'src/**/*.{ts,html}'
+            - 'eslint.config.mjs'
+            - 'tsconfig.json'
+            - 'tsconfig.lib.json'
+            - '/angular.json'
+            - '/tsconfig.base.json'
+            - '/eslint.config.mjs'
+
     lint-css:
+        command: 'pnpm lint-css'
+        inputs:
+            - 'src/**/*.scss'
+            - '.stylelintrc.json'
+
+    test-ci:
+        command: 'pnpm test-ci'
+        deps:
+            - 'root:playwright-install'
+        inputs:
+            - 'src/**/*'
+            - 'vitest.config.mts'
+            - 'tsconfig.json'
+            - 'tsconfig.spec.json'
+            - '/tsconfig.base.json'
+            - '/tsconfig.json'
+        outputs:
+            - '/coverage/packages/arcane-ui/**'
+            - '/reports/packages/arcane-ui/**'
+
+    test:
+        command: 'pnpm test'
+        preset: 'server'
+        deps:
+            - 'root:playwright-install'
