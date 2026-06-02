@@ -1,4 +1,8 @@
 {
     "files": [],
-    "references": [{ "path": "./apps/realm" }, { "path": "./e2e/realm" }, { "path": "./packages/arcane-ui" }]
+    "references": [
+        { "path": "./apps/realm/tsconfig.json" },
+        { "path": "./e2e/realm/tsconfig.json" },
+        { "path": "./packages/arcane-ui/tsconfig.json" }
+    ]
 }
