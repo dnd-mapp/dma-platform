@@ -52,6 +52,7 @@
     "lint-staged": "catalog:",
     "markdownlint-cli2": "catalog:",
     "prettier": "catalog:prettier",
+    "playwright": "catalog:playwright",
     "prettier-plugin-organize-imports": "catalog:prettier",
     "typescript": "catalog:",
     "typescript-eslint": "catalog:eslint"
