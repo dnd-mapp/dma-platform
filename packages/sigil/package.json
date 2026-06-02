@@ -29,5 +29,16 @@
     "build": "sass src/index.scss ../../dist/packages/sigil/index.css --source-map",
     "build-dev": "sass --watch src/index.scss ../../dist/packages/sigil/index.css --source-map",
     "lint-css": "stylelint \"src/**/*.scss\""
+  },
+  "devDependencies": {
+    "@dnd-mapp/stylelint-config": "workspace:*",
+    "@fontsource-variable/inconsolata": "catalog:",
+    "@fontsource-variable/lora": "catalog:",
+    "@fontsource/metamorphous": "catalog:",
+    "sass": "catalog:",
+    "stylelint": "catalog:stylelint",
+    "stylelint-config-clean-order": "catalog:stylelint",
+    "stylelint-config-standard-scss": "catalog:stylelint",
+    "stylelint-order": "catalog:stylelint"
   }
 }
