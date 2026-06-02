@@ -166,6 +166,9 @@ importers:
 
   .:
     devDependencies:
+      '@angular/cli':
+        specifier: catalog:angular
+        version: 21.2.12(@types/node@24.12.4)(chokidar@5.0.0)
       '@commitlint/cli':
         specifier: 'catalog:'
         version: 21.0.1(@types/node@24.12.4)(conventional-commits-parser@6.4.0)(typescript@5.9.3)

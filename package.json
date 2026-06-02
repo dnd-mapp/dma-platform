@@ -41,6 +41,7 @@
     ]
   },
   "devDependencies": {
+    "@angular/cli": "catalog:angular",
     "@commitlint/cli": "catalog:",
     "@commitlint/config-conventional": "catalog:",
     "@dnd-mapp/eslint-config": "workspace:*",
