@@ -16,5 +16,41 @@
     "lint-css": "stylelint \"**/*.scss\"",
     "test-ci": "ng test arcane-ui",
     "test": "ng test arcane-ui -c dev"
+  },
+  "peerDependencies": {
+    "@angular/cdk": "^21.2.0",
+    "@angular/common": "^21.2.0",
+    "@angular/core": "^21.2.0",
+    "rxjs": "^7.8.0",
+    "tslib": "^2.8.0"
+  },
+  "devDependencies": {
+    "@angular-eslint/builder": "catalog:angular",
+    "@angular/build": "catalog:angular",
+    "@angular/cli": "catalog:angular",
+    "@angular/compiler": "catalog:angular",
+    "@angular/compiler-cli": "catalog:angular",
+    "@dnd-mapp/eslint-config": "workspace:*",
+    "@dnd-mapp/stylelint-config": "workspace:*",
+    "@storybook/angular": "catalog:storybook",
+    "@storybook/builder-vite": "catalog:storybook",
+    "@types/node": "catalog:",
+    "@vitest/browser-playwright": "catalog:vitest",
+    "@vitest/coverage-v8": "catalog:vitest",
+    "@vitest/ui": "catalog:vitest",
+    "angular-eslint": "catalog:angular",
+    "eslint": "catalog:eslint",
+    "eslint-config-prettier": "catalog:eslint",
+    "ng-packagr": "catalog:angular",
+    "sass": "catalog:",
+    "storybook": "catalog:storybook",
+    "stylelint": "catalog:stylelint",
+    "stylelint-config-clean-order": "catalog:stylelint",
+    "stylelint-config-standard-scss": "catalog:stylelint",
+    "stylelint-order": "catalog:stylelint",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:eslint",
+    "vite": "catalog:",
+    "vitest": "catalog:vitest"
   }
 }

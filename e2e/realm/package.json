@@ -13,5 +13,15 @@
     "lint-ts": "eslint .",
     "test-ci": "playwright test",
     "test-dev": "playwright test --ui"
+  },
+  "devDependencies": {
+    "@dnd-mapp/eslint-config": "workspace:*",
+    "@playwright/test": "catalog:playwright",
+    "@types/node": "catalog:",
+    "eslint": "catalog:eslint",
+    "eslint-config-prettier": "catalog:eslint",
+    "playwright": "catalog:playwright",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:eslint"
   }
 }

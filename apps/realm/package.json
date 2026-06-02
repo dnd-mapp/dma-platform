@@ -16,5 +16,43 @@
     "lint-css": "stylelint \"**/*.scss\"",
     "test-ci": "ng test",
     "test-dev": "ng test -c dev"
+  },
+  "dependencies": {
+    "@angular/animations": "catalog:angular",
+    "@angular/cdk": "catalog:angular",
+    "@angular/common": "catalog:angular",
+    "@angular/compiler": "catalog:angular",
+    "@angular/core": "catalog:angular",
+    "@angular/forms": "catalog:angular",
+    "@angular/platform-browser": "catalog:angular",
+    "@angular/platform-browser-dynamic": "catalog:angular",
+    "@angular/router": "catalog:angular",
+    "@ngrx/signals": "catalog:ngrx",
+    "rxjs": "catalog:",
+    "tslib": "catalog:"
+  },
+  "devDependencies": {
+    "@angular-eslint/builder": "catalog:angular",
+    "@angular/build": "catalog:angular",
+    "@angular/cli": "catalog:angular",
+    "@angular/compiler-cli": "catalog:angular",
+    "@dnd-mapp/eslint-config": "workspace:*",
+    "@dnd-mapp/stylelint-config": "workspace:*",
+    "@types/node": "catalog:",
+    "@vitest/browser-playwright": "catalog:vitest",
+    "@vitest/coverage-v8": "catalog:vitest",
+    "@vitest/ui": "catalog:vitest",
+    "angular-eslint": "catalog:angular",
+    "eslint": "catalog:eslint",
+    "eslint-config-prettier": "catalog:eslint",
+    "sass": "catalog:",
+    "stylelint": "catalog:stylelint",
+    "stylelint-config-clean-order": "catalog:stylelint",
+    "stylelint-config-standard-scss": "catalog:stylelint",
+    "stylelint-order": "catalog:stylelint",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:eslint",
+    "vite": "catalog:",
+    "vitest": "catalog:vitest"
   }
 }
