@@ -92,6 +92,53 @@
                     }
                 }
             }
+        },
+        "arcane-ui": {
+            "projectType": "library",
+            "root": "packages/arcane-ui",
+            "sourceRoot": "packages/arcane-ui/src",
+            "prefix": "dma",
+            "architect": {
+                "build": {
+                    "builder": "@angular/build:ng-packagr",
+                    "defaultConfiguration": "prod",
+                    "configurations": {
+                        "prod": {
+                            "tsConfig": "packages/arcane-ui/tsconfig.lib.prod.json"
+                        },
+                        "dev": {
+                            "tsConfig": "packages/arcane-ui/tsconfig.lib.json",
+                            "watch": true
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular/build:unit-test",
+                    "options": {
+                        "buildTarget": "arcane-ui:build",
+                        "runner": "vitest",
+                        "runnerConfig": "packages/arcane-ui/vitest.config.mts",
+                        "tsConfig": "packages/arcane-ui/tsconfig.spec.json"
+                    },
+                    "defaultConfiguration": "ci",
+                    "configurations": {
+                        "ci": {
+                            "watch": false
+                        },
+                        "dev": {
+                            "watch": true,
+                            "ui": true
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-eslint/builder:lint",
+                    "options": {
+                        "eslintConfig": "packages/arcane-ui/eslint.config.mjs",
+                        "lintFilePatterns": ["packages/arcane-ui/**/*.ts", "packages/arcane-ui/**/*.html"]
+                    }
+                }
+            }
         }
     }
 }

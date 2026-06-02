@@ -1,0 +1,20 @@
+{
+  "name": "@dnd-mapp/arcane-ui",
+  "version": "0.0.0",
+  "description": "Shared Angular library for the D&D Mapp platform — reusable components, services, and tokens across applications.",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dnd-mapp/dma-platform.git",
+    "directory": "packages/arcane-ui"
+  },
+  "scripts": {
+    "build": "ng build arcane-ui",
+    "build-dev": "ng build arcane-ui -c dev",
+    "lint-ts": "ng lint arcane-ui",
+    "lint-css": "stylelint \"**/*.scss\"",
+    "test-ci": "ng test arcane-ui",
+    "test": "ng test arcane-ui -c dev"
+  }
+}

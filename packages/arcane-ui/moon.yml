@@ -1,0 +1,13 @@
+$schema: 'https://moonrepo.dev/schemas/project.json'
+
+language: 'typescript'
+stack: 'frontend'
+layer: 'library'
+
+tasks:
+    build:
+    build-dev:
+    test-ci:
+    test:
+    lint-ts:
+    lint-css:
