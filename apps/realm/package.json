@@ -12,10 +12,11 @@
   "scripts": {
     "start": "ng serve realm",
     "build": "ng build realm",
-    "lint-ts": "ng lint realm",
-    "lint-css": "stylelint \"**/*.scss\"",
+    "playwright-install": "playwright install chromium --with-deps",
     "test-ci": "ng test",
-    "test-dev": "ng test -c dev"
+    "test": "ng test -c dev",
+    "lint-ts": "ng lint realm",
+    "lint-css": "stylelint \"**/*.scss\""
   },
   "dependencies": {
     "@angular/animations": "catalog:angular",
@@ -45,6 +46,7 @@
     "angular-eslint": "catalog:angular",
     "eslint": "catalog:eslint",
     "eslint-config-prettier": "catalog:eslint",
+    "playwright": "catalog:playwright",
     "sass": "catalog:",
     "stylelint": "catalog:stylelint",
     "stylelint-config-clean-order": "catalog:stylelint",
@@ -52,7 +54,6 @@
     "stylelint-order": "catalog:stylelint",
     "typescript": "catalog:",
     "typescript-eslint": "catalog:eslint",
-    "vite": "catalog:",
     "vitest": "catalog:vitest"
   }
 }

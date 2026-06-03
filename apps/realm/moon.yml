@@ -5,6 +5,10 @@ stack: 'frontend'
 layer: 'application'
 
 tasks:
+    start:
+        command: 'pnpm start'
+        preset: 'server'
+
     build:
         command: 'pnpm build'
         inputs:
@@ -13,51 +17,57 @@ tasks:
             - 'tsconfig.json'
             - 'tsconfig.app.json'
             - 'package.json'
-            - '/angular.json'
+            - 'angular.json'
             - '/tsconfig.base.json'
             - '/tsconfig.json'
         outputs:
             - '/dist/apps/realm/**'
 
-    lint-ts:
-        command: 'pnpm lint-ts'
+    playwright-install:
+        command: 'pnpm playwright-install'
         inputs:
-            - 'src/**/*.{ts,html}'
-            - 'eslint.config.mjs'
-            - 'tsconfig.json'
-            - 'tsconfig.app.json'
-            - '/angular.json'
-            - '/tsconfig.base.json'
-            - '/eslint.config.mjs'
+            - 'package.json'
 
-    lint-css:
-        command: 'pnpm lint-css'
-        inputs:
-            - 'src/**/*.scss'
-            - '.stylelintrc.json'
-
-    test:
+    test-ci:
         command: 'pnpm test-ci'
         deps:
-            - 'root:playwright-install'
+            - 'playwright-install'
         inputs:
             - 'src/**/*'
             - 'test/**/*'
             - 'vitest.config.mts'
             - 'tsconfig.json'
             - 'tsconfig.spec.json'
+            - 'package.json'
+            - 'angular.json'
             - '/tsconfig.base.json'
             - '/tsconfig.json'
         outputs:
             - '/coverage/apps/realm/**'
             - '/reports/apps/realm/**'
 
-    test-dev:
-        command: 'pnpm test-dev'
+    test:
+        command: 'pnpm test'
         preset: 'server'
         deps:
-            - 'root:playwright-install'
+            - 'playwright-install'
 
-    start:
-        command: 'pnpm start'
-        preset: 'server'
+    lint-ts:
+        command: 'pnpm lint-ts'
+        inputs:
+            - 'src/**/*.{ts,html}'
+            - 'test/**/*.ts'
+            - 'eslint.config.mjs'
+            - 'tsconfig.json'
+            - 'tsconfig.app.json'
+            - 'tsconfig.spec.json'
+            - 'angular.json'
+            - '/tsconfig.base.json'
+            - '/packages/eslint-config/src/**/*.mjs'
+
+    lint-css:
+        command: 'pnpm lint-css'
+        inputs:
+            - 'src/**/*.scss'
+            - '.stylelintrc.json'
+            - '/packages/stylelint-config/src/**/*.mjs'
