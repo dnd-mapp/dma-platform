@@ -4,6 +4,7 @@ import { defineConfig } from 'vitest/config';
 const isCI = Boolean(process.env['CI']);
 
 export default defineConfig({
+    publicDir: '.msw',
     resolve: {
         tsconfigPaths: true,
     },
