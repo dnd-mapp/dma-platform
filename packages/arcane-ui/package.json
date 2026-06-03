@@ -41,6 +41,7 @@
     "@storybook/builder-vite": "catalog:storybook",
     "@types/node": "catalog:",
     "@vitest/browser-playwright": "catalog:vitest",
+    "msw": "catalog:",
     "@vitest/coverage-v8": "catalog:vitest",
     "@vitest/ui": "catalog:vitest",
     "angular-eslint": "catalog:angular",
