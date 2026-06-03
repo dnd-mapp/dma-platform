@@ -10,11 +10,13 @@
     "directory": "packages/arcane-ui"
   },
   "scripts": {
-    "build": "ng build arcane-ui",
-    "build-dev": "ng build arcane-ui -c dev",
-    "test-ci": "ng test arcane-ui",
-    "test": "ng test arcane-ui -c dev",
-    "lint-ts": "ng lint arcane-ui",
+    "build": "ng run arcane-ui:build",
+    "build-dev": "ng run arcane-ui:build -c dev",
+    "storybook-start": "ng run arcane-ui:storybook-start",
+    "storybook-build": "ng run arcane-ui:storybook-build",
+    "test-ci": "ng run arcane-ui:test",
+    "test": "ng run arcane-ui:test -c dev",
+    "lint-ts": "ng run arcane-ui:lint",
     "lint-css": "stylelint \"**/*.scss\""
   },
   "dependencies": {

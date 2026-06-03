@@ -1,10 +1,17 @@
 {
     "extends": "../../tsconfig.json",
-    "include": ["src/**/*.ts"],
-    "exclude": ["**/*.spec.ts"],
+    "include": [
+        "components/**/*.ts",
+        "config/**/*.ts",
+        "http/**/*.ts",
+        "src/**/*.ts",
+        "storage/**/*.ts",
+        "testing/**/*.ts",
+        "theming/**/*.ts"
+    ],
+    "exclude": ["**/*.spec.ts", "**/*.stories.ts"],
     "compilerOptions": {
         "composite": true,
-        "tsBuildInfoFile": "./out-tsc/lib/.tsbuildinfo",
         "outDir": "./out-tsc/lib",
         "declaration": true,
         "declarationMap": true,
