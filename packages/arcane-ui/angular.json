@@ -1,0 +1,59 @@
+{
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "schematics": {
+        "@schematics/angular:component": {
+            "style": "scss",
+            "changeDetection": "OnPush"
+        }
+    },
+    "projects": {
+        "arcane-ui": {
+            "projectType": "library",
+            "root": ".",
+            "sourceRoot": "./src",
+            "prefix": "dma",
+            "architect": {
+                "build": {
+                    "builder": "@angular/build:ng-packagr",
+                    "defaultConfiguration": "prod",
+                    "configurations": {
+                        "prod": {
+                            "tsConfig": "./tsconfig.lib.prod.json"
+                        },
+                        "dev": {
+                            "tsConfig": "./tsconfig.lib.json",
+                            "watch": true
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular/build:unit-test",
+                    "options": {
+                        "buildTarget": "arcane-ui:build",
+                        "runner": "vitest",
+                        "runnerConfig": "./vitest.config.mts",
+                        "tsConfig": "./tsconfig.spec.json"
+                    },
+                    "defaultConfiguration": "ci",
+                    "configurations": {
+                        "ci": {
+                            "watch": false
+                        },
+                        "dev": {
+                            "watch": true,
+                            "ui": true
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-eslint/builder:lint",
+                    "options": {
+                        "eslintConfig": "./eslint.config.mjs",
+                        "lintFilePatterns": ["./**/*.ts", "./**/*.html"]
+                    }
+                }
+            }
+        }
+    }
+}

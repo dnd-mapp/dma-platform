@@ -8,13 +8,13 @@ tasks:
     build:
         command: 'pnpm build'
         inputs:
-            - 'src/**/*'
-            - 'ng-package.json'
+            - '**/*.{ts,html,scss}'
+            - '**/ng-package.json'
             - 'tsconfig.json'
             - 'tsconfig.lib.json'
             - 'tsconfig.lib.prod.json'
             - 'package.json'
-            - '/angular.json'
+            - 'angular.json'
             - '/tsconfig.base.json'
             - '/tsconfig.json'
         outputs:
@@ -24,32 +24,22 @@ tasks:
         command: 'pnpm build-dev'
         preset: 'server'
 
-    lint-ts:
-        command: 'pnpm lint-ts'
+    playwright-install:
+        command: 'pnpm playwright-install'
         inputs:
-            - 'src/**/*.{ts,html}'
-            - 'eslint.config.mjs'
-            - 'tsconfig.json'
-            - 'tsconfig.lib.json'
-            - '/angular.json'
-            - '/tsconfig.base.json'
-            - '/eslint.config.mjs'
-
-    lint-css:
-        command: 'pnpm lint-css'
-        inputs:
-            - 'src/**/*.scss'
-            - '.stylelintrc.json'
+            - 'package.json'
 
     test-ci:
         command: 'pnpm test-ci'
         deps:
-            - 'root:playwright-install'
+            - 'playwright-install'
         inputs:
-            - 'src/**/*'
+            - '**/*.{ts,html,scss}'
             - 'vitest.config.mts'
             - 'tsconfig.json'
             - 'tsconfig.spec.json'
+            - 'package.json'
+            - 'angular.json'
             - '/tsconfig.base.json'
             - '/tsconfig.json'
         outputs:
@@ -60,4 +50,22 @@ tasks:
         command: 'pnpm test'
         preset: 'server'
         deps:
-            - 'root:playwright-install'
+            - 'playwright-install'
+
+    lint-ts:
+        command: 'pnpm lint-ts'
+        inputs:
+            - '**/*.{ts,html}'
+            - 'eslint.config.mjs'
+            - 'tsconfig.json'
+            - 'tsconfig.lib.json'
+            - 'angular.json'
+            - '/tsconfig.base.json'
+            - '/packages/eslint-config/src/**/*.mjs'
+
+    lint-css:
+        command: 'pnpm lint-css --aei'
+        inputs:
+            - '**/*.scss'
+            - '.stylelintrc.json'
+            - '/packages/stylelint-config/src/**/*.mjs'
