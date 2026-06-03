@@ -12,6 +12,7 @@ jobs:
     ci:
         name: CI
         runs-on: ubuntu-22.04
+        timeout-minutes: 5
         permissions:
             contents: read
             code-quality: write
