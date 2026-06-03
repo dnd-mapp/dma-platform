@@ -11,11 +11,11 @@
   },
   "scripts": {
     "build": "ng run arcane-ui:build",
-    "build-dev": "ng run arcane-ui:build -c dev",
+    "build-dev": "ng run arcane-ui:build:dev",
     "storybook-start": "ng run arcane-ui:storybook-start",
     "storybook-build": "ng run arcane-ui:storybook-build",
     "test-ci": "ng run arcane-ui:test",
-    "test": "ng run arcane-ui:test -c dev",
+    "test": "ng run arcane-ui:test:dev",
     "lint-ts": "ng run arcane-ui:lint",
     "lint-css": "stylelint \"**/*.scss\""
   },
