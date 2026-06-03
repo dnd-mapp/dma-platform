@@ -32,8 +32,10 @@ pnpm-lock.yaml
 !.vscode/extensions.json
 !.vscode/settings.json
 
-.angular/
-dist/
+**/.msw/
 
-coverage/
-reports/
+**/.angular/
+**/dist/
+
+**/coverage/
+**/reports/
