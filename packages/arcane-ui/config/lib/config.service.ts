@@ -28,12 +28,12 @@ export class ConfigService<T> {
 
     /** Fetches and stores the config. Called automatically by {@link provideConfig}. */
     public async load(): Promise<void> {
+        // TODO - Use RequestService
         const response = await fetch(this.url);
 
         if (!response.ok) {
             throw new Error(`Config fetch failed with status ${response.status}`);
         }
-
         this.config = (await response.json()) as T;
     }
 }
