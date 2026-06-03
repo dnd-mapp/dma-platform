@@ -18,15 +18,10 @@ tasks:
             - '/tsconfig.base.json'
             - '/packages/eslint-config/src/**/*.mjs'
 
-    playwright-install:
-        command: 'pnpm playwright-install'
-        inputs:
-            - 'package.json'
-
     e2e-ci:
         command: 'pnpm e2e-ci'
         deps:
-            - 'playwright-install'
+            - 'root:playwright-install'
             - 'realm:build'
             - 'realm:lint-ts'
             - 'realm:lint-css'
@@ -43,4 +38,4 @@ tasks:
         command: 'pnpm e2e'
         preset: 'server'
         deps:
-            - 'playwright-install'
+            - 'root:playwright-install'

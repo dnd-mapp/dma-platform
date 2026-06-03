@@ -196,6 +196,9 @@ importers:
       markdownlint-cli2:
         specifier: 'catalog:'
         version: 0.22.1
+      playwright:
+        specifier: catalog:playwright
+        version: 1.60.0
       prettier:
         specifier: catalog:prettier
         version: 3.8.3

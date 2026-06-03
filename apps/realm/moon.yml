@@ -23,15 +23,10 @@ tasks:
         outputs:
             - '/dist/apps/realm/**'
 
-    playwright-install:
-        command: 'pnpm playwright-install'
-        inputs:
-            - 'package.json'
-
     test-ci:
         command: 'pnpm test-ci'
         deps:
-            - 'playwright-install'
+            - 'root:playwright-install'
         inputs:
             - 'src/**/*'
             - 'test/**/*'
@@ -50,7 +45,7 @@ tasks:
         command: 'pnpm test'
         preset: 'server'
         deps:
-            - 'playwright-install'
+            - 'root:playwright-install'
 
     lint-ts:
         command: 'pnpm lint-ts'

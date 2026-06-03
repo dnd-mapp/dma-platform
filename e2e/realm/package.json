@@ -10,7 +10,6 @@
     "directory": "e2e/realm"
   },
   "scripts": {
-    "playwright-install": "playwright install chromium --with-deps",
     "e2e-ci": "playwright test",
     "e2e": "playwright test --ui",
     "lint-ts": "eslint ."

@@ -24,15 +24,10 @@ tasks:
         command: 'pnpm build-dev'
         preset: 'server'
 
-    playwright-install:
-        command: 'pnpm playwright-install'
-        inputs:
-            - 'package.json'
-
     test-ci:
         command: 'pnpm test-ci'
         deps:
-            - 'playwright-install'
+            - 'root:playwright-install'
         inputs:
             - '**/*.{ts,html,scss}'
             - 'vitest.config.mts'
@@ -50,7 +45,7 @@ tasks:
         command: 'pnpm test'
         preset: 'server'
         deps:
-            - 'playwright-install'
+            - 'root:playwright-install'
 
     lint-ts:
         command: 'pnpm lint-ts'

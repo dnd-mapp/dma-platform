@@ -5,6 +5,11 @@ stack: 'unknown'
 layer: 'tool'
 
 tasks:
+    playwright-install:
+        command: 'pnpm playwright-install'
+        inputs:
+            - 'package.json'
+
     format-check:
         command: 'pnpm format-check'
         inputs:
