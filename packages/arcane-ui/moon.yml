@@ -19,11 +19,28 @@ tasks:
             - '/tsconfig.json'
         outputs:
             - '.angular/**'
-            - 'dist/**'
+            - 'dist/arcane-ui/**'
 
     build-dev:
         command: 'pnpm build-dev'
         preset: 'server'
+
+    storybook-start:
+        command: 'pnpm storybook-start'
+        preset: 'server'
+
+    storybook-build:
+        command: 'pnpm storybook-build'
+        inputs:
+            - '**/*.{ts,html,scss}'
+            - '**/*.stories.ts'
+            - '.storybook/**'
+            - 'tsconfig.json'
+            - 'package.json'
+            - '/tsconfig.base.json'
+            - '/tsconfig.json'
+        outputs:
+            - 'dist/storybook/**'
 
     test-ci:
         command: 'pnpm test-ci'
