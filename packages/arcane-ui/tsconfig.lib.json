@@ -4,7 +4,8 @@
     "exclude": ["**/*.spec.ts"],
     "compilerOptions": {
         "composite": true,
-        "outDir": "../../out-tsc/lib",
+        "tsBuildInfoFile": "./out-tsc/lib/.tsbuildinfo",
+        "outDir": "./out-tsc/lib",
         "declaration": true,
         "declarationMap": true,
         "types": []

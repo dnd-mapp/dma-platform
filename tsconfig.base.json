@@ -1,5 +1,14 @@
 {
     "compilerOptions": {
+        "paths": {
+            "@dnd-mapp/arcane-ui": ["./packages/arcane-ui/src/public-api.ts"],
+            "@dnd-mapp/arcane-ui/components": ["./packages/arcane-ui/components/public-api.ts"],
+            "@dnd-mapp/arcane-ui/config": ["./packages/arcane-ui/config/public-api.ts"],
+            "@dnd-mapp/arcane-ui/http": ["./packages/arcane-ui/http/public-api.ts"],
+            "@dnd-mapp/arcane-ui/storage": ["./packages/arcane-ui/storage/public-api.ts"],
+            "@dnd-mapp/arcane-ui/testing": ["./packages/arcane-ui/testing/public-api.ts"],
+            "@dnd-mapp/arcane-ui/theming": ["./packages/arcane-ui/theming/public-api.ts"]
+        },
         "allowUnreachableCode": false,
         "allowUnusedLabels": false,
         "exactOptionalPropertyTypes": true,
