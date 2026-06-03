@@ -16,16 +16,21 @@ tasks:
             - 'eslint.config.mjs'
             - 'tsconfig.json'
             - '/tsconfig.base.json'
-            - '/eslint.config.mjs'
+            - '/packages/eslint-config/src/**/*.mjs'
 
-    test:
-        command: 'pnpm test-ci'
+    playwright-install:
+        command: 'pnpm playwright-install'
+        inputs:
+            - 'package.json'
+
+    e2e-ci:
+        command: 'pnpm e2e-ci'
         deps:
-            - 'root:playwright-install'
+            - 'playwright-install'
             - 'realm:build'
             - 'realm:lint-ts'
             - 'realm:lint-css'
-            - 'realm:test'
+            - 'realm:test-ci'
         inputs:
             - 'src/**/*.ts'
             - 'playwright.config.ts'
@@ -34,8 +39,8 @@ tasks:
         outputs:
             - '/reports/e2e/realm/**'
 
-    test-dev:
-        command: 'pnpm test-dev'
+    e2e:
+        command: 'pnpm e2e'
         preset: 'server'
         deps:
-            - 'root:playwright-install'
+            - 'playwright-install'
