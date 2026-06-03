@@ -25,3 +25,4 @@ tasks:
         inputs:
             - 'src/**/*.scss'
             - '.stylelintrc.json'
+            - '/packages/stylelint-config/src/**/*.mjs'
