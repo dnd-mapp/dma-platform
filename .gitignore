@@ -3,13 +3,13 @@
 !.vscode/extensions.json
 !.vscode/settings.json
 
-node_modules/
+**/node_modules/
 
-.angular/
-dist/
+**/.angular/
+**/dist/
 
-coverage/
-reports/
+**/coverage/
+**/reports/
 
 .husky/_
 .moon/cache/

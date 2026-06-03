@@ -14,7 +14,7 @@ tasks:
             - 'README.md'
             - 'scripts/post-build.mjs'
         outputs:
-            - '/dist/packages/sigil'
+            - 'dist/**'
 
     build-dev:
         command: 'pnpm build-dev'

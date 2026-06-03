@@ -21,7 +21,8 @@ tasks:
             - '/tsconfig.base.json'
             - '/tsconfig.json'
         outputs:
-            - '/dist/apps/realm/**'
+            - '.angular/**'
+            - 'dist/**'
 
     test-ci:
         command: 'pnpm test-ci'
@@ -38,8 +39,8 @@ tasks:
             - '/tsconfig.base.json'
             - '/tsconfig.json'
         outputs:
-            - '/coverage/apps/realm/**'
-            - '/reports/apps/realm/**'
+            - 'coverage/**'
+            - 'reports/**'
 
     test:
         command: 'pnpm test'

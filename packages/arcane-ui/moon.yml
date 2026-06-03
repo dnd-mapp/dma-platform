@@ -18,7 +18,8 @@ tasks:
             - '/tsconfig.base.json'
             - '/tsconfig.json'
         outputs:
-            - '/dist/packages/arcane-ui'
+            - '.angular/**'
+            - 'dist/**'
 
     build-dev:
         command: 'pnpm build-dev'
@@ -38,8 +39,8 @@ tasks:
             - '/tsconfig.base.json'
             - '/tsconfig.json'
         outputs:
-            - '/coverage/packages/arcane-ui/**'
-            - '/reports/packages/arcane-ui/**'
+            - 'coverage/**'
+            - 'reports/**'
 
     test:
         command: 'pnpm test'

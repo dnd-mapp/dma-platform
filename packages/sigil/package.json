@@ -26,8 +26,8 @@
   "scripts": {
     "download-fonts": "node scripts/download-fonts.mjs",
     "postbuild": "node scripts/post-build.mjs",
-    "build": "sass src/index.scss ../../dist/packages/sigil/index.css --source-map",
-    "build-dev": "sass --watch src/index.scss ../../dist/packages/sigil/index.css --source-map",
+    "build": "sass src/index.scss ./dist/index.css --source-map",
+    "build-dev": "sass --watch src/index.scss ./dist/index.css --source-map",
     "lint-css": "stylelint \"src/**/*.scss\""
   },
   "devDependencies": {

@@ -25,7 +25,7 @@
                         "browser": "./src/main.ts",
                         "index": "./src/index.html",
                         "inlineStyleLanguage": "scss",
-                        "outputPath": "dist/.",
+                        "outputPath": "dist",
                         "styles": ["./src/main.scss"],
                         "tsConfig": "./tsconfig.app.json"
                     },

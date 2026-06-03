@@ -22,7 +22,7 @@ export default defineConfig({
             provider: 'v8',
             reporter: ['text-summary', 'html', 'cobertura'],
             reportOnFailure: true,
-            reportsDirectory: '../../coverage/apps/realm',
+            reportsDirectory: 'coverage/',
             thresholds: {
                 branches: 80,
                 functions: 80,
@@ -33,11 +33,7 @@ export default defineConfig({
         globals: true,
         name: 'realm',
         open: false,
-        reporters: [
-            'dot',
-            ['html', { outputFile: '../../reports/apps/realm/index.html' }],
-            ...(isCI ? ['github-actions'] : []),
-        ],
+        reporters: ['dot', ['html', { outputFile: 'reports/index.html' }], ...(isCI ? ['github-actions'] : [])],
         root: import.meta.dirname,
         sequence: {
             shuffle: true,
