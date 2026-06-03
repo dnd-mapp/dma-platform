@@ -45,6 +45,8 @@ pnpm-lock.yaml      text eol=lf linguist-generated
 
 .run/*.xml          text eol=lf linguist-generated
 
+**/.msw/*.js        text eol=lf linguist-generated
+
 AGENTS.md           linguist-documentation
 CLAUDE.md           linguist-documentation
 CONTEXT.md          linguist-documentation
