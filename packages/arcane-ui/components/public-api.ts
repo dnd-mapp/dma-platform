@@ -1,1 +1,1 @@
-export {};
+export { DummyComponent } from './dummy/dummy.component';

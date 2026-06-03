@@ -1,18 +1,12 @@
 {
     "extends": "../../tsconfig.base.json",
     "references": [{ "path": "tsconfig.lib.json" }, { "path": "tsconfig.spec.json" }],
-    "include": [
-        "src/**/*.ts",
-        "components/**/*.ts",
-        "config/**/*.ts",
-        "http/**/*.ts",
-        "storage/**/*.ts",
-        "testing/**/*.ts",
-        "theming/**/*.ts"
-    ],
+    "files": [],
+    "include": [],
     "compilerOptions": {
         "composite": true,
         "experimentalDecorators": true,
+        "incremental": false,
         "lib": ["ES2024", "DOM", "DOM.AsyncIterable", "DOM.Iterable"],
         "module": "es2022",
         "moduleResolution": "bundler",

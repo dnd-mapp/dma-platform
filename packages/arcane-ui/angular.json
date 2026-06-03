@@ -27,6 +27,24 @@
                         }
                     }
                 },
+                "storybook-start": {
+                    "builder": "@storybook/angular:start-storybook",
+                    "options": {
+                        "browserTarget": "arcane-ui:build",
+                        "compodoc": false,
+                        "configDir": "./.storybook",
+                        "port": 6006
+                    }
+                },
+                "storybook-build": {
+                    "builder": "@storybook/angular:build-storybook",
+                    "options": {
+                        "browserTarget": "arcane-ui:build",
+                        "compodoc": false,
+                        "configDir": "./.storybook",
+                        "outputDir": "./dist/storybook"
+                    }
+                },
                 "test": {
                     "builder": "@angular/build:unit-test",
                     "options": {
@@ -55,5 +73,8 @@
                 }
             }
         }
+    },
+    "cli": {
+        "analytics": "4e82e6d1-6158-404d-a1ac-f6cc21212704"
     }
 }
