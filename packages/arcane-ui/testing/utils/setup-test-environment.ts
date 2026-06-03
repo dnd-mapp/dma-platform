@@ -13,7 +13,6 @@ export interface SetupTestEnvironmentParams {
  */
 export function setupTestEnvironment(params: SetupTestEnvironmentParams = {}) {
     TestBed.configureTestingModule({
-        imports: [],
         providers: [...(params?.providers ?? [])],
     });
 
