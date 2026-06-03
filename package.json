@@ -6,12 +6,11 @@
   "private": true,
   "scripts": {
     "prepare": "husky",
-    "ng": "ng",
     "moon": "moon",
     "commitlint": "commitlint",
+    "playwright-install": "playwright install chromium --with-deps",
     "lint-md": "markdownlint-cli2 --config .markdownlint-cli2.json",
     "lint-ts": "eslint .",
-    "playwright-install": "playwright install chromium --with-deps",
     "format": "prettier -w .",
     "format-check": "prettier -l ."
   },
@@ -41,7 +40,6 @@
     ]
   },
   "devDependencies": {
-    "@angular/cli": "catalog:angular",
     "@commitlint/cli": "catalog:",
     "@commitlint/config-conventional": "catalog:",
     "@dnd-mapp/eslint-config": "workspace:*",
@@ -52,8 +50,8 @@
     "husky": "catalog:",
     "lint-staged": "catalog:",
     "markdownlint-cli2": "catalog:",
-    "prettier": "catalog:prettier",
     "playwright": "catalog:playwright",
+    "prettier": "catalog:prettier",
     "prettier-plugin-organize-imports": "catalog:prettier",
     "typescript": "catalog:",
     "typescript-eslint": "catalog:eslint"

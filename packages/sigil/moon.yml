@@ -4,9 +4,6 @@ language: 'scss'
 stack: 'frontend'
 layer: 'library'
 
-dependsOn:
-    - stylelint-config
-
 tasks:
     build:
         command: 'pnpm build'
@@ -17,7 +14,7 @@ tasks:
             - 'README.md'
             - 'scripts/post-build.mjs'
         outputs:
-            - '/dist/packages/sigil'
+            - 'dist/**'
 
     build-dev:
         command: 'pnpm build-dev'
@@ -28,3 +25,4 @@ tasks:
         inputs:
             - 'src/**/*.scss'
             - '.stylelintrc.json'
+            - '/packages/stylelint-config/src/**/*.mjs'

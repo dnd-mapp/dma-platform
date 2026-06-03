@@ -3,7 +3,7 @@ import { resolve } from 'path';
 import { fileURLToPath } from 'url';
 
 const pkgDir = fileURLToPath(new URL('..', import.meta.url));
-const distDir = resolve(pkgDir, '../../dist/packages/sigil');
+const distDir = resolve(pkgDir, './dist');
 
 async function postBuild() {
     await mkdir(distDir, { recursive: true });

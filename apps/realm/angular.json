@@ -1,0 +1,96 @@
+{
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "schematics": {
+        "@schematics/angular:component": {
+            "style": "scss",
+            "changeDetection": "OnPush"
+        }
+    },
+    "projects": {
+        "realm": {
+            "projectType": "application",
+            "root": ".",
+            "sourceRoot": "./src",
+            "architect": {
+                "build": {
+                    "builder": "@angular/build:application",
+                    "options": {
+                        "assets": [
+                            {
+                                "glob": "**/*",
+                                "input": "./public"
+                            }
+                        ],
+                        "browser": "./src/main.ts",
+                        "index": "./src/index.html",
+                        "inlineStyleLanguage": "scss",
+                        "outputPath": "dist",
+                        "styles": ["./src/main.scss"],
+                        "tsConfig": "./tsconfig.app.json"
+                    },
+                    "defaultConfiguration": "production",
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "500kB",
+                                    "maximumError": "1MB"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "4kB",
+                                    "maximumError": "8kB"
+                                }
+                            ],
+                            "outputHashing": "all",
+                            "subresourceIntegrity": true
+                        },
+                        "development": {
+                            "extractLicenses": false,
+                            "namedChunks": true,
+                            "optimization": false,
+                            "sourceMap": true
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular/build:dev-server",
+                    "options": {
+                        "buildTarget": "realm:build:development"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-eslint/builder:lint",
+                    "options": {
+                        "eslintConfig": "./eslint.config.mjs",
+                        "lintFilePatterns": ["./**/*.ts", "./**/*.html"]
+                    }
+                },
+                "test": {
+                    "builder": "@angular/build:unit-test",
+                    "options": {
+                        "buildTarget": "realm:build",
+                        "runner": "vitest",
+                        "runnerConfig": "./vitest.config.mts",
+                        "tsConfig": "./tsconfig.spec.json"
+                    },
+                    "defaultConfiguration": "ci",
+                    "configurations": {
+                        "ci": {
+                            "watch": false
+                        },
+                        "dev": {
+                            "ui": true,
+                            "watch": true
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "cli": {
+        "analytics": "096eef13-0bcd-45b2-b3bb-4ebc99cfef2f"
+    }
+}

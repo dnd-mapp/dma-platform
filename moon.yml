@@ -5,26 +5,28 @@ stack: 'unknown'
 layer: 'tool'
 
 tasks:
+    playwright-install:
+        command: 'pnpm playwright-install'
+        inputs:
+            - 'package.json'
+
     format-check:
         command: 'pnpm format-check'
         inputs:
-            - '**/*.{ts,js,mjs,cjs,json,yaml,yml,scss,css,html}'
+            - '**/*.{ts,cts,mts,tsx,js,cjs,mjs,jsx,json,yaml,yml,scss,css,html,webmanifest}'
             - '.prettierrc'
             - '.prettierignore'
 
     lint-ts:
         command: 'pnpm lint-ts'
         inputs:
-            - '*.{js,mjs,cjs,ts}'
-            - 'eslint.config.mjs'
+            - '**/*.{js,mjs,cjs}'
+            - '!apps/**'
+            - '!packages/**'
+            - '!e2e/**'
 
     lint-md:
         command: 'pnpm lint-md'
         inputs:
             - '**/*.md'
             - '.markdownlint-cli2.json'
-
-    playwright-install:
-        command: 'pnpm playwright-install'
-        inputs:
-            - 'package.json'

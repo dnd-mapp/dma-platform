@@ -12,9 +12,6 @@ minimumReleaseAgeExclude:
 trustPolicy: no-downgrade
 trustPolicyExclude:
   - '@dnd-mapp'
-  # TODO: Check if it can be removed after next upgrade of pnpm
-  - 'ast-v8-to-istanbul'
-  - 'tinyexec'
 trustPolicyIgnoreAfter: 10080 # 7 days
 blockExoticSubdeps: true
 
@@ -61,7 +58,7 @@ catalogs:
     typescript-eslint: '~8.60.0'
   stylelint:
     stylelint: '~17.12.0'
-    stylelint-config-clean-order: '~8.0.2'
+    stylelint-config-clean-order: '~10.0.0'
     stylelint-config-standard-scss: '~17.0.0'
     stylelint-order: '~8.1.1'
   prettier:

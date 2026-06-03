@@ -10,9 +10,9 @@
     "directory": "e2e/realm"
   },
   "scripts": {
-    "lint-ts": "eslint .",
-    "test-ci": "playwright test",
-    "test-dev": "playwright test --ui"
+    "e2e-ci": "playwright test",
+    "e2e": "playwright test --ui",
+    "lint-ts": "eslint ."
   },
   "devDependencies": {
     "@dnd-mapp/eslint-config": "workspace:*",

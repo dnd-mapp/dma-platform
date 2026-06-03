@@ -12,17 +12,20 @@
   "scripts": {
     "build": "ng build arcane-ui",
     "build-dev": "ng build arcane-ui -c dev",
-    "lint-ts": "ng lint arcane-ui",
-    "lint-css": "stylelint \"**/*.scss\"",
     "test-ci": "ng test arcane-ui",
-    "test": "ng test arcane-ui -c dev"
+    "test": "ng test arcane-ui -c dev",
+    "lint-ts": "ng lint arcane-ui",
+    "lint-css": "stylelint \"**/*.scss\""
+  },
+  "dependencies": {
+    "tslib": "catalog:"
   },
   "peerDependencies": {
     "@angular/cdk": "^21.2.0",
     "@angular/common": "^21.2.0",
     "@angular/core": "^21.2.0",
-    "rxjs": "^7.8.0",
-    "tslib": "^2.8.0"
+    "@angular/platform-browser": "^21.2.0",
+    "rxjs": "^7.8.0"
   },
   "devDependencies": {
     "@angular-eslint/builder": "catalog:angular",
@@ -42,6 +45,7 @@
     "eslint": "catalog:eslint",
     "eslint-config-prettier": "catalog:eslint",
     "ng-packagr": "catalog:angular",
+    "playwright": "catalog:playwright",
     "sass": "catalog:",
     "storybook": "catalog:storybook",
     "stylelint": "catalog:stylelint",

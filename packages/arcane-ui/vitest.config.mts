@@ -22,7 +22,7 @@ export default defineConfig({
             provider: 'v8',
             reporter: ['text-summary', 'html', 'cobertura'],
             reportOnFailure: true,
-            reportsDirectory: '../../coverage/packages/arcane-ui',
+            reportsDirectory: 'coverage/',
             thresholds: {
                 branches: 80,
                 functions: 80,
@@ -33,11 +33,7 @@ export default defineConfig({
         globals: true,
         name: 'arcane-ui',
         open: false,
-        reporters: [
-            'dot',
-            ['html', { outputFile: '../../reports/packages/arcane-ui/index.html' }],
-            ...(isCI ? ['github-actions'] : []),
-        ],
+        reporters: ['dot', ['html', { outputFile: 'reports/index.html' }], ...(isCI ? ['github-actions'] : [])],
         root: import.meta.dirname,
         sequence: {
             shuffle: true,
