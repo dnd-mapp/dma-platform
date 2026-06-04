@@ -28,6 +28,12 @@ The platform's design token library (`packages/sigil`). Provides the visual lang
 
 Owns the **primitive** and **semantic** token layers. Compiles to CSS (custom properties on `:root` and `[data-theme]` selectors). Ships three self-hosted fonts (woff2): Metamorphous (headings), Lora (body), Inconsolata (monospace). Component tokens are owned by Arcane UI and expressed as CSS custom properties so apps can override them via the cascade.
 
+Ships three opt-in CSS entry points, each independently importable:
+
+- **`index.css`** — semantic tokens (CSS custom properties) and font-face declarations. The default entry point.
+- **`normalize.css`** — cross-browser consistency layer (modern-normalize). Standalone: no Sigil tokens, no side effects beyond browser normalisation.
+- **`base.css`** — opinionated element defaults using semantic tokens. Self-contained: includes semantic tokens so it can be imported without `index.css`. Covers `body` (background, text colour, font, size, line-height), `h1`–`h6` (Metamorphous font, size scale 4xl→md, weight and line-height per level), and typographic elements (`code`, `kbd`, `samp`, `pre` with mono font; `hr` with border token). Form and interactive elements (`a`, `button`, `input`, etc.) are out of scope.
+
 ## Arcane UI
 
 A shared Angular library (`packages/arcane-ui`) providing generic, reusable UI components and services. Not tied to any visual theme — usable across multiple frontend apps in their own context. No third-party component framework. Components are documented and explored via co-located Storybook stories (Vite builder, documentation only). Unit tests follow the same pattern as Realm: Vitest in browser mode with Playwright and Angular CDK harnesses.
