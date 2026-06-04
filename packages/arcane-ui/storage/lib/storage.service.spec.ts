@@ -5,8 +5,8 @@ import { setupTestEnvironment } from '@dnd-mapp/arcane-ui/testing';
 import { StorageService } from './storage.service';
 
 describe('StorageService', () => {
-    function setupTest() {
-        setupTestEnvironment({
+    async function setupTest() {
+        await setupTestEnvironment({
             providers: [StorageService, provideStorage(new MockStorage())],
         });
 
@@ -16,44 +16,44 @@ describe('StorageService', () => {
         };
     }
 
-    it('returns null for a missing key', () => {
-        const { service } = setupTest();
+    it('returns null for a missing key', async () => {
+        const { service } = await setupTest();
 
         expect(service.get('missing')).toBeNull();
     });
 
-    it('round-trips a primitive value', () => {
-        const { service } = setupTest();
+    it('round-trips a primitive value', async () => {
+        const { service } = await setupTest();
 
         service.set('num', 42);
         expect(service.get('num')).toBe(42);
     });
 
-    it('round-trips an object value', () => {
-        const { service } = setupTest();
+    it('round-trips an object value', async () => {
+        const { service } = await setupTest();
 
         service.set('obj', { a: 1, b: 'two' });
         expect(service.get('obj')).toEqual({ a: 1, b: 'two' });
     });
 
-    it('removes a key', () => {
-        const { service } = setupTest();
+    it('removes a key', async () => {
+        const { service } = await setupTest();
 
         service.set('key', 'value');
         service.remove('key');
         expect(service.get('key')).toBeNull();
     });
 
-    it('overwriting a key reflects the new value', () => {
-        const { service } = setupTest();
+    it('overwriting a key reflects the new value', async () => {
+        const { service } = await setupTest();
 
         service.set('key', 'first');
         service.set('key', 'second');
         expect(service.get('key')).toBe('second');
     });
 
-    it('returns null when the stored value is not valid JSON', () => {
-        const { service, mockStorage } = setupTest();
+    it('returns null when the stored value is not valid JSON', async () => {
+        const { service, mockStorage } = await setupTest();
 
         mockStorage.setItem('key', 'not valid json {');
         expect(service.get('key')).toBeNull();

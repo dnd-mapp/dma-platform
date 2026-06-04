@@ -23,8 +23,8 @@ describe('ConfigService', () => {
         server.resetHandlers();
     });
 
-    function setupTest() {
-        setupTestEnvironment({
+    async function setupTest() {
+        await setupTestEnvironment({
             providers: [
                 ConfigService,
                 RequestService,
@@ -37,7 +37,7 @@ describe('ConfigService', () => {
     }
 
     it('loads and exposes the config on a successful fetch', async () => {
-        const { service } = setupTest();
+        const { service } = await setupTest();
         const payload: TestConfig = { apiUrl: 'https://api.test', version: 1 };
 
         server.use(http.get('/test-config.json', () => HttpResponse.json(payload)));
@@ -48,7 +48,7 @@ describe('ConfigService', () => {
     });
 
     it('throws when the response status is not ok', async () => {
-        const { service } = setupTest();
+        const { service } = await setupTest();
 
         server.use(http.get('/test-config.json', () => new HttpResponse(null, { status: 404 })));
 
@@ -56,7 +56,7 @@ describe('ConfigService', () => {
     });
 
     it('propagates a network error', async () => {
-        const { service } = setupTest();
+        const { service } = await setupTest();
 
         server.use(http.get('/test-config.json', () => HttpResponse.error()));
 

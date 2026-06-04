@@ -27,8 +27,8 @@ describe('RequestService', () => {
         server.resetHandlers();
     });
 
-    function setupTest() {
-        setupTestEnvironment({
+    async function setupTest() {
+        await setupTestEnvironment({
             providers: [RequestService, provideHttpClient()],
         });
 
@@ -38,7 +38,7 @@ describe('RequestService', () => {
     }
 
     it('get returns the parsed response body', async () => {
-        const { service } = setupTest();
+        const { service } = await setupTest();
         const payload: TestPayload = { id: 1, name: 'Alice' };
 
         server.use(http.get(`${baseUrl}/items`, () => HttpResponse.json(payload)));
@@ -49,7 +49,7 @@ describe('RequestService', () => {
     });
 
     it('post sends the body and returns the response', async () => {
-        const { service } = setupTest();
+        const { service } = await setupTest();
         const payload: TestPayload = { id: 2, name: 'Bob' };
 
         server.use(http.post(`${baseUrl}/items`, () => HttpResponse.json(payload)));
@@ -60,7 +60,7 @@ describe('RequestService', () => {
     });
 
     it('put sends the body and returns the response', async () => {
-        const { service } = setupTest();
+        const { service } = await setupTest();
         const payload: TestPayload = { id: 1, name: 'Updated' };
 
         server.use(http.put(`${baseUrl}/items/1`, () => HttpResponse.json(payload)));
@@ -73,7 +73,7 @@ describe('RequestService', () => {
     });
 
     it('patch sends the body and returns the response', async () => {
-        const { service } = setupTest();
+        const { service } = await setupTest();
         const payload: TestPayload = { id: 1, name: 'Patched' };
 
         server.use(http.patch(`${baseUrl}/items/1`, () => HttpResponse.json(payload)));
@@ -86,7 +86,7 @@ describe('RequestService', () => {
     });
 
     it('delete hits the correct url and returns the response', async () => {
-        const { service } = setupTest();
+        const { service } = await setupTest();
 
         server.use(http.delete(`${baseUrl}/items/1`, () => HttpResponse.json(null)));
 
@@ -96,7 +96,7 @@ describe('RequestService', () => {
     });
 
     it('propagates a non-2xx response as an error', async () => {
-        const { service } = setupTest();
+        const { service } = await setupTest();
 
         server.use(http.get(`${baseUrl}/items`, () => new HttpResponse(null, { status: 404 })));
 
