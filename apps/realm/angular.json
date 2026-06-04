@@ -28,6 +28,7 @@
                         "outputPath": "dist",
                         "styles": [
                             "node_modules/@dnd-mapp/sigil/normalize.css",
+                            "node_modules/@dnd-mapp/sigil/base.css",
                             "node_modules/@dnd-mapp/sigil/index.css",
                             "./src/main.scss"
                         ],
