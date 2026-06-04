@@ -11,6 +11,7 @@
   "license": "MIT",
   "exports": {
     ".": "./index.css",
+    "./normalize": "./normalize.css",
     "./primitives/*": {
       "sass": "./primitives/_*.scss"
     },
