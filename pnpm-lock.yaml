@@ -208,6 +208,9 @@ importers:
       prettier-plugin-organize-imports:
         specifier: catalog:prettier
         version: 4.3.0(prettier@3.8.3)(typescript@5.9.3)
+      stylelint:
+        specifier: catalog:stylelint
+        version: 17.12.0(typescript@5.9.3)
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
