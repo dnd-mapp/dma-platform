@@ -29,8 +29,8 @@
   "scripts": {
     "download-fonts": "node scripts/download-fonts.mjs",
     "postbuild": "node scripts/post-build.mjs",
-    "build": "sass src/index.scss ./dist/index.css --source-map",
-    "build-dev": "sass --watch src/index.scss ./dist/index.css --source-map",
+    "build": "sass --pkg-importer=node src/index.scss:./dist/index.css src/normalize.scss:./dist/normalize.css --source-map",
+    "build-dev": "sass --watch --pkg-importer=node src/index.scss:./dist/index.css src/normalize.scss:./dist/normalize.css --source-map",
     "lint-css": "stylelint \"src/**/*.scss\""
   },
   "devDependencies": {
@@ -38,6 +38,7 @@
     "@fontsource-variable/inconsolata": "catalog:",
     "@fontsource-variable/lora": "catalog:",
     "@fontsource/metamorphous": "catalog:",
+    "modern-normalize": "catalog:",
     "sass": "catalog:",
     "stylelint": "catalog:stylelint",
     "stylelint-config-clean-order": "catalog:stylelint",
