@@ -5,33 +5,6 @@ packages:
   - 'packages/*'
   - '!dist/**/*'
 
-# Dependency Resolution
-minimumReleaseAge: 4320 # 3 days
-minimumReleaseAgeExclude:
-  - '@dnd-mapp'
-trustPolicy: no-downgrade
-trustPolicyExclude:
-  - '@dnd-mapp'
-trustPolicyIgnoreAfter: 10080 # 7 days
-blockExoticSubdeps: true
-
-# Peer Dependency Settings
-strictPeerDependencies: true
-
-# CLI Settings
-engineStrict: true
-packageManagerStrict: true
-packageManagerStrictVersion: true
-managePackageManagerVersions: false
-
-# Build Settings
-ignoreDepScripts: true
-verifyDepsBeforeRun: error
-strictDepBuilds: true
-
-# Other Settings
-savePrefix: '~'
-
 # Catalogs
 catalogs:
   angular:
@@ -50,17 +23,32 @@ catalogs:
     '@angular/router': '~21.2.14'
     angular-eslint: '~21.4.0'
     ng-packagr: '~21.2.3'
+  default:
+    '@commitlint/cli': '~21.0.2'
+    '@commitlint/config-conventional': '~21.0.2'
+    '@fontsource-variable/inconsolata': '~5.2.8'
+    '@fontsource-variable/lora': '~5.2.8'
+    '@fontsource/metamorphous': '~5.2.8'
+    '@moonrepo/cli': '~2.2.6'
+    '@types/node': '~24.12.4'
+    husky: '~9.1.7'
+    lint-staged: '~17.0.7'
+    markdownlint-cli2: '~0.22.1'
+    msw: '~2.14.6'
+    rxjs: '~7.8.2'
+    sass: '~1.100.0'
+    tslib: '~2.8.1'
+    typescript: '~5.9.3'
+    vite: '~8.0.14'
+  eslint:
+    eslint: '~10.4.1'
+    eslint-config-prettier: '~10.1.8'
+    typescript-eslint: '~8.60.1'
   ngrx:
     '@ngrx/signals': '~21.1.0'
-  eslint:
-    eslint: '~10.4.0'
-    eslint-config-prettier: '~10.1.8'
-    typescript-eslint: '~8.60.0'
-  stylelint:
-    stylelint: '~17.12.0'
-    stylelint-config-clean-order: '~10.0.0'
-    stylelint-config-standard-scss: '~17.0.0'
-    stylelint-order: '~8.1.1'
+  playwright:
+    '@playwright/test': '~1.60.0'
+    playwright: '~1.60.0'
   prettier:
     prettier: '~3.8.3'
     prettier-plugin-organize-imports: '~4.3.0'
@@ -68,28 +56,40 @@ catalogs:
     '@storybook/angular': '~10.4.1'
     '@storybook/builder-vite': '~10.4.1'
     storybook: '~10.4.1'
+  stylelint:
+    stylelint: '~17.12.0'
+    stylelint-config-clean-order: '~10.0.0'
+    stylelint-config-standard-scss: '~17.0.0'
+    stylelint-order: '~8.1.1'
   vitest:
     '@vitest/browser-playwright': '~4.1.7'
     '@vitest/coverage-v8': '~4.1.7'
     '@vitest/ui': '~4.1.7'
     vitest: '~4.1.7'
-  playwright:
-    '@playwright/test': '~1.60.0'
-    playwright: '~1.60.0'
-  default:
-    msw: '~2.14.6'
-    '@commitlint/cli': '~21.0.1'
-    '@commitlint/config-conventional': '~21.0.1'
-    '@fontsource-variable/inconsolata': '~5.2.8'
-    '@fontsource-variable/lora': '~5.2.8'
-    '@fontsource/metamorphous': '~5.2.8'
-    '@moonrepo/cli': '~2.2.5'
-    '@types/node': '~24.12.4'
-    husky: '~9.1.7'
-    lint-staged: '~17.0.5'
-    markdownlint-cli2: '~0.22.1'
-    rxjs: '~7.8.2'
-    sass: '~1.100.0'
-    tslib: '~2.8.1'
-    typescript: '~5.9.3'
-    vite: '~8.0.14'
+
+# CLI Settings
+engineStrict: true
+
+# Build Settings
+ignoreDepScripts: true
+managePackageManagerVersions: false
+
+# Dependency Resolution
+minimumReleaseAge: 4320 # 3 days
+minimumReleaseAgeExclude:
+  - '@dnd-mapp'
+packageManagerStrict: true
+packageManagerStrictVersion: true
+blockExoticSubdeps: true
+
+# Other Settings
+savePrefix: '~'
+strictDepBuilds: true
+
+# Peer Dependency Settings
+strictPeerDependencies: true
+trustPolicy: no-downgrade
+trustPolicyExclude:
+  - '@dnd-mapp'
+trustPolicyIgnoreAfter: 10080 # 7 days
+verifyDepsBeforeRun: error
