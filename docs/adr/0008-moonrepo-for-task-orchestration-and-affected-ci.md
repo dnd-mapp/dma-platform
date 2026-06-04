@@ -70,7 +70,7 @@ Moon will not schedule `realm-e2e:test` until all four pass. This supersedes ADR
 
 **Pipeline settings:** Left at moon defaults. No explicit concurrency tuning — the scheduler uses available CPU cores on the runner.
 
-**Remote caching:** Disabled for now. Moonbase (moon's hosted remote cache) has been sunset. A self-hosted alternative using `bazel-remote` is under investigation (see `docs/handoffs/bazel-remote-cache-investigation.md`). Until a solution is adopted, moon provides affected-only task execution but no cross-run cache persistence in CI.
+**Remote caching:** Enabled via a self-hosted `bazel-remote` instance accessible over the Tailscale tailnet. See ADR 0017.
 
 ## Consequences
 
@@ -79,6 +79,6 @@ Moon will not schedule `realm-e2e:test` until all four pass. This supersedes ADR
 - The E2E gate is maintained: moon will not run `realm-e2e:test` if any of its four `dependsOn` tasks fail, preserving the intent of ADR 0005.
 - Each project requires a `moon.yml` file. New projects must declare their `dependsOn` relationships at creation time; omitting them will cause moon to treat the project as isolated and miss affected propagation.
 - The project dependency graph is maintained in `moon.yml` files rather than `package.json`. This is a second place where dependencies are expressed (alongside `tsconfig` path aliases), requiring both to be kept in sync when a new inter-project dependency is introduced.
-- Without remote caching, CI always runs cold. The affected-only model reduces the number of tasks executed, but individual task results are not reused across runs.
+- CI runs benefit from remote caching via `bazel-remote` (see ADR 0017). Tasks with declared `outputs` upload their results on a cache miss and retrieve them on a hit, reducing cold-run cost for build and test tasks.
 - `moon ci --affected` compares against the base branch ref by default. Both `pull-request` and `push-main` workflows use the same command; affected detection on `push-main` runs against the previous commit on main.
 - `lint-ts`, `lint-md`, and other script names that previously used colons are renamed in `package.json` to align with moon task IDs. Any external references (CI steps, `lint-staged` config, documentation) must be updated accordingly.
