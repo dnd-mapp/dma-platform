@@ -1,7 +1,7 @@
 {
     "extends": "./tsconfig.json",
     "files": ["vitest.config.mts"],
-    "include": ["src/**/*.d.ts", "src/**/*.spec.ts", "test/**/*.ts"],
+    "include": ["**/*.ts"],
     "compilerOptions": {
         "types": ["node", "vitest/globals"]
     }
