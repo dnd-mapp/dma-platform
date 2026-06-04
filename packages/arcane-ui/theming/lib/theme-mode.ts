@@ -7,3 +7,8 @@ export const ThemeModes = {
 
 /** The union of valid theme modes accepted by {@link ThemeService.setTheme}. */
 export type ThemeMode = (typeof ThemeModes)[keyof typeof ThemeModes];
+
+/** Returns `true` if `value` is a valid {@link ThemeMode}. */
+export function isThemeMode(value: unknown): value is ThemeMode {
+    return Object.values(ThemeModes).includes(value as ThemeMode);
+}

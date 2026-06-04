@@ -11,6 +11,14 @@
 export class MockStorage implements Storage {
     private store: Record<string, string> = {};
 
+    constructor(store?: Record<string, unknown>) {
+        if (store) {
+            for (const [key, value] of Object.entries(store)) {
+                this.store[key] = JSON.stringify(value);
+            }
+        }
+    }
+
     public get length(): number {
         return Object.keys(this.store).length;
     }
