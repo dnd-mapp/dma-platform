@@ -53,6 +53,7 @@
     "playwright": "catalog:playwright",
     "prettier": "catalog:prettier",
     "prettier-plugin-organize-imports": "catalog:prettier",
+    "stylelint": "catalog:stylelint",
     "typescript": "catalog:",
     "typescript-eslint": "catalog:eslint"
   }
