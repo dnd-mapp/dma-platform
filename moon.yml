@@ -9,6 +9,8 @@ tasks:
         command: 'pnpm playwright-install'
         inputs:
             - 'package.json'
+        options:
+            cache: false
 
     format-check:
         command: 'pnpm format-check'
