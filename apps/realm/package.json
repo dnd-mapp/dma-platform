@@ -10,12 +10,12 @@
     "directory": "apps/realm"
   },
   "scripts": {
-    "start": "ng serve realm",
-    "build": "ng build realm",
+    "start": "ng run realm:serve",
+    "build": "ng run realm:build",
     "playwright-install": "playwright install chromium --with-deps",
-    "test-ci": "ng test",
-    "test": "ng test -c dev",
-    "lint-ts": "ng lint realm",
+    "test-ci": "ng run realm:test",
+    "test": "ng run realm:test:dev",
+    "lint-ts": "ng run realm:lint",
     "lint-css": "stylelint \"**/*.scss\""
   },
   "dependencies": {
@@ -28,6 +28,7 @@
     "@angular/platform-browser": "catalog:angular",
     "@angular/platform-browser-dynamic": "catalog:angular",
     "@angular/router": "catalog:angular",
+    "@dnd-mapp/arcane-ui": "workspace:*",
     "@ngrx/signals": "catalog:ngrx",
     "rxjs": "catalog:",
     "tslib": "catalog:"

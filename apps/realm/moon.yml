@@ -11,6 +11,8 @@ tasks:
 
     build:
         command: 'pnpm build'
+        deps:
+            - 'arcane-ui:build'
         inputs:
             - 'src/**/*'
             - 'public/**/*'
@@ -27,6 +29,7 @@ tasks:
     test-ci:
         command: 'pnpm test-ci'
         deps:
+            - 'arcane-ui:build'
             - 'root:playwright-install'
         inputs:
             - 'src/**/*'
@@ -50,6 +53,8 @@ tasks:
 
     lint-ts:
         command: 'pnpm lint-ts'
+        deps:
+            - 'arcane-ui:build'
         inputs:
             - 'src/**/*.{ts,html}'
             - 'test/**/*.ts'
