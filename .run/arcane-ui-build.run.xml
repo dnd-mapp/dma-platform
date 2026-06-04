@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="realm-test-dev" type="js.build_tools.npm" folderName="apps/realm">
-    <package-json value="$PROJECT_DIR$/apps/realm/package.json" />
+  <configuration default="false" name="arcane-ui-build" type="js.build_tools.npm" folderName="packages/arcane-ui">
+    <package-json value="$PROJECT_DIR$/packages/arcane-ui/package.json" />
     <command value="run" />
     <scripts>
-      <script value="test-dev" />
+      <script value="build" />
     </scripts>
     <node-interpreter value="project" />
     <envs />
