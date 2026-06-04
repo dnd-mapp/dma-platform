@@ -10,7 +10,7 @@ import { firstValueFrom } from 'rxjs';
  *
  * @example
  * bootstrapApplication(AppComponent, {
- *   providers: [provideConfig<AppConfig>('/config.json')],
+ *   providers: [...provideConfig<AppConfig>('/config.json')],
  * });
  *
  * @example

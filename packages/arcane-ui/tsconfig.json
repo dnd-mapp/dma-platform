@@ -10,6 +10,17 @@
         "lib": ["ES2024", "DOM", "DOM.AsyncIterable", "DOM.Iterable"],
         "module": "es2022",
         "moduleResolution": "bundler",
+        "paths": {
+            "@dnd-mapp/arcane-ui": ["./src/public-api.ts"],
+            "@dnd-mapp/arcane-ui/common": ["./common/public-api.ts"],
+            "@dnd-mapp/arcane-ui/components": ["./components/public-api.ts"],
+            "@dnd-mapp/arcane-ui/config": ["./config/public-api.ts"],
+            "@dnd-mapp/arcane-ui/http": ["./http/public-api.ts"],
+            "@dnd-mapp/arcane-ui/storage": ["./storage/public-api.ts"],
+            "@dnd-mapp/arcane-ui/storage/testing": ["./storage/testing/public-api.ts"],
+            "@dnd-mapp/arcane-ui/testing": ["./testing/public-api.ts"],
+            "@dnd-mapp/arcane-ui/theming": ["./theming/public-api.ts"]
+        },
         "useDefineForClassFields": false,
         "target": "es2023"
     },

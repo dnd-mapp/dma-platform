@@ -11,7 +11,7 @@ import { ConfigService } from './config.service';
  *
  * @example
  * bootstrapApplication(AppComponent, {
- *   providers: [provideConfig<AppConfig>('/config.json')],
+ *   providers: [...provideConfig<AppConfig>('/config.json')],
  * });
  */
 export function provideConfig<T>(url: string): (Provider | EnvironmentProviders)[] {

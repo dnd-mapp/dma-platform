@@ -1,8 +1,7 @@
 import { RootHarness } from '@/core/test/harnesses/root';
-import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { Component, provideZonelessChangeDetection } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { setupTestEnvironment } from '@dnd-mapp/arcane-ui/testing';
 import { RootComponent } from './root.component';
 
 describe('RootComponent', () => {
@@ -14,15 +13,14 @@ describe('RootComponent', () => {
     class TestComponent {}
 
     async function setupTest() {
-        const fixture = TestBed.configureTestingModule({
-            imports: [TestComponent],
-            providers: [provideZonelessChangeDetection(), provideRouter([])],
-        }).createComponent(TestComponent);
-
-        const harnessLoader = TestbedHarnessEnvironment.loader(fixture);
+        const { harness } = await setupTestEnvironment({
+            testComponent: TestComponent,
+            harness: RootHarness,
+            providers: [provideRouter([])],
+        });
 
         return {
-            harness: await harnessLoader.getHarness(RootHarness),
+            harness: harness!,
         };
     }
 

@@ -244,6 +244,9 @@ importers:
       '@angular/router':
         specifier: catalog:angular
         version: 21.2.15(@angular/common@21.2.15(@angular/core@21.2.15(@angular/compiler@21.2.15)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.2.15(@angular/compiler@21.2.15)(rxjs@7.8.2))(@angular/platform-browser@21.2.15(@angular/animations@21.2.15(@angular/core@21.2.15(@angular/compiler@21.2.15)(rxjs@7.8.2)))(@angular/common@21.2.15(@angular/core@21.2.15(@angular/compiler@21.2.15)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.2.15(@angular/compiler@21.2.15)(rxjs@7.8.2)))(rxjs@7.8.2)
+      '@dnd-mapp/arcane-ui':
+        specifier: workspace:*
+        version: link:../../packages/arcane-ui/dist/arcane-ui
       '@ngrx/signals':
         specifier: catalog:ngrx
         version: 21.1.0(@angular/core@21.2.15(@angular/compiler@21.2.15)(rxjs@7.8.2))(rxjs@7.8.2)
@@ -456,6 +459,7 @@ importers:
       vitest:
         specifier: catalog:vitest
         version: 4.1.7(@types/node@24.12.4)(@vitest/browser-playwright@4.1.7)(@vitest/coverage-v8@4.1.7)(@vitest/ui@4.1.7)(msw@2.14.6(@types/node@24.12.4)(typescript@5.9.3))(vite@8.0.14(@types/node@24.12.4)(esbuild@0.27.7)(jiti@2.7.0)(less@4.4.2)(sass@1.100.0)(terser@5.48.0)(yaml@2.9.0))
+    publishDirectory: dist/arcane-ui
 
   packages/eslint-config:
     dependencies:

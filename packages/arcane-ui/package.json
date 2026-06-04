@@ -4,6 +4,9 @@
   "description": "Shared Angular library for the D&D Mapp platform — reusable components, services, and tokens across applications.",
   "license": "MIT",
   "private": true,
+  "publishConfig": {
+    "directory": "dist/arcane-ui"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dnd-mapp/dma-platform.git",
