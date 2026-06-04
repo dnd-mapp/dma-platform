@@ -26,7 +26,7 @@
                         "index": "./src/index.html",
                         "inlineStyleLanguage": "scss",
                         "outputPath": "dist",
-                        "styles": ["./src/main.scss"],
+                        "styles": ["node_modules/@dnd-mapp/sigil/index.css", "./src/main.scss"],
                         "tsConfig": "./tsconfig.app.json"
                     },
                     "defaultConfiguration": "production",

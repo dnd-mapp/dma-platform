@@ -8,16 +8,6 @@ dependsOn:
     - realm
 
 tasks:
-    lint-ts:
-        command: 'pnpm lint-ts'
-        inputs:
-            - 'src/**/*.ts'
-            - 'playwright.config.ts'
-            - 'eslint.config.mjs'
-            - 'tsconfig.json'
-            - '/tsconfig.base.json'
-            - '/packages/eslint-config/src/**/*.mjs'
-
     e2e-ci:
         command: 'pnpm e2e-ci'
         deps:
@@ -39,3 +29,12 @@ tasks:
         preset: 'server'
         deps:
             - 'root:playwright-install'
+    lint-ts:
+        command: 'pnpm lint-ts'
+        inputs:
+            - 'src/**/*.ts'
+            - 'playwright.config.ts'
+            - 'eslint.config.mjs'
+            - 'tsconfig.json'
+            - '/tsconfig.base.json'
+            - '/packages/eslint-config/src/**/*.mjs'
