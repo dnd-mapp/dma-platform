@@ -1,5 +1,6 @@
 import { inject, provideAppInitializer, type EnvironmentProviders, type Provider } from '@angular/core';
 import { CONFIG_URL } from '@dnd-mapp/arcane-ui/common';
+import { RequestService } from '@dnd-mapp/arcane-ui/http';
 import { ConfigService } from './config.service';
 
 /**
@@ -17,6 +18,7 @@ export function provideConfig<T>(url: string): (Provider | EnvironmentProviders)
     return [
         { provide: CONFIG_URL, useValue: url },
         ConfigService,
+        RequestService,
         provideAppInitializer(() => {
             const service = inject(ConfigService<T>);
 

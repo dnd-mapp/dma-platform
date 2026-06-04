@@ -1,5 +1,7 @@
+import { provideHttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { CONFIG_URL } from '@dnd-mapp/arcane-ui/common';
+import { RequestService } from '@dnd-mapp/arcane-ui/http';
 import { setupTestEnvironment } from '@dnd-mapp/arcane-ui/testing';
 import { http, HttpResponse } from 'msw';
 import { setupWorker } from 'msw/browser';
@@ -23,7 +25,12 @@ describe('ConfigService', () => {
 
     function setupTest() {
         setupTestEnvironment({
-            providers: [ConfigService, { provide: CONFIG_URL, useValue: '/test-config.json' }],
+            providers: [
+                ConfigService,
+                RequestService,
+                provideHttpClient(),
+                { provide: CONFIG_URL, useValue: '/test-config.json' },
+            ],
         });
 
         return { service: TestBed.inject(ConfigService<TestConfig>) };

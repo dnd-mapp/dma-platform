@@ -1,5 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { CONFIG_URL } from '@dnd-mapp/arcane-ui/common';
+import { RequestService } from '@dnd-mapp/arcane-ui/http';
+import { firstValueFrom } from 'rxjs';
 
 /**
  * Fetches a JSON config file at bootstrap and exposes it as a typed singleton.
@@ -18,6 +20,7 @@ import { CONFIG_URL } from '@dnd-mapp/arcane-ui/common';
 @Injectable({ providedIn: null })
 export class ConfigService<T> {
     private readonly url = inject(CONFIG_URL);
+    private readonly requestService = inject(RequestService);
 
     private config!: T;
 
@@ -28,12 +31,6 @@ export class ConfigService<T> {
 
     /** Fetches and stores the config. Called automatically by {@link provideConfig}. */
     public async load(): Promise<void> {
-        // TODO - Use RequestService
-        const response = await fetch(this.url);
-
-        if (!response.ok) {
-            throw new Error(`Config fetch failed with status ${response.status}`);
-        }
-        this.config = (await response.json()) as T;
+        this.config = await firstValueFrom(this.requestService.get<T>(this.url));
     }
 }
