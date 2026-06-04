@@ -250,6 +250,9 @@ importers:
       '@dnd-mapp/arcane-ui':
         specifier: workspace:*
         version: link:../../packages/arcane-ui/dist/arcane-ui
+      '@dnd-mapp/sigil':
+        specifier: workspace:*
+        version: link:../../packages/sigil/dist
       '@ngrx/signals':
         specifier: catalog:ngrx
         version: 21.1.0(@angular/core@21.2.15(@angular/compiler@21.2.15)(rxjs@7.8.2))(rxjs@7.8.2)
@@ -512,6 +515,7 @@ importers:
       stylelint-order:
         specifier: catalog:stylelint
         version: 8.1.1(stylelint@17.12.0(typescript@5.9.3))
+    publishDirectory: dist
 
   packages/stylelint-config:
     dependencies:

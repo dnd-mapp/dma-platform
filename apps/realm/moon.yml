@@ -8,11 +8,15 @@ tasks:
     start:
         command: 'pnpm start'
         preset: 'server'
+        deps:
+            - 'arcane-ui:build'
+            - 'sigil:build'
 
     build:
         command: 'pnpm build'
         deps:
             - 'arcane-ui:build'
+            - 'sigil:build'
         inputs:
             - 'src/**/*'
             - 'public/**/*'
@@ -30,6 +34,7 @@ tasks:
         command: 'pnpm test-ci'
         deps:
             - 'arcane-ui:build'
+            - 'sigil:build'
             - 'root:playwright-install'
         inputs:
             - 'src/**/*'
@@ -49,6 +54,7 @@ tasks:
         command: 'pnpm test'
         preset: 'server'
         deps:
+            - 'sigil:build'
             - 'root:playwright-install'
 
     lint-ts:

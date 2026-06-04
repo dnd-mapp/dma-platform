@@ -29,6 +29,7 @@
     "@angular/platform-browser-dynamic": "catalog:angular",
     "@angular/router": "catalog:angular",
     "@dnd-mapp/arcane-ui": "workspace:*",
+    "@dnd-mapp/sigil": "workspace:*",
     "@ngrx/signals": "catalog:ngrx",
     "rxjs": "catalog:",
     "tslib": "catalog:"
