@@ -9,11 +9,22 @@ updates:
       directory: /.docker/realm
       schedule:
           interval: weekly
+      ignore:
+          # Node major bumps must be coordinated across Dockerfile, package.json engines,
+          # and @types/node — see ADR 0018. Upgrade when Node LTS drops (each October).
+          - dependency-name: node
+            update-types:
+                - version-update:semver-major
 
     - package-ecosystem: npm
       directory: /
       schedule:
           interval: weekly
+      ignore:
+          # @types/node major must match the runtime Node major — see ADR 0018.
+          - dependency-name: '@types/node'
+            update-types:
+                - version-update:semver-major
       groups:
           angular:
               patterns:
