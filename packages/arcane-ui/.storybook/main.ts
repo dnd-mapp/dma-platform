@@ -11,6 +11,10 @@ const config: StorybookConfig = {
             },
         },
     },
+    viteFinal: (config) => ({
+        ...config,
+        base: process.env['STORYBOOK_BASE_URL'] ?? '/',
+    }),
 };
 
 export default config;
