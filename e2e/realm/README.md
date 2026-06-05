@@ -10,10 +10,24 @@ See [Getting started](../../README.md#getting-started) in the root README.
 
 ## Running tests
 
+### Locally (dev server)
+
 ```sh
-pnpm --filter @dnd-mapp/realm-e2e test
+pnpm moon run realm-e2e:e2e-ci
 ```
 
-Playwright starts `apps/realm` automatically via its `webServer` config. Locally it reuses an already-running dev server if one is available; in CI it always starts a fresh one.
+Playwright starts `apps/realm` automatically via its `webServer` config at `https://localhost:4000` and reuses an already-running dev server if one is available.
+
+### Against the Docker image (CI stack)
+
+Spin up the compose stack first, then run the tests with `CI=true` so Playwright targets `https://localhost:4000` via the Caddy proxy instead of the dev server:
+
+```sh
+PR_NUMBER=<n> docker compose -f .docker/compose.e2e.yml up -d
+CI=true pnpm moon run realm-e2e:e2e-ci
+docker compose -f .docker/compose.e2e.yml down
+```
+
+`PR_NUMBER` must match an image tag that exists in Docker Hub (`dndmapp/realm:pr-<n>`).
 
 HTML reports are written to `reports/e2e/realm/` and test artifacts (screenshots, traces) to `reports/e2e/realm/test-results/` in the repo root.
