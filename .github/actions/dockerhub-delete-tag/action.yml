@@ -1,0 +1,51 @@
+name: Delete Docker Hub Tag
+description: Deletes a tag from a Docker Hub repository.
+
+inputs:
+    username:
+        description: Docker Hub username
+        required: true
+    token:
+        description: Docker Hub access token
+        required: true
+    repository:
+        description: Docker Hub repository (e.g. dndmapp/realm)
+        required: true
+    tag:
+        description: Tag to delete (e.g. pr-123)
+        required: true
+
+runs:
+    using: composite
+    steps:
+        - name: Delete tag
+          shell: bash
+          env:
+              DOCKERHUB_USERNAME: ${{ inputs.username }}
+              DOCKERHUB_TOKEN: ${{ inputs.token }}
+              REPOSITORY: ${{ inputs.repository }}
+              TAG: ${{ inputs.tag }}
+          run: |
+              TOKEN=$(jq -rn \
+                --arg user "$DOCKERHUB_USERNAME" \
+                --arg pass "$DOCKERHUB_TOKEN" \
+                '{"username": $user, "password": $pass}' \
+                | curl -fsSL -X POST \
+                    -H "Content-Type: application/json" \
+                    -d @- \
+                    "https://hub.docker.com/v2/users/login/" \
+                | jq -r '.token')
+
+              HTTP_STATUS=$(curl -o /dev/null -w "%{http_code}" -sL \
+                -X DELETE \
+                -H "Authorization: JWT ${TOKEN}" \
+                "https://hub.docker.com/v2/repositories/${REPOSITORY}/tags/${TAG}/")
+
+              if [[ "$HTTP_STATUS" == "204" ]]; then
+                echo "Tag ${TAG} deleted."
+              elif [[ "$HTTP_STATUS" == "404" ]]; then
+                echo "Tag ${TAG} not found — nothing to delete."
+              else
+                echo "Unexpected HTTP status: ${HTTP_STATUS}"
+                exit 1
+              fi
