@@ -63,7 +63,8 @@
                 "serve": {
                     "builder": "@angular/build:dev-server",
                     "options": {
-                        "buildTarget": "realm:build:development"
+                        "buildTarget": "realm:build:development",
+                        "port": 4000
                     }
                 },
                 "lint": {
