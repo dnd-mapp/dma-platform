@@ -29,7 +29,7 @@ catalogs:
     '@fontsource-variable/inconsolata': '~5.2.8'
     '@fontsource-variable/lora': '~5.2.8'
     '@fontsource/metamorphous': '~5.2.8'
-    '@moonrepo/cli': '~2.2.6'
+    '@moonrepo/cli': '~2.3.0'
     '@types/node': '~24.12.4'
     husky: '~9.1.7'
     lint-staged: '~17.0.7'
@@ -40,7 +40,7 @@ catalogs:
     sass: '~1.100.0'
     tslib: '~2.8.1'
     typescript: '~5.9.3'
-    vite: '~8.0.14'
+    vite: '~8.0.16'
   eslint:
     eslint: '~10.4.1'
     eslint-config-prettier: '~10.1.8'
