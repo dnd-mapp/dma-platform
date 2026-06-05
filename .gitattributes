@@ -1,8 +1,8 @@
 *                   text=auto
 
 *.sh                text eol=lf
-*.sh                text eol=lf
 *.md                text eol=lf
+*.txt               text eol=lf
 *.yml               text eol=lf
 *.xml               text eol=lf
 *.yaml              text eol=lf
@@ -19,10 +19,12 @@
 *.svg               text eol=lf
 *.scss              text eol=lf
 *.css               text eol=lf
+*.conf              text eol=lf
 *.webmanifest       text eol=lf
 
 *.png               binary
 *.ico               binary
+*.woff2             binary
 
 .husky/commit-msg   text eol=lf
 .husky/pre-commit   text eol=lf
@@ -31,6 +33,7 @@
 
 .gitignore          text eol=lf
 .gitattributes      text eol=lf
+*.git-keep          text eol=lf
 .github/CODEOWNERS  text eol=lf
 
 .editorconfig       text eol=lf
