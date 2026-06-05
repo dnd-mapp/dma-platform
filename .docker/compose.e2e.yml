@@ -1,0 +1,19 @@
+services:
+    realm:
+        image: dndmapp/realm:pr-${PR_NUMBER}
+        healthcheck:
+            test: ['CMD', 'wget', '-q', '--spider', 'http://localhost:4000']
+            interval: 5s
+            timeout: 3s
+            retries: 5
+            start_period: 5s
+
+    proxy:
+        image: caddy:2-alpine
+        ports:
+            - '443:443'
+        volumes:
+            - ./Caddyfile:/etc/caddy/Caddyfile:ro
+        depends_on:
+            realm:
+                condition: service_healthy

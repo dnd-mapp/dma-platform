@@ -1,0 +1,4 @@
+localhost {
+    tls internal
+    reverse_proxy realm:4000
+}
