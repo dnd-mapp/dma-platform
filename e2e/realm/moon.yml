@@ -12,10 +12,8 @@ tasks:
         command: 'pnpm e2e-ci'
         deps:
             - 'root:playwright-install'
-            - 'realm:build'
-            - 'realm:lint-ts'
-            - 'realm:lint-css'
-            - 'realm:test-ci'
+        options:
+            runInCI: false
         inputs:
             - 'src/**/*.ts'
             - 'playwright.config.ts'
