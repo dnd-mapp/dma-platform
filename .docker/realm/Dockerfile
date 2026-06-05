@@ -1,5 +1,8 @@
 # ── Build stage ────────────────────────────────────────────────────────────────
-FROM node:24.16.0-alpine3.23 AS build
+FROM --platform="$BUILDPLATFORM" node:24.16.0-alpine3.23 AS build
+
+ENV HUSKY="0" \
+    CI="true"
 
 WORKDIR /app
 
@@ -14,7 +17,8 @@ COPY packages/eslint-config/package.json      ./packages/eslint-config/
 COPY packages/sigil/package.json              ./packages/sigil/
 COPY packages/stylelint-config/package.json   ./packages/stylelint-config/
 
-RUN pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store \
+    pnpm install
 
 # Source — only after install so the above layer stays cached
 COPY . .
