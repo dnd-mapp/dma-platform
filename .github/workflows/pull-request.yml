@@ -80,7 +80,7 @@ jobs:
         needs: ci
         if: needs.ci.outputs.realm_build_affected == 'true' && github.event.action != 'closed'
         runs-on: ubuntu-22.04
-        timeout-minutes: 20
+        timeout-minutes: 10
         permissions:
             contents: read
         steps:
@@ -133,3 +133,42 @@ jobs:
                   token: ${{ secrets.DOCKERHUB_TOKEN }}
                   repository: dndmapp/realm
                   tag: pr-${{ github.event.number }}
+
+    e2e:
+        name: E2E
+        needs: [docker]
+        runs-on: ubuntu-22.04
+        timeout-minutes: 10
+        permissions:
+            contents: read
+        steps:
+            - name: Checkout
+              uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+
+            - name: Setup workspace
+              uses: ./.github/actions/setup-workspace
+
+            - name: Connect to Tailscale
+              uses: tailscale/github-action@306e68a486fd2350f2bfc3b19fcd143891a4a2d8 # v4.1.2
+              with:
+                  oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+                  oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+                  tags: tag:github-actions
+                  ping: docker-bazel-remote
+
+            - name: Start Realm container
+              env:
+                  PR_NUMBER: ${{ github.event.number }}
+              run: docker compose -f .docker/compose.e2e.yml up -d --wait
+
+            - name: Run E2E tests
+              env:
+                  MOON_REMOTE_HOST: grpc://docker-bazel-remote:9092
+              run: pnpm moon run realm-e2e:e2e-ci
+
+            - name: Upload E2E reports
+              if: failure()
+              uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+              with:
+                  name: e2e-reports
+                  path: e2e/realm/reports/

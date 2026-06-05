@@ -1,0 +1,22 @@
+name: realm-e2e
+services:
+    realm:
+        image: dndmapp/realm:pr-${PR_NUMBER}
+        container_name: realm
+        healthcheck:
+            test: ['CMD-SHELL', 'wget -qO /dev/null http://127.0.0.1:4000']
+            interval: 5s
+            timeout: 3s
+            retries: 5
+            start_period: 5s
+
+    proxy:
+        image: caddy:2-alpine
+        container_name: proxy
+        ports:
+            - '4000:4000'
+        volumes:
+            - ./Caddyfile:/etc/caddy/Caddyfile:ro
+        depends_on:
+            realm:
+                condition: service_healthy
