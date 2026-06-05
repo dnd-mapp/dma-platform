@@ -6,9 +6,9 @@ export default defineConfig({
     testDir: '.',
     fullyParallel: true,
     forbidOnly: isCI,
-    outputDir: '../../reports/e2e/realm/test-results',
+    outputDir: './reports/test-results',
     retries: isCI ? 2 : 0,
-    reporter: [['html', { outputFolder: '../../reports/e2e/realm/html' }], ...(isCI ? [['github'] as const] : [])],
+    reporter: [['html', { outputFolder: './reports/html' }], ...(isCI ? [['github'] as const] : [])],
     use: {
         baseURL: 'http://localhost:4000',
         trace: 'on-first-retry',
