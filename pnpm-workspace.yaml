@@ -29,7 +29,7 @@ catalogs:
     '@fontsource-variable/inconsolata': '~5.2.8'
     '@fontsource-variable/lora': '~5.2.8'
     '@fontsource/metamorphous': '~5.2.8'
-    '@moonrepo/cli': '~2.3.0'
+    '@moonrepo/cli': '~2.3.1'
     '@types/node': '~24.12.4'
     husky: '~9.1.7'
     lint-staged: '~17.0.7'
