@@ -1,6 +1,7 @@
 import type { StorybookConfig } from '@storybook/angular';
+import type { StorybookConfigVite } from '@storybook/builder-vite';
 
-const config: StorybookConfig = {
+const config: StorybookConfig & StorybookConfigVite = {
     stories: ['../**/*.mdx', '../**/*.stories.ts'],
     addons: [],
     framework: {
@@ -11,6 +12,10 @@ const config: StorybookConfig = {
             },
         },
     },
+    viteFinal: (config) => ({
+        ...config,
+        base: process.env['STORYBOOK_BASE_URL'] ?? '/',
+    }),
 };
 
 export default config;
