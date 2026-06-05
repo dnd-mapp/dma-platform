@@ -1,0 +1,26 @@
+name: Detect Affected Moon Task
+description: Queries Moon to determine whether a given task is affected by recent changes.
+
+inputs:
+    project:
+        description: Moon project name (e.g. realm)
+        required: true
+    task:
+        description: Moon task id (e.g. build)
+        required: true
+
+outputs:
+    affected:
+        description: "'true' if the task is affected by recent changes, 'false' otherwise"
+        value: ${{ steps.query.outputs.affected }}
+
+runs:
+    using: composite
+    steps:
+        - name: Query Moon
+          id: query
+          shell: bash
+          run: |
+              RESULT=$(pnpm exec moon query tasks --affected --project ${{ inputs.project }} --id ${{ inputs.task }} \
+                | jq -r 'if (.tasks | keys | length) > 0 then "true" else "false" end')
+              echo "affected=${RESULT}" >> "$GITHUB_OUTPUT"
