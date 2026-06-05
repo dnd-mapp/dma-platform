@@ -119,3 +119,41 @@ jobs:
                   source: .
                   targets: realm
                   push: true
+
+    docker-cleanup:
+        name: Docker cleanup
+        needs: ci
+        if: needs.ci.outputs.realm_build_affected == 'true' && github.event.action == 'closed' && !github.event.pull_request.merged
+        runs-on: ubuntu-22.04
+        timeout-minutes: 5
+        steps:
+            - name: Delete PR image tag from Docker Hub
+              shell: bash
+              env:
+                  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+                  DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+                  PR_NUMBER: ${{ github.event.number }}
+              run: |
+                  TOKEN=$(jq -rn \
+                    --arg user "$DOCKERHUB_USERNAME" \
+                    --arg pass "$DOCKERHUB_TOKEN" \
+                    '{"username": $user, "password": $pass}' \
+                    | curl -fsSL -X POST \
+                        -H "Content-Type: application/json" \
+                        -d @- \
+                        "https://hub.docker.com/v2/users/login/" \
+                    | jq -r '.token')
+
+                  HTTP_STATUS=$(curl -o /dev/null -w "%{http_code}" -sL \
+                    -X DELETE \
+                    -H "Authorization: JWT ${TOKEN}" \
+                    "https://hub.docker.com/v2/repositories/dndmapp/realm/tags/pr-${PR_NUMBER}/")
+
+                  if [[ "$HTTP_STATUS" == "204" ]]; then
+                    echo "Tag pr-${PR_NUMBER} deleted."
+                  elif [[ "$HTTP_STATUS" == "404" ]]; then
+                    echo "Tag pr-${PR_NUMBER} not found — nothing to delete."
+                  else
+                    echo "Unexpected HTTP status: ${HTTP_STATUS}"
+                    exit 1
+                  fi
