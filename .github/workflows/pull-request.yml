@@ -126,6 +126,7 @@ jobs:
         if: needs.ci.outputs.realm_build_affected == 'true' && github.event.action == 'closed' && !github.event.pull_request.merged
         runs-on: ubuntu-22.04
         timeout-minutes: 5
+        permissions: {}
         steps:
             - name: Delete PR image tag from Docker Hub
               shell: bash
