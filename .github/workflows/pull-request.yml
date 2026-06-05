@@ -18,7 +18,7 @@ jobs:
         runs-on: ubuntu-22.04
         timeout-minutes: 5
         outputs:
-            realm_build_affected: ${{ steps.affected.outputs.realm_build_affected }}
+            realm_build_affected: ${{ steps.affected.outputs.affected }}
         permissions:
             contents: read
             code-quality: write
@@ -34,12 +34,10 @@ jobs:
 
             - name: Detect affected realm:build
               id: affected
-              shell: bash
-              run: |
-                  RESULT=$(pnpm exec moon query tasks --affected --project realm --id build \
-                    | jq -r 'if (.tasks | keys | length) > 0 then "true" else "false" end')
-
-                  echo "realm_build_affected=${RESULT}" >> "$GITHUB_OUTPUT"
+              uses: ./.github/actions/detect-affected-task
+              with:
+                  project: realm
+                  task: build
 
             - name: Connect to Tailscale
               uses: tailscale/github-action@306e68a486fd2350f2bfc3b19fcd143891a4a2d8 # v4.1.2
@@ -129,32 +127,9 @@ jobs:
         permissions: {}
         steps:
             - name: Delete PR image tag from Docker Hub
-              shell: bash
-              env:
-                  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-                  DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-                  PR_NUMBER: ${{ github.event.number }}
-              run: |
-                  TOKEN=$(jq -rn \
-                    --arg user "$DOCKERHUB_USERNAME" \
-                    --arg pass "$DOCKERHUB_TOKEN" \
-                    '{"username": $user, "password": $pass}' \
-                    | curl -fsSL -X POST \
-                        -H "Content-Type: application/json" \
-                        -d @- \
-                        "https://hub.docker.com/v2/users/login/" \
-                    | jq -r '.token')
-
-                  HTTP_STATUS=$(curl -o /dev/null -w "%{http_code}" -sL \
-                    -X DELETE \
-                    -H "Authorization: JWT ${TOKEN}" \
-                    "https://hub.docker.com/v2/repositories/dndmapp/realm/tags/pr-${PR_NUMBER}/")
-
-                  if [[ "$HTTP_STATUS" == "204" ]]; then
-                    echo "Tag pr-${PR_NUMBER} deleted."
-                  elif [[ "$HTTP_STATUS" == "404" ]]; then
-                    echo "Tag pr-${PR_NUMBER} not found — nothing to delete."
-                  else
-                    echo "Unexpected HTTP status: ${HTTP_STATUS}"
-                    exit 1
-                  fi
+              uses: ./.github/actions/dockerhub-delete-tag
+              with:
+                  username: ${{ secrets.DOCKERHUB_USERNAME }}
+                  token: ${{ secrets.DOCKERHUB_TOKEN }}
+                  repository: dndmapp/realm
+                  tag: pr-${{ github.event.number }}

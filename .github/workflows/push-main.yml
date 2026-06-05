@@ -13,6 +13,8 @@ jobs:
         name: CI
         runs-on: ubuntu-22.04
         timeout-minutes: 5
+        outputs:
+            realm_build_affected: ${{ steps.affected.outputs.affected }}
         permissions:
             contents: read
             code-quality: write
@@ -24,6 +26,13 @@ jobs:
 
             - name: Setup workspace
               uses: ./.github/actions/setup-workspace
+
+            - name: Detect affected realm:build
+              id: affected
+              uses: ./.github/actions/detect-affected-task
+              with:
+                  project: realm
+                  task: build
 
             - name: Connect to Tailscale
               uses: tailscale/github-action@306e68a486fd2350f2bfc3b19fcd143891a4a2d8 # v4.1.2
@@ -54,3 +63,44 @@ jobs:
                   file: packages/arcane-ui/coverage/cobertura-coverage.xml
                   language: javascript
                   label: arcane-ui
+
+    docker-promote:
+        name: Docker promote
+        needs: ci
+        if: needs.ci.outputs.realm_build_affected == 'true'
+        runs-on: ubuntu-22.04
+        timeout-minutes: 10
+        permissions:
+            contents: read
+            pull-requests: read
+        steps:
+            - name: Get merged PR number
+              id: pr
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              shell: bash
+              run: |
+                  PR_NUMBER=$(gh api \
+                    /repos/dnd-mapp/dma-platform/commits/${{ github.sha }}/pulls \
+                    --jq '.[0].number')
+                  echo "number=${PR_NUMBER}" >> "$GITHUB_OUTPUT"
+
+            - name: Log in to Docker Hub
+              uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee # v4.2.0
+              with:
+                  username: ${{ secrets.DOCKERHUB_USERNAME }}
+                  password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+            - name: Promote PR image to next
+              uses: ./.github/actions/docker-promote-image
+              with:
+                  source: dndmapp/realm:pr-${{ steps.pr.outputs.number }}
+                  target: dndmapp/realm:next
+
+            - name: Delete PR image tag from Docker Hub
+              uses: ./.github/actions/dockerhub-delete-tag
+              with:
+                  username: ${{ secrets.DOCKERHUB_USERNAME }}
+                  token: ${{ secrets.DOCKERHUB_TOKEN }}
+                  repository: dndmapp/realm
+                  tag: pr-${{ steps.pr.outputs.number }}
