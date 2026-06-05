@@ -1,5 +1,5 @@
 # ── Build stage ────────────────────────────────────────────────────────────────
-FROM --platform="$BUILDPLATFORM" node:24.16.0-alpine3.23 AS build
+FROM --platform="$BUILDPLATFORM" node:26.3.0-alpine3.23 AS build
 
 ENV HUSKY="0" \
     CI="true"
