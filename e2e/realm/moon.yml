@@ -22,7 +22,7 @@ tasks:
             - 'tsconfig.json'
             - '/tsconfig.base.json'
         outputs:
-            - '/reports/e2e/realm/**'
+            - 'reports/**'
 
     e2e:
         command: 'pnpm e2e'
