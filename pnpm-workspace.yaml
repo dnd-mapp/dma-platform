@@ -30,7 +30,7 @@ catalogs:
     '@fontsource-variable/lora': '~5.2.8'
     '@fontsource/metamorphous': '~5.2.8'
     '@moonrepo/cli': '~2.2.6'
-    '@types/node': '~24.12.4'
+    '@types/node': '~25.9.1'
     husky: '~9.1.7'
     lint-staged: '~17.0.7'
     markdownlint-cli2: '~0.22.1'
