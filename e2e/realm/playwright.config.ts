@@ -10,7 +10,7 @@ export default defineConfig({
     retries: isCI ? 2 : 0,
     reporter: [['html', { outputFolder: '../../reports/e2e/realm/html' }], ...(isCI ? [['github'] as const] : [])],
     use: {
-        baseURL: 'http://localhost:4200',
+        baseURL: 'http://localhost:4000',
         trace: 'on-first-retry',
     },
     projects: [
@@ -21,7 +21,7 @@ export default defineConfig({
     ],
     webServer: {
         command: 'pnpm --filter @dnd-mapp/realm start',
-        url: 'http://localhost:4200',
+        url: 'http://localhost:4000',
         reuseExistingServer: !isCI,
     },
     ...(isCI ? { workers: 1 } : {}),
