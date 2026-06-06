@@ -1,6 +1,8 @@
 {
     "extends": "../../tsconfig.base.json",
     "references": [{ "path": "tsconfig.app.json" }, { "path": "tsconfig.spec.json" }],
+    "files": [],
+    "include": [],
     "compilerOptions": {
         "experimentalDecorators": true,
         "composite": true,
@@ -9,8 +11,8 @@
         "moduleResolution": "bundler",
         "outDir": "./dist/out-tsc",
         "paths": {
-            "@/core/*": ["./src/core/*"],
-            "@/core/test/*": ["./test/core/*"]
+            "@/core/*": ["./core/src/*"],
+            "@/core/test/*": ["./core/test/*"]
         },
         "target": "es2024",
         "useDefineForClassFields": false

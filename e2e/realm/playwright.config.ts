@@ -6,12 +6,13 @@ export default defineConfig({
     testDir: '.',
     fullyParallel: true,
     forbidOnly: isCI,
-    outputDir: '../../reports/e2e/realm/test-results',
+    outputDir: './reports/test-results',
     retries: isCI ? 2 : 0,
-    reporter: [['html', { outputFolder: '../../reports/e2e/realm/html' }], ...(isCI ? [['github'] as const] : [])],
+    reporter: [['html', { outputFolder: './reports/html' }], ...(isCI ? [['github'] as const] : [])],
     use: {
-        baseURL: 'http://localhost:4200',
+        baseURL: 'https://localhost:4000',
         trace: 'on-first-retry',
+        ...(isCI ? { ignoreHTTPSErrors: true } : {}),
     },
     projects: [
         {
@@ -19,10 +20,13 @@ export default defineConfig({
             use: { ...devices['Desktop Chrome'] },
         },
     ],
-    webServer: {
-        command: 'pnpm --filter @dnd-mapp/realm start',
-        url: 'http://localhost:4200',
-        reuseExistingServer: !isCI,
-    },
-    ...(isCI ? { workers: 1 } : {}),
+    ...(isCI
+        ? { workers: 1 }
+        : {
+              webServer: {
+                  command: 'pnpm moon run realm:start',
+                  url: 'https://localhost:4000',
+                  reuseExistingServer: true,
+              },
+          }),
 });

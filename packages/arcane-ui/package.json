@@ -1,0 +1,66 @@
+{
+  "name": "@dnd-mapp/arcane-ui",
+  "version": "0.0.0",
+  "description": "Shared Angular library for the D&D Mapp platform — reusable components, services, and tokens across applications.",
+  "license": "MIT",
+  "private": true,
+  "publishConfig": {
+    "directory": "dist/arcane-ui"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dnd-mapp/dma-platform.git",
+    "directory": "packages/arcane-ui"
+  },
+  "scripts": {
+    "build": "ng run arcane-ui:build",
+    "build-dev": "ng run arcane-ui:build:dev",
+    "storybook-start": "ng run arcane-ui:storybook-start",
+    "storybook-build": "ng run arcane-ui:storybook-build",
+    "test-ci": "ng run arcane-ui:test",
+    "test": "ng run arcane-ui:test:dev",
+    "lint-ts": "ng run arcane-ui:lint",
+    "lint-css": "stylelint \"**/*.scss\""
+  },
+  "dependencies": {
+    "tslib": "catalog:"
+  },
+  "peerDependencies": {
+    "@angular/cdk": "^21.2.0",
+    "@angular/common": "^21.2.0",
+    "@angular/core": "^21.2.0",
+    "@angular/platform-browser": "^21.2.0",
+    "rxjs": "^7.8.0"
+  },
+  "devDependencies": {
+    "@angular-eslint/builder": "catalog:angular",
+    "@angular/build": "catalog:angular",
+    "@angular/cli": "catalog:angular",
+    "@angular/compiler": "catalog:angular",
+    "@angular/compiler-cli": "catalog:angular",
+    "@dnd-mapp/eslint-config": "workspace:*",
+    "@dnd-mapp/stylelint-config": "workspace:*",
+    "@storybook/angular": "catalog:storybook",
+    "@storybook/builder-vite": "catalog:storybook",
+    "@types/node": "catalog:",
+    "@vitest/browser-playwright": "catalog:vitest",
+    "msw": "catalog:",
+    "@vitest/coverage-v8": "catalog:vitest",
+    "@vitest/ui": "catalog:vitest",
+    "angular-eslint": "catalog:angular",
+    "eslint": "catalog:eslint",
+    "eslint-config-prettier": "catalog:eslint",
+    "ng-packagr": "catalog:angular",
+    "playwright": "catalog:playwright",
+    "sass": "catalog:",
+    "storybook": "catalog:storybook",
+    "stylelint": "catalog:stylelint",
+    "stylelint-config-clean-order": "catalog:stylelint",
+    "stylelint-config-standard-scss": "catalog:stylelint",
+    "stylelint-order": "catalog:stylelint",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:eslint",
+    "vite": "catalog:",
+    "vitest": "catalog:vitest"
+  }
+}

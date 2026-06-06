@@ -8,88 +8,146 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-    lint:
-        name: Lint
+    ci:
+        name: CI
         runs-on: ubuntu-22.04
-        permissions:
-            contents: read
-        steps:
-            - name: Checkout
-              uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
-            - name: Setup workspace
-              uses: ./.github/actions/setup-workspace
-
-            - name: Lint TypeScript (root)
-              run: pnpm lint:ts
-
-            - name: Lint Realm
-              run: pnpm --filter @dnd-mapp/realm lint
-
-            - name: Lint CSS (Realm)
-              run: pnpm --filter @dnd-mapp/realm lint-css
-
-            - name: Lint E2E
-              run: pnpm --filter @dnd-mapp/realm-e2e lint
-
-            - name: Lint ESLint config
-              run: pnpm --filter @dnd-mapp/eslint-config lint
-
-            - name: Lint Stylelint config
-              run: pnpm --filter @dnd-mapp/stylelint-config lint
-
-            - name: Check formatting
-              run: pnpm format-check
-
-            - name: Lint Markdown
-              run: pnpm lint:md
-
-    build:
-        name: Build
-        runs-on: ubuntu-22.04
-        permissions:
-            contents: read
-        steps:
-            - name: Checkout
-              uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
-            - name: Setup workspace
-              uses: ./.github/actions/setup-workspace
-
-            - name: Build
-              run: pnpm --filter @dnd-mapp/realm build
-
-    test:
-        name: Unit tests
-        runs-on: ubuntu-22.04
+        timeout-minutes: 5
+        outputs:
+            realm_build_affected: ${{ steps.affected.outputs.affected }}
         permissions:
             contents: read
             code-quality: write
+            pull-requests: write
         steps:
             - name: Checkout
-              uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+              uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+              with:
+                  fetch-depth: 0
 
             - name: Setup workspace
               uses: ./.github/actions/setup-workspace
 
-            - name: Run unit tests
-              uses: ./.github/actions/unit-test
+            - name: Detect affected realm:build
+              id: affected
+              uses: ./.github/actions/detect-affected-task
+              with:
+                  project: realm
+                  task: build
 
-    e2e:
-        name: E2E tests
-        needs: [lint, build, test]
+            - name: Connect to Tailscale
+              uses: tailscale/github-action@306e68a486fd2350f2bfc3b19fcd143891a4a2d8 # v4.1.2
+              with:
+                  oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+                  oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+                  tags: tag:github-actions
+                  ping: docker-bazel-remote
+
+            - name: Run CI
+              shell: bash
+              env:
+                  MOON_REMOTE_HOST: grpc://docker-bazel-remote:9092
+              run: pnpm moon ci
+
+            - name: Report CI results
+              uses: moonrepo/run-report-action@bbe7e99bf2aca819ec660ec01fc59d84bdd492d6 # v1.10.0
+              if: success() || failure()
+              with:
+                  access-token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Upload code coverage (realm)
+              if: hashFiles('apps/realm/coverage/cobertura-coverage.xml') != ''
+              uses: actions/upload-code-coverage@abb5995db9e0199b0e2bb9dbd136fce4cb1ec4d3 # v1.3.0
+              with:
+                  file: apps/realm/coverage/cobertura-coverage.xml
+                  language: javascript
+                  label: realm
+
+            - name: Upload code coverage (arcane-ui)
+              if: hashFiles('packages/arcane-ui/coverage/cobertura-coverage.xml') != ''
+              uses: actions/upload-code-coverage@abb5995db9e0199b0e2bb9dbd136fce4cb1ec4d3 # v1.3.0
+              with:
+                  file: packages/arcane-ui/coverage/cobertura-coverage.xml
+                  language: javascript
+                  label: arcane-ui
+
+    docker:
+        name: Docker
+        needs: ci
+        if: needs.ci.outputs.realm_build_affected == 'true'
         runs-on: ubuntu-22.04
+        timeout-minutes: 10
         permissions:
             contents: read
         steps:
             - name: Checkout
-              uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+              uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+
+            - name: Set up QEMU
+              uses: docker/setup-qemu-action@06116385d9baf250c9f4dcb4858b16962ea869c3 # v4.1.0
+
+            - name: Set up Docker Buildx
+              uses: docker/setup-buildx-action@d7f5e7f509e45cec5c76c4d5afdd7de93d0b3df5 # v4.1.0
+
+            - name: Docker metadata
+              id: meta
+              uses: docker/metadata-action@80c7e94dd9b9319bd5eb7a0e0fe9291e23a2a2e9 # v6.1.0
+              with:
+                  images: dndmapp/realm
+                  tags: |
+                      type=ref,event=pr
+                  bake-target: docker-metadata-action
+
+            - name: Log in to Docker Hub
+              uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee # v4.2.0
+              with:
+                  username: ${{ secrets.DOCKERHUB_USERNAME }}
+                  password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+            - name: Build and push
+              uses: docker/bake-action@6614cfa25eff9a0b2b2697efb0b6159e7680d584 # v7.2.0
+              with:
+                  files: |
+                      .docker/bake.hcl
+                      ${{ steps.meta.outputs.bake-file }}
+                  source: .
+                  targets: realm
+                  push: true
+
+    e2e:
+        name: E2E
+        needs: [docker]
+        runs-on: ubuntu-22.04
+        timeout-minutes: 10
+        permissions:
+            contents: read
+        steps:
+            - name: Checkout
+              uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
             - name: Setup workspace
               uses: ./.github/actions/setup-workspace
 
-            - name: Install Playwright browsers
-              run: pnpm playwright-install
+            - name: Connect to Tailscale
+              uses: tailscale/github-action@306e68a486fd2350f2bfc3b19fcd143891a4a2d8 # v4.1.2
+              with:
+                  oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+                  oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+                  tags: tag:github-actions
+                  ping: docker-bazel-remote
+
+            - name: Start Realm container
+              env:
+                  PR_NUMBER: ${{ github.event.number }}
+              run: docker compose -f .docker/compose.e2e.yml up -d --wait
 
             - name: Run E2E tests
-              run: pnpm --filter @dnd-mapp/realm-e2e test-ci
+              env:
+                  MOON_REMOTE_HOST: grpc://docker-bazel-remote:9092
+              run: pnpm moon run realm-e2e:e2e-ci
+
+            - name: Upload E2E reports
+              if: failure()
+              uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+              with:
+                  name: e2e-reports
+                  path: e2e/realm/reports/

@@ -1,0 +1,12 @@
+{
+    "extends": "./tsconfig.json",
+    "include": ["**/*.ts"],
+    "exclude": ["**/*.spec.ts", "**/*.stories.ts"],
+    "compilerOptions": {
+        "composite": true,
+        "outDir": "./out-tsc/lib",
+        "declaration": true,
+        "declarationMap": true,
+        "types": []
+    }
+}

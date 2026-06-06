@@ -1,0 +1,25 @@
+name: PR Closed
+
+on:
+    pull_request:
+        types:
+            - closed
+
+jobs:
+    docker-cleanup:
+        name: Docker cleanup
+        if: '!github.event.pull_request.merged'
+        runs-on: ubuntu-22.04
+        timeout-minutes: 5
+        permissions: {}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+
+            - name: Delete PR image tag from Docker Hub
+              uses: ./.github/actions/dockerhub-delete-tag
+              with:
+                  username: ${{ secrets.DOCKERHUB_USERNAME }}
+                  token: ${{ secrets.DOCKERHUB_TOKEN }}
+                  repository: dndmapp/realm
+                  tag: pr-${{ github.event.number }}

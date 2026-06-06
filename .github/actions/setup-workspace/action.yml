@@ -26,3 +26,8 @@ runs:
           env:
               HUSKY: 0
           run: pnpm install
+
+        - name: Verify moon installation
+          if: inputs.install-dependencies == 'true'
+          shell: bash
+          run: pnpm moon --version

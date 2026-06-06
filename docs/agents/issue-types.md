@@ -17,12 +17,14 @@ Org-level issue type: `Epic` (node ID: `IT_kwDODFcis84CBKdR`)
 
 **Priority options** (org-level issue field `IFSS_kgDOAopeGg`):
 
-| Value | ID         | Description                                                 |
-|:------|:-----------|:------------------------------------------------------------|
-| `P0`  | `74587961` | Drop everything — blocking critical path or a live incident |
-| `P1`  | `74587962` | High priority — must be addressed this quarter              |
-| `P2`  | `74587963` | Normal priority — planned and scheduled                     |
-| `P3`  | `74587964` | Low priority — nice to have, no firm commitment             |
+> **GraphQL note:** Use the `IFSSO_` node IDs below with `singleSelectOptionId`. REST integer IDs do not work with the GraphQL `updateIssueFieldValue` mutation.
+
+| Value | ID                 | Description                                                 |
+|:------|:-------------------|:------------------------------------------------------------|
+| `P0`  | `IFSSO_kgDOBHIfOQ` | Drop everything — blocking critical path or a live incident |
+| `P1`  | `IFSSO_kgDOBHIfOg` | High priority — must be addressed this quarter              |
+| `P2`  | `IFSSO_kgDOBHIfOw` | Normal priority — planned and scheduled                     |
+| `P3`  | `IFSSO_kgDOBHIfPA` | Low priority — nice to have, no firm commitment             |
 
 ### Statuses
 
@@ -60,9 +62,14 @@ Org-level issue type: `Story` (node ID: `IT_kwDODFcis84CBKrx`)
 |:-------------|:-----------------------|:-------------------------------|:--------------|:----------------------------|
 | `priority`   | Org-level issue field  | `IFSS_kgDOAopeGg`              | Single-select | P0 \| P1 \| P2 \| P3        |
 | `estimation` | Org-level issue field  | `IFN_kgDOAoptyA`               | Number        | 1 \| 2 \| 3 \| 5 \| 8 \| 13 |
-| `parent`     | Project field (native) | `PVTF_lADODFcis84BY-C4zhUADu4` | Parent issue  | `Parent #<n>`               |
+| `parent`     | Project field (native) | `PVTF_lADODFcis84BY-C4zhUADu4` | Parent issue  | use `addSubIssue` mutation  |
 
 **Priority options:** see Epic section above.
+
+> **Note — parent field:** Set natively via `addSubIssue` mutation — do not
+> include `Parent #<n>` in the issue body.
+>
+> **GraphQL note — Story Points:** Set via `updateIssueFieldValue` with `issueField: { fieldId: "IFN_kgDOAoptyA", numberValue: <n> }`. The argument is `numberValue` (Float), not `number`.
 
 ### Statuses
 
@@ -143,12 +150,12 @@ Org-level issue type: `Bug` (node ID: `IT_kwDODFcis84CBK3a`)
 
 **Severity options** (org-level issue field `IFSS_kgDOAoplog`):
 
-| Value | ID         | Description                                                           |
-|:------|:-----------|:----------------------------------------------------------------------|
-| `S0`  | `74591344` | Data loss, corruption, or complete feature failure with no workaround |
-| `S1`  | `74591345` | Core flow broken; workaround exists but is painful                    |
-| `S2`  | `74591346` | Degraded experience; reasonable workaround available                  |
-| `S3`  | `74591347` | Cosmetic or minor issue; does not impact functionality                |
+| Value | ID                 | Description                                                           |
+|:------|:-------------------|:----------------------------------------------------------------------|
+| `S0`  | `IFSSO_kgDOBHIscA` | Data loss, corruption, or complete feature failure with no workaround |
+| `S1`  | `IFSSO_kgDOBHIscQ` | Core flow broken; workaround exists but is painful                    |
+| `S2`  | `IFSSO_kgDOBHIscg` | Degraded experience; reasonable workaround available                  |
+| `S3`  | `IFSSO_kgDOBHIscw` | Cosmetic or minor issue; does not impact functionality                |
 
 ### Statuses
 

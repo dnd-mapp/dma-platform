@@ -1,0 +1,94 @@
+// White and black — near-absolute with a faint maroon warmth (32°) for tonal consistency with surfaces
+$color-white: oklch(99% 0.006 32deg);
+$color-black: oklch(8% 0.006 32deg);
+
+// Maroon — primary brand
+$color-maroon-50: oklch(97% 0.01 32deg);
+$color-maroon-100: oklch(93% 0.02 32deg);
+$color-maroon-200: oklch(86% 0.04 32deg);
+$color-maroon-300: oklch(76% 0.07 32deg);
+$color-maroon-400: oklch(63% 0.095 32deg);
+$color-maroon-500: oklch(49% 0.105 32deg);
+$color-maroon-600: oklch(40% 0.095 32deg);
+$color-maroon-700: oklch(33% 0.082 32deg);
+$color-maroon-800: oklch(26% 0.065 32deg);
+$color-maroon-900: oklch(19% 0.045 32deg);
+$color-maroon-950: oklch(13% 0.03 32deg);
+
+// Gold — secondary brand
+$color-gold-50: oklch(98% 0.015 75deg);
+$color-gold-100: oklch(95% 0.035 75deg);
+$color-gold-200: oklch(90% 0.065 75deg);
+$color-gold-300: oklch(83% 0.1 75deg);
+$color-gold-400: oklch(76% 0.135 75deg);
+$color-gold-500: oklch(68% 0.155 75deg);
+$color-gold-600: oklch(58% 0.145 75deg);
+$color-gold-700: oklch(48% 0.13 75deg);
+$color-gold-800: oklch(37% 0.105 75deg);
+$color-gold-900: oklch(26% 0.075 75deg);
+$color-gold-950: oklch(17% 0.05 75deg);
+
+// Grey — neutral
+$color-grey-50: oklch(97% 0.004 0deg);
+$color-grey-100: oklch(93% 0.004 0deg);
+$color-grey-200: oklch(87% 0.004 0deg);
+$color-grey-300: oklch(78% 0.004 0deg);
+$color-grey-400: oklch(67% 0.004 0deg);
+$color-grey-500: oklch(55% 0.004 0deg);
+$color-grey-600: oklch(45% 0.004 0deg);
+$color-grey-700: oklch(37% 0.004 0deg);
+$color-grey-800: oklch(29% 0.004 0deg);
+$color-grey-900: oklch(21% 0.004 0deg);
+$color-grey-950: oklch(14% 0.004 0deg);
+
+// Red — danger
+$color-red-50: oklch(97% 0.012 27deg);
+$color-red-100: oklch(93% 0.03 27deg);
+$color-red-200: oklch(87% 0.065 27deg);
+$color-red-300: oklch(78% 0.11 27deg);
+$color-red-400: oklch(66% 0.155 27deg);
+$color-red-500: oklch(54% 0.185 27deg);
+$color-red-600: oklch(44% 0.17 27deg);
+$color-red-700: oklch(36% 0.145 27deg);
+$color-red-800: oklch(28% 0.115 27deg);
+$color-red-900: oklch(21% 0.08 27deg);
+$color-red-950: oklch(14% 0.055 27deg);
+
+// Emerald — success
+$color-emerald-50: oklch(97% 0.015 150deg);
+$color-emerald-100: oklch(94% 0.04 150deg);
+$color-emerald-200: oklch(88% 0.075 150deg);
+$color-emerald-300: oklch(80% 0.115 150deg);
+$color-emerald-400: oklch(70% 0.15 150deg);
+$color-emerald-500: oklch(59% 0.17 150deg);
+$color-emerald-600: oklch(49% 0.155 150deg);
+$color-emerald-700: oklch(40% 0.13 150deg);
+$color-emerald-800: oklch(31% 0.105 150deg);
+$color-emerald-900: oklch(23% 0.075 150deg);
+$color-emerald-950: oklch(16% 0.05 150deg);
+
+// Yellow — warning
+$color-yellow-50: oklch(98% 0.02 85deg);
+$color-yellow-100: oklch(96% 0.05 85deg);
+$color-yellow-200: oklch(92% 0.095 85deg);
+$color-yellow-300: oklch(87% 0.135 85deg);
+$color-yellow-400: oklch(82% 0.165 85deg);
+$color-yellow-500: oklch(77% 0.18 85deg);
+$color-yellow-600: oklch(65% 0.165 85deg);
+$color-yellow-700: oklch(53% 0.14 85deg);
+$color-yellow-800: oklch(41% 0.11 85deg);
+$color-yellow-900: oklch(29% 0.08 85deg);
+$color-yellow-950: oklch(19% 0.055 85deg);
+
+// Sky — info
+$color-sky-50: oklch(97% 0.012 220deg);
+$color-sky-100: oklch(93% 0.03 220deg);
+$color-sky-200: oklch(87% 0.065 220deg);
+$color-sky-300: oklch(79% 0.1 220deg);
+$color-sky-400: oklch(68% 0.14 220deg);
+$color-sky-500: oklch(57% 0.165 220deg);
+$color-sky-600: oklch(47% 0.15 220deg);
+$color-sky-700: oklch(38% 0.125 220deg);
+$color-sky-800: oklch(30% 0.1 220deg);
+$color-sky-900: oklch(22% 0.07 220deg);
+$color-sky-950: oklch(15% 0.047 220deg);

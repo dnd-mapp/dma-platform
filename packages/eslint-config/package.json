@@ -20,7 +20,7 @@
     "src"
   ],
   "scripts": {
-    "lint": "eslint ."
+    "lint-ts": "eslint ."
   },
   "peerDependencies": {
     "angular-eslint": ">=21.0.0",
@@ -32,6 +32,12 @@
     "angular-eslint": {
       "optional": true
     }
+  },
+  "devDependencies": {
+    "eslint": "catalog:eslint",
+    "eslint-config-prettier": "catalog:eslint",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:eslint"
   },
   "engines": {
     "node": ">=24.0.0"

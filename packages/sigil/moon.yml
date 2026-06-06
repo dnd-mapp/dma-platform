@@ -1,0 +1,28 @@
+$schema: 'https://moonrepo.dev/schemas/project.json'
+
+language: 'scss'
+stack: 'frontend'
+layer: 'library'
+
+tasks:
+    build:
+        command: 'pnpm build'
+        inputs:
+            - 'src/**/*.scss'
+            - 'assets/**/*'
+            - 'package.json'
+            - 'README.md'
+            - 'scripts/post-build.mjs'
+        outputs:
+            - 'dist/**'
+
+    build-dev:
+        command: 'pnpm build-dev'
+        preset: 'server'
+
+    lint-css:
+        command: 'pnpm lint-css'
+        inputs:
+            - 'src/**/*.scss'
+            - '.stylelintrc.json'
+            - '/packages/stylelint-config/src/**/*.mjs'

@@ -1,0 +1,13 @@
+$schema: 'https://moonrepo.dev/schemas/project.json'
+
+language: 'javascript'
+stack: 'unknown'
+layer: 'configuration'
+
+tasks:
+    lint-ts:
+        command: 'pnpm lint-ts'
+        inputs:
+            - 'src/**/*.mjs'
+            - 'eslint.config.mjs'
+            - '/eslint.config.mjs'

@@ -1,0 +1,31 @@
+@use '../primitives/font-family' as *;
+@use '../primitives/font-size' as *;
+@use '../primitives/font-weight' as *;
+@use '../primitives/line-height' as *;
+
+// Size
+$typography-size-xs: var(--typography-size-xs, #{$font-size-xs});
+$typography-size-sm: var(--typography-size-sm, #{$font-size-sm});
+$typography-size-md: var(--typography-size-md, #{$font-size-md});
+$typography-size-lg: var(--typography-size-lg, #{$font-size-lg});
+$typography-size-xl: var(--typography-size-xl, #{$font-size-xl});
+$typography-size-2xl: var(--typography-size-2xl, #{$font-size-2xl});
+$typography-size-3xl: var(--typography-size-3xl, #{$font-size-3xl});
+$typography-size-4xl: var(--typography-size-4xl, #{$font-size-4xl});
+
+// Weight
+$typography-weight-regular: var(--typography-weight-regular, #{$font-weight-regular});
+$typography-weight-medium: var(--typography-weight-medium, #{$font-weight-medium});
+$typography-weight-semibold: var(--typography-weight-semibold, #{$font-weight-semibold});
+$typography-weight-bold: var(--typography-weight-bold, #{$font-weight-bold});
+
+// Line height
+$typography-line-height-tight: var(--typography-line-height-tight, #{$line-height-tight});
+$typography-line-height-snug: var(--typography-line-height-snug, #{$line-height-snug});
+$typography-line-height-normal: var(--typography-line-height-normal, #{$line-height-normal});
+$typography-line-height-relaxed: var(--typography-line-height-relaxed, #{$line-height-relaxed});
+
+// Font family
+$typography-font-heading: var(--font-heading, #{$font-family-heading});
+$typography-font-body: var(--font-body, #{$font-family-body});
+$typography-font-mono: var(--font-mono, #{$font-family-mono});

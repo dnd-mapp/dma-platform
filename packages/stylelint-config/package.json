@@ -18,13 +18,19 @@
     "src"
   ],
   "scripts": {
-    "lint": "eslint ."
+    "lint-ts": "eslint ."
   },
   "peerDependencies": {
     "stylelint": ">=17.0.0",
     "stylelint-config-clean-order": ">=8.0.0",
     "stylelint-config-standard-scss": ">=17.0.0",
     "stylelint-order": ">=8.0.0"
+  },
+  "devDependencies": {
+    "eslint": "catalog:eslint",
+    "eslint-config-prettier": "catalog:eslint",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:eslint"
   },
   "engines": {
     "node": ">=24.0.0"

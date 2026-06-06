@@ -1,0 +1,75 @@
+@use '../primitives/color' as *;
+
+@mixin dark-theme-colors() {
+    // Surface
+    --color-surface-subtle: #{$color-maroon-950};
+    --color-surface-default: #{$color-maroon-900};
+    --color-surface-raised: #{$color-maroon-800};
+    --color-surface-overlay: #{$color-maroon-700};
+
+    // Text
+    --color-text-primary: #{$color-white};
+    --color-text-secondary: #{$color-grey-300};
+    --color-text-disabled: #{$color-grey-600};
+    --color-text-inverse: #{$color-grey-900};
+    --color-text-on-interactive: #{$color-grey-900};
+
+    // Border
+    --color-border-subtle: #{$color-grey-800};
+    --color-border-default: #{$color-grey-700};
+    --color-border-strong: #{$color-grey-500};
+
+    // Interactive
+    --color-interactive-primary: #{$color-maroon-400};
+    --color-interactive-primary-hover: #{$color-maroon-300};
+    --color-interactive-primary-active: #{$color-maroon-500};
+    --color-interactive-danger: #{$color-red-400};
+    --color-interactive-focus-on-primary: #{$color-gold-400};
+    --color-interactive-focus-on-secondary: #{$color-maroon-300};
+}
+
+@mixin light-theme-colors() {
+    // Surface
+    --color-surface-subtle: #{$color-maroon-100};
+    --color-surface-default: #{$color-maroon-50};
+    --color-surface-raised: #{$color-white};
+    --color-surface-overlay: #{$color-white};
+
+    // Text
+    --color-text-primary: #{$color-grey-900};
+    --color-text-secondary: #{$color-grey-600};
+    --color-text-disabled: #{$color-grey-400};
+    --color-text-inverse: #{$color-white};
+    --color-text-on-interactive: #{$color-white};
+
+    // Border
+    --color-border-subtle: #{$color-grey-100};
+    --color-border-default: #{$color-grey-200};
+    --color-border-strong: #{$color-grey-400};
+
+    // Interactive
+    --color-interactive-primary: #{$color-maroon-600};
+    --color-interactive-primary-hover: #{$color-maroon-700};
+    --color-interactive-primary-active: #{$color-maroon-800};
+    --color-interactive-danger: #{$color-red-600};
+    --color-interactive-focus-on-primary: #{$color-gold-500};
+    --color-interactive-focus-on-secondary: #{$color-maroon-400};
+}
+
+:root {
+    @include dark-theme-colors;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        @include light-theme-colors;
+    }
+}
+
+[data-theme='light'] {
+    @include light-theme-colors;
+}
+
+[data-theme='dark'] {
+    @include dark-theme-colors;
+}

@@ -1,0 +1,80 @@
+{
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "cli": {
+        "analytics": "4e82e6d1-6158-404d-a1ac-f6cc21212704"
+    },
+    "schematics": {
+        "@schematics/angular:component": {
+            "style": "scss",
+            "changeDetection": "OnPush"
+        }
+    },
+    "projects": {
+        "arcane-ui": {
+            "projectType": "library",
+            "root": ".",
+            "sourceRoot": ".",
+            "prefix": "dma",
+            "architect": {
+                "build": {
+                    "builder": "@angular/build:ng-packagr",
+                    "defaultConfiguration": "prod",
+                    "configurations": {
+                        "prod": {
+                            "tsConfig": "./tsconfig.lib.prod.json"
+                        },
+                        "dev": {
+                            "tsConfig": "./tsconfig.lib.json",
+                            "watch": true
+                        }
+                    }
+                },
+                "storybook-start": {
+                    "builder": "@storybook/angular:start-storybook",
+                    "options": {
+                        "browserTarget": "arcane-ui:build",
+                        "compodoc": false,
+                        "configDir": "./.storybook",
+                        "port": 6006
+                    }
+                },
+                "storybook-build": {
+                    "builder": "@storybook/angular:build-storybook",
+                    "options": {
+                        "browserTarget": "arcane-ui:build",
+                        "compodoc": false,
+                        "configDir": "./.storybook",
+                        "outputDir": "./dist/storybook"
+                    }
+                },
+                "test": {
+                    "builder": "@angular/build:unit-test",
+                    "options": {
+                        "buildTarget": "arcane-ui:build",
+                        "runner": "vitest",
+                        "runnerConfig": "./vitest.config.mts",
+                        "tsConfig": "./tsconfig.spec.json"
+                    },
+                    "defaultConfiguration": "ci",
+                    "configurations": {
+                        "ci": {
+                            "watch": false
+                        },
+                        "dev": {
+                            "watch": true,
+                            "ui": true
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-eslint/builder:lint",
+                    "options": {
+                        "eslintConfig": "./eslint.config.mjs",
+                        "lintFilePatterns": ["./**/*.ts", "./**/*.html"]
+                    }
+                }
+            }
+        }
+    }
+}
