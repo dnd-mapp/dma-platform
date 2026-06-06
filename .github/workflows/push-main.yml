@@ -58,22 +58,6 @@ jobs:
                   MOON_REMOTE_HOST: grpc://docker-bazel-remote:9092
               run: pnpm moon ci
 
-            - name: Upload code coverage (realm)
-              if: hashFiles('apps/realm/coverage/cobertura-coverage.xml') != ''
-              uses: actions/upload-code-coverage@abb5995db9e0199b0e2bb9dbd136fce4cb1ec4d3 # v1.3.0
-              with:
-                  file: apps/realm/coverage/cobertura-coverage.xml
-                  language: javascript
-                  label: realm
-
-            - name: Upload code coverage (arcane-ui)
-              if: hashFiles('packages/arcane-ui/coverage/cobertura-coverage.xml') != ''
-              uses: actions/upload-code-coverage@abb5995db9e0199b0e2bb9dbd136fce4cb1ec4d3 # v1.3.0
-              with:
-                  file: packages/arcane-ui/coverage/cobertura-coverage.xml
-                  language: javascript
-                  label: arcane-ui
-
             - name: Upload Storybook artifact
               if: steps.arcane_ui_storybook_affected.outputs.affected == 'true'
               uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
