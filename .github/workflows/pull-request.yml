@@ -6,7 +6,6 @@ on:
             - opened
             - synchronize
             - reopened
-            - closed
 
 concurrency:
     group: ${{ github.workflow }}-${{ github.ref }}
@@ -78,7 +77,7 @@ jobs:
     docker:
         name: Docker
         needs: ci
-        if: needs.ci.outputs.realm_build_affected == 'true' && github.event.action != 'closed'
+        if: needs.ci.outputs.realm_build_affected == 'true'
         runs-on: ubuntu-22.04
         timeout-minutes: 10
         permissions:
@@ -117,22 +116,6 @@ jobs:
                   source: .
                   targets: realm
                   push: true
-
-    docker-cleanup:
-        name: Docker cleanup
-        needs: ci
-        if: needs.ci.outputs.realm_build_affected == 'true' && github.event.action == 'closed' && !github.event.pull_request.merged
-        runs-on: ubuntu-22.04
-        timeout-minutes: 5
-        permissions: {}
-        steps:
-            - name: Delete PR image tag from Docker Hub
-              uses: ./.github/actions/dockerhub-delete-tag
-              with:
-                  username: ${{ secrets.DOCKERHUB_USERNAME }}
-                  token: ${{ secrets.DOCKERHUB_TOKEN }}
-                  repository: dndmapp/realm
-                  tag: pr-${{ github.event.number }}
 
     e2e:
         name: E2E
