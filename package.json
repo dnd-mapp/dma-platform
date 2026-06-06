@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "prepare": "husky",
+    "certs:generate": "mkcert -cert-file certs/local.pem -key-file certs/local-key.pem localhost.www.dndmapp.dev localhost.auth.dndmapp.dev localhost 127.0.0.1 ::1",
     "moon": "moon",
     "commitlint": "commitlint",
     "playwright-install": "playwright install chromium --with-deps",

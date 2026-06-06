@@ -64,7 +64,11 @@
                     "builder": "@angular/build:dev-server",
                     "options": {
                         "buildTarget": "realm:build:development",
-                        "port": 4000
+                        "host": "localhost.www.dndmapp.dev",
+                        "port": 4000,
+                        "ssl": true,
+                        "sslCert": "../../certs/local.pem",
+                        "sslKey": "../../certs/local-key.pem"
                     }
                 },
                 "lint": {

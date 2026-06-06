@@ -12,4 +12,8 @@
 **/reports/
 
 .husky/_
+
+certs/*
+!certs/.gitkeep
+
 .moon/cache/
