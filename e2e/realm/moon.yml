@@ -12,8 +12,6 @@ tasks:
         command: 'pnpm e2e-ci'
         deps:
             - 'root:playwright-install'
-        options:
-            runInCI: false
         inputs:
             - 'src/**/*.ts'
             - 'playwright.config.ts'
