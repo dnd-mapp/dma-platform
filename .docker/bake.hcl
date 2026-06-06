@@ -1,8 +1,3 @@
-variable "TAGS" {
-  default = ["latest"]
-  type    = list(string)
-}
-
 # docker/metadata-action populates this at CI time via its bake-file fragment.
 # It injects dynamic OCI labels (created, revision, version) and extra tags.
 target "docker-metadata-action" {}
@@ -18,7 +13,6 @@ target "realm" {
   inherits   = ["_common", "docker-metadata-action"]
   dockerfile = ".docker/realm/Dockerfile"
   context    = "."
-  tags       = [for tag in TAGS : "dndmapp/realm:${tag}"]
   cache-from = ["type=registry,ref=dndmapp/realm:buildcache"]
   cache-to   = ["type=registry,ref=dndmapp/realm:buildcache,mode=max"]
   labels     = {
