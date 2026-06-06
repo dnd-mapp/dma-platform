@@ -13,8 +13,11 @@ jobs:
         name: CI
         runs-on: ubuntu-22.04
         timeout-minutes: 5
+        env:
+            STORYBOOK_BASE_URL: /dma-platform/
         outputs:
             realm_build_affected: ${{ steps.affected.outputs.affected }}
+            arcane_ui_storybook_affected: ${{ steps.arcane_ui_storybook_affected.outputs.affected }}
         permissions:
             contents: read
             code-quality: write
@@ -33,6 +36,13 @@ jobs:
               with:
                   project: realm
                   task: build
+
+            - name: Detect affected arcane-ui:storybook-build
+              id: arcane_ui_storybook_affected
+              uses: ./.github/actions/detect-affected-task
+              with:
+                  project: arcane-ui
+                  task: storybook-build
 
             - name: Connect to Tailscale
               uses: tailscale/github-action@306e68a486fd2350f2bfc3b19fcd143891a4a2d8 # v4.1.2
@@ -63,6 +73,12 @@ jobs:
                   file: packages/arcane-ui/coverage/cobertura-coverage.xml
                   language: javascript
                   label: arcane-ui
+
+            - name: Upload Storybook artifact
+              if: steps.arcane_ui_storybook_affected.outputs.affected == 'true'
+              uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+              with:
+                  path: packages/arcane-ui/dist/storybook
 
     docker-promote:
         name: Docker promote
