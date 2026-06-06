@@ -17,14 +17,13 @@ COPY packages/eslint-config/package.json      ./packages/eslint-config/
 COPY packages/sigil/package.json              ./packages/sigil/
 COPY packages/stylelint-config/package.json   ./packages/stylelint-config/
 
-RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store,sharing=locked \
-    pnpm install
+RUN pnpm install
 
 # Source — only after install so the above layer stays cached
 COPY . .
 
 # moon (installed via pnpm) resolves arcane-ui:build → sigil:build → realm:build
-RUN pnpm exec moon run realm:build
+RUN pnpm moon run realm:build
 
 
 # ── Serve stage ────────────────────────────────────────────────────────────────
