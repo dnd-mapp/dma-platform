@@ -31,6 +31,8 @@ tasks:
 
     storybook-build:
         command: 'pnpm storybook-build'
+        env:
+            STORYBOOK_BASE_URL: '/'
         inputs:
             - '**/*.{ts,html,scss}'
             - '**/*.stories.ts'
