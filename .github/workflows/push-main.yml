@@ -74,6 +74,9 @@ jobs:
             contents: read
             pull-requests: read
         steps:
+            - name: Checkout
+              uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+
             - name: Get merged PR number
               id: pr
               env:
