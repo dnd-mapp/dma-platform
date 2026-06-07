@@ -33,10 +33,13 @@
     "postbuild": "node scripts/post-build.mjs",
     "build": "sass --pkg-importer=node src/index.scss:./dist/index.css src/normalize.scss:./dist/normalize.css src/base.scss:./dist/base.css --source-map",
     "build-dev": "sass --watch --pkg-importer=node src/index.scss:./dist/index.css src/normalize.scss:./dist/normalize.css src/base.scss:./dist/base.css --source-map",
-    "lint-css": "stylelint \"src/**/*.scss\""
+    "lint-css": "stylelint \"src/**/*.scss\"",
+    "lint-ts": "eslint scripts/"
   },
   "devDependencies": {
+    "@dnd-mapp/eslint-config": "workspace:*",
     "@dnd-mapp/stylelint-config": "workspace:*",
+    "eslint": "catalog:eslint",
     "@fontsource-variable/inconsolata": "catalog:",
     "@fontsource-variable/lora": "catalog:",
     "@fontsource/metamorphous": "catalog:",
