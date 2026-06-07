@@ -1,14 +1,20 @@
 # dndmapp/realm
 
-Angular SPA for D&D Mapp, served by nginx on port 4000.
+[![Docker Pulls](https://img.shields.io/docker/pulls/dndmapp/realm)](https://hub.docker.com/r/dndmapp/realm)
+[![CI](https://img.shields.io/github/actions/workflow/status/dnd-mapp/dma-platform/push-main.yml?label=CI)](https://github.com/dnd-mapp/dma-platform/actions/workflows/push-main.yml)
+[![License: MIT](https://img.shields.io/github/license/dnd-mapp/dma-platform)](https://github.com/dnd-mapp/dma-platform/blob/main/LICENSE)
+
+Angular SPA for D&D Mapp, served by nginx on port 4000. Part of the D&D Mapp stack — authentication and API calls require Gatekeeper and other companion services to function.
+
+**Source:** [dnd-mapp/dma-platform](https://github.com/dnd-mapp/dma-platform)
 
 ## Tags
 
-| Tag          | Description                                                   |
-|--------------|---------------------------------------------------------------|
-| `next`       | Latest build from `main` — use this for deployments           |
-| `pr-{N}`     | Ephemeral build for PR #N — CI-only, do not use in production |
-| `buildcache` | Internal BuildKit cache layer — do not pull                   |
+| Tag          | Description                                                                |
+|:-------------|:---------------------------------------------------------------------------|
+| `next`       | Latest build from `main` — use this for deployments                        |
+| `pr-{N}`     | Ephemeral build for PR #N — CI-only, do not use in production              |
+| `buildcache` | Internal BuildKit cache layer, not a runnable image — do not pull directly |
 
 ## Configuration
 
@@ -21,7 +27,7 @@ Runtime configuration is supplied by mounting a `config.json` file into the cont
 ### Schema
 
 | Key | Type | Required | Description                                                                            |
-|-----|------|----------|----------------------------------------------------------------------------------------|
+|:----|:-----|:---------|:---------------------------------------------------------------------------------------|
 | —   | —    | —        | No configuration keys yet — this table will grow as backend services are containerised |
 
 Minimal example:
@@ -61,14 +67,4 @@ services:
 
 ## Building from source
 
-Prerequisites: Docker with BuildKit enabled, repository cloned.
-
-```sh
-docker buildx bake -f .docker/bake.hcl realm
-```
-
-The bake target builds for `linux/amd64` and `linux/arm64` by default. To restrict to a single platform for local development:
-
-```sh
-docker buildx bake -f .docker/bake.hcl realm --set realm.platforms=linux/amd64
-```
+See [Building the Docker image](https://github.com/dnd-mapp/dma-platform/blob/main/apps/realm/README.md#building-the-docker-image) in the source repository.

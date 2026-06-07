@@ -28,3 +28,26 @@ The app will be available at `https://realm.dnd-mapp.localhost`.
 Tests are run in a real Chromium browser via Playwright. Coverage reports are written to `coverage/apps/realm/` and HTML test reports to `reports/apps/realm/`.
 
 End-to-end tests live in [`e2e/realm`](../../e2e/realm) and are run separately via `pnpm --filter @dnd-mapp/realm-e2e test`.
+
+## Building the Docker image
+
+The image is built with [Docker Bake](https://docs.docker.com/build/bake/) using [`.docker/bake.hcl`](../../.docker/bake.hcl).
+
+In CI, `docker/metadata-action` generates a supplementary bake file that populates the `docker-metadata-action` target with image tags and dynamic OCI labels (`org.opencontainers.image.created`, `.revision`, `.version`). That file is not available locally, so you must supply those values via `--set` flags:
+
+```sh
+docker buildx bake \
+  --file .docker/bake.hcl \
+  --set realm.tags=realm:local \
+  --set "realm.labels.org.opencontainers.image.created=$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+  --set "realm.labels.org.opencontainers.image.revision=$(git rev-parse HEAD)" \
+  --set "realm.labels.org.opencontainers.image.version=local" \
+  --set realm.platform=linux/amd64 \
+  --load \
+  realm
+```
+
+`--set realm.platform=linux/amd64` restricts the build to a single architecture so `--load` can import the result into the local Docker store. Use `linux/arm64` instead on Apple Silicon.
+
+> [!NOTE]
+> The bake file references a registry-based build cache (`dndmapp/realm:buildcache`). Cache-pull errors during local builds are non-fatal and can be ignored if you are not authenticated to Docker Hub.
