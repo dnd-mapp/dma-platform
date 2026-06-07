@@ -4,10 +4,19 @@ language: 'javascript'
 stack: 'unknown'
 layer: 'configuration'
 
+fileGroups:
+    sources:
+        - 'src/**/*.mjs'
+    tests: []
+    configs:
+        - 'eslint.config.mjs'
+
+workspace:
+    inheritedTasks:
+        exclude:
+            - 'lint-css'
+            - 'test-ci'
+
 tasks:
     lint-ts:
         command: 'pnpm lint-ts'
-        inputs:
-            - 'src/**/*.mjs'
-            - 'eslint.config.mjs'
-            - '/eslint.config.mjs'

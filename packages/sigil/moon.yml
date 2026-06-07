@@ -4,6 +4,23 @@ language: 'scss'
 stack: 'frontend'
 layer: 'library'
 
+fileGroups:
+    sources:
+        - 'src/**/*.scss'
+        - 'assets/**/*'
+    tests: []
+    configs:
+        - 'package.json'
+        - 'README.md'
+        - 'scripts/**/*.mjs'
+        - 'eslint.config.mjs'
+        - '.stylelintrc.json'
+
+workspace:
+    inheritedTasks:
+        exclude:
+            - 'test-ci'
+
 tasks:
     build:
         command: 'pnpm build'
@@ -20,9 +37,5 @@ tasks:
         command: 'pnpm build-dev'
         preset: 'server'
 
-    lint-css:
-        command: 'pnpm lint-css'
-        inputs:
-            - 'src/**/*.scss'
-            - '.stylelintrc.json'
-            - '/packages/stylelint-config/src/**/*.mjs'
+    lint-ts:
+        command: 'pnpm lint-ts'

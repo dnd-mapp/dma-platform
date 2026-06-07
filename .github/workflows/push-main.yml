@@ -56,7 +56,7 @@ jobs:
               shell: bash
               env:
                   MOON_REMOTE_HOST: grpc://docker-bazel-remote:9092
-              run: pnpm moon ci
+              run: pnpm moon ci :format-check :build :storybook-build :test-ci :lint-ts :lint-css :lint-md
 
             - name: Upload Storybook artifact
               if: steps.arcane_ui_storybook_affected.outputs.affected == 'true'

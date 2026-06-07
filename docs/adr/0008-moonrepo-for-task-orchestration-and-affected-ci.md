@@ -1,6 +1,6 @@
 # ADR 0008: Use moonrepo for task orchestration and affected-only CI runs
 
-- **Status:** Accepted
+- **Status:** Partially superseded by [ADR 0022](0022-moon-task-inheritance-file-groups-and-ci-target-selection.md) (CI structure and pipeline configuration)
 - **Date:** 2026-05-30
 
 ## Context

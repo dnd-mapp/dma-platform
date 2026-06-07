@@ -4,8 +4,23 @@ language: 'typescript'
 stack: 'frontend'
 layer: 'automation'
 
+fileGroups:
+    sources:
+        - 'src/**/*.ts'
+    tests: []
+    configs:
+        - 'tsconfig*.json'
+        - 'playwright.config.ts'
+        - 'eslint.config.mjs'
+
 dependsOn:
     - realm
+
+workspace:
+    inheritedTasks:
+        exclude:
+            - 'lint-css'
+            - 'test-ci'
 
 tasks:
     e2e-ci:
@@ -25,12 +40,3 @@ tasks:
         preset: 'server'
         deps:
             - 'root:playwright-install'
-    lint-ts:
-        command: 'pnpm lint-ts'
-        inputs:
-            - 'src/**/*.ts'
-            - 'playwright.config.ts'
-            - 'eslint.config.mjs'
-            - 'tsconfig.json'
-            - '/tsconfig.base.json'
-            - '/packages/eslint-config/src/**/*.mjs'
