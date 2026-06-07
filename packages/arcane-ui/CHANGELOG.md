@@ -26,5 +26,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Cross-entry-point imports in the `config` entry point corrected to use the full package name so `ng-packagr` resolves entry-point boundaries correctly
 - `viteFinal` in the Storybook configuration typed via `StorybookConfigVite` to restore TypeScript narrowing after the Storybook 9 migration
-
-[Unreleased]: https://github.com/dnd-mapp/dma-platform/compare/arcane-ui@0.0.0...HEAD
