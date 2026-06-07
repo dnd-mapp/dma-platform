@@ -1,0 +1,35 @@
+$schema: 'https://moonrepo.dev/schemas/project.json'
+
+language: 'typescript'
+stack: 'unknown'
+layer: 'tool'
+
+tasks:
+    build:
+        command: 'pnpm build'
+        inputs:
+            - 'src/**/*.ts'
+            - 'tsconfig.json'
+            - '/tsconfig.base.json'
+        outputs:
+            - '/scripts/release/**'
+
+    lint-ts:
+        command: 'pnpm lint-ts'
+        inputs:
+            - 'src/**/*.ts'
+            - 'eslint.config.mjs'
+            - '/eslint.config.mjs'
+
+    test-ci:
+        command: 'pnpm test-ci'
+        inputs:
+            - 'src/**/*.ts'
+            - 'vitest.config.ts'
+        outputs:
+            - 'coverage/**'
+            - 'reports/**'
+
+    test:
+        command: 'pnpm test'
+        preset: 'server'

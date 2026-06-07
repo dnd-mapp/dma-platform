@@ -32,3 +32,10 @@ tasks:
         inputs:
             - '**/*.md'
             - '.markdownlint-cli2.json'
+
+    release:
+        command: 'node scripts/release/index.js'
+        deps:
+            - 'release-script:build'
+        options:
+            cache: false

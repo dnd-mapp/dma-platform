@@ -1,0 +1,28 @@
+{
+  "name": "@dnd-mapp/release-script",
+  "version": "0.0.0",
+  "description": "Interactive release script for the D&D Mapp monorepo — bumps versions, promotes changelogs, and opens release PRs.",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "test-ci": "vitest run",
+    "test": "vitest",
+    "lint-ts": "eslint ."
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "devDependencies": {
+    "@dnd-mapp/eslint-config": "workspace:*",
+    "@types/node": "catalog:",
+    "@vitest/coverage-v8": "catalog:vitest",
+    "@vitest/ui": "catalog:vitest",
+    "eslint": "catalog:eslint",
+    "eslint-config-prettier": "catalog:eslint",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:eslint",
+    "vitest": "catalog:vitest"
+  }
+}
