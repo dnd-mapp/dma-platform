@@ -491,6 +491,9 @@ importers:
 
   packages/sigil:
     devDependencies:
+      '@dnd-mapp/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
       '@dnd-mapp/stylelint-config':
         specifier: workspace:*
         version: link:../stylelint-config
@@ -503,6 +506,9 @@ importers:
       '@fontsource/metamorphous':
         specifier: 'catalog:'
         version: 5.2.8
+      eslint:
+        specifier: catalog:eslint
+        version: 10.4.1(jiti@2.7.0)
       modern-normalize:
         specifier: 'catalog:'
         version: 3.0.1
