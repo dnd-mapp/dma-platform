@@ -4,6 +4,15 @@ language: 'typescript'
 stack: 'frontend'
 layer: 'automation'
 
+fileGroups:
+    sources:
+        - 'src/**/*.ts'
+    tests: []
+    configs:
+        - 'tsconfig*.json'
+        - 'playwright.config.ts'
+        - 'eslint.config.mjs'
+
 dependsOn:
     - realm
 

@@ -4,6 +4,18 @@ language: 'scss'
 stack: 'frontend'
 layer: 'library'
 
+fileGroups:
+    sources:
+        - 'src/**/*.scss'
+        - 'assets/**/*'
+    tests: []
+    configs:
+        - 'package.json'
+        - 'README.md'
+        - 'scripts/post-build.mjs'
+        - 'eslint.config.mjs'
+        - '.stylelintrc.json'
+
 tasks:
     build:
         command: 'pnpm build'
