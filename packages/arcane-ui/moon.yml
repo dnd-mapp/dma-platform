@@ -67,6 +67,8 @@ tasks:
 
     test-ci:
         command: 'pnpm test-ci'
+        deps:
+            - 'root:playwright-install'
         outputs:
             - 'coverage/**'
             - 'reports/**'

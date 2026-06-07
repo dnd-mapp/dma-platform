@@ -53,6 +53,7 @@ tasks:
     test-ci:
         command: 'pnpm test-ci'
         deps:
+            - 'root:playwright-install'
             - 'arcane-ui:build'
             - 'sigil:build'
         outputs:
