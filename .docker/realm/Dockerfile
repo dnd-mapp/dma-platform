@@ -14,6 +14,7 @@ COPY apps/realm/package.json                  ./apps/realm/
 COPY e2e/realm/package.json                   ./e2e/realm/
 COPY packages/arcane-ui/package.json          ./packages/arcane-ui/
 COPY packages/eslint-config/package.json      ./packages/eslint-config/
+COPY packages/release-script/package.json              ./packages/release-script/
 COPY packages/sigil/package.json              ./packages/sigil/
 COPY packages/stylelint-config/package.json   ./packages/stylelint-config/
 
