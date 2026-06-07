@@ -67,17 +67,6 @@ tasks:
 
     test-ci:
         command: 'pnpm test-ci'
-        deps:
-            - 'root:playwright-install'
-        inputs:
-            - '**/*.{ts,html,scss}'
-            - 'vitest.config.mts'
-            - 'tsconfig.json'
-            - 'tsconfig.spec.json'
-            - 'package.json'
-            - 'angular.json'
-            - '/tsconfig.base.json'
-            - '/tsconfig.json'
         outputs:
             - 'coverage/**'
             - 'reports/**'
@@ -88,20 +77,5 @@ tasks:
         deps:
             - 'root:playwright-install'
 
-    lint-ts:
-        command: 'pnpm lint-ts'
-        inputs:
-            - '**/*.{ts,html}'
-            - 'eslint.config.mjs'
-            - 'tsconfig.json'
-            - 'tsconfig.lib.json'
-            - 'angular.json'
-            - '/tsconfig.base.json'
-            - '/packages/eslint-config/src/**/*.mjs'
-
     lint-css:
         command: 'pnpm lint-css --aei'
-        inputs:
-            - '**/*.scss'
-            - '.stylelintrc.json'
-            - '/packages/stylelint-config/src/**/*.mjs'

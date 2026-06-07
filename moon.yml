@@ -17,6 +17,12 @@ fileGroups:
         - '.markdownlint-cli2.json'
         - 'package.json'
 
+workspace:
+    inheritedTasks:
+        exclude:
+            - 'lint-css'
+            - 'test-ci'
+
 tasks:
     playwright-install:
         command: 'pnpm playwright-install'

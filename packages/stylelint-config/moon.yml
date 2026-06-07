@@ -11,6 +11,12 @@ fileGroups:
     configs:
         - 'eslint.config.mjs'
 
+workspace:
+    inheritedTasks:
+        exclude:
+            - 'lint-css'
+            - 'test-ci'
+
 tasks:
     lint-ts:
         command: 'pnpm lint-ts'

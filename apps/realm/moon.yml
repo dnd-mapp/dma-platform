@@ -55,17 +55,6 @@ tasks:
         deps:
             - 'arcane-ui:build'
             - 'sigil:build'
-            - 'root:playwright-install'
-        inputs:
-            - 'src/**/*'
-            - 'test/**/*'
-            - 'vitest.config.mts'
-            - 'tsconfig.json'
-            - 'tsconfig.spec.json'
-            - 'package.json'
-            - 'angular.json'
-            - '/tsconfig.base.json'
-            - '/tsconfig.json'
         outputs:
             - 'coverage/**'
             - 'reports/**'
@@ -81,20 +70,8 @@ tasks:
         command: 'pnpm lint-ts'
         deps:
             - 'arcane-ui:build'
-        inputs:
-            - 'src/**/*.{ts,html}'
-            - 'test/**/*.ts'
-            - 'eslint.config.mjs'
-            - 'tsconfig.json'
-            - 'tsconfig.app.json'
-            - 'tsconfig.spec.json'
-            - 'angular.json'
-            - '/tsconfig.base.json'
-            - '/packages/eslint-config/src/**/*.mjs'
 
     lint-css:
         command: 'pnpm lint-css'
         inputs:
             - 'src/**/*.scss'
-            - '.stylelintrc.json'
-            - '/packages/stylelint-config/src/**/*.mjs'

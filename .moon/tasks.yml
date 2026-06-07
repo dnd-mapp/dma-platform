@@ -8,3 +8,30 @@ fileGroups:
     typescript-base-configs:
         - '/tsconfig.base.json'
         - '/tsconfig.json'
+
+tasks:
+    lint-ts:
+        command: 'pnpm lint-ts'
+        inputs:
+            - '@globs(sources)'
+            - '@globs(tests)'
+            - '@globs(configs)'
+            - '@globs(eslint-config-files)'
+            - '@globs(typescript-base-configs)'
+
+    lint-css:
+        command: 'pnpm lint-css'
+        inputs:
+            - '@globs(sources)'
+            - '@globs(configs)'
+            - '@globs(stylelint-config-files)'
+
+    test-ci:
+        command: 'pnpm test-ci'
+        deps:
+            - 'root:playwright-install'
+        inputs:
+            - '@globs(sources)'
+            - '@globs(tests)'
+            - '@globs(configs)'
+            - '@globs(typescript-base-configs)'
