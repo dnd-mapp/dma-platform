@@ -20,7 +20,3 @@ workspace:
 tasks:
     lint-ts:
         command: 'pnpm lint-ts'
-        inputs:
-            - 'src/**/*.mjs'
-            - 'eslint.config.mjs'
-            - '/eslint.config.mjs'
