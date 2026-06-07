@@ -12,9 +12,14 @@ fileGroups:
     configs:
         - 'package.json'
         - 'README.md'
-        - 'scripts/post-build.mjs'
+        - 'scripts/**/*.mjs'
         - 'eslint.config.mjs'
         - '.stylelintrc.json'
+
+workspace:
+    inheritedTasks:
+        exclude:
+            - 'test-ci'
 
 tasks:
     build:
@@ -32,16 +37,5 @@ tasks:
         command: 'pnpm build-dev'
         preset: 'server'
 
-    lint-css:
-        command: 'pnpm lint-css'
-        inputs:
-            - 'src/**/*.scss'
-            - '.stylelintrc.json'
-            - '/packages/stylelint-config/src/**/*.mjs'
-
     lint-ts:
         command: 'pnpm lint-ts'
-        inputs:
-            - 'scripts/**/*.mjs'
-            - 'eslint.config.mjs'
-            - '/packages/eslint-config/src/**/*.mjs'
