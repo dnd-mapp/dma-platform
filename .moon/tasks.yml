@@ -1,0 +1,10 @@
+$schema: 'https://moonrepo.dev/schemas/global-project.json'
+
+fileGroups:
+    eslint-config-files:
+        - '/packages/eslint-config/src/**/*.mjs'
+    stylelint-config-files:
+        - '/packages/stylelint-config/src/**/*.mjs'
+    typescript-base-configs:
+        - '/tsconfig.base.json'
+        - '/tsconfig.json'
