@@ -14,7 +14,8 @@
   "type": "module",
   "exports": {
     ".": "./src/index.mjs",
-    "./angular": "./src/angular.mjs"
+    "./angular": "./src/angular.mjs",
+    "./node": "./src/node.mjs"
   },
   "files": [
     "src"
