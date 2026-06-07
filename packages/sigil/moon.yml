@@ -36,3 +36,6 @@ tasks:
     build-dev:
         command: 'pnpm build-dev'
         preset: 'server'
+
+    lint-ts:
+        command: 'pnpm lint-ts'
