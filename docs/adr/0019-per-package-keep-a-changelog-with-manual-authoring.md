@@ -16,4 +16,7 @@ Two automated approaches were considered and rejected:
 
 Each package and app has a `CHANGELOG.md` in [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format. Entries are written manually by the developer as part of the PR that introduces the change. Updating the changelog is a convention enforced by code review, not by CI or pre-commit hooks — not every commit warrants a user-facing entry, and automated gates cannot make that judgment.
 
-The `[Unreleased]` section accumulates changes between releases. On release, it is promoted to a versioned entry by the release script (see ADR 0020). Each file maintains Keep a Changelog comparison links at the bottom, updated by the release script on each release.
+The `[Unreleased]` section accumulates changes between releases. On release, it is promoted to a versioned entry by the release script (see ADR 0020). Each file maintains Keep a Changelog reference links at the bottom, updated by the release script on each release:
+
+- Versioned entries (e.g. `[0.1.0]`) link to their GitHub Release page (`releases/tag/<package>@<version>`).
+- `[Unreleased]` links to `compare/<package>@<last-version>...HEAD`, showing all commits since the last release. Before any release exists, the `[Unreleased]` link is omitted entirely.

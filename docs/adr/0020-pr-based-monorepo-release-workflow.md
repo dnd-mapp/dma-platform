@@ -14,14 +14,14 @@ Releases are initiated via an interactive TypeScript release script (`packages/r
 1. Prompts the developer to select a package or app to release.
 2. Collects commits since the last tag for that package (filtered by the package's path) and suggests a next version: `0.1.0` for the first release (no prior tag), or a semver bump derived from conventional commit types for subsequent releases — `BREAKING CHANGE` or `!` → major, `feat` → minor, everything else → patch.
 3. The developer confirms or overrides the suggested version.
-4. The script bumps the `version` field in the package's `package.json`, promotes `[Unreleased]` in its `CHANGELOG.md` to the versioned entry with today's date, inserts a fresh empty `[Unreleased]` section, and updates the Keep a Changelog comparison links at the bottom of the file.
+4. The script bumps the `version` field in the package's `package.json`, promotes `[Unreleased]` in its `CHANGELOG.md` to the versioned entry with today's date, inserts a fresh empty `[Unreleased]` section, and updates the Keep a Changelog reference links at the bottom of the file: the new versioned entry gets a `releases/tag/<package>@<version>` link; `[Unreleased]` gets a `compare/<package>@<version>...HEAD` link (see ADR 0019 for the full link convention).
 5. Creates a branch `release/<project>-<version>` and opens a pull request targeting `main`.
 
 After the release PR is merged, a dedicated CI workflow (`release-merge`) triggers on `pull_request: closed` where the PR is merged and the source branch matches `release/**`. The workflow:
 
 - Extracts the package name and version from the branch name.
 - Creates the git tag `<name>@<version>` (e.g. `sigil@1.2.0`).
-- Parses the versioned section from the package's `CHANGELOG.md` and appends a comparison link (`https://github.com/dnd-mapp/dma-platform/compare/<name>@<prev>...<name>@<version>`) as the GitHub Release body.
+- Parses the versioned section from the package's `CHANGELOG.md` and uses it as the GitHub Release body.
 - Creates a GitHub Release. If the version string contains a `-` pre-release identifier, the release is marked as a pre-release.
 - For `realm` releases only: promotes `dndmapp/realm:next` to `dndmapp/realm:latest`, `dndmapp/realm:<major>`, `dndmapp/realm:<major>.<minor>`, and `dndmapp/realm:<version>` — extending the build-once promotion chain established in ADR 0014.
 
