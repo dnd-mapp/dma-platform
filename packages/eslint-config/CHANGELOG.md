@@ -18,5 +18,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Node.js engine requirement raised from `>=18.18.0` to `>=24.0.0` to match the monorepo's pinned toolchain
 - `lint` npm script renamed to `lint-ts` for consistency with other Moonrepo-managed packages
 - `devDependencies` migrated to pnpm catalog references (`catalog:eslint` and `catalog:`) per ADR 0013, delegating version pinning to the workspace-level catalog
-
-[Unreleased]: https://github.com/dnd-mapp/dma-platform/compare/eslint-config@0.0.0...HEAD

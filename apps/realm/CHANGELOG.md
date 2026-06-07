@@ -18,5 +18,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Root component test spec now correctly provides `provideZonelessChangeDetection()` and `provideRouter([])`, matching the production app configuration
-
-[Unreleased]: https://github.com/dnd-mapp/dma-platform/compare/realm@0.0.0...HEAD

@@ -27,5 +27,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `build` and `build-dev` scripts extended to compile `normalize.scss` and `base.scss` alongside `index.scss`; `--pkg-importer=node` flag added to resolve `pkg:` imports (e.g. `pkg:modern-normalize`)
 - All `devDependencies` migrated to shared pnpm catalog references (ADR 0013)
 - Moon `dependsOn: [stylelint-config]` removed — dependency is now auto-detected from the pnpm workspace link in `package.json`
-
-[Unreleased]: https://github.com/dnd-mapp/dma-platform/compare/sigil@0.0.0...HEAD
