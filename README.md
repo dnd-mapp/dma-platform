@@ -17,10 +17,13 @@ Monorepo for the D&D Mapp platform — libraries and applications powering chara
 
 ### Packages
 
-| Package                                                   | Description                                  |
-|:----------------------------------------------------------|:---------------------------------------------|
-| [eslint-config](packages/eslint-config/README.md)         | Shared ESLint flat config for TS and Angular |
-| [stylelint-config](packages/stylelint-config/README.md)   | Shared Stylelint config for SCSS and Angular |
+| Package                                                   | Description                                                                    |
+|:----------------------------------------------------------|:-------------------------------------------------------------------------------|
+| [arcane-ui](packages/arcane-ui/README.md)                 | Shared Angular component library built on sigil design tokens                  |
+| [eslint-config](packages/eslint-config/README.md)         | Shared ESLint flat config for TS and Angular                                   |
+| [release-script](packages/release-script/README.md)       | Interactive release script — bumps versions, promotes changelogs, opens PRs    |
+| [sigil](packages/sigil/README.md)                         | Design token library — colors, typography, and spacing as SCSS and CSS         |
+| [stylelint-config](packages/stylelint-config/README.md)   | Shared Stylelint config for SCSS and Angular                                   |
 
 ### End-to-end tests
 
