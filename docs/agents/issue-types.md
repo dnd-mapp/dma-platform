@@ -26,6 +26,8 @@ Org-level issue type: `Epic` (node ID: `IT_kwDODFcis84CBKdR`)
 | `P2`  | `IFSSO_kgDOBHIfOw` | Normal priority — planned and scheduled                     |
 | `P3`  | `IFSSO_kgDOBHIfPA` | Low priority — nice to have, no firm commitment             |
 
+> **GraphQL note — Priority:** Set via `updateIssueFieldValue` with `issueField: { fieldId: "IFSS_kgDOAopeGg", singleSelectOptionId: "<option_id>" }`. This applies to all Issue Types that carry the priority field.
+
 ### Statuses
 
 `Status` Project field (single-select, node ID: `PVTSSF_lADODFcis84BY-C4zhUADuc`):
@@ -157,6 +159,8 @@ Org-level issue type: `Bug` (node ID: `IT_kwDODFcis84CBK3a`)
 | `S2`  | `IFSSO_kgDOBHIscg` | Degraded experience; reasonable workaround available                  |
 | `S3`  | `IFSSO_kgDOBHIscw` | Cosmetic or minor issue; does not impact functionality                |
 
+> **GraphQL note — Severity:** Set via `updateIssueFieldValue` with `issueField: { fieldId: "IFSS_kgDOAoplog", singleSelectOptionId: "<option_id>" }`.
+
 ### Statuses
 
 `Status` Project field (single-select, node ID: `PVTSSF_lADODFcis84BY-C4zhUADuc`):
@@ -200,6 +204,8 @@ Org-level issue type: `Spike` (node ID: `IT_kwDODFcis84CBK-7`)
 | `parent`   | Project field (native) | `PVTF_lADODFcis84BY-C4zhUADu4` | Parent issue  | `Parent #<n>`                        |
 
 **Priority options:** see Epic section above.
+
+> **GraphQL note — Time box:** Set via `updateIssueFieldValue` with `issueField: { fieldId: "IFT_kgDOAopn2A", textValue: "<value>" }` (e.g. `"2d"`, `"1 week"`).
 
 ### Statuses
 
