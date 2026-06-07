@@ -4,6 +4,27 @@ language: 'typescript'
 stack: 'frontend'
 layer: 'library'
 
+fileGroups:
+    sources:
+        - '**/*.{ts,html,scss}'
+        - '!**/*.spec.ts'
+        - '!dist/**'
+        - '!.angular/**'
+        - '!coverage/**'
+        - '!reports/**'
+    tests:
+        - '**/*.spec.ts'
+        - '.msw/**/*'
+    configs:
+        - 'tsconfig*.json'
+        - '**/ng-package.json'
+        - 'package.json'
+        - 'angular.json'
+        - 'vitest.config.mts'
+        - 'eslint.config.mjs'
+        - '.stylelintrc.json'
+        - '.storybook/**'
+
 tasks:
     build:
         command: 'pnpm build'

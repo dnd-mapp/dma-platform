@@ -4,6 +4,13 @@ language: 'javascript'
 stack: 'unknown'
 layer: 'configuration'
 
+fileGroups:
+    sources:
+        - 'src/**/*.mjs'
+    tests: []
+    configs:
+        - 'eslint.config.mjs'
+
 tasks:
     lint-ts:
         command: 'pnpm lint-ts'

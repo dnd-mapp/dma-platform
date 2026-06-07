@@ -4,6 +4,19 @@ language: 'javascript'
 stack: 'unknown'
 layer: 'tool'
 
+fileGroups:
+    sources:
+        - '**/*.{js,cjs,mjs}'
+        - '!apps/**'
+        - '!packages/**'
+        - '!e2e/**'
+    tests: []
+    configs:
+        - '.prettierrc'
+        - '.prettierignore'
+        - '.markdownlint-cli2.json'
+        - 'package.json'
+
 tasks:
     playwright-install:
         command: 'pnpm playwright-install'

@@ -4,6 +4,26 @@ language: 'typescript'
 stack: 'frontend'
 layer: 'application'
 
+fileGroups:
+    sources:
+        - '**/*.{ts,html}'
+        - 'public/**/*'
+        - '!**/test/**'
+        - '!dist/**'
+        - '!.angular/**'
+        - '!coverage/**'
+        - '!reports/**'
+    tests:
+        - '**/test/**/*.ts'
+        - '.msw/**/*'
+    configs:
+        - 'tsconfig*.json'
+        - 'package.json'
+        - 'angular.json'
+        - 'vitest.config.mts'
+        - 'eslint.config.mjs'
+        - '.stylelintrc.json'
+
 tasks:
     start:
         command: 'pnpm start'
