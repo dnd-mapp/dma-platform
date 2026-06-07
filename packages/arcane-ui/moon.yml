@@ -73,6 +73,9 @@ tasks:
             - 'coverage/**'
             - 'reports/**'
 
+    lint-ts:
+        command: 'pnpm lint-ts'
+
     test:
         command: 'pnpm test'
         preset: 'server'

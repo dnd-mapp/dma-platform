@@ -6,7 +6,7 @@ layer: 'application'
 
 fileGroups:
     sources:
-        - '**/*.{ts,html}'
+        - '**/*.{ts,html,scss}'
         - 'public/**/*'
         - '!**/test/**'
         - '!dist/**'
@@ -74,5 +74,3 @@ tasks:
 
     lint-css:
         command: 'pnpm lint-css'
-        inputs:
-            - 'src/**/*.scss'
