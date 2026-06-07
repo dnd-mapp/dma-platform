@@ -3,6 +3,7 @@
     "references": [
         { "path": "./apps/realm/tsconfig.json" },
         { "path": "./e2e/realm/tsconfig.json" },
-        { "path": "./packages/arcane-ui/tsconfig.json" }
+        { "path": "./packages/arcane-ui/tsconfig.json" },
+        { "path": "./packages/release-script/tsconfig.json" }
     ]
 }
