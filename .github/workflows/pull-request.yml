@@ -46,7 +46,7 @@ jobs:
               shell: bash
               env:
                   MOON_REMOTE_HOST: grpc://docker-bazel-remote:9092
-              run: pnpm moon ci
+              run: pnpm moon ci :build :test-ci :lint-ts :lint-css :storybook-build :lint-md :format-check
 
             - name: Report CI results
               uses: moonrepo/run-report-action@bbe7e99bf2aca819ec660ec01fc59d84bdd492d6 # v1.10.0
@@ -145,7 +145,7 @@ jobs:
             - name: Run E2E tests
               env:
                   MOON_REMOTE_HOST: grpc://docker-bazel-remote:9092
-              run: pnpm moon run realm-e2e:e2e-ci
+              run: pnpm moon ci :e2e-ci
 
             - name: Upload E2E reports
               if: failure()
