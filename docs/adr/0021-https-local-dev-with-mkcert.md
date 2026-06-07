@@ -1,4 +1,4 @@
-# ADR 0007: HTTPS-only local dev for Realm via mkcert and custom hostname
+# ADR 0021: HTTPS-only local dev for Realm via mkcert and custom hostname
 
 - **Status:** Accepted
 - **Date:** 2026-05-30
