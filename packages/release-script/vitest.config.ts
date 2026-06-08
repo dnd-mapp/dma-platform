@@ -3,6 +3,13 @@ import { defineConfig } from 'vitest/config';
 const isCI = Boolean(process.env['CI']);
 
 export default defineConfig({
+    server: {
+        watch: {
+            // Prevent EBUSY errors on Windows caused by the watcher trying to
+            // lock coverage/report files while they are still being written.
+            ignored: ['**/coverage/**', '**/reports/**'],
+        },
+    },
     test: {
         clearMocks: true,
         coverage: {
@@ -10,7 +17,7 @@ export default defineConfig({
             provider: 'v8',
             reporter: ['text-summary', 'html', 'cobertura'],
             reportOnFailure: true,
-            reportsDirectory: 'coverage/',
+            reportsDirectory: 'coverage',
         },
         environment: 'node',
         globals: true,
