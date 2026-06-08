@@ -14,13 +14,6 @@ tasks:
         outputs:
             - '/scripts/release/**'
 
-    lint-ts:
-        command: 'pnpm lint-ts'
-        inputs:
-            - 'src/**/*.ts'
-            - 'eslint.config.mjs'
-            - '/eslint.config.mjs'
-
     test-ci:
         command: 'pnpm test-ci'
         inputs:
@@ -33,3 +26,10 @@ tasks:
     test:
         command: 'pnpm test'
         preset: 'server'
+
+    lint-ts:
+        command: 'pnpm lint-ts'
+        inputs:
+            - 'src/**/*.ts'
+            - 'eslint.config.mjs'
+            - '/eslint.config.mjs'

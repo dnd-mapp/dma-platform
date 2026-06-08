@@ -73,6 +73,9 @@ catalogs:
     '@types/node':
       specifier: ~24.12.4
       version: 24.12.4
+    '@types/semver':
+      specifier: ~7.7.1
+      version: 7.7.1
     husky:
       specifier: ~9.1.7
       version: 9.1.7
@@ -94,6 +97,9 @@ catalogs:
     sass:
       specifier: ~1.100.0
       version: 1.100.0
+    semver:
+      specifier: ~7.8.2
+      version: 7.8.2
     tslib:
       specifier: ~2.8.1
       version: 2.8.1
@@ -490,6 +496,10 @@ importers:
         version: 8.60.1(eslint@10.4.1(jiti@2.7.0))(typescript@5.9.3)
 
   packages/release-script:
+    dependencies:
+      semver:
+        specifier: 'catalog:'
+        version: 7.8.2
     devDependencies:
       '@dnd-mapp/eslint-config':
         specifier: workspace:*
@@ -497,6 +507,9 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 24.12.4
+      '@types/semver':
+        specifier: 'catalog:'
+        version: 7.7.1
       '@vitest/coverage-v8':
         specifier: catalog:vitest
         version: 4.1.7(@vitest/browser@4.1.7)(vitest@4.1.7)
@@ -3562,6 +3575,9 @@ packages:
   '@types/retry@0.12.2':
     resolution: {integrity: sha512-XISRgDJ2Tc5q4TRqvgJtzsRkFYNJzZrhTdtMoGVBttwzzQJkPnS3WWTFc7kuDRoPtPakl+T+OfdEUjYJj7Jbow==}
 
+  '@types/semver@7.7.1':
+    resolution: {integrity: sha512-FmgJfu+MOcQ370SD0ev7EI8TlCAfKYU+B4m5T3yXc1CiRN94g/SZPtsCkk506aUDtlMnFZvasDwHHUcZUEaYuA==}
+
   '@types/send@0.17.6':
     resolution: {integrity: sha512-Uqt8rPBE8SY0RK8JB1EzVOIZ32uqy8HwdxCnoCOsYrvnswqmFZ/k+9Ikidlk/ImhsdvBsloHbAlewb2IEBV/Og==}
 
@@ -6541,6 +6557,11 @@ packages:
 
   semver@7.8.1:
     resolution: {integrity: sha512-rkVq3IXh+4FDGch+KwzX3aV9W3kO54GyEgpvBzSyctDA6Xtd7RJQV1xmXbeQp5v7+VzLOfVqiutSE6GICgPFvg==}
+    engines: {node: '>=10'}
+    hasBin: true
+
+  semver@7.8.2:
+    resolution: {integrity: sha512-c8jsqUZm3omBOI66G90z1Dyw5z622G8oLG+omfsHBJf3CWQTlOcwOjvOG6wtiNfW6anKm/eA39LMwMtMez2TiQ==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -10716,6 +10737,8 @@ snapshots:
 
   '@types/retry@0.12.2': {}
 
+  '@types/semver@7.7.1': {}
+
   '@types/send@0.17.6':
     dependencies:
       '@types/mime': 1.3.5
@@ -11701,7 +11724,7 @@ snapshots:
       postcss-modules-scope: 3.2.1(postcss@8.5.15)
       postcss-modules-values: 4.0.0(postcss@8.5.15)
       postcss-value-parser: 4.2.0
-      semver: 7.8.1
+      semver: 7.8.2
     optionalDependencies:
       webpack: 5.105.2(esbuild@0.27.3)(lightningcss@1.32.0)(postcss@8.5.12)
 
@@ -13807,7 +13830,7 @@ snapshots:
       cosmiconfig: 9.0.1(typescript@5.9.3)
       jiti: 2.7.0
       postcss: 8.5.12
-      semver: 7.8.1
+      semver: 7.8.2
     optionalDependencies:
       webpack: 5.105.2(esbuild@0.27.3)(lightningcss@1.32.0)(postcss@8.5.12)
     transitivePeerDependencies:
@@ -14232,6 +14255,8 @@ snapshots:
   semver@7.7.4: {}
 
   semver@7.8.1: {}
+
+  semver@7.8.2: {}
 
   send@0.19.2:
     dependencies:

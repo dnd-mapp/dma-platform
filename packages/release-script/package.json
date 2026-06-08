@@ -14,9 +14,13 @@
   "engines": {
     "node": ">=24.0.0"
   },
+  "dependencies": {
+    "semver": "catalog:"
+  },
   "devDependencies": {
     "@dnd-mapp/eslint-config": "workspace:*",
     "@types/node": "catalog:",
+    "@types/semver": "catalog:",
     "@vitest/coverage-v8": "catalog:vitest",
     "@vitest/ui": "catalog:vitest",
     "eslint": "catalog:eslint",
