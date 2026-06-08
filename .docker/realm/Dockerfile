@@ -1,29 +1,37 @@
+# ── Scaffold stage ─────────────────────────────────────────────────────────────
+FROM --platform="$BUILDPLATFORM" node:24.16.0-alpine3.23 AS scaffold
+
+ENV MOON_TOOLCHAIN_FORCE_GLOBALS=true
+
+WORKDIR /app
+
+RUN npm install -g @moonrepo/cli@2.3.0
+
+COPY . .
+
+RUN moon docker scaffold realm
+
+
 # ── Build stage ────────────────────────────────────────────────────────────────
 FROM --platform="$BUILDPLATFORM" node:24.16.0-alpine3.23 AS build
 
 ENV HUSKY="0" \
-    CI="true"
+    CI="true" \
+    MOON_TOOLCHAIN_FORCE_GLOBALS=true
 
 WORKDIR /app
 
-RUN npm i -g pnpm@10.34.1
+RUN npm install -g pnpm@10.34.1 @moonrepo/cli@2.3.0
 
-# Dependency manifests first — this layer is cached until lockfiles change
-COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
-COPY apps/realm/package.json                  ./apps/realm/
-COPY e2e/realm/package.json                   ./e2e/realm/
-COPY packages/arcane-ui/package.json          ./packages/arcane-ui/
-COPY packages/eslint-config/package.json      ./packages/eslint-config/
-COPY packages/release-script/package.json              ./packages/release-script/
-COPY packages/sigil/package.json              ./packages/sigil/
-COPY packages/stylelint-config/package.json   ./packages/stylelint-config/
+# Dependency manifests only — this layer is cached until lockfiles change
+COPY --from=scaffold /app/.moon/docker/workspace .
 
-RUN pnpm install
+RUN moon docker setup
 
-# Source — only after install so the above layer stays cached
-COPY . .
+# Source files — copied after install so the above layer stays cached
+COPY --from=scaffold /app/.moon/docker/sources .
 
-# moon (installed via pnpm) resolves arcane-ui:build → sigil:build → realm:build
+# moon resolves arcane-ui:build → sigil:build → realm:build
 RUN pnpm moon run realm:build
 
 
