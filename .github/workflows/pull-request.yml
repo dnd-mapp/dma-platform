@@ -13,7 +13,7 @@ jobs:
         runs-on: ubuntu-22.04
         timeout-minutes: 5
         outputs:
-            realm_build_affected: ${{ steps.affected.outputs.affected }}
+            realm_docker_build_affected: ${{ steps.affected.outputs.affected }}
         permissions:
             contents: read
             code-quality: write
@@ -27,12 +27,12 @@ jobs:
             - name: Setup workspace
               uses: ./.github/actions/setup-workspace
 
-            - name: Detect affected realm:build
+            - name: Detect affected realm:docker-build
               id: affected
               uses: ./.github/actions/detect-affected-task
               with:
                   project: realm
-                  task: build
+                  task: docker-build
 
             - name: Connect to Tailscale
               uses: tailscale/github-action@306e68a486fd2350f2bfc3b19fcd143891a4a2d8 # v4.1.2
@@ -81,7 +81,7 @@ jobs:
     docker:
         name: Docker
         needs: ci
-        if: needs.ci.outputs.realm_build_affected == 'true'
+        if: needs.ci.outputs.realm_docker_build_affected == 'true'
         runs-on: ubuntu-22.04
         timeout-minutes: 10
         permissions:
