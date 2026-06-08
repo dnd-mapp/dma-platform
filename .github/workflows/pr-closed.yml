@@ -23,3 +23,29 @@ jobs:
                   token: ${{ secrets.DOCKERHUB_TOKEN }}
                   repository: dndmapp/realm
                   tag: pr-${{ github.event.number }}
+
+    release:
+        name: Release
+        if: github.event.pull_request.merged == true && startsWith(github.head_ref, 'release/')
+        runs-on: ubuntu-22.04
+        timeout-minutes: 10
+        permissions:
+            contents: write
+        steps:
+            - name: Checkout
+              uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+              with:
+                  fetch-depth: 0
+
+            - name: Extract package name and version
+              id: extract
+              run: |
+                  branch="${{ github.head_ref }}"
+                  branch="${branch#release/}"
+                  if [[ "$branch" =~ ^(.+)-([0-9]+\.[0-9]+\.[0-9].*)$ ]]; then
+                      echo "name=${BASH_REMATCH[1]}" >> "$GITHUB_OUTPUT"
+                      echo "version=${BASH_REMATCH[2]}" >> "$GITHUB_OUTPUT"
+                  else
+                      echo "::error::Branch name does not match pattern 'release/<name>-<version>'"
+                      exit 1
+                  fi
