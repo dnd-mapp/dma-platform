@@ -203,18 +203,24 @@ describe('stageFiles', () => {
 });
 
 describe('commitRelease', () => {
-    it('uses the conventional commit message format', () => {
+    it('uses the conventional commit message format and sets HUSKY=0', () => {
         commitRelease('sigil', '0.1.0');
 
-        expect(mockExecSync).toHaveBeenCalledWith('git commit -m "release(sigil): 0.1.0"', { stdio: 'inherit' });
+        const [cmd, opts] = mockExecSync.mock.calls[0] as [string, { stdio: string; env: Record<string, string> }];
+        expect(cmd).toBe('git commit -m "release(sigil): 0.1.0"');
+        expect(opts.stdio).toBe('inherit');
+        expect(opts.env['HUSKY']).toBe('0');
     });
 });
 
 describe('pushBranch', () => {
-    it('pushes to origin with upstream tracking', () => {
+    it('pushes to origin with upstream tracking and sets HUSKY=0', () => {
         pushBranch('release/sigil-0.1.0');
 
-        expect(mockExecSync).toHaveBeenCalledWith('git push -u origin release/sigil-0.1.0', { stdio: 'inherit' });
+        const [cmd, opts] = mockExecSync.mock.calls[0] as [string, { stdio: string; env: Record<string, string> }];
+        expect(cmd).toBe('git push -u origin release/sigil-0.1.0');
+        expect(opts.stdio).toBe('inherit');
+        expect(opts.env['HUSKY']).toBe('0');
     });
 });
 

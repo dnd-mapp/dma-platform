@@ -98,12 +98,20 @@ export function stageFiles(files: string[]): void {
 
 /** Creates a release commit using the conventional commit message format. */
 export function commitRelease(shortName: string, version: string): void {
-    execSync(`git commit -m "release(${shortName}): ${version}"`, { stdio: 'inherit' });
+    // HUSKY=0 prevents hook scripts from running via a shell that may not be in PATH when
+    // Node.js spawns the subprocess (common on Windows).
+    execSync(`git commit -m "release(${shortName}): ${version}"`, {
+        stdio: 'inherit',
+        env: { ...process.env, HUSKY: '0' },
+    });
 }
 
 /** Pushes the branch to origin and sets the upstream tracking reference. */
 export function pushBranch(branchName: string): void {
-    execSync(`git push -u origin ${branchName}`, { stdio: 'inherit' });
+    execSync(`git push -u origin ${branchName}`, {
+        stdio: 'inherit',
+        env: { ...process.env, HUSKY: '0' },
+    });
 }
 
 /** Opens a pull request targeting main via the GitHub CLI. */
