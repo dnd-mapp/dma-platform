@@ -42,6 +42,7 @@ jobs:
               run: |
                   branch="${{ github.head_ref }}"
                   branch="${branch#release/}"
+
                   if [[ "$branch" =~ ^(.+)-([0-9]+\.[0-9]+\.[0-9].*)$ ]]; then
                       echo "name=${BASH_REMATCH[1]}" >> "$GITHUB_OUTPUT"
                       echo "version=${BASH_REMATCH[2]}" >> "$GITHUB_OUTPUT"
@@ -49,3 +50,25 @@ jobs:
                       echo "::error::Branch name does not match pattern 'release/<name>-<version>'"
                       exit 1
                   fi
+
+            - name: Create and push git tag
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  TAG: ${{ steps.extract.outputs.name }}@${{ steps.extract.outputs.version }}
+                  NAME: ${{ steps.extract.outputs.name }}
+                  VERSION: ${{ steps.extract.outputs.version }}
+              run: |
+                  sha=$(git rev-parse HEAD)
+
+                  tag_sha=$(gh api repos/dnd-mapp/dma-platform/git/tags \
+                    --method POST \
+                    --field tag="$TAG" \
+                    --field message="Release $NAME $VERSION" \
+                    --field object="$sha" \
+                    --field type="commit" \
+                    --jq '.sha')
+
+                  gh api repos/dnd-mapp/dma-platform/git/refs \
+                    --method POST \
+                    --field ref="refs/tags/$TAG" \
+                    --field sha="$tag_sha"
