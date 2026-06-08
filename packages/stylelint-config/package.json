@@ -1,6 +1,6 @@
 {
   "name": "@dnd-mapp/stylelint-config",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Shared Stylelint configuration for SCSS and Angular projects.",
   "keywords": [
     "stylelint",
