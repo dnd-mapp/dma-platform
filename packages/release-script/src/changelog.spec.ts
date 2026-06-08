@@ -94,6 +94,24 @@ describe('parseChangelog', () => {
             expect(serializeChangelog(parseChangelog(fixture))).toBe(fixture);
         }
     });
+
+    it('returns the whole content as header with no entries when there are no section headings', () => {
+        const input = '# Changelog\n\nSome introductory text with no sections.\n';
+        const result = parseChangelog(input);
+
+        expect(result.header).toBe(input);
+        expect(result.entries).toEqual([]);
+        expect(result.links).toEqual([]);
+    });
+
+    it('handles content that does not end with a newline', () => {
+        const input = '# Changelog\n\n## [Unreleased]'; // no trailing \n
+        const result = parseChangelog(input);
+
+        expect(result.entries).toHaveLength(1);
+        expect(result.entries[0]).toEqual({ version: 'Unreleased', content: '' });
+        expect(result.links).toEqual([]);
+    });
 });
 
 describe('promoteChangelog', () => {
@@ -181,6 +199,17 @@ describe('serializeChangelog', () => {
             '\n[Unreleased]: https://github.com/dnd-mapp/dma-platform/compare/sigil@0.1.0...HEAD\n',
         );
         expect(result).toContain('[0.1.0]: https://github.com/dnd-mapp/dma-platform/releases/tag/sigil@0.1.0\n');
+    });
+
+    it('appends a trailing newline when entry content does not end with one', () => {
+        const changelog: Changelog = {
+            header: '# Changelog\n\n',
+            entries: [{ version: 'Unreleased', content: '\n- item without trailing newline' }],
+            links: [],
+        };
+        const result = serializeChangelog(changelog);
+
+        expect(result.endsWith('\n')).toBe(true);
     });
 
     it('places [Unreleased] link before versioned links', () => {
