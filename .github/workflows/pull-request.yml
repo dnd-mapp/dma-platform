@@ -70,6 +70,14 @@ jobs:
                   language: javascript
                   label: arcane-ui
 
+            - name: Upload code coverage (release-script)
+              if: hashFiles('packages/release-script/coverage/cobertura-coverage.xml') != ''
+              uses: actions/upload-code-coverage@abb5995db9e0199b0e2bb9dbd136fce4cb1ec4d3 # v1.3.0
+              with:
+                  file: packages/release-script/coverage/cobertura-coverage.xml
+                  language: javascript
+                  label: release-script
+
     docker:
         name: Docker
         needs: ci
