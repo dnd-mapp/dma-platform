@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 import { confirm, input, select } from '@inquirer/prompts';
+import { readFile, writeFile } from 'fs/promises';
+import { join } from 'path';
 import { valid as semverValid } from 'semver';
-import { suggestVersion } from './git.js';
+import { parseChangelog, promoteChangelog, serializeChangelog } from './changelog.js';
+import { commitRelease, createReleaseBranch, openReleasePR, pushBranch, stageFiles, suggestVersion } from './git.js';
 import { discoverPackages } from './packages.js';
 
 async function main() {
@@ -39,7 +42,41 @@ async function main() {
         console.log('Release aborted.');
         process.exit(0);
     }
-    console.log('Release execution is not yet implemented.');
+    console.log('\nBumping package.json...');
+
+    const pkgJsonPath = join(process.cwd(), selected.path, 'package.json');
+    const pkgJson = JSON.parse(await readFile(pkgJsonPath, 'utf8')) as Record<string, unknown>;
+    pkgJson['version'] = version;
+
+    await writeFile(pkgJsonPath, JSON.stringify(pkgJson, null, 2) + '\n');
+
+    console.log('Promoting CHANGELOG.md...');
+
+    const changelogPath = join(process.cwd(), selected.path, 'CHANGELOG.md');
+    const promoted = promoteChangelog({
+        changelog: parseChangelog(await readFile(changelogPath, 'utf8')),
+        packageName: shortName,
+        version: version,
+        date: new Date().toISOString().slice(0, 10),
+    });
+    await writeFile(changelogPath, serializeChangelog(promoted));
+
+    console.log(`Creating branch ${branchName}...`);
+    createReleaseBranch(branchName);
+
+    console.log('Staging changes...');
+    stageFiles([`${selected.path}/package.json`, `${selected.path}/CHANGELOG.md`]);
+
+    console.log('Committing...');
+    commitRelease(shortName, version);
+
+    console.log('Pushing branch...');
+    pushBranch(branchName);
+
+    console.log('Opening PR...');
+    openReleasePR(shortName, version);
+
+    console.log('\nRelease complete.');
 }
 
 main().catch((error: unknown) => {
