@@ -92,6 +92,13 @@ describe('getCommitsSinceTag', () => {
 
         expect(getCommitsSinceTag('sigil@0.1.0', 'packages/sigil')).toEqual([]);
     });
+
+    it('passes the package path to the git log command', () => {
+        mockExecSync.mockReturnValue('');
+        getCommitsSinceTag('sigil@0.1.0', 'packages/sigil');
+
+        expect(mockExecSync).toHaveBeenCalledWith(expect.stringContaining('-- "packages/sigil"'), expect.anything());
+    });
 });
 
 describe('deriveBumpType', () => {
@@ -131,6 +138,15 @@ describe('deriveBumpType', () => {
                 { subject: 'fix!: Remove thing', body: '' },
             ]),
         ).toBe('major');
+    });
+
+    it('minor wins over patch when feat and fix commits are present', () => {
+        expect(
+            deriveBumpType([
+                { subject: 'fix: Correct token', body: '' },
+                { subject: 'feat: Add colour alias', body: '' },
+            ]),
+        ).toBe('minor');
     });
 });
 
