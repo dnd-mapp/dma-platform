@@ -4,8 +4,7 @@
     "exclude": ["src/**/*.spec.ts"],
     "compilerOptions": {
         "declaration": false,
-        "outDir": "../../scripts/release",
-        "rootDir": "src",
+        "noEmit": true,
         "types": ["node"]
     }
 }

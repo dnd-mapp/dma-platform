@@ -6,7 +6,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
+    "build": "rm -rf ../../scripts/release && esbuild src/index.ts --bundle --format=cjs --platform=node --target=node24 --outfile=../../scripts/release/index.js",
     "test-ci": "vitest run",
     "test": "vitest --ui",
     "lint-ts": "eslint ."
@@ -15,6 +15,7 @@
     "node": ">=24.0.0"
   },
   "dependencies": {
+    "@inquirer/prompts": "catalog:",
     "semver": "catalog:"
   },
   "devDependencies": {
@@ -26,6 +27,7 @@
     "eslint": "catalog:eslint",
     "eslint-config-prettier": "catalog:eslint",
     "typescript": "catalog:",
+    "esbuild": "catalog:",
     "typescript-eslint": "catalog:eslint",
     "vitest": "catalog:vitest"
   }

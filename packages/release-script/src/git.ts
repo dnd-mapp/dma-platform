@@ -18,6 +18,7 @@ export function getLatestTag(packageName: string): string | null {
     try {
         const stdout = execSync(`git tag --list "${packageName}@*" --sort=-version:refname`, {
             encoding: 'utf8',
+            stdio: ['ignore', 'pipe', 'pipe'],
         });
         const first = stdout.trim().split('\n')[0];
         return first || null;
@@ -35,6 +36,7 @@ export function getCommitsSinceTag(tag: string | null, packagePath: string): Com
 
     const stdout = execSync(`git log ${range} -z --format=%s%n%b -- "${packagePath}"`, {
         encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'pipe'],
     });
 
     if (!stdout.trim()) return [];

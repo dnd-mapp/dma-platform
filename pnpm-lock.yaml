@@ -67,6 +67,9 @@ catalogs:
     '@fontsource/metamorphous':
       specifier: ~5.2.8
       version: 5.2.8
+    '@inquirer/prompts':
+      specifier: ~7.10.1
+      version: 7.10.1
     '@moonrepo/cli':
       specifier: ~2.3.0
       version: 2.3.0
@@ -76,6 +79,9 @@ catalogs:
     '@types/semver':
       specifier: ~7.7.1
       version: 7.7.1
+    esbuild:
+      specifier: ~0.27.0
+      version: 0.27.7
     husky:
       specifier: ~9.1.7
       version: 9.1.7
@@ -497,6 +503,9 @@ importers:
 
   packages/release-script:
     dependencies:
+      '@inquirer/prompts':
+        specifier: 'catalog:'
+        version: 7.10.1(@types/node@24.12.4)
       semver:
         specifier: 'catalog:'
         version: 7.8.2
@@ -516,6 +525,9 @@ importers:
       '@vitest/ui':
         specifier: catalog:vitest
         version: 4.1.7(vitest@4.1.7)
+      esbuild:
+        specifier: 'catalog:'
+        version: 0.27.7
       eslint:
         specifier: catalog:eslint
         version: 10.4.1(jiti@2.7.0)

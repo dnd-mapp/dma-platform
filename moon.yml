@@ -58,3 +58,4 @@ tasks:
             - 'release-script:build'
         options:
             cache: false
+            interactive: true
