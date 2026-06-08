@@ -36,6 +36,7 @@ describe('getLatestTag', () => {
 
         expect(mockExecSync).toHaveBeenCalledWith('git tag --list "arcane-ui@*" --sort=-version:refname', {
             encoding: 'utf8',
+            stdio: ['ignore', 'pipe', 'pipe'],
         });
     });
 });

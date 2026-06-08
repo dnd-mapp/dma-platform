@@ -9,6 +9,7 @@ tasks:
         command: 'pnpm build'
         inputs:
             - 'src/**/*.ts'
+            - 'package.json'
             - 'tsconfig.json'
             - '/tsconfig.base.json'
         outputs:
