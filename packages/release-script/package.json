@@ -8,7 +8,7 @@
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "test-ci": "vitest run",
-    "test": "vitest",
+    "test": "vitest --ui",
     "lint-ts": "eslint ."
   },
   "engines": {
