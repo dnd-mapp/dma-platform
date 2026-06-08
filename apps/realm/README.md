@@ -33,7 +33,15 @@ End-to-end tests live in [`e2e/realm`](../../e2e/realm) and are run separately v
 
 The image is built with [Docker Bake](https://docs.docker.com/build/bake/) using [`.docker/bake.hcl`](../../.docker/bake.hcl).
 
-In CI, `docker/metadata-action` generates a supplementary bake file that populates the `docker-metadata-action` target with image tags and dynamic OCI labels (`org.opencontainers.image.created`, `.revision`, `.version`). That file is not available locally, so you must supply those values via `--set` flags:
+The quickest way to build locally is via the moon task:
+
+```sh
+pnpm moon run realm:docker-build
+```
+
+This builds for `linux/amd64` (use `linux/arm64` on Apple Silicon — pass `--set realm.platform=linux/arm64` via the raw command below). The image is tagged `dndmapp/realm:local` and is not loaded into the local Docker store; add `--load` to the bake command if you need to run it with `docker run`.
+
+For full control over tags and OCI labels, call bake directly. In CI, `docker/metadata-action` generates a supplementary bake file that populates the `docker-metadata-action` target with image tags and dynamic OCI labels (`org.opencontainers.image.created`, `.revision`, `.version`). That file is not available locally, so you must supply those values via `--set` flags:
 
 ```sh
 docker buildx bake \
@@ -46,8 +54,6 @@ docker buildx bake \
   --load \
   realm
 ```
-
-`--set realm.platform=linux/amd64` restricts the build to a single architecture so `--load` can import the result into the local Docker store. Use `linux/arm64` instead on Apple Silicon.
 
 > [!NOTE]
 > The bake file references a registry-based build cache (`dndmapp/realm:buildcache`). Cache-pull errors during local builds are non-fatal and can be ignored if you are not authenticated to Docker Hub.

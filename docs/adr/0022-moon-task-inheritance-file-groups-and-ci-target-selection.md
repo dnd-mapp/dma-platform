@@ -3,6 +3,7 @@
 - **Status:** Accepted
 - **Date:** 2026-06-07
 - **Partially supersedes:** [ADR 0008](0008-moonrepo-for-task-orchestration-and-affected-ci.md) (CI structure and pipeline configuration)
+- **Partially superseded by:** [ADR 0023](0023-docker-build-task-and-e2e-affected-detection.md) (docker job gate condition)
 
 ADR 0008 adopted moonrepo for task orchestration and described a single-job CI structure where the E2E gate is enforced by moon's `dependsOn`. The actual implementation diverged: the CI uses three sequential GitHub Actions jobs (`ci → docker → e2e`) because the Docker build requires GHA-specific setup (QEMU, Buildx, Docker Hub auth, PR tag derivation from `${{ github.event.number }}`) that cannot be expressed as a moon task. This ADR formalises the three-job structure and introduces task inheritance and file groups to eliminate input repetition across project `moon.yml` files.
 
