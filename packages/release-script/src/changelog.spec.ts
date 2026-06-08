@@ -212,6 +212,12 @@ describe('serializeChangelog', () => {
         expect(result.endsWith('\n')).toBe(true);
     });
 
+    it('omits the reference-link block for a fresh changelog with no versioned entries', () => {
+        const result = serializeChangelog(parseChangelog(FIXTURE_INITIAL));
+
+        expect(result).not.toMatch(/^\[Unreleased\]:/m);
+    });
+
     it('places [Unreleased] link before versioned links', () => {
         const changelog = parseChangelog(FIXTURE_INITIAL);
         const result = serializeChangelog(
