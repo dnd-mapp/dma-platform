@@ -26,5 +26,6 @@ export default defineConfig({
         passWithNoTests: true,
         reporters: ['dot', ['html', { outputFile: 'reports/index.html' }], ...(isCI ? ['github-actions'] : [])],
         root: import.meta.dirname,
+        uiBase: '/release-script/',
     },
 });
