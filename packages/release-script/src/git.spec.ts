@@ -1,5 +1,16 @@
 import { execSync } from 'child_process';
-import { bumpVersion, deriveBumpType, getCommitsSinceTag, getLatestTag, suggestVersion } from './git.js';
+import {
+    bumpVersion,
+    commitRelease,
+    createReleaseBranch,
+    deriveBumpType,
+    getCommitsSinceTag,
+    getLatestTag,
+    openReleasePR,
+    pushBranch,
+    stageFiles,
+    suggestVersion,
+} from './git.js';
 
 vi.mock('child_process');
 
@@ -170,5 +181,50 @@ describe('suggestVersion', () => {
         mockExecSync.mockReturnValueOnce('sigil@1.2.3\n').mockReturnValueOnce('fix: Correct shadow token\n\0');
 
         expect(suggestVersion('sigil', 'packages/sigil')).toBe('1.2.4');
+    });
+});
+
+describe('createReleaseBranch', () => {
+    it('runs the correct git checkout command', () => {
+        createReleaseBranch('release/sigil-0.1.0');
+
+        expect(mockExecSync).toHaveBeenCalledWith('git checkout -b release/sigil-0.1.0', { stdio: 'inherit' });
+    });
+});
+
+describe('stageFiles', () => {
+    it('passes all file paths to git add', () => {
+        stageFiles(['packages/sigil/package.json', 'packages/sigil/CHANGELOG.md']);
+
+        expect(mockExecSync).toHaveBeenCalledWith('git add packages/sigil/package.json packages/sigil/CHANGELOG.md', {
+            stdio: 'inherit',
+        });
+    });
+});
+
+describe('commitRelease', () => {
+    it('uses the conventional commit message format', () => {
+        commitRelease('sigil', '0.1.0');
+
+        expect(mockExecSync).toHaveBeenCalledWith('git commit -m "release(sigil): 0.1.0"', { stdio: 'inherit' });
+    });
+});
+
+describe('pushBranch', () => {
+    it('pushes to origin with upstream tracking', () => {
+        pushBranch('release/sigil-0.1.0');
+
+        expect(mockExecSync).toHaveBeenCalledWith('git push -u origin release/sigil-0.1.0', { stdio: 'inherit' });
+    });
+});
+
+describe('openReleasePR', () => {
+    it('calls gh pr create with the correct title and base branch', () => {
+        openReleasePR('sigil', '0.1.0');
+
+        expect(mockExecSync).toHaveBeenCalledWith(
+            'gh pr create --base main --title "release(sigil): 0.1.0" --body ""',
+            { stdio: 'inherit' },
+        );
     });
 });

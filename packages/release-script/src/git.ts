@@ -85,3 +85,28 @@ export function suggestVersion(packageName: string, packagePath: string): string
 
     return bumpVersion(currentVersion, deriveBumpType(commits));
 }
+
+/** Creates a new git branch and checks it out. */
+export function createReleaseBranch(branchName: string): void {
+    execSync(`git checkout -b ${branchName}`, { stdio: 'inherit' });
+}
+
+/** Stages the given file paths for commit. */
+export function stageFiles(files: string[]): void {
+    execSync(`git add ${files.join(' ')}`, { stdio: 'inherit' });
+}
+
+/** Creates a release commit using the conventional commit message format. */
+export function commitRelease(shortName: string, version: string): void {
+    execSync(`git commit -m "release(${shortName}): ${version}"`, { stdio: 'inherit' });
+}
+
+/** Pushes the branch to origin and sets the upstream tracking reference. */
+export function pushBranch(branchName: string): void {
+    execSync(`git push -u origin ${branchName}`, { stdio: 'inherit' });
+}
+
+/** Opens a pull request targeting main via the GitHub CLI. */
+export function openReleasePR(shortName: string, version: string): void {
+    execSync(`gh pr create --base main --title "release(${shortName}): ${version}" --body ""`, { stdio: 'inherit' });
+}
