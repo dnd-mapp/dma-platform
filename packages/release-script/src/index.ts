@@ -7,7 +7,7 @@ import { parseChangelog, promoteChangelog, serializeChangelog } from './changelo
 import { commitRelease, createReleaseBranch, openReleasePR, pushBranch, stageFiles, suggestVersion } from './git.js';
 import { discoverPackages } from './packages.js';
 
-async function main() {
+export async function main() {
     const packages = await discoverPackages(process.cwd());
 
     if (packages.length === 0) {
@@ -27,7 +27,7 @@ async function main() {
         validate: (v) => (semverValid(v) !== null ? true : `"${v}" is not a valid semver string`),
     });
 
-    const shortName = selected.name.split('/').pop() ?? selected.name;
+    const shortName = selected.name.replace(/^.*\//, '');
     const branchName = `release/${shortName}-${version}`;
 
     console.log('\nPlanned actions:');
@@ -79,7 +79,10 @@ async function main() {
     console.log('\nRelease complete.');
 }
 
-main().catch((error: unknown) => {
-    console.error(error);
-    process.exit(1);
-});
+/* v8 ignore next 4 */
+if (process.env['VITEST'] == null) {
+    main().catch((error: unknown) => {
+        console.error(error);
+        process.exit(1);
+    });
+}
