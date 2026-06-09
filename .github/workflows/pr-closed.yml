@@ -39,6 +39,7 @@ jobs:
 
             - name: Extract package name and version
               id: extract
+              shell: bash
               run: |
                   branch="${{ github.head_ref }}"
                   branch="${branch#release/}"
@@ -57,6 +58,7 @@ jobs:
                   TAG: ${{ steps.extract.outputs.name }}@${{ steps.extract.outputs.version }}
                   NAME: ${{ steps.extract.outputs.name }}
                   VERSION: ${{ steps.extract.outputs.version }}
+              shell: bash
               run: |
                   sha=$(git rev-parse HEAD)
 
@@ -72,3 +74,46 @@ jobs:
                     --method POST \
                     --field ref="refs/tags/$TAG" \
                     --field sha="$tag_sha"
+
+            - name: Extract CHANGELOG section
+              env:
+                  NAME: ${{ steps.extract.outputs.name }}
+                  VERSION: ${{ steps.extract.outputs.version }}
+              shell: bash
+              run: |
+                  if [[ -f "packages/${NAME}/CHANGELOG.md" ]]; then
+                      changelog="packages/${NAME}/CHANGELOG.md"
+                  elif [[ -f "apps/${NAME}/CHANGELOG.md" ]]; then
+                      changelog="apps/${NAME}/CHANGELOG.md"
+                  else
+                      echo "::error::CHANGELOG.md not found for package '${NAME}'"
+                      exit 1
+                  fi
+
+                  awk -v ver="$VERSION" '
+                      /^## \[/{
+                          if (found) exit
+                          if (index($0, "[" ver "]") > 0) found = 1
+                          next
+                      }
+                      found { print }
+                  ' "$changelog" > /tmp/release-notes.md
+
+            - name: Create GitHub Release
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  TAG: ${{ steps.extract.outputs.name }}@${{ steps.extract.outputs.version }}
+                  NAME: ${{ steps.extract.outputs.name }}
+                  VERSION: ${{ steps.extract.outputs.version }}
+              shell: bash
+              run: |
+                  prerelease_flag=()
+
+                  if [[ "$VERSION" == *"-"* ]]; then
+                      prerelease_flag=(--prerelease)
+                  fi
+
+                  gh release create "$TAG" \
+                      --title "$NAME $VERSION" \
+                      --notes-file /tmp/release-notes.md \
+                      "${prerelease_flag[@]}"
