@@ -31,6 +31,9 @@ jobs:
         timeout-minutes: 10
         permissions:
             contents: write
+        outputs:
+            name: ${{ steps.extract.outputs.name }}
+            version: ${{ steps.extract.outputs.version }}
         steps:
             - name: Checkout
               uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
@@ -117,3 +120,53 @@ jobs:
                       --title "$NAME $VERSION" \
                       --notes-file /tmp/release-notes.md \
                       "${prerelease_flag[@]}"
+
+    docker-release-promote:
+        name: Docker release promote
+        needs: release
+        if: needs.release.outputs.name == 'realm'
+        runs-on: ubuntu-22.04
+        timeout-minutes: 5
+        permissions: {}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+
+            - name: Compute semver tags
+              id: tags
+              shell: bash
+              run: |
+                  version="${{ needs.release.outputs.version }}"
+                  base="${version%%-*}"
+                  echo "major=${base%%.*}" >> "$GITHUB_OUTPUT"
+                  echo "major_minor=${base%.*}" >> "$GITHUB_OUTPUT"
+
+            - name: Log in to Docker Hub
+              uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee # v4.2.0
+              with:
+                  username: ${{ secrets.DOCKERHUB_USERNAME }}
+                  password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+            - name: Promote to :latest
+              uses: ./.github/actions/docker-promote-image
+              with:
+                  source: dndmapp/realm:next
+                  target: dndmapp/realm:latest
+
+            - name: Promote to :<major>
+              uses: ./.github/actions/docker-promote-image
+              with:
+                  source: dndmapp/realm:next
+                  target: dndmapp/realm:${{ steps.tags.outputs.major }}
+
+            - name: Promote to :<major>.<minor>
+              uses: ./.github/actions/docker-promote-image
+              with:
+                  source: dndmapp/realm:next
+                  target: dndmapp/realm:${{ steps.tags.outputs.major_minor }}
+
+            - name: Promote to :<version>
+              uses: ./.github/actions/docker-promote-image
+              with:
+                  source: dndmapp/realm:next
+                  target: dndmapp/realm:${{ needs.release.outputs.version }}
