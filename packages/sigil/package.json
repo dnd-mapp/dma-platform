@@ -13,6 +13,7 @@
     ".": "./index.css",
     "./normalize": "./normalize.css",
     "./base": "./base.css",
+    "./animations": "./animations.css",
     "./primitives/*": {
       "sass": "./primitives/_*.scss"
     },
@@ -31,8 +32,8 @@
   "scripts": {
     "download-fonts": "node scripts/download-fonts.mjs",
     "postbuild": "node scripts/post-build.mjs",
-    "build": "sass --pkg-importer=node src/index.scss:./dist/index.css src/normalize.scss:./dist/normalize.css src/base.scss:./dist/base.css --source-map",
-    "build-dev": "sass --watch --pkg-importer=node src/index.scss:./dist/index.css src/normalize.scss:./dist/normalize.css src/base.scss:./dist/base.css --source-map",
+    "build": "sass --pkg-importer=node src/index.scss:./dist/index.css src/normalize.scss:./dist/normalize.css src/base.scss:./dist/base.css src/animations.scss:./dist/animations.css --source-map",
+    "build-dev": "sass --watch --pkg-importer=node src/index.scss:./dist/index.css src/normalize.scss:./dist/normalize.css src/base.scss:./dist/base.css src/animations.scss:./dist/animations.css --source-map",
     "lint-css": "stylelint \"src/**/*.scss\"",
     "lint-ts": "eslint scripts/"
   },

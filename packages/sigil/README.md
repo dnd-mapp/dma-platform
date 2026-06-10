@@ -87,6 +87,45 @@ Each variable compiles to a `var()` with the light-theme primitive as fallback:
 | `tokens/color`      | `$color-surface-*`, `$color-text-*`, `$color-border-*`, `$color-interactive-*` |
 | `tokens/typography` | `$typography-size-*`, `$typography-weight-*`, `$typography-line-height-*`      |
 
+## Consuming animation tokens
+
+Animation keyframes and timing tokens are compiled to `animations.css`. Load it alongside `index.css` wherever spinning animations are used:
+
+In Angular, add it to the `styles` array in `angular.json`:
+
+```json
+{
+    "styles": [
+        "dist/packages/sigil/index.css",
+        "dist/packages/sigil/animations.css"
+    ]
+}
+```
+
+Or link it directly in your HTML shell:
+
+```html
+<link rel="stylesheet" href="dist/packages/sigil/animations.css">
+```
+
+Use the `dma-spin` keyframe and the timing tokens in component styles:
+
+```scss
+.spinner {
+    animation: dma-spin var(--dma-animation-spin-duration) linear infinite;
+    animation-play-state: var(--dma-animation-play-state);
+}
+```
+
+`--dma-animation-play-state` is automatically set to `paused` when `prefers-reduced-motion: reduce` is active, so no extra media query is needed in the component.
+
+### Available animation tokens
+
+| Token                           | Default   | Description                                            |
+|:--------------------------------|:----------|:-------------------------------------------------------|
+| `--dma-animation-play-state`    | `running` | Set to `paused` under `prefers-reduced-motion: reduce` |
+| `--dma-animation-spin-duration` | `0.8s`    | Duration of one full `dma-spin` rotation               |
+
 ## Consuming spacing and radius primitives
 
 Spacing and radius are SCSS-only — they are not compiled to CSS custom properties. Consume them via `@use` at build time using the same load path setup:
