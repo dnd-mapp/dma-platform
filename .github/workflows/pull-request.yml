@@ -40,12 +40,12 @@ jobs:
                   oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
                   oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
                   tags: tag:github-actions
-                  ping: docker-bazel-remote
+                  ping: bazel-remote.wolf-triggerfish.ts.net
 
             - name: Run CI
               shell: bash
               env:
-                  MOON_REMOTE_HOST: grpc://docker-bazel-remote:9092
+                  MOON_REMOTE_HOST: grpc://bazel-remote.wolf-triggerfish.ts.net:9092
               run: pnpm moon ci :build :test-ci :lint-ts :lint-css :storybook-build :lint-md :format-check
 
             - name: Report CI results
@@ -143,7 +143,7 @@ jobs:
                   oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
                   oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
                   tags: tag:github-actions
-                  ping: docker-bazel-remote
+                  ping: bazel-remote.wolf-triggerfish.ts.net
 
             - name: Start Realm container
               env:
@@ -152,7 +152,7 @@ jobs:
 
             - name: Run E2E tests
               env:
-                  MOON_REMOTE_HOST: grpc://docker-bazel-remote:9092
+                  MOON_REMOTE_HOST: grpc://bazel-remote.wolf-triggerfish.ts.net:9092
               run: pnpm moon ci :e2e-ci
 
             - name: Upload E2E reports
