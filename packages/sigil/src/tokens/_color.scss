@@ -23,5 +23,14 @@ $color-interactive-primary: var(--color-interactive-primary, #{$color-maroon-400
 $color-interactive-primary-hover: var(--color-interactive-primary-hover, #{$color-maroon-300});
 $color-interactive-primary-active: var(--color-interactive-primary-active, #{$color-maroon-500});
 $color-interactive-danger: var(--color-interactive-danger, #{$color-red-400});
+$color-interactive-warning: var(--color-interactive-warning, #{$color-yellow-400});
+$color-interactive-warning-hover: var(--color-interactive-warning-hover, #{$color-yellow-300});
+$color-interactive-warning-active: var(--color-interactive-warning-active, #{$color-yellow-500});
+$color-interactive-success: var(--color-interactive-success, #{$color-emerald-400});
+$color-interactive-success-hover: var(--color-interactive-success-hover, #{$color-emerald-300});
+$color-interactive-success-active: var(--color-interactive-success-active, #{$color-emerald-500});
+$color-interactive-info: var(--color-interactive-info, #{$color-sky-400});
+$color-interactive-info-hover: var(--color-interactive-info-hover, #{$color-sky-300});
+$color-interactive-info-active: var(--color-interactive-info-active, #{$color-sky-500});
 $color-interactive-focus-on-primary: var(--color-interactive-focus-on-primary, #{$color-gold-400});
 $color-interactive-focus-on-secondary: var(--color-interactive-focus-on-secondary, #{$color-maroon-300});

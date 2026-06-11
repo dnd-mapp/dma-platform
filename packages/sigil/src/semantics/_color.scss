@@ -24,6 +24,15 @@
     --color-interactive-primary-hover: #{$color-maroon-300};
     --color-interactive-primary-active: #{$color-maroon-500};
     --color-interactive-danger: #{$color-red-400};
+    --color-interactive-warning: #{$color-yellow-400};
+    --color-interactive-warning-hover: #{$color-yellow-300};
+    --color-interactive-warning-active: #{$color-yellow-500};
+    --color-interactive-success: #{$color-emerald-400};
+    --color-interactive-success-hover: #{$color-emerald-300};
+    --color-interactive-success-active: #{$color-emerald-500};
+    --color-interactive-info: #{$color-sky-400};
+    --color-interactive-info-hover: #{$color-sky-300};
+    --color-interactive-info-active: #{$color-sky-500};
     --color-interactive-focus-on-primary: #{$color-gold-400};
     --color-interactive-focus-on-secondary: #{$color-maroon-300};
 }
@@ -52,6 +61,15 @@
     --color-interactive-primary-hover: #{$color-maroon-700};
     --color-interactive-primary-active: #{$color-maroon-800};
     --color-interactive-danger: #{$color-red-600};
+    --color-interactive-warning: #{$color-yellow-600};
+    --color-interactive-warning-hover: #{$color-yellow-700};
+    --color-interactive-warning-active: #{$color-yellow-800};
+    --color-interactive-success: #{$color-emerald-600};
+    --color-interactive-success-hover: #{$color-emerald-700};
+    --color-interactive-success-active: #{$color-emerald-800};
+    --color-interactive-info: #{$color-sky-600};
+    --color-interactive-info-hover: #{$color-sky-700};
+    --color-interactive-info-active: #{$color-sky-800};
     --color-interactive-focus-on-primary: #{$color-gold-500};
     --color-interactive-focus-on-secondary: #{$color-maroon-400};
 }
