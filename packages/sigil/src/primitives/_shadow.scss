@@ -1,0 +1,7 @@
+$shadow-elevated:
+    0px 1px 2px oklch(0% 0 0deg / 30%),
+    0px 1px 3px 1px oklch(0% 0 0deg / 15%);
+$shadow-elevated-hover:
+    0px 1px 2px oklch(0% 0 0deg / 30%),
+    0px 2px 6px 2px oklch(0% 0 0deg / 15%);
+$shadow-elevated-active: 0px 1px 2px oklch(0% 0 0deg / 30%);
