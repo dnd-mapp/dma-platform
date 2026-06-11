@@ -14,6 +14,7 @@
             "@dnd-mapp/arcane-ui": ["./src/public-api.ts"],
             "@dnd-mapp/arcane-ui/common": ["./common/public-api.ts"],
             "@dnd-mapp/arcane-ui/components": ["./components/public-api.ts"],
+            "@dnd-mapp/arcane-ui/components/testing": ["./components/testing/public-api.ts"],
             "@dnd-mapp/arcane-ui/config": ["./config/public-api.ts"],
             "@dnd-mapp/arcane-ui/http": ["./http/public-api.ts"],
             "@dnd-mapp/arcane-ui/icons": ["./icons/public-api.ts"],
