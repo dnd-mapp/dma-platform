@@ -13,6 +13,12 @@
             }
         },
         {
+            "files": ["*.svg"],
+            "options": {
+                "parser": "html"
+            }
+        },
+        {
             "files": [".commitlintrc", ".lintstagedrc"],
             "options": {
                 "parser": "json"

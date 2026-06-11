@@ -39,6 +39,7 @@
     "@angular/compiler": "catalog:angular",
     "@angular/compiler-cli": "catalog:angular",
     "@dnd-mapp/eslint-config": "workspace:*",
+    "@dnd-mapp/sigil": "workspace:*",
     "@dnd-mapp/stylelint-config": "workspace:*",
     "@storybook/angular": "catalog:storybook",
     "@storybook/builder-vite": "catalog:storybook",

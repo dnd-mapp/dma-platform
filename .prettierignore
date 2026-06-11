@@ -9,6 +9,7 @@
 !*.yaml
 !*.yml
 !*.html
+!*.svg
 !*.css
 !*.scss
 !*.[cm]js

@@ -36,7 +36,9 @@
                         "browserTarget": "arcane-ui:build",
                         "compodoc": false,
                         "configDir": "./.storybook",
-                        "port": 6006
+                        "open": false,
+                        "port": 6006,
+                        "styles": [".storybook/styles.scss"]
                     }
                 },
                 "storybook-build": {
@@ -45,7 +47,8 @@
                         "browserTarget": "arcane-ui:build",
                         "compodoc": false,
                         "configDir": "./.storybook",
-                        "outputDir": "./dist/storybook"
+                        "outputDir": "./dist/storybook",
+                        "styles": [".storybook/styles.scss"]
                     }
                 },
                 "test": {
