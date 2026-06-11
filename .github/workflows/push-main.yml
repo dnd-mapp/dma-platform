@@ -132,6 +132,22 @@ jobs:
                   repository: dndmapp/realm
                   tag: pr-${{ steps.pr.outputs.number }}
 
+            - name: Connect to Tailscale
+              uses: tailscale/github-action@306e68a486fd2350f2bfc3b19fcd143891a4a2d8 # v4.1.2
+              with:
+                  oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+                  oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+                  tags: tag:github-actions
+                  ping: watchtower-dma.wolf-triggerfish.ts.net
+
+            - name: Notify Watchtower
+              shell: bash
+              run: |
+                  curl --fail-with-body \
+                      -X POST \
+                      -H "Authorization: Bearer ${{ secrets.WATCHTOWER_HTTP_API_TOKEN }}" \
+                      "https://watchtower-dma.wolf-triggerfish.ts.net/v1/update?image=dndmapp/realm:next&async=true"
+
     storybook-deploy:
         name: Storybook deploy
         needs: ci
