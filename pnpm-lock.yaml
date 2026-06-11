@@ -411,6 +411,9 @@ importers:
       '@dnd-mapp/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
+      '@dnd-mapp/sigil':
+        specifier: workspace:*
+        version: link:../sigil/dist
       '@dnd-mapp/stylelint-config':
         specifier: workspace:*
         version: link:../stylelint-config
