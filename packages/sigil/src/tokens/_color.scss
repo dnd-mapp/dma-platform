@@ -5,6 +5,7 @@ $color-surface-subtle: var(--color-surface-subtle, #{$color-maroon-950});
 $color-surface-default: var(--color-surface-default, #{$color-maroon-900});
 $color-surface-raised: var(--color-surface-raised, #{$color-maroon-800});
 $color-surface-overlay: var(--color-surface-overlay, #{$color-maroon-700});
+$color-surface-elevated: var(--color-surface-elevated, #{$color-maroon-700});
 
 // Text
 $color-text-primary: var(--color-text-primary, #{$color-white});
@@ -34,3 +35,10 @@ $color-interactive-info-hover: var(--color-interactive-info-hover, #{$color-sky-
 $color-interactive-info-active: var(--color-interactive-info-active, #{$color-sky-500});
 $color-interactive-focus-on-primary: var(--color-interactive-focus-on-primary, #{$color-gold-400});
 $color-interactive-focus-on-secondary: var(--color-interactive-focus-on-secondary, #{$color-maroon-300});
+
+// Interactive — tonal backgrounds
+$color-interactive-primary-tonal: var(--color-interactive-primary-tonal, #{$color-maroon-800});
+$color-interactive-danger-tonal: var(--color-interactive-danger-tonal, #{$color-red-900});
+$color-interactive-warning-tonal: var(--color-interactive-warning-tonal, #{$color-yellow-900});
+$color-interactive-success-tonal: var(--color-interactive-success-tonal, #{$color-emerald-900});
+$color-interactive-info-tonal: var(--color-interactive-info-tonal, #{$color-sky-900});
