@@ -2,3 +2,9 @@
 @use '@dnd-mapp/sigil';
 @use '@dnd-mapp/sigil/base';
 @use '@dnd-mapp/sigil/animations';
+
+.docs-story {
+    padding: 1.5rem;
+    color: var(--color-text-primary);
+    background-color: var(--color-surface-default);
+}

@@ -55,6 +55,7 @@
     "playwright": "catalog:playwright",
     "sass": "catalog:",
     "storybook": "catalog:storybook",
+    "@storybook/addon-docs": "catalog:storybook",
     "stylelint": "catalog:stylelint",
     "stylelint-config-clean-order": "catalog:stylelint",
     "stylelint-config-standard-scss": "catalog:stylelint",

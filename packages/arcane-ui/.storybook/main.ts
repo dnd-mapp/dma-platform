@@ -3,7 +3,7 @@ import type { StorybookConfigVite } from '@storybook/builder-vite';
 
 const config: StorybookConfig & StorybookConfigVite = {
     stories: ['../**/*.mdx', '../**/*.stories.ts'],
-    addons: [],
+    addons: ['@storybook/addon-docs'],
     framework: {
         name: '@storybook/angular',
         options: {

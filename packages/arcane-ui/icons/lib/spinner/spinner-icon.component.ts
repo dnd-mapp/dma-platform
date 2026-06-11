@@ -1,7 +1,21 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { type IconSize, IconSizes } from './icon-size.model';
 
-export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-
+/**
+ * Animated spinner icon that indicates a loading or in-progress state.
+ *
+ * The icon inherits its color from `currentColor` and is `aria-hidden` by default,
+ * so a visible or screen-reader-accessible label must be provided by the parent.
+ *
+ * @example
+ * ```html
+ * <!-- scales with surrounding text -->
+ * <dma-icon-spinner />
+ *
+ * <!-- explicit size -->
+ * <dma-icon-spinner size="lg" />
+ * ```
+ */
 @Component({
     selector: 'dma-icon-spinner',
     templateUrl: `./spinner-icon.component.html`,
@@ -13,5 +27,6 @@ export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
     },
 })
 export class DmaSpinnerIconComponent {
-    public readonly size = input<IconSize>('md');
+    /** Sets the dimensions of the icon using a named size token. Defaults to `'md'` (1.25 rem). */
+    public readonly size = input<IconSize>(IconSizes.MEDIUM);
 }

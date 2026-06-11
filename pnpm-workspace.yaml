@@ -61,6 +61,7 @@ catalogs:
     '@storybook/angular': '~10.4.2'
     '@storybook/builder-vite': '~10.4.2'
     storybook: '~10.4.2'
+    '@storybook/addon-docs': '~10.4.2'
   stylelint:
     stylelint: '~17.12.0'
     stylelint-config-clean-order: '~10.0.0'
