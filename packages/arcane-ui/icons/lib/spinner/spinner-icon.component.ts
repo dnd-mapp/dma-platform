@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { type IconSize, IconSizes } from './icon-size.model';
+import { type IconSize } from '@dnd-mapp/arcane-ui/common';
 
 /**
  * Animated spinner icon that indicates a loading or in-progress state.
@@ -26,7 +26,7 @@ import { type IconSize, IconSizes } from './icon-size.model';
         '[class]': 'size()',
     },
 })
-export class DmaSpinnerIconComponent {
-    /** Sets the dimensions of the icon using a named size token. Defaults to `'md'` (1.25 rem). */
-    public readonly size = input<IconSize>(IconSizes.MEDIUM);
+export class SpinnerIconComponent {
+    /** Sets the dimensions of the icon using a named size token. Omit to scale with the surrounding font size (1em). */
+    public readonly size = input<IconSize>();
 }
