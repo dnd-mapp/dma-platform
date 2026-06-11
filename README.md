@@ -57,6 +57,12 @@ Monorepo for the D&D Mapp platform — libraries and applications powering chara
     mkdir -p ~/.config/husky && echo 'eval "$(mise activate bash)"' >> ~/.config/husky/init.sh
     ```
 
+5. **(Windows only)** Enable git long-path support. Storybook's content-hashed cache filenames exceed Windows' 260-character `MAX_PATH` limit and cause git to fail without this setting:
+
+    ```sh
+    git config --local core.longpaths true
+    ```
+
 ### Local HTTPS setup
 
 The dev server for `apps/realm` serves exclusively over HTTPS at `https://localhost.www.dndmapp.dev:4000`. The following one-time steps are required before running `ng serve realm`. Steps 1–3 require administrator privileges.
