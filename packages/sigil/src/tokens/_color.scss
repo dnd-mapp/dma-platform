@@ -24,6 +24,8 @@ $color-interactive-primary: var(--color-interactive-primary, #{$color-maroon-400
 $color-interactive-primary-hover: var(--color-interactive-primary-hover, #{$color-maroon-300});
 $color-interactive-primary-active: var(--color-interactive-primary-active, #{$color-maroon-500});
 $color-interactive-danger: var(--color-interactive-danger, #{$color-red-400});
+$color-interactive-danger-hover: var(--color-interactive-danger-hover, #{$color-red-300});
+$color-interactive-danger-active: var(--color-interactive-danger-active, #{$color-red-500});
 $color-interactive-warning: var(--color-interactive-warning, #{$color-yellow-400});
 $color-interactive-warning-hover: var(--color-interactive-warning-hover, #{$color-yellow-300});
 $color-interactive-warning-active: var(--color-interactive-warning-active, #{$color-yellow-500});

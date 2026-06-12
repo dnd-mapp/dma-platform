@@ -28,6 +28,8 @@ fileGroups:
 tasks:
     build:
         command: 'pnpm build'
+        deps:
+            - 'sigil:build'
         inputs:
             - '**/*.{ts,html,scss}'
             - '**/ng-package.json'
@@ -48,6 +50,8 @@ tasks:
 
     storybook-start:
         command: 'pnpm storybook-start'
+        deps:
+            - 'sigil:build'
         preset: 'server'
 
     storybook-build:
@@ -71,6 +75,7 @@ tasks:
         command: 'pnpm test-ci'
         deps:
             - 'root:playwright-install'
+            - 'sigil:build'
         outputs:
             - 'coverage/**'
             - 'reports/**'
@@ -83,6 +88,7 @@ tasks:
         preset: 'server'
         deps:
             - 'root:playwright-install'
+            - 'sigil:build'
 
     lint-css:
         command: 'pnpm lint-css --aei'
