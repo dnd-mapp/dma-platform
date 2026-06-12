@@ -1,18 +1,5 @@
-import { ComponentHarness } from '@angular/cdk/testing';
-import { type IconSize } from '@dnd-mapp/arcane-ui/common';
+import { BaseIconHarness } from './base-icon.harness';
 
-export class SpinnerIconHarness extends ComponentHarness {
+export class SpinnerIconHarness extends BaseIconHarness {
     public static readonly hostSelector = 'dma-icon-spinner';
-
-    public async isAriaHidden(): Promise<boolean> {
-        return (await (await this.host()).getAttribute('aria-hidden')) === 'true';
-    }
-
-    public async hasSize(size: IconSize): Promise<boolean> {
-        return (await this.host()).hasClass(size);
-    }
-
-    public async hasSvg(): Promise<boolean> {
-        return (await this.locatorForAll('svg')()).length > 0;
-    }
 }
