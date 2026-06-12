@@ -14,6 +14,7 @@
     --dma-button-padding: #{$spacing-2} #{$spacing-4};
     --dma-button-font-size: #{$typography-size-sm};
     --dma-button-min-height: 2.25rem;
+    --dma-button-gap: #{$spacing-2};
 
     cursor: pointer;
 
@@ -48,6 +49,7 @@
         grid-area: 1 / 1;
         align-items: center;
         justify-content: center;
+        gap: var(--dma-button-gap);
     }
 
     dma-icon-spinner {
