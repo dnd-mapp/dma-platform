@@ -7,6 +7,7 @@ import {
     DEFAULT_BUTTON_INTENT,
     DEFAULT_BUTTON_SIZE,
 } from '@dnd-mapp/arcane-ui/common';
+import { SpinnerIconComponent } from '@dnd-mapp/arcane-ui/icons';
 
 /**
  * Enhances a native `<button>` element with DnD Mapp's design-system appearance,
@@ -22,6 +23,7 @@ import {
  */
 @Component({
     selector: 'button[dma-button]',
+    imports: [SpinnerIconComponent],
     templateUrl: './button.component.html',
     styleUrl: './button.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -52,5 +54,6 @@ export class ButtonComponent {
     /** When `true`, stretches the button to fill its container's width. */
     public readonly fullWidth = input(false);
 
+    /** Combines appearance, intent, and size into the host's `[class]` binding. */
     protected readonly classNames = computed(() => `${this.appearance()} ${this.intent()} ${this.size()}`);
 }

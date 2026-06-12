@@ -1,1 +1,471 @@
-// TODO #241
+@use '@dnd-mapp/sigil/primitives/radius' as *;
+@use '@dnd-mapp/sigil/primitives/shadow' as *;
+@use '@dnd-mapp/sigil/primitives/spacing' as *;
+@use '@dnd-mapp/sigil/tokens/color' as *;
+@use '@dnd-mapp/sigil/tokens/typography' as *;
+
+// ── Component tokens ────────────────────────────────────────────────────────
+
+:host {
+    --dma-button-bg: transparent;
+    --dma-button-text: #{$color-text-primary};
+    --dma-button-border: transparent;
+    --dma-button-shadow: none;
+    --dma-button-padding: #{$spacing-2} #{$spacing-4};
+    --dma-button-font-size: #{$typography-size-sm};
+    --dma-button-min-height: 2.25rem;
+
+    cursor: pointer;
+
+    display: inline-grid;
+    place-items: center;
+
+    min-height: var(--dma-button-min-height);
+    padding: var(--dma-button-padding);
+    border: 1px solid var(--dma-button-border);
+    border-radius: $radius-md;
+
+    font-family: #{$typography-font-body};
+    font-size: var(--dma-button-font-size);
+    font-weight: #{$typography-weight-medium};
+    line-height: #{$typography-line-height-tight};
+    color: var(--dma-button-text);
+    text-decoration: none;
+    white-space: nowrap;
+
+    background-color: var(--dma-button-bg);
+    box-shadow: var(--dma-button-shadow);
+
+    transition:
+        background-color 150ms ease,
+        border-color 150ms ease,
+        box-shadow 150ms ease,
+        color 150ms ease;
+
+    .content,
+    dma-icon-spinner {
+        display: flex;
+        grid-area: 1 / 1;
+        align-items: center;
+        justify-content: center;
+    }
+
+    dma-icon-spinner {
+        visibility: hidden;
+    }
+
+    &:focus-visible {
+        outline: 2px solid #{$color-interactive-focus-on-primary};
+        outline-offset: 2px;
+    }
+
+    &:disabled,
+    &.loading {
+        pointer-events: none;
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+}
+
+// ── Loading state ────────────────────────────────────────────────────────────
+
+:host(.loading) {
+    .content {
+        visibility: hidden;
+    }
+
+    dma-icon-spinner {
+        visibility: visible;
+    }
+}
+
+// ── Size scale ───────────────────────────────────────────────────────────────
+
+:host(.sm) {
+    --dma-button-padding: #{$spacing-1} #{$spacing-3};
+    --dma-button-font-size: #{$typography-size-xs};
+    --dma-button-min-height: 1.75rem;
+}
+
+:host(.lg) {
+    --dma-button-padding: #{$spacing-3} #{$spacing-5};
+    --dma-button-font-size: #{$typography-size-md};
+    --dma-button-min-height: 2.75rem;
+}
+
+// ── Modifier classes ─────────────────────────────────────────────────────────
+
+:host(.full-width) {
+    width: 100%;
+}
+
+:host(.icon-only) {
+    --dma-button-icon-only-padding: #{$spacing-2};
+
+    aspect-ratio: 1 / 1;
+    padding: var(--dma-button-icon-only-padding);
+}
+
+:host(.icon-only.sm) {
+    --dma-button-icon-only-padding: #{$spacing-1};
+}
+
+:host(.icon-only.lg) {
+    --dma-button-icon-only-padding: #{$spacing-3};
+}
+
+// ── Appearance × Intent ───────────────────────────────────────────────────────
+// filled — solid intent background, on-interactive text color
+
+:host(.filled.primary) {
+    --dma-button-bg: #{$color-interactive-primary};
+    --dma-button-text: #{$color-text-on-interactive};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-primary-hover};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-primary-active};
+    }
+}
+
+:host(.filled.danger) {
+    --dma-button-bg: #{$color-interactive-danger};
+    --dma-button-text: #{$color-text-on-interactive};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-danger-hover};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-danger-active};
+    }
+}
+
+:host(.filled.warning) {
+    --dma-button-bg: #{$color-interactive-warning};
+    --dma-button-text: #{$color-text-on-interactive};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-warning-hover};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-warning-active};
+    }
+}
+
+:host(.filled.success) {
+    --dma-button-bg: #{$color-interactive-success};
+    --dma-button-text: #{$color-text-on-interactive};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-success-hover};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-success-active};
+    }
+}
+
+:host(.filled.info) {
+    --dma-button-bg: #{$color-interactive-info};
+    --dma-button-text: #{$color-text-on-interactive};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-info-hover};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-info-active};
+    }
+}
+
+// outlined — transparent background, intent-coloured border and text
+
+:host(.outlined.primary) {
+    --dma-button-border: #{$color-interactive-primary};
+    --dma-button-text: #{$color-interactive-primary};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-primary-tonal};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-primary-active};
+        --dma-button-text: #{$color-text-on-interactive};
+    }
+}
+
+:host(.outlined.danger) {
+    --dma-button-border: #{$color-interactive-danger};
+    --dma-button-text: #{$color-interactive-danger};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-danger-tonal};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-danger-active};
+        --dma-button-text: #{$color-text-on-interactive};
+    }
+}
+
+:host(.outlined.warning) {
+    --dma-button-border: #{$color-interactive-warning};
+    --dma-button-text: #{$color-interactive-warning};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-warning-tonal};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-warning-active};
+        --dma-button-text: #{$color-text-on-interactive};
+    }
+}
+
+:host(.outlined.success) {
+    --dma-button-border: #{$color-interactive-success};
+    --dma-button-text: #{$color-interactive-success};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-success-tonal};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-success-active};
+        --dma-button-text: #{$color-text-on-interactive};
+    }
+}
+
+:host(.outlined.info) {
+    --dma-button-border: #{$color-interactive-info};
+    --dma-button-text: #{$color-interactive-info};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-info-tonal};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-info-active};
+        --dma-button-text: #{$color-text-on-interactive};
+    }
+}
+
+// ghost — no border, intent-coloured text, tonal hover
+
+:host(.ghost.primary) {
+    --dma-button-text: #{$color-interactive-primary};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-primary-tonal};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-primary-active};
+        --dma-button-text: #{$color-text-on-interactive};
+    }
+}
+
+:host(.ghost.danger) {
+    --dma-button-text: #{$color-interactive-danger};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-danger-tonal};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-danger-active};
+        --dma-button-text: #{$color-text-on-interactive};
+    }
+}
+
+:host(.ghost.warning) {
+    --dma-button-text: #{$color-interactive-warning};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-warning-tonal};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-warning-active};
+        --dma-button-text: #{$color-text-on-interactive};
+    }
+}
+
+:host(.ghost.success) {
+    --dma-button-text: #{$color-interactive-success};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-success-tonal};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-success-active};
+        --dma-button-text: #{$color-text-on-interactive};
+    }
+}
+
+:host(.ghost.info) {
+    --dma-button-text: #{$color-interactive-info};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-info-tonal};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-info-active};
+        --dma-button-text: #{$color-text-on-interactive};
+    }
+}
+
+// tonal — intent tonal background, intent-coloured text
+
+:host(.tonal.primary) {
+    --dma-button-bg: #{$color-interactive-primary-tonal};
+    --dma-button-text: #{$color-interactive-primary};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-primary-hover};
+        --dma-button-text: #{$color-text-on-interactive};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-primary-active};
+        --dma-button-text: #{$color-text-on-interactive};
+    }
+}
+
+:host(.tonal.danger) {
+    --dma-button-bg: #{$color-interactive-danger-tonal};
+    --dma-button-text: #{$color-interactive-danger};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-danger-hover};
+        --dma-button-text: #{$color-text-on-interactive};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-danger-active};
+        --dma-button-text: #{$color-text-on-interactive};
+    }
+}
+
+:host(.tonal.warning) {
+    --dma-button-bg: #{$color-interactive-warning-tonal};
+    --dma-button-text: #{$color-interactive-warning};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-warning-hover};
+        --dma-button-text: #{$color-text-on-interactive};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-warning-active};
+        --dma-button-text: #{$color-text-on-interactive};
+    }
+}
+
+:host(.tonal.success) {
+    --dma-button-bg: #{$color-interactive-success-tonal};
+    --dma-button-text: #{$color-interactive-success};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-success-hover};
+        --dma-button-text: #{$color-text-on-interactive};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-success-active};
+        --dma-button-text: #{$color-text-on-interactive};
+    }
+}
+
+:host(.tonal.info) {
+    --dma-button-bg: #{$color-interactive-info-tonal};
+    --dma-button-text: #{$color-interactive-info};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-info-hover};
+        --dma-button-text: #{$color-text-on-interactive};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-bg: #{$color-interactive-info-active};
+        --dma-button-text: #{$color-text-on-interactive};
+    }
+}
+
+// elevated — surface-elevated background, intent-coloured text, shadow
+
+:host(.elevated.primary) {
+    --dma-button-bg: #{$color-surface-elevated};
+    --dma-button-shadow: #{$shadow-elevated};
+    --dma-button-text: #{$color-interactive-primary};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-shadow: #{$shadow-elevated-hover};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-shadow: #{$shadow-elevated-active};
+    }
+}
+
+:host(.elevated.danger) {
+    --dma-button-bg: #{$color-surface-elevated};
+    --dma-button-shadow: #{$shadow-elevated};
+    --dma-button-text: #{$color-interactive-danger};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-shadow: #{$shadow-elevated-hover};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-shadow: #{$shadow-elevated-active};
+    }
+}
+
+:host(.elevated.warning) {
+    --dma-button-bg: #{$color-surface-elevated};
+    --dma-button-shadow: #{$shadow-elevated};
+    --dma-button-text: #{$color-interactive-warning};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-shadow: #{$shadow-elevated-hover};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-shadow: #{$shadow-elevated-active};
+    }
+}
+
+:host(.elevated.success) {
+    --dma-button-bg: #{$color-surface-elevated};
+    --dma-button-shadow: #{$shadow-elevated};
+    --dma-button-text: #{$color-interactive-success};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-shadow: #{$shadow-elevated-hover};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-shadow: #{$shadow-elevated-active};
+    }
+}
+
+:host(.elevated.info) {
+    --dma-button-bg: #{$color-surface-elevated};
+    --dma-button-shadow: #{$shadow-elevated};
+    --dma-button-text: #{$color-interactive-info};
+
+    &:hover:not(:disabled, .loading) {
+        --dma-button-shadow: #{$shadow-elevated-hover};
+    }
+
+    &:active:not(:disabled, .loading) {
+        --dma-button-shadow: #{$shadow-elevated-active};
+    }
+}
