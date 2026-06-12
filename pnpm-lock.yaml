@@ -12251,7 +12251,7 @@ snapshots:
       normalize-path: 3.0.0
       schema-utils: 4.3.3
       serialize-javascript: 7.0.5
-      tinyglobby: 0.2.17
+      tinyglobby: 0.2.15
       webpack: 5.105.2(esbuild@0.27.3)(lightningcss@1.32.0)(postcss@8.5.12)
 
   core-js-compat@3.49.0:
@@ -12316,7 +12316,7 @@ snapshots:
       postcss-modules-scope: 3.2.1(postcss@8.5.15)
       postcss-modules-values: 4.0.0(postcss@8.5.15)
       postcss-value-parser: 4.2.0
-      semver: 7.8.2
+      semver: 7.7.4
     optionalDependencies:
       webpack: 5.105.2(esbuild@0.27.3)(lightningcss@1.32.0)(postcss@8.5.12)
 
@@ -14458,7 +14458,7 @@ snapshots:
       cosmiconfig: 9.0.2(typescript@5.9.3)
       jiti: 2.7.0
       postcss: 8.5.12
-      semver: 7.8.2
+      semver: 7.7.4
     optionalDependencies:
       webpack: 5.105.2(esbuild@0.27.3)(lightningcss@1.32.0)(postcss@8.5.12)
     transitivePeerDependencies:
