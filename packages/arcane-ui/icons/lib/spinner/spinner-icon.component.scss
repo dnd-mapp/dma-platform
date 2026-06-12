@@ -1,40 +1,8 @@
+@use '../../_icon-base' as icons;
+
+@include icons.icon-base;
+
 :host {
-    display: inline-flex;
-
-    width: 1em;
-    height: 1em;
-
     animation: dma-spin var(--dma-animation-spin-duration, 0.8s) linear infinite;
     animation-play-state: var(--dma-animation-play-state, running);
-
-    &.xs {
-        width: var(--dma-icon-size-xs, 0.75rem);
-        height: var(--dma-icon-size-xs, 0.75rem);
-    }
-
-    &.sm {
-        width: var(--dma-icon-size-sm, 1rem);
-        height: var(--dma-icon-size-sm, 1rem);
-    }
-
-    &.md {
-        width: var(--dma-icon-size-md, 1.25rem);
-        height: var(--dma-icon-size-md, 1.25rem);
-    }
-
-    &.lg {
-        width: var(--dma-icon-size-lg, 1.5rem);
-        height: var(--dma-icon-size-lg, 1.5rem);
-    }
-
-    &.xl {
-        width: var(--dma-icon-size-xl, 1.75rem);
-        height: var(--dma-icon-size-xl, 1.75rem);
-    }
-}
-
-svg {
-    width: 100%;
-    height: 100%;
-    fill: currentcolor;
 }
