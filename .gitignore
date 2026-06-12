@@ -19,3 +19,4 @@ certs/*
 !certs/.gitkeep
 
 .moon/cache/
+.claude/worktrees/
