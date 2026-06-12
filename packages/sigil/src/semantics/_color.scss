@@ -25,6 +25,8 @@
     --color-interactive-primary-hover: #{$color-maroon-300};
     --color-interactive-primary-active: #{$color-maroon-500};
     --color-interactive-danger: #{$color-red-400};
+    --color-interactive-danger-hover: #{$color-red-300};
+    --color-interactive-danger-active: #{$color-red-500};
     --color-interactive-warning: #{$color-yellow-400};
     --color-interactive-warning-hover: #{$color-yellow-300};
     --color-interactive-warning-active: #{$color-yellow-500};
@@ -70,6 +72,8 @@
     --color-interactive-primary-hover: #{$color-maroon-700};
     --color-interactive-primary-active: #{$color-maroon-800};
     --color-interactive-danger: #{$color-red-600};
+    --color-interactive-danger-hover: #{$color-red-700};
+    --color-interactive-danger-active: #{$color-red-800};
     --color-interactive-warning: #{$color-yellow-600};
     --color-interactive-warning-hover: #{$color-yellow-700};
     --color-interactive-warning-active: #{$color-yellow-800};
