@@ -26,6 +26,7 @@ describe('ButtonComponent', () => {
                 [iconOnly]="iconOnly()"
                 [loading]="loading()"
                 [fullWidth]="fullWidth()"
+                [disabled]="disabled()"
             >
                 Click
             </button>
@@ -39,6 +40,7 @@ describe('ButtonComponent', () => {
         public readonly iconOnly = signal(false);
         public readonly loading = signal(false);
         public readonly fullWidth = signal(false);
+        public readonly disabled = signal(false);
     }
 
     async function setupTest() {
@@ -155,6 +157,20 @@ describe('ButtonComponent', () => {
             component.fullWidth.set(true);
 
             expect(await harness.isFullWidth()).toBe(true);
+        });
+    });
+
+    describe('disabled', () => {
+        it('is not disabled by default', async () => {
+            const { harness } = await setupTest();
+            expect(await harness.isDisabled()).toBe(false);
+        });
+
+        it('is disabled when the disabled attribute is set', async () => {
+            const { component, harness } = await setupTest();
+            component.disabled.set(true);
+
+            expect(await harness.isDisabled()).toBe(true);
         });
     });
 });

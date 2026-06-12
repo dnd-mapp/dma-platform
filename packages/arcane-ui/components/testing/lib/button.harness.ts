@@ -34,4 +34,8 @@ export class ButtonHarness extends ComponentHarness {
     public async isFullWidth(): Promise<boolean> {
         return (await this.host()).hasClass('full-width');
     }
+
+    public async isDisabled(): Promise<boolean> {
+        return (await this.host()).getProperty<boolean>('disabled');
+    }
 }

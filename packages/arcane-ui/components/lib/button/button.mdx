@@ -1,6 +1,68 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
 import * as ButtonStories from './button.stories';
 
 <Meta of={ButtonStories} />
 
 # Button
+
+Enhances a native `<button>` element with DnD Mapp's design-system appearance, intent, and size variants.
+
+## Usage
+
+Add `ButtonComponent` to your component's `imports` array:
+
+```ts
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ButtonComponent } from '@dnd-mapp/arcane-ui/components';
+
+@Component({
+    selector: 'app-example',
+    templateUrl: './example.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [ButtonComponent],
+})
+export class ExampleComponent {}
+```
+
+And then in the component's template:
+
+```html
+<!-- default (filled, primary, md) -->
+<button dma-button>Label</button>
+
+<!-- outlined danger button -->
+<button dma-button appearance="outlined" intent="danger">Delete</button>
+
+<!-- small ghost button -->
+<button dma-button appearance="ghost" size="sm">Cancel</button>
+
+<!-- icon-only button -->
+<button dma-button iconOnly>
+    <dma-icon-plus />
+</button>
+
+<!-- full-width loading button -->
+<button dma-button fullWidth [loading]="isSaving">Save</button>
+```
+
+## Preview
+
+<Canvas of={ButtonStories.Default} />
+
+## With icons
+
+### Icon only
+
+<Canvas of={ButtonStories.IconOnly} />
+
+### Leading icon
+
+<Canvas of={ButtonStories.LeadingIcon} />
+
+### Trailing icon
+
+<Canvas of={ButtonStories.TrailingIcon} />
+
+## API
+
+<Controls of={ButtonStories.Default} />
