@@ -1,0 +1,78 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as ButtonLinkStories from './button-link.stories';
+
+<Meta of={ButtonLinkStories} />
+
+# ButtonLink
+
+Enhances a native `<a>` element with DnD Mapp's design-system appearance, intent, and size variants.
+
+Unlike `ButtonComponent`, the disabled state is communicated via `aria-disabled` and `tabindex="-1"` rather than
+the HTML `disabled` attribute, which is not valid on anchor elements.
+
+## Usage
+
+Add `ButtonLinkComponent` to your component's `imports` array:
+
+```ts
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ButtonLinkComponent } from '@dnd-mapp/arcane-ui/components';
+
+@Component({
+    selector: 'app-example',
+    templateUrl: './example.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [ButtonLinkComponent],
+})
+export class ExampleComponent {}
+```
+
+And then in the component's template:
+
+```html
+<!-- default (filled, primary, md) -->
+<a dma-button-link href="/dashboard">Dashboard</a>
+
+<!-- outlined danger link -->
+<a dma-button-link appearance="outlined" intent="danger" href="/delete">Delete</a>
+
+<!-- small ghost link -->
+<a dma-button-link appearance="ghost" size="sm" href="/cancel">Cancel</a>
+
+<!-- icon-only link -->
+<a dma-button-link iconOnly href="/add" aria-label="Add item">
+    <dma-icon-plus />
+</a>
+
+<!-- disabled link -->
+<a dma-button-link [disabled]="true">Unavailable</a>
+```
+
+## Preview
+
+<Canvas of={ButtonLinkStories.Default} />
+
+## Disabled
+
+Use the `disabled` input to prevent interaction. The component sets `aria-disabled="true"` and `tabindex="-1"`
+on the host element; remove or clear the `href` attribute on the consuming side to fully prevent navigation.
+
+<Canvas of={ButtonLinkStories.Disabled} />
+
+## With icons
+
+### Icon only
+
+<Canvas of={ButtonLinkStories.IconOnly} />
+
+### Leading icon
+
+<Canvas of={ButtonLinkStories.LeadingIcon} />
+
+### Trailing icon
+
+<Canvas of={ButtonLinkStories.TrailingIcon} />
+
+## API
+
+<Controls of={ButtonLinkStories.Default} />

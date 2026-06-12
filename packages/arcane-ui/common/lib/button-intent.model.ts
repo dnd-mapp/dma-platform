@@ -2,9 +2,7 @@
 export const ButtonIntents = {
     PRIMARY: 'primary',
     DANGER: 'danger',
-    WARNING: 'warning',
     SUCCESS: 'success',
-    INFO: 'info',
 } as const;
 
 /** Union of valid button intent values derived from {@link ButtonIntents}. */
