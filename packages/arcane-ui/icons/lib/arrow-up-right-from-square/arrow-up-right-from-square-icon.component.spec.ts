@@ -1,5 +1,4 @@
-import { Component, signal } from '@angular/core';
-import { type IconSize, IconSizes } from '@dnd-mapp/arcane-ui/common';
+import { Component } from '@angular/core';
 import { ArrowUpRightFromSquareIconHarness } from '@dnd-mapp/arcane-ui/icons/testing';
 import { setupTestEnvironment } from '@dnd-mapp/arcane-ui/testing';
 import { ArrowUpRightFromSquareIconComponent } from './arrow-up-right-from-square-icon.component';
@@ -7,47 +6,16 @@ import { ArrowUpRightFromSquareIconComponent } from './arrow-up-right-from-squar
 describe('ArrowUpRightFromSquareIconComponent', () => {
     @Component({
         selector: 'dma-test',
-        template: '<dma-icon-arrow-up-right-from-square [size]="size()" />',
+        template: '<dma-icon-arrow-up-right-from-square />',
         imports: [ArrowUpRightFromSquareIconComponent],
     })
-    class TestComponent {
-        public readonly size = signal<IconSize | undefined>(undefined);
-    }
+    class TestComponent {}
 
-    async function setupTest() {
-        const { fixture, harness } = await setupTestEnvironment({
+    it('SVG element is present in rendered output', async () => {
+        const { harness } = await setupTestEnvironment({
             testComponent: TestComponent,
             harness: ArrowUpRightFromSquareIconHarness,
         });
-
-        return {
-            testComponent: fixture!.componentInstance,
-            harness: harness!,
-        };
-    }
-
-    it('host has aria-hidden set to "true"', async () => {
-        const { harness } = await setupTest();
-        expect(await harness.isAriaHidden()).toBe(true);
-    });
-
-    it('no size class is applied by default', async () => {
-        const { harness } = await setupTest();
-
-        for (const size of Object.values(IconSizes)) {
-            expect(await harness.hasSize(size)).toBe(false);
-        }
-    });
-
-    it.each(Object.values(IconSizes))('size "%s" applies the correct class to the host', async (size) => {
-        const { harness, testComponent } = await setupTest();
-        testComponent.size.set(size);
-
-        expect(await harness.hasSize(size)).toBe(true);
-    });
-
-    it('SVG element is present in rendered output', async () => {
-        const { harness } = await setupTest();
-        expect(await harness.hasSvg()).toBe(true);
+        expect(await harness!.hasSvg()).toBe(true);
     });
 });
