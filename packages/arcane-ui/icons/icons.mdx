@@ -1,0 +1,87 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as IconStories from './icons.stories';
+
+<Meta of={IconStories} />
+
+# Icons
+
+A set of lightweight SVG icon components. Each icon inherits its color from
+`currentColor`, is `aria-hidden` by default, and can be sized via the `size`
+input or by letting it scale with the surrounding text (default `1em`).
+
+## Available icons
+
+<table>
+  <thead>
+    <tr>
+      <th>Selector</th>
+      <th>Component</th>
+      <th>Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>&lt;dma-icon-arrow-up-right-from-square&gt;</code></td>
+      <td><code>ArrowUpRightFromSquareIconComponent</code></td>
+      <td>External link, open in new tab</td>
+    </tr>
+    <tr>
+      <td><code>&lt;dma-icon-pen&gt;</code></td>
+      <td><code>PenIconComponent</code></td>
+      <td>Edit / write action</td>
+    </tr>
+    <tr>
+      <td><code>&lt;dma-icon-plus&gt;</code></td>
+      <td><code>PlusIconComponent</code></td>
+      <td>Add / create action</td>
+    </tr>
+    <tr>
+      <td><code>&lt;dma-icon-spinner&gt;</code></td>
+      <td><code>SpinnerIconComponent</code></td>
+      <td>Loading / in-progress state</td>
+    </tr>
+    <tr>
+      <td><code>&lt;dma-icon-trash&gt;</code></td>
+      <td><code>TrashIconComponent</code></td>
+      <td>Delete / remove action</td>
+    </tr>
+  </tbody>
+</table>
+
+## Usage
+
+Add the icon component(s) you need to your component's `imports` array:
+
+```ts
+import { SpinnerIconComponent } from '@dnd-mapp/arcane-ui/icons';
+```
+
+Then use the selector in your template:
+
+```html
+<!-- scales with surrounding text (default) -->
+<dma-icon-spinner />
+
+<!-- explicit size -->
+<dma-icon-spinner size="lg" />
+```
+
+All icons accept the same `size` input (`xs` | `sm` | `md` | `lg` | `xl`). Omit
+it to let the icon scale with the surrounding font size (`1em`).
+
+Because icons are `aria-hidden`, always pair them with an accessible label on
+the parent element:
+
+```html
+<button aria-label="Delete item">
+    <dma-icon-trash />
+</button>
+```
+
+## Preview
+
+<Canvas of={IconStories.Gallery} />
+
+## API
+
+<Controls of={IconStories.Gallery} />
