@@ -30,7 +30,7 @@ catalogs:
     '@fontsource-variable/lora': '~5.2.8'
     '@fontsource/metamorphous': '~5.2.8'
     '@inquirer/prompts': '~8.5.2'
-    '@moonrepo/cli': '~2.3.0'
+    '@moonrepo/cli': '~2.3.3'
     '@types/node': '~24.12.4'
     '@types/semver': '~7.7.1'
     husky: '~9.1.7'
@@ -55,7 +55,7 @@ catalogs:
     '@playwright/test': '~1.60.0'
     playwright: '~1.60.0'
   prettier:
-    prettier: '~3.8.3'
+    prettier: '~3.8.4'
     prettier-plugin-organize-imports: '~4.3.0'
   storybook:
     '@storybook/angular': '~10.4.2'
