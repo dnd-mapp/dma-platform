@@ -1,0 +1,12 @@
+@use '../button/button-styles' as button-styles;
+
+@include button-styles.button-base($disabled-selector: '[aria-disabled=true]');
+
+// ── Content layout ────────────────────────────────────────────────────────────
+
+:host {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--dma-button-gap);
+}
