@@ -19,7 +19,6 @@
     "lint-css": "stylelint \"**/*.scss\""
   },
   "dependencies": {
-    "@angular/animations": "catalog:angular",
     "@angular/cdk": "catalog:angular",
     "@angular/common": "catalog:angular",
     "@angular/compiler": "catalog:angular",

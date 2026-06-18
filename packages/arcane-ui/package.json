@@ -34,6 +34,8 @@
   },
   "devDependencies": {
     "@angular-eslint/builder": "catalog:angular",
+    "@angular-devkit/core": "catalog:angular",
+    "@angular-devkit/architect": "catalog:angular",
     "@angular/build": "catalog:angular",
     "@angular/cli": "catalog:angular",
     "@angular/compiler": "catalog:angular",
