@@ -51,10 +51,42 @@ Monorepo for the D&D Mapp platform — libraries and applications powering chara
     pnpm install
     ```
 
-4. Set up the Husky init script so that git hooks can find the correct Node and pnpm versions:
+4. Set up the Husky init script so that git hooks can find the correct Node and
+   pnpm versions. On Windows, Husky runs in Git Bash, so use POSIX-formatted
+   mise shim paths instead of evaluating the native Windows
+   `mise activate bash` output:
 
     ```sh
-    mkdir -p ~/.config/husky && echo 'eval "$(mise activate bash)"' >> ~/.config/husky/init.sh
+    mkdir -p ~/.config/husky
+    ```
+
+    Add the following to `~/.config/husky/init.sh`:
+
+    ```sh
+    case "$(uname -s)" in
+        MINGW*|MSYS*|CYGWIN*)
+            mise_data_dir="${MISE_DATA_DIR:-"$HOME/AppData/Local/mise"}"
+            case "$mise_data_dir" in
+                [A-Za-z]:\\*) mise_data_dir="$(cygpath -u "$mise_data_dir")" ;;
+            esac
+
+            if mise_command="$(command -v mise 2>/dev/null)"; then
+                mise_bin_dir="$(dirname "$mise_command")"
+            else
+                scoop_dir="${SCOOP:-"$HOME/scoop"}"
+                case "$scoop_dir" in
+                    [A-Za-z]:\\*) scoop_dir="$(cygpath -u "$scoop_dir")" ;;
+                esac
+                mise_bin_dir="$scoop_dir/apps/mise/current/bin"
+            fi
+
+            export PATH="$mise_data_dir/shims:$mise_bin_dir:$PATH"
+            unset mise_data_dir mise_command mise_bin_dir scoop_dir
+            ;;
+        *)
+            eval "$(mise activate bash)"
+            ;;
+    esac
     ```
 
 5. **(Windows only)** Enable git long-path support. Storybook's content-hashed cache filenames exceed Windows' 260-character `MAX_PATH` limit and cause git to fail without this setting:

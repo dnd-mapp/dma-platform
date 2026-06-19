@@ -1,6 +1,6 @@
 import { provideHttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { setupTestEnvironment } from '@dnd-mapp/arcane-ui/testing';
+import { MSW_START_OPTIONS, setupTestEnvironment } from '@dnd-mapp/arcane-ui/testing';
 import { http, HttpResponse } from 'msw';
 import { setupWorker } from 'msw/browser';
 import { firstValueFrom } from 'rxjs';
@@ -20,7 +20,7 @@ describe('RequestService', () => {
     const baseUrl = 'https://api.test';
 
     beforeAll(async () => {
-        await server.start({ onUnhandledRequest: 'warn', quiet: true });
+        await server.start(MSW_START_OPTIONS);
     });
 
     afterEach(() => {
