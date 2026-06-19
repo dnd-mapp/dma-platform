@@ -8,6 +8,7 @@
     "prepare": "husky",
     "certs:generate": "mkcert -cert-file certs/local.pem -key-file certs/local-key.pem localhost.www.dndmapp.dev localhost.auth.dndmapp.dev localhost 127.0.0.1 ::1",
     "moon": "moon",
+    "lint-staged": "lint-staged",
     "commitlint": "commitlint",
     "playwright-install": "playwright install chromium --with-deps",
     "lint-md": "markdownlint-cli2 --config .markdownlint-cli2.json",
