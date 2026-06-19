@@ -171,6 +171,15 @@ describe('BaseInputComponent', () => {
         expect(await harness.isDisabled()).toBe(true);
     });
 
+    it('supports user interaction without Angular forms', async () => {
+        const { harness } = await setupStandaloneInput();
+
+        await harness.setValue('Frodo');
+        await harness.blur();
+
+        expect(await harness.getValue()).toBe('Frodo');
+    });
+
     it('exposes required inputs and derives stable description IDs', async () => {
         const { harness } = await setupStandaloneInput();
 
@@ -216,6 +225,15 @@ describe('BaseInputComponent', () => {
         host.control.markAsTouched();
 
         expect(await harness.getStatus()).toBe('success');
+    });
+
+    it('stays neutral while an interacted control is pending validation', async () => {
+        const { harness, host } = await setupFormInput();
+
+        host.control.markAsTouched();
+        host.control.markAsPending();
+
+        expect(await harness.getStatus()).toBe('default');
     });
 
     it('returns to a neutral status when the control is reset', async () => {
