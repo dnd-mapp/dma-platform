@@ -28,7 +28,7 @@ RUN pnpm moon run realm:build
 
 
 # ── Serve stage ────────────────────────────────────────────────────────────────
-FROM nginx:1.31.1-alpine3.23 AS serve
+FROM nginx:1.31.2-alpine3.23 AS serve
 
 COPY .docker/realm/nginx.conf        /etc/nginx/nginx.conf
 COPY .docker/realm/default.conf      /etc/nginx/conf.d/default.conf
