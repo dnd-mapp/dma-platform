@@ -2,7 +2,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { CONFIG_URL } from '@dnd-mapp/arcane-ui/common';
 import { RequestService } from '@dnd-mapp/arcane-ui/http';
-import { setupTestEnvironment } from '@dnd-mapp/arcane-ui/testing';
+import { MSW_START_OPTIONS, setupTestEnvironment } from '@dnd-mapp/arcane-ui/testing';
 import { http, HttpResponse } from 'msw';
 import { setupWorker } from 'msw/browser';
 import { ConfigService } from './config.service';
@@ -16,7 +16,7 @@ describe('ConfigService', () => {
     const server = setupWorker();
 
     beforeAll(async () => {
-        await server.start({ onUnhandledRequest: 'warn', quiet: true });
+        await server.start(MSW_START_OPTIONS);
     });
 
     afterEach(() => {
