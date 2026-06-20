@@ -2,7 +2,7 @@
 
 [![Main](https://github.com/dnd-mapp/dma-platform/actions/workflows/push-main.yml/badge.svg)](https://github.com/dnd-mapp/dma-platform/actions/workflows/push-main.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![node: 24.16.0](https://img.shields.io/badge/node-24.16.0-339933?logo=nodedotjs&logoColor=white)](package.json)
+[![node: 24.17.0](https://img.shields.io/badge/node-24.17.0-339933?logo=nodedotjs&logoColor=white)](package.json)
 [![pnpm: 10.34.1](https://img.shields.io/badge/pnpm-10.34.1-F69220?logo=pnpm&logoColor=white)](package.json)
 
 Monorepo for the D&D Mapp platform — libraries and applications powering character management, campaign tools, and Virtual Tabletop sessions for D&D 5e.
