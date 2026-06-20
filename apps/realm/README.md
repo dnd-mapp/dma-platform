@@ -3,6 +3,7 @@
 [![Angular: 21.2](https://img.shields.io/badge/Angular-21.2-DD0031?logo=angular&logoColor=white)](../../package.json)
 [![TypeScript: 5.9](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)](../../package.json)
 [![Vitest: 4.1](https://img.shields.io/badge/Vitest-4.1-6E9F18?logo=vitest&logoColor=white)](../../package.json)
+[![Docker Pulls](https://img.shields.io/docker/pulls/dndmapp/realm)](https://hub.docker.com/r/dndmapp/realm)
 
 The main frontend client for D&D Mapp. A single Angular SPA used by both Players and Dungeon Masters — role gates DM-only sections within the same app. Communicates with the backend via REST API and via WebSockets for real-time VTT sessions.
 
@@ -28,6 +29,17 @@ The app will be available at `https://realm.dnd-mapp.localhost`.
 Tests are run in a real Chromium browser via Playwright. Coverage reports are written to `coverage/apps/realm/` and HTML test reports to `reports/apps/realm/`.
 
 End-to-end tests live in [`e2e/realm`](../../e2e/realm) and are run separately via `pnpm --filter @dnd-mapp/realm-e2e test`.
+
+## Published Docker image
+
+Published images are available from the [`dndmapp/realm`](https://hub.docker.com/r/dndmapp/realm) repository on Docker Hub.
+
+| Tag          | Description                                                   |
+|--------------|---------------------------------------------------------------|
+| `next`       | Latest build from `main`, intended for current deployments    |
+| Version tags | Stable releases, including `latest`, major, and minor aliases |
+| `pr-{N}`     | Ephemeral image for pull request N                            |
+| `buildcache` | Internal BuildKit cache; not a runnable image                 |
 
 ## Building the Docker image
 
