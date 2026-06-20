@@ -20,7 +20,6 @@ jobs:
             arcane_ui_storybook_affected: ${{ steps.arcane_ui_storybook_affected.outputs.affected }}
         permissions:
             contents: read
-            code-quality: write
         steps:
             - name: Checkout
               uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
@@ -57,30 +56,6 @@ jobs:
               env:
                   MOON_REMOTE_HOST: grpc://bazel-remote.wolf-triggerfish.ts.net:9092
               run: pnpm moon ci :format-check :build :storybook-build :test-ci :lint-ts :lint-css :lint-md
-
-            - name: Upload code coverage (realm)
-              if: hashFiles('apps/realm/coverage/cobertura-coverage.xml') != ''
-              uses: actions/upload-code-coverage@abb5995db9e0199b0e2bb9dbd136fce4cb1ec4d3 # v1.3.0
-              with:
-                  file: apps/realm/coverage/cobertura-coverage.xml
-                  language: javascript
-                  label: realm
-
-            - name: Upload code coverage (arcane-ui)
-              if: hashFiles('packages/arcane-ui/coverage/cobertura-coverage.xml') != ''
-              uses: actions/upload-code-coverage@abb5995db9e0199b0e2bb9dbd136fce4cb1ec4d3 # v1.3.0
-              with:
-                  file: packages/arcane-ui/coverage/cobertura-coverage.xml
-                  language: javascript
-                  label: arcane-ui
-
-            - name: Upload code coverage (release-script)
-              if: hashFiles('packages/release-script/coverage/cobertura-coverage.xml') != ''
-              uses: actions/upload-code-coverage@abb5995db9e0199b0e2bb9dbd136fce4cb1ec4d3 # v1.3.0
-              with:
-                  file: packages/release-script/coverage/cobertura-coverage.xml
-                  language: javascript
-                  label: release-script
 
             - name: Upload Storybook artifact
               if: steps.arcane_ui_storybook_affected.outputs.affected == 'true'
