@@ -25,7 +25,6 @@
     "@angular/core": "catalog:angular",
     "@angular/forms": "catalog:angular",
     "@angular/platform-browser": "catalog:angular",
-    "@angular/platform-browser-dynamic": "catalog:angular",
     "@angular/router": "catalog:angular",
     "@dnd-mapp/arcane-ui": "workspace:*",
     "@dnd-mapp/sigil": "workspace:*",
