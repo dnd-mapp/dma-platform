@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import type { IconSize } from '@dnd-mapp/arcane-ui/common';
 import {
     ArrowUpRightFromSquareIconComponent,
+    CheckIconComponent,
+    ExclamationCircleIconComponent,
     PenIconComponent,
     PlusIconComponent,
     SpinnerIconComponent,
@@ -15,6 +17,8 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         ArrowUpRightFromSquareIconComponent,
+        CheckIconComponent,
+        ExclamationCircleIconComponent,
         PenIconComponent,
         PlusIconComponent,
         SpinnerIconComponent,
