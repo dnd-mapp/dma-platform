@@ -36,6 +36,7 @@
                         "browserTarget": "arcane-ui:build",
                         "compodoc": false,
                         "configDir": "./.storybook",
+                        "experimentalZoneless": true,
                         "open": false,
                         "port": 6006,
                         "styles": [".storybook/styles.scss"]
@@ -47,6 +48,7 @@
                         "browserTarget": "arcane-ui:build",
                         "compodoc": false,
                         "configDir": "./.storybook",
+                        "experimentalZoneless": true,
                         "outputDir": "./dist/storybook",
                         "styles": [".storybook/styles.scss"]
                     }
