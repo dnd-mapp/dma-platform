@@ -1,0 +1,162 @@
+@use '@dnd-mapp/sigil/primitives/radius' as *;
+@use '@dnd-mapp/sigil/primitives/spacing' as *;
+@use '@dnd-mapp/sigil/tokens/color' as *;
+@use '@dnd-mapp/sigil/tokens/typography' as *;
+
+// Shared base styles for concrete Arcane UI input components.
+// $disabled-selector: selector appended to & that applies disabled appearance.
+@mixin input-base($disabled-selector: '.disabled') {
+    :host {
+        --dma-input-bg: #{$color-surface-default};
+        --dma-input-text: #{$color-text-primary};
+        --dma-input-placeholder: #{$color-text-secondary};
+        --dma-input-border: #{$color-border-default};
+        --dma-input-icon-color: #{$color-text-secondary};
+        --dma-input-status-color: var(--dma-input-icon-color);
+        --dma-input-padding-block: #{$spacing-2};
+        --dma-input-padding-inline: #{$spacing-3};
+        --dma-input-gap: #{$spacing-2};
+        --dma-input-min-height: 2.5rem;
+        --dma-input-radius: #{$radius-md};
+        --dma-input-font-size: #{$typography-size-sm};
+        --dma-input-disabled-opacity: 0.5;
+
+        display: block;
+        color: var(--dma-input-text);
+    }
+
+    :host(.error),
+    :host([data-status='error']) {
+        --dma-input-border: #{$color-interactive-danger};
+        --dma-input-status-color: #{$color-interactive-danger};
+    }
+
+    :host(.success),
+    :host([data-status='success']) {
+        --dma-input-border: #{$color-interactive-success};
+        --dma-input-status-color: #{$color-interactive-success};
+    }
+
+    :host(#{$disabled-selector}) {
+        pointer-events: none;
+        cursor: not-allowed;
+        opacity: var(--dma-input-disabled-opacity);
+    }
+
+    .input-control {
+        display: grid;
+        grid-template-areas: 'leading field trailing status action';
+        grid-template-columns: auto minmax(0, 1fr) auto auto auto;
+        gap: var(--dma-input-gap);
+        align-items: center;
+
+        min-height: var(--dma-input-min-height);
+        padding: var(--dma-input-padding-block) var(--dma-input-padding-inline);
+        border: 1px solid var(--dma-input-border);
+        border-radius: var(--dma-input-radius);
+
+        color: var(--dma-input-text);
+
+        background-color: var(--dma-input-bg);
+
+        transition:
+            border-color 150ms ease,
+            box-shadow 150ms ease;
+    }
+
+    .input-control:has(.native-input:focus-visible),
+    .input-control:has(input:focus-visible),
+    .input-control:has(select:focus-visible),
+    .input-control:has(textarea:focus-visible) {
+        outline: 2px solid #{$color-interactive-focus-on-primary};
+        outline-offset: 2px;
+    }
+
+    .leading-icon,
+    .trailing-icon,
+    .status-icon,
+    .action-button {
+        display: inline-flex;
+        flex: 0 0 auto;
+        align-items: center;
+        justify-content: center;
+
+        min-width: 1rem;
+
+        color: var(--dma-input-icon-color);
+    }
+
+    .leading-icon {
+        grid-area: leading;
+    }
+
+    .input-field {
+        grid-area: field;
+        min-width: 0;
+    }
+
+    .native-input,
+    input,
+    select,
+    textarea {
+        grid-area: field;
+
+        width: 100%;
+        min-width: 0;
+        padding: 0;
+        border: 0;
+
+        font: inherit;
+        font-family: #{$typography-font-body};
+        font-size: var(--dma-input-font-size);
+        line-height: #{$typography-line-height-normal};
+        color: var(--dma-input-text);
+
+        background: transparent;
+
+        &::placeholder {
+            color: var(--dma-input-placeholder);
+            opacity: 1;
+        }
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button,
+        &::-webkit-search-cancel-button {
+            margin: 0;
+            appearance: none;
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        &[type='number'] {
+            appearance: textfield;
+        }
+    }
+
+    textarea {
+        resize: vertical;
+    }
+
+    .trailing-icon {
+        grid-area: trailing;
+    }
+
+    .status-icon {
+        grid-area: status;
+        color: var(--dma-input-status-color);
+    }
+
+    .action-button {
+        grid-area: action;
+    }
+
+    :host(#{$disabled-selector}) .input-control,
+    :host(#{$disabled-selector}) .native-input,
+    :host(#{$disabled-selector}) input,
+    :host(#{$disabled-selector}) select,
+    :host(#{$disabled-selector}) textarea {
+        cursor: not-allowed;
+    }
+}
