@@ -19,15 +19,16 @@ You are an automated PR reviewer running in a GitHub Actions workflow. Work thro
 
 ```text
 Progress:
-- [ ] Step 1: PR metadata and linked issues gathered
-- [ ] Step 2: Diff obtained and line count measured
-- [ ] Step 3: Review documentation loaded
-- [ ] Step 4: CONTEXT.md files loaded
-- [ ] Step 5: Relevant ADRs loaded
-- [ ] Step 6: Review complete, findings recorded
-- [ ] Step 7: Review body written
-- [ ] Step 8: Inline comment files written
-- [ ] Step 9: Payload built and review posted
+- [ ] Step 1:  PR metadata and linked issues gathered
+- [ ] Step 2:  Diff base determined (incremental or full)
+- [ ] Step 3:  Diff obtained and line count measured
+- [ ] Step 4:  Review documentation loaded
+- [ ] Step 5:  CONTEXT.md files loaded
+- [ ] Step 6:  Relevant ADRs loaded
+- [ ] Step 7:  Review complete, findings recorded
+- [ ] Step 8:  Review body written
+- [ ] Step 9:  Inline comment files written
+- [ ] Step 10: Payload built and review posted
 ```
 
 ## Environment
@@ -65,23 +66,33 @@ Note the PR title, author, description, and all linked issue details for use thr
 
 ---
 
-## Step 2 — Get and measure the diff
+## Step 2 — Determine diff base
+
+```bash
+node .claude/skills/pr-review/resolve-diff-base.js
+```
+
+Parse the JSON written to stdout. Note `diffBase` and `forcePushDetected` — you will use both in Steps 3 and 8. If the script exits non-zero, fall back to `$BASE_SHA` and treat `forcePushDetected` as false.
+
+---
+
+## Step 3 — Get and measure the diff
 
 Run both commands:
 
 ```bash
-git diff $BASE_SHA $HEAD_SHA -- ':!pnpm-lock.yaml' ':!**/CHANGELOG.md'
+git diff $DIFF_BASE $HEAD_SHA -- ':!pnpm-lock.yaml' ':!**/CHANGELOG.md'
 ```
 
 ```bash
-git diff --name-only $BASE_SHA $HEAD_SHA -- ':!pnpm-lock.yaml' ':!**/CHANGELOG.md'
+git diff --name-only $DIFF_BASE $HEAD_SHA -- ':!pnpm-lock.yaml' ':!**/CHANGELOG.md'
 ```
 
 Count total lines changed (added and removed). If the count exceeds 1000, note this in the review body but continue reviewing.
 
 ---
 
-## Step 3 — Load review documentation
+## Step 4 — Load review documentation
 
 Always read:
 
@@ -90,7 +101,7 @@ Always read:
 - `docs/agents/pr-review/quality.md`
 - `docs/agents/pr-review/process.md`
 
-Based on the changed file paths from Step 2, conditionally read:
+Based on the changed file paths from Step 3, conditionally read:
 
 - Any frontend paths (Angular components, CSS, Storybook, `arcane-ui`, Realm UI code) → `docs/agents/pr-review/frontend.md`
 - Any backend/API paths (NestJS controllers, services, database, `gatekeeper`, Realm server code) → `docs/agents/pr-review/backend.md`
@@ -98,7 +109,7 @@ Based on the changed file paths from Step 2, conditionally read:
 
 ---
 
-## Step 4 — Load CONTEXT.md files
+## Step 5 — Load CONTEXT.md files
 
 Based on the changed paths, read:
 
@@ -111,7 +122,7 @@ If any of the above apply, also read the root `CONTEXT.md`.
 
 ---
 
-## Step 5 — Load relevant ADRs
+## Step 6 — Load relevant ADRs
 
 List `docs/adr/` and read only the ADRs relevant to what the diff touches:
 
@@ -128,7 +139,7 @@ List `docs/adr/` and read only the ADRs relevant to what the diff touches:
 
 ---
 
-## Step 6 — Review
+## Step 7 — Review
 
 Apply the quick checklist from `pull-request-review.md` universally. Apply the specialist checklists you loaded selectively based on what changed.
 
@@ -143,22 +154,24 @@ Non-line-specific findings go in the main review body.
 
 ---
 
-## Step 7 — Write the review body
+## Step 8 — Write the review body
 
 Write the review body to `.review/body.md` as plain Markdown. Include:
 
 1. A brief summary of the change based on the PR metadata and diff
 2. Any non-line-specific findings
-3. If the diff exceeded 1000 lines: `> **Warning:** This diff exceeded 1000 lines. Findings may be incomplete.`
-4. A final line in exactly this format (substitute the actual SHA values from the environment):
+3. If `forcePushDetected` was true (from Step 2), include this note (substitute the actual SHA):
+   > Force push detected (previous reviewed commit: `<lastReviewedSha>`). History was rewritten, so this review covers the full diff from base rather than incremental commits since that SHA.
+4. If the diff exceeded 1000 lines: `> **Warning:** This diff exceeded 1000 lines. Findings may be incomplete.`
+5. A final line in exactly this format (use `diffBase` from Step 2, not `$BASE_SHA`):
 
 ```text
-**Commits reviewed:** `<BASE_SHA>`..`<HEAD_SHA>`
+**Commits reviewed:** `<DIFF_BASE>`..`<HEAD_SHA>`
 ```
 
 ---
 
-## Step 8 — Write inline comments
+## Step 9 — Write inline comments
 
 Write each inline comment as a separate file in `.review/comments/<slug>.md`.
 
@@ -179,7 +192,7 @@ Use a short descriptive slug for each filename (e.g. `auth-ownership-check.md`).
 
 ---
 
-## Step 9 — Build payload and post
+## Step 10 — Build payload and post
 
 Run the build script:
 
