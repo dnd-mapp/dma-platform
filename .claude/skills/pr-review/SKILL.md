@@ -11,7 +11,6 @@ allowed-tools:
     - Bash
     - Read
     - Write
-    - Glob
 ---
 
 # PR Review
