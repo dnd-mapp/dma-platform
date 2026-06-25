@@ -20,3 +20,4 @@ certs/*
 
 .moon/cache/
 .claude/worktrees/
+.claude/plans/
