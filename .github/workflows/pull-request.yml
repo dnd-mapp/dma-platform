@@ -53,6 +53,50 @@ jobs:
               with:
                   access-token: ${{ secrets.GITHUB_TOKEN }}
 
+    review:
+        name: Review
+        runs-on: ubuntu-22.04
+        timeout-minutes: 15
+        if: ${{ !endsWith(github.actor, '[bot]') && !startsWith(github.head_ref, 'release/') }}
+        permissions:
+            contents: read
+            pull-requests: write
+        steps:
+            - name: Generate GitHub App token
+              id: app-token
+              uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+              with:
+                  app-id: ${{ secrets.GH_APP_ID }}
+                  private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
+            - name: Checkout
+              uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+              with:
+                  fetch-depth: 0
+
+            - name: Setup workspace
+              uses: ./.github/actions/setup-workspace
+              with:
+                  install-dependencies: 'false'
+
+            - name: Install Claude Code
+              run: pnpm add -g @anthropic-ai/claude-code
+
+            - name: Review pull request
+              shell: bash
+              env:
+                  CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+                  GH_TOKEN: ${{ steps.app-token.outputs.token }}
+                  PR_NUMBER: ${{ github.event.number }}
+                  REPO: ${{ github.repository }}
+                  BASE_SHA: ${{ github.event.pull_request.base.sha }}
+                  HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+              run: |
+                  claude -p /pr-review \
+                      --model claude-sonnet-4-6 \
+                      --effort high \
+                      --allowedTools Bash
+
     docker:
         name: Docker
         needs: ci
