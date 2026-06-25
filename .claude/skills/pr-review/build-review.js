@@ -89,13 +89,15 @@ function parseComment(file, content) {
     }
     const { frontmatter, body } = parsed;
 
-    if (!frontmatter.path || !frontmatter.line || !frontmatter.side) {
+    const line = parseInt(frontmatter.line, 10);
+
+    if (!frontmatter.path || !Number.isFinite(line) || !['LEFT', 'RIGHT'].includes(frontmatter.side)) {
         console.warn(`Warning: missing required fields (path, line, side) in ${file}, skipping`);
         return null;
     }
     return {
         path: frontmatter.path,
-        line: parseInt(frontmatter.line, 10),
+        line: line,
         side: frontmatter.side,
         body: body,
     };
