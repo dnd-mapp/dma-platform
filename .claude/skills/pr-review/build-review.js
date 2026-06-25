@@ -115,7 +115,15 @@ async function readComments(commentsDir) {
     const files = (await readdir(commentsDir)).filter((file) => file.endsWith('.md')).sort();
 
     const comments = await Promise.all(
-        files.map(async (file) => parseComment(file, await readFile(join(commentsDir, file), { encoding: 'utf8' }))),
+        files.map(async (file) => {
+            const { result, error } = await attempt(readFile(join(commentsDir, file), { encoding: 'utf8' }));
+
+            if (error) {
+                console.warn(`Warning: could not read ${file}, skipping`);
+                return null;
+            }
+            return parseComment(file, result);
+        }),
     );
 
     return comments.filter(Boolean);
