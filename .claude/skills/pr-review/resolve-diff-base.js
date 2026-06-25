@@ -66,7 +66,7 @@ async function fetchReviews(repo, prNumber) {
  */
 function findLastReviewedSha(reviews) {
     const matched = reviews
-        .filter((reviews) => SENTINEL_RE.test(reviews.body))
+        .filter((review) => SENTINEL_RE.test(review.body))
         .sort((curr, next) => new Date(next.submitted_at) - new Date(curr.submitted_at));
 
     if (matched.length === 0) return null;
