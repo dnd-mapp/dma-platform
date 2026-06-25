@@ -112,18 +112,27 @@ function parseComment(file, content) {
  * @returns {Promise<ReviewComment[]>}
  */
 async function readComments(commentsDir) {
-    const files = (await readdir(commentsDir)).filter((file) => file.endsWith('.md')).sort();
+    const { result: entries, error } = await attempt(readdir(commentsDir));
 
+    if (error) {
+        console.error('Error: .review/comments/ directory not found');
+        process.exit(1);
+    }
     const comments = await Promise.all(
-        files.map(async (file) => {
-            const { result, error } = await attempt(readFile(join(commentsDir, file), { encoding: 'utf8' }));
+        entries
+            .filter((file) => file.endsWith('.md'))
+            .sort()
+            .map(async (file) => {
+                const { result, error: readError } = await attempt(
+                    readFile(join(commentsDir, file), { encoding: 'utf8' }),
+                );
 
-            if (error) {
-                console.warn(`Warning: could not read ${file}, skipping`);
-                return null;
-            }
-            return parseComment(file, result);
-        }),
+                if (readError) {
+                    console.warn(`Warning: could not read ${file}, skipping`);
+                    return null;
+                }
+                return parseComment(file, result);
+            }),
     );
 
     return comments.filter(Boolean);
@@ -158,7 +167,7 @@ async function writePayload(reviewDir, payload) {
     const outputPath = join(reviewDir, 'payload.json');
     await writeFile(outputPath, JSON.stringify(payload, null, 2), { encoding: 'utf8' });
 
-    console.log(`Written payload to ${outputPath} (${payload.comments.length} inline comment(s))`);
+    console.log(`Written payload to .review/payload.json (${payload.comments.length} inline comment(s))`);
 }
 
 /**
