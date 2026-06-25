@@ -34,6 +34,25 @@ On the initial review of a PR, Claude reviews the full diff from the base branch
 
 The last-reviewed SHA is recorded visibly in the main review body — not a hidden marker. Contributors and the PR author can see exactly which commits have been reviewed and which have not. The review body is updated on every run.
 
+#### Force pushes
+
+A `synchronize` event is fired for both normal pushes and force pushes. After extracting the last-reviewed SHA from the review body, Claude checks whether it is still an ancestor of the new `HEAD`:
+
+```bash
+git merge-base --is-ancestor <last-reviewed-sha> HEAD
+```
+
+Both failure modes indicate a force push:
+
+- **Exit 1** — the SHA exists in the object store but is no longer an ancestor of `HEAD` (history was rewritten).
+- **Object not found error** — the SHA was orphaned by the force push and was not fetched by `fetch-depth: 0` (which only fetches reachable commits).
+
+When a force push is detected, Claude falls back to a full re-review from base to `HEAD`, identical to the initial review. The review body includes a contextual note:
+
+> Force push detected (previous reviewed commit: `<old-sha>`). History was rewritten, so this review covers the full diff from base rather than incremental commits since that SHA.
+
+Existing inline comments from previous reviews are left in place. GitHub automatically marks them as outdated when their diff position no longer exists in the rewritten history, preserving a record of what was reviewed under the old history.
+
 ### Review format
 
 Claude posts a **formal GitHub Review** using the GitHub Reviews API. The verdict is always `COMMENT` — never `APPROVE` or `REQUEST_CHANGES`. This keeps the review purely advisory: it never blocks merge and never requires dismissal.
