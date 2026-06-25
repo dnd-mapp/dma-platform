@@ -72,7 +72,7 @@ Note the PR title, author, description, and all linked issue details for use thr
 node .claude/skills/pr-review/resolve-diff-base.js
 ```
 
-Parse the JSON written to stdout. Note `diffBase`, `forcePushDetected`, and `lastReviewedSha` — you will use all three in Steps 3 and 8. If the script exits non-zero, fall back to `$BASE_SHA` and treat `forcePushDetected` as false.
+Parse the JSON written to stdout. Note `diffBase`, `forcePushDetected`, and `lastReviewedSha` — use `diffBase` in Steps 3 and 8, and `forcePushDetected`/`lastReviewedSha` in Step 8 only. If the script exits non-zero, fall back to `$BASE_SHA` and treat `forcePushDetected` as false.
 
 ---
 
