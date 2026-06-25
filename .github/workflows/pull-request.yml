@@ -80,7 +80,9 @@ jobs:
                   install-dependencies: 'false'
 
             - name: Install Claude Code
-              run: pnpm add -g @anthropic-ai/claude-code
+              run: |
+                  pnpm add -g @anthropic-ai/claude-code
+                  pnpm approve-builds -g @anthropic-ai/claude-code
 
             - name: Review pull request
               shell: bash
