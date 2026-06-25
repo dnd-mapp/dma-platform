@@ -91,13 +91,7 @@ jobs:
                   REPO: ${{ github.repository }}
                   BASE_SHA: ${{ github.event.pull_request.base.sha }}
                   HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-              run: |
-                  claude --model claude-sonnet-4-6 \
-                      --effort high \
-                      --allowedTools Bash \
-                      --verbose \
-                      --print \
-                      /pr-review
+              run: claude --model claude-sonnet-4-6 --effort high --verbose --print /pr-review
 
     docker:
         name: Docker
