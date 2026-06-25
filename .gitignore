@@ -19,5 +19,9 @@ certs/*
 !certs/.gitkeep
 
 .moon/cache/
+
 .claude/worktrees/
 .claude/plans/
+
+.review/*
+!.review/comments/.gitkeep
