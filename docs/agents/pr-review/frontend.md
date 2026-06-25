@@ -37,7 +37,7 @@ Detailed checks for frontend, accessibility, and internationalization.
 - [ ] `OnPush` change detection is used where appropriate.
 - [ ] Template expressions are free of side effects.
 - [ ] Subscriptions are cleaned up (`takeUntilDestroyed` or `async` pipe preferred over manual unsubscription).
-- [ ] `@ViewChild` / `@ContentChild` usage respects lifecycle timing (`ngAfterViewInit`).
+- [ ] `viewChild()` / `contentChild()` signals are used instead of `@ViewChild` / `@ContentChild` decorators.
 - [ ] Standalone components import only what they need.
 - [ ] Dependency injection is correct (provided at the right scope).
 - [ ] Route guards and resolvers handle errors correctly.
