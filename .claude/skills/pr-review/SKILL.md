@@ -124,6 +124,7 @@ List `docs/adr/` and read only the ADRs relevant to what the diff touches:
 | Release or versioning                                 | 0019, 0020       |
 | Design tokens                                         | 0007             |
 | Component split patterns                              | 0027             |
+| `.claude/skills/pr-review/` changes                   | 0028             |
 
 ---
 
