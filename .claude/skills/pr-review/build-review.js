@@ -96,7 +96,7 @@ function parseComment(file, content) {
         return null;
     }
     return {
-        path: frontmatter.path,
+        path: frontmatter.path.replace(/^\/+/, ''),
         line: line,
         side: frontmatter.side,
         body: body,
