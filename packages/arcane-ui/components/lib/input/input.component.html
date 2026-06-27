@@ -1,0 +1,47 @@
+<label [for]="inputId()">{{ label() }}</label>
+
+<div class="input-control">
+    <span class="leading-icon">
+        <ng-content select="[dmaInputLeadingIcon]" />
+    </span>
+
+    <input
+        class="native-input"
+        [id]="inputId()"
+        [type]="type()"
+        [placeholder]="placeholder() ?? ''"
+        [autocomplete]="autocomplete() ?? ''"
+        [disabled]="effectiveDisabled()"
+        [attr.readonly]="readonly() || null"
+        [value]="value() ?? ''"
+        [attr.aria-required]="required() || null"
+        [attr.aria-invalid]="effectiveStatus() === 'error' || null"
+        [attr.aria-describedby]="ariaDescribedBy()"
+        (input)="updateValue($any($event.target).value)"
+        (blur)="markAsTouched()"
+    />
+
+    <span class="trailing-icon">
+        <ng-content select="[dmaInputTrailingIcon]" />
+    </span>
+
+    <span class="status-icon">
+        @if (effectiveStatus() === 'success') {
+            <dma-icon-check aria-hidden="true" />
+        } @else if (effectiveStatus() === 'error') {
+            <dma-icon-exclamation-circle aria-hidden="true" />
+        }
+    </span>
+
+    <span class="action-button">
+        <ng-content select="[dmaInputAction]" />
+    </span>
+</div>
+
+@if (helperText()) {
+    <span class="helper-text" [id]="helperTextId()">{{ helperText() }}</span>
+}
+
+@if (effectiveStatus() === 'error' && errorMessage()) {
+    <span class="error-message" role="alert" [id]="errorMessageId()">{{ errorMessage() }}</span>
+}

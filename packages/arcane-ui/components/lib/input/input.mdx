@@ -1,0 +1,77 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as InputStories from './input.stories';
+
+<Meta of={InputStories} />
+
+# Input
+
+A single-line text input with optional leading/trailing icon and action slots, automatic validation-state icons, and full Angular forms integration via `ControlValueAccessor`.
+
+## Usage
+
+Add `InputComponent` to your component's `imports` array:
+
+```ts
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { InputComponent } from '@dnd-mapp/arcane-ui/components';
+
+@Component({
+    selector: 'app-example',
+    templateUrl: './example.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [InputComponent],
+})
+export class ExampleComponent {}
+```
+
+And then in the component's template:
+
+```html
+<!-- basic text input -->
+<dma-input inputId="name" label="Name" />
+
+<!-- email input with placeholder -->
+<dma-input inputId="email" label="Email" type="email" placeholder="name@example.com" />
+
+<!-- with helper text -->
+<dma-input inputId="username" label="Username" helperText="Must be at least 3 characters." />
+
+<!-- with Angular Reactive Forms -->
+<dma-input inputId="name" label="Name" [formControl]="nameControl" [errorMessage]="'This field is required.'" />
+```
+
+## Preview
+
+<Canvas of={InputStories.Default} />
+
+## With helper text
+
+<Canvas of={InputStories.WithHelperText} />
+
+## Validation states
+
+### Error
+
+<Canvas of={InputStories.ErrorState} />
+
+### Success
+
+<Canvas of={InputStories.SuccessState} />
+
+## With icons
+
+### Leading icon
+
+<Canvas of={InputStories.WithLeadingIcon} />
+
+### Trailing icon
+
+<Canvas of={InputStories.WithTrailingIcon} />
+
+## Disabled
+
+<Canvas of={InputStories.Disabled} />
+
+## API
+
+<Controls of={InputStories.Default} />
