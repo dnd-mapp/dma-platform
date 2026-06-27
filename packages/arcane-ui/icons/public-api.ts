@@ -1,8 +1,11 @@
 export { ArrowUpRightFromSquareIconComponent } from './lib/arrow-up-right-from-square/arrow-up-right-from-square-icon.component';
 export { CheckIconComponent } from './lib/check/check-icon.component';
 export { ExclamationCircleIconComponent } from './lib/exclamation-circle/exclamation-circle-icon.component';
+export { EyeSlashIconComponent } from './lib/eye-slash/eye-slash-icon.component';
+export { EyeIconComponent } from './lib/eye/eye-icon.component';
 export { IconDirective } from './lib/icon.directive';
 export { PenIconComponent } from './lib/pen/pen-icon.component';
 export { PlusIconComponent } from './lib/plus/plus-icon.component';
 export { SpinnerIconComponent } from './lib/spinner/spinner-icon.component';
 export { TrashIconComponent } from './lib/trash/trash-icon.component';
+export { XMarkIconComponent } from './lib/x-mark/x-mark-icon.component';
