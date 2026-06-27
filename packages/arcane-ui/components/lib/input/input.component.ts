@@ -3,6 +3,8 @@ import { DEFAULT_INPUT_TYPE, type InputType } from '@dnd-mapp/arcane-ui/common';
 import { CheckIconComponent, ExclamationCircleIconComponent } from '@dnd-mapp/arcane-ui/icons';
 import { BaseInputComponent } from './base-input.component';
 
+export type { InputStatus } from './base-input.component';
+
 /**
  * A single-line text input with leading/trailing icon and action slots, automatic
  * validation-state icons, and full Angular forms integration.
