@@ -4,10 +4,13 @@ import {
     ArrowUpRightFromSquareIconComponent,
     CheckIconComponent,
     ExclamationCircleIconComponent,
+    EyeIconComponent,
+    EyeSlashIconComponent,
     PenIconComponent,
     PlusIconComponent,
     SpinnerIconComponent,
     TrashIconComponent,
+    XMarkIconComponent,
 } from '@dnd-mapp/arcane-ui/icons';
 
 @Component({
@@ -19,10 +22,13 @@ import {
         ArrowUpRightFromSquareIconComponent,
         CheckIconComponent,
         ExclamationCircleIconComponent,
+        EyeIconComponent,
+        EyeSlashIconComponent,
         PenIconComponent,
         PlusIconComponent,
         SpinnerIconComponent,
         TrashIconComponent,
+        XMarkIconComponent,
     ],
 })
 export class IconGalleryComponent {
