@@ -17,6 +17,7 @@ describe('InputComponent', () => {
                 [type]="type()"
                 [required]="required()"
                 [placeholder]="placeholder()"
+                [readonly]="readonly()"
                 [disabled]="disabled()"
                 [status]="status()"
                 [helperText]="helperText()"
@@ -29,6 +30,7 @@ describe('InputComponent', () => {
         public readonly type = signal<InputType>('text');
         public readonly required = signal(false);
         public readonly placeholder = signal<string | undefined>(undefined);
+        public readonly readonly = signal(false);
         public readonly disabled = signal(false);
         public readonly status = signal<InputStatus | undefined>(undefined);
         public readonly helperText = signal<string | undefined>(undefined);
@@ -213,6 +215,19 @@ describe('InputComponent', () => {
             const { host, harness } = await setupForm();
             host.control.disable();
             expect(await harness.isDisabled()).toBe(true);
+        });
+    });
+
+    describe('readonly', () => {
+        it('is not readonly by default', async () => {
+            const { harness } = await setup();
+            expect(await harness.isReadonly()).toBe(false);
+        });
+
+        it('sets the readonly attribute when readonly is true', async () => {
+            const { host, harness } = await setup();
+            host.readonly.set(true);
+            expect(await harness.isReadonly()).toBe(true);
         });
     });
 

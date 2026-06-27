@@ -49,6 +49,11 @@ export class InputHarness extends ComponentHarness {
         return (await this.host()).hasClass('disabled');
     }
 
+    /** Returns `true` if the `readonly` attribute is present on the native input. */
+    public async isReadonly(): Promise<boolean> {
+        return (await (await this.nativeInput()).getAttribute('readonly')) !== null;
+    }
+
     /** Returns `true` if `aria-required` is set on the native input. */
     public async isRequired(): Promise<boolean> {
         return (await (await this.nativeInput()).getAttribute('aria-required')) === 'true';
