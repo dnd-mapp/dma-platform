@@ -21,22 +21,22 @@
     "url": "git+https://github.com/dnd-mapp/dma-platform.git"
   },
   "engines": {
-    "node": "24.17.0"
+    "node": "24.18.0"
   },
   "devEngines": {
     "runtime": {
       "name": "node",
-      "version": "24.17.0"
+      "version": "24.18.0"
     },
     "packageManager": [
       {
         "name": "pnpm",
-        "version": "10.34.1",
+        "version": "10.34.4",
         "onFail": "error"
       },
       {
         "name": "npm",
-        "version": "11.13.0",
+        "version": "11.16.0",
         "onFail": "warn"
       }
     ]

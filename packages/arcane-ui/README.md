@@ -1,7 +1,7 @@
 # @dnd-mapp/arcane-ui
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
-[![node: 24.17.0](https://img.shields.io/badge/node-24.17.0-339933?logo=nodedotjs&logoColor=white)](../../package.json)
+[![node: 24.18.0](https://img.shields.io/badge/node-24.18.0-339933?logo=nodedotjs&logoColor=white)](../../package.json)
 [![Angular: ~21.2.14](https://img.shields.io/badge/Angular-~21.2.14-DD0031?logo=angular&logoColor=white)](../../package.json)
 
 `@dnd-mapp/arcane-ui` is D&D Mapp's shared Angular library. It provides reusable components built on top of [`@dnd-mapp/sigil`](../sigil/README.md) design tokens, alongside shared services and injection tokens — all shared across the platform's frontend applications.

@@ -1,12 +1,12 @@
 # ── Build stage ────────────────────────────────────────────────────────────────
-FROM --platform="$BUILDPLATFORM" node:24.17.0-alpine3.23 AS build
+FROM --platform="$BUILDPLATFORM" node:24.18.0-alpine3.23 AS build
 
 ENV HUSKY="0" \
     CI="true"
 
 WORKDIR /app
 
-RUN npm i -g pnpm@10.34.1
+RUN npm i -g pnpm@10.34.4
 
 # Dependency manifests first — this layer is cached until lockfiles change
 COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
