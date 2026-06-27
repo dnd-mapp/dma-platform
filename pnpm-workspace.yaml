@@ -26,14 +26,14 @@ catalogs:
     angular-eslint: '~21.4.0'
     ng-packagr: '~21.2.5'
   default:
-    '@commitlint/cli': '~21.0.2'
-    '@commitlint/config-conventional': '~21.0.2'
+    '@commitlint/cli': '~21.1.0'
+    '@commitlint/config-conventional': '~21.1.0'
     '@fontsource-variable/inconsolata': '~5.2.8'
     '@fontsource-variable/lora': '~5.2.8'
     '@fontsource/metamorphous': '~5.2.8'
     '@inquirer/prompts': '~8.5.2'
     '@moonrepo/cli': '~2.3.4'
-    '@types/node': '~24.12.4'
+    '@types/node': '~24.13.2'
     '@types/semver': '~7.7.1'
     esbuild: '~0.28.1'
     husky: '~9.1.7'
@@ -46,16 +46,16 @@ catalogs:
     semver: '~7.8.5'
     tslib: '~2.8.1'
     typescript: '~5.9.3'
-    vite: '~8.0.16'
+    vite: '~8.1.0'
   eslint:
     eslint: '~10.5.0'
     eslint-config-prettier: '~10.1.8'
-    typescript-eslint: '~8.61.1'
+    typescript-eslint: '~8.62.0'
   ngrx:
     '@ngrx/signals': '~21.1.1'
   playwright:
-    '@playwright/test': '~1.61.0'
-    playwright: '~1.61.0'
+    '@playwright/test': '~1.61.1'
+    playwright: '~1.61.1'
   prettier:
     prettier: '~3.8.4'
     prettier-plugin-organize-imports: '~4.3.0'
