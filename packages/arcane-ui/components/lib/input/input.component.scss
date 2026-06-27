@@ -1,0 +1,33 @@
+@use '@dnd-mapp/sigil/tokens/color' as *;
+@use '@dnd-mapp/sigil/tokens/typography' as *;
+@use '@dnd-mapp/sigil/primitives/spacing' as *;
+@use './input-styles' as input-styles;
+
+@include input-styles.input-base($disabled-selector: '.disabled');
+
+label {
+    display: block;
+
+    margin-bottom: $spacing-1;
+
+    font-family: $typography-font-body;
+    font-size: $typography-size-sm;
+    font-weight: $typography-weight-medium;
+    color: $color-text-primary;
+}
+
+.helper-text,
+.error-message {
+    display: block;
+    margin-top: $spacing-1;
+    font-family: $typography-font-body;
+    font-size: $typography-size-xs;
+}
+
+.helper-text {
+    color: $color-text-secondary;
+}
+
+.error-message {
+    color: $color-interactive-danger;
+}

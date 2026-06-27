@@ -47,7 +47,6 @@
         display: grid;
         grid-template-areas: 'leading field trailing status action';
         grid-template-columns: auto minmax(0, 1fr) auto auto auto;
-        gap: var(--dma-input-gap);
         align-items: center;
 
         min-height: var(--dma-input-min-height);
@@ -81,13 +80,19 @@
         align-items: center;
         justify-content: center;
 
-        min-width: 1rem;
-
         color: var(--dma-input-icon-color);
+
+        &:empty {
+            display: none;
+        }
     }
 
     .leading-icon {
         grid-area: leading;
+
+        &:not(:empty) {
+            padding-inline-end: var(--dma-input-gap);
+        }
     }
 
     .input-field {
@@ -141,15 +146,27 @@
 
     .trailing-icon {
         grid-area: trailing;
+
+        &:not(:empty) {
+            padding-inline-start: var(--dma-input-gap);
+        }
     }
 
     .status-icon {
         grid-area: status;
         color: var(--dma-input-status-color);
+
+        &:not(:empty) {
+            padding-inline-start: var(--dma-input-gap);
+        }
     }
 
     .action-button {
         grid-area: action;
+
+        &:not(:empty) {
+            padding-inline-start: var(--dma-input-gap);
+        }
     }
 
     :host(#{$disabled-selector}) .input-control,
